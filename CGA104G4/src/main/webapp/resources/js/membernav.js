@@ -32,14 +32,19 @@ header.innerHTML =
                             <li><a href="" >個人訊息</a></li>
                         </ul>
                     </li>
-                 </ul>
-             </nav>
+                </ul>
+            </nav>
             <div class="menu-btn">
                 <span class="bar1"></span>
                 <span class="bar2"></span>
                 <span class="bar3"></span>
             </div>
             <ul class="oth-lnks ml-auto">
+                <li>
+                    <a href="#" title="" class="">
+                        <img alt="" src="" id="personImage" style="width:2.5rem;border-radius: 100%;margin-right: 0px">
+                    </a>
+                </li>
                 <li>
                     <a href="#" title="" class="">
                         <img alt="" src="../resources/images/bell.svg" style="width:2rem">
@@ -106,59 +111,79 @@ divwrapper.append(header);
 divwrapper.append(div);
 body.insertAdjacentElement("afterbegin", divwrapper);
 
-//頁面載入時判斷是否有登入
-(async function logincheck(){
-    let memData = sessionStorage.getItem("memData");
-    if(memData){
-        loginNavChange();
+//頁面載入時判斷是否有登入與是否登入過期。
+(async function logincheck() {
+    let memDataJson = sessionStorage.getItem("memData");
+    if (!memDataJson) {
+        await loginCheckWithServer();
         return;
     }
 
+    let memData = JSON.parse(memDataJson);
+    let Now = new Date().getTime();
+    if((Now-memData.LoginTime)>=(60*30*1000)){
+        await loginCheckWithServer();
+        return;
+    }
+
+    loginNavChange();
+
+})();
+
+
+async function loginCheckWithServer(){
     let path = window.location.pathname;
     let webCtx = path.substring(0, path.indexOf('/', 1));
-    let url = webCtx+"/member/memberlogin.do?action=loginCheck";
+    let url = webCtx + "/member/memberfront.do?action=loginCheck";
 
-    let response = await fetch(url,{ method: 'get'}).then(e=>e.json());
-    if(response.state){
-        let memData={};
+    let response = await fetch(url, {method: 'get'}).then(e => e.json());
+    if (response.state) {
+        let memData = {};
         memData.memId = response.memId;
         memData.memName = response.memName;
         memData.memPic = response.memPic;
-        sessionStorage.setItem("memData",JSON.stringify(memData));
+        memData.LoginTime = new Date().getTime();
+        sessionStorage.setItem("memData", JSON.stringify(memData));
         loginNavChange();
-
     }
-})();
+}
 
 //登入改變NAV顯示結果
-function loginNavChange(){
+function loginNavChange() {
     //改變一般navbar
-    document.querySelector("#logul").innerHTML="";
-    document.querySelector("#logul").innerHTML= `<li><a href="" title="" class="logout">登出</a></li>`;
+    document.querySelector("#logul").innerHTML = "";
+    document.querySelector("#logul").innerHTML = `<li><a href="" title="" class="logout">登出</a></li>`;
+    let memData = JSON.parse(sessionStorage.getItem("memData"));
+    if(memData.memPic){
+        document.querySelector("#personImage").setAttribute("src","data:image/png;base64,"+memData.memPic);
+    }else {
+        document.querySelector("#personImage").setAttribute("src","../resources/images/personal.jpg");
+    }
+
     //改變response-navbar
-    document.querySelector("#log-il-response").innerHTML="";
-    document.querySelector("#log-il-response").innerHTML=`<a href="" class="logout">登出</a>`;
+    document.querySelector("#log-il-response").innerHTML = "";
+    document.querySelector("#log-il-response").innerHTML = `<a href="" class="logout">登出</a>`;
 //綁定登出連結觸發事件(resposne與一般NAR綁定同事件)
-    document.querySelectorAll("a.logout").forEach(e=>e.addEventListener("click",function (e) {
+    document.querySelectorAll("a.logout").forEach(e => e.addEventListener("click", function (e) {
         e.preventDefault();
         logout();
     }));
 }
 
 //登出時刪除SESSION與sessionStorage資料
-async function logout(){
+async function logout() {
     let path = window.location.pathname;
     let webCtx = path.substring(0, path.indexOf('/', 1));
-    let url = webCtx+"/member/memberlogin.do?action=logout";
+    let url = webCtx + "/member/memberfront.do?action=logout";
 
-    await fetch(url,{ method: 'get'})
-        .then(response=>{
-        if (response.ok){
-            sessionStorage.removeItem("memData");
-            window.location.reload();
-            window.location.href = "./index.html";
-        }
-    })
+    await fetch(url, {method: 'get'})
+        .then(response => {
+            if (response.ok) {
+                sessionStorage.removeItem("memData");
+                window.location.reload();
+                window.location.href = "./index.html";
+            }
+        })
 
 }
 

@@ -25,12 +25,6 @@ public class MemberService {
         return dao.getMemId();
     }
 
-    public MemberVO findByPrimaryKey(Integer memId) {
-
-        return dao.findByPrimaryKey(memId);
-
-    }
-
     public void update(Integer memId, String memEmail, String memPwd, Integer accStat, String memName, String memMobile,
                        String memCity, String memDist, String memAdr, Integer memToken) {
 
@@ -51,7 +45,13 @@ public class MemberService {
 
     }
 
-    //以下是MemberLoginServlet使用到的方法
+
+    //以下是MemberFrontServlet使用到的方法
+    public MemberVO findByPrimaryKey(Integer memId) {
+
+        return dao.findByPrimaryKey(memId);
+
+    }
 
 
     public Integer insertWithReturn(String memEmail, String memPwd, String memName, String memMobile, String memCity,
@@ -73,6 +73,10 @@ public class MemberService {
     public MemberVO login(String memEmail, String memPwd) {
         return dao.login(memEmail, memPwd);
 
+    }
+
+    public void updatePwd(MemberVO memberVO){
+        dao.updatePwd(memberVO);
     }
 
     public Integer selectByMemEmail(String memEmail){

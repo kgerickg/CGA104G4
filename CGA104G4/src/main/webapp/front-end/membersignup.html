@@ -197,19 +197,7 @@
 
     $("button#signup").click(function (e) {
         e.preventDefault();
-        let pwd = $("input[name='memPwd']").val();
-        let cfpwd = $("input[name='cfMemPwd']").val();
-        if (pwd !== cfpwd) {
-            $("#memPwderror").html("<p style='color:red;'>確認密碼與密碼不相符請重新確認</p>");
-            return;
-        }
-        if (pwd.trim().length === 0 || cfpwd.trim().length === 0) {
-            $("#memPwderror").html("<p style='color:red;'>密碼與確認密碼請勿空白</p>");
-            return;
-        }
-        $("#memPwderror").html("");
         insertData();
-
     })
 
     async function insertData() {
@@ -217,6 +205,7 @@
         formData.append('action', 'signup');
         formData.append('memEmail', $("input[name='memEmail']").val());
         formData.append('memPwd', $("input[name='memPwd']").val());
+        formData.append('memcfPwd',$("input[name='cfMemPwd']").val());
         formData.append('memName', $("input[name='memName']").val());
         formData.append('memMobile', $("input[name='memMobile']").val());
         formData.append('memCity', $("select[name='memCity']").val());
@@ -225,7 +214,7 @@
 
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/member/memberlogin.do";
+        let url = webCtx + "/member/memberfront.do";
 
         try {
             let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
@@ -237,6 +226,7 @@
                 $("#memMobileerror").html("");
                 $("input[name='memEmail']").val("");
                 $("input[name='memPwd']").val("");
+                $("input[name='cfMemPwd']").val("");
                 $("input[name='memName']").val("");
                 $("input[name='memMobile']").val("");
                 $("select#memCity").empty();

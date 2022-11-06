@@ -2,7 +2,6 @@ package com.member.controller;
 
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
-import org.hibernate.Session;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -13,9 +12,9 @@ import java.io.Writer;
 import java.util.Base64;
 
 
-@WebServlet(name = "MemberLoginServlet", urlPatterns = {"/MemberLoginServlet", "/member/memberlogin.do"})
+@WebServlet(name = "MemberFrontServlet", urlPatterns = {"/MemberFrontServlet", "/member/memberfront.do"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
-public class MemberLoginServlet extends HttpServlet {
+public class MemberFrontServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -41,10 +40,89 @@ public class MemberLoginServlet extends HttpServlet {
                 signup(request, response);
                 break;
             case "forgetPwd":
-                forgetPwd(request,response);
+                forgetPwd(request, response);
                 break;
+            case "updatePassword":
+                updatePassword(request, response);
+            case "memberInfoUpdate":
+                memberInfoUpdate(request,response);
 
         }
+    }
+
+    private void memberInfoUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        JSONObject memberJson = new JSONObject();
+        MemberService memSvc = new MemberService();
+        Writer out = response.getWriter();
+
+        Integer memId =(Integer) request.getSession().getAttribute("memId");
+
+
+       MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+
+       memberJson.put("memEmail",memberVO.getMemEmail());
+       memberJson.put("memName",memberVO.getMemName());
+       memberJson.put("memMobile",memberVO.getMemMobile());
+       memberJson.put("memCity",memberVO.getMemCity());
+       memberJson.put("memDist",memberVO.getMemDist());
+       memberJson.put("memAdr",memberVO.getMemAdr());
+
+       out.write(memberJson.toString());
+
+
+    }
+
+    private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        JSONObject MsgsJson = new JSONObject();
+        MemberService memSvc = new MemberService();
+        Writer out = response.getWriter();
+
+        String memOldPwd = request.getParameter("memOldPwd");
+        String memNewPwd = request.getParameter("memNewPwd");
+        String memcfNewPwd = request.getParameter("memcfNewPwd");
+
+        String memPwdReg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
+        if (memOldPwd == null || memOldPwd.trim().length() == 0) {
+            MsgsJson.put("memOldPwderror", "舊密碼請勿空白");
+        } else if (!memOldPwd.trim().matches(memPwdReg)) {
+            MsgsJson.put("memOldPwderror", "舊密碼格式異常");
+        }
+
+        if (memNewPwd == null || memNewPwd.trim().length() == 0) {
+            MsgsJson.put("memNewPwderror", "新密碼請勿空白");
+        } else if (!memOldPwd.trim().matches(memPwdReg)) {
+            MsgsJson.put("memNewPwderror", "新密碼格式異常");
+        } else if (memNewPwd.equals(memOldPwd)) {
+            MsgsJson.put("memNewPwderror", "新密碼請勿與舊密碼相同");
+        }
+
+        if (memNewPwd != null) {
+            if (!memNewPwd.equals(memcfNewPwd)) {
+                MsgsJson.put("memcfNewPwderror", "新密碼與確認密碼不相符");
+            }
+        }
+
+        if (!MsgsJson.isEmpty()) {
+            MsgsJson.put("state", false);
+            out.write(MsgsJson.toString());
+            return;
+        }
+
+        Integer memId = (Integer) request.getSession().getAttribute("memId");
+        MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+        String MemPwd = memberVO.getMemPwd();
+        if (!MemPwd.equals(memOldPwd)) {
+            MsgsJson.put("state", false);
+            MsgsJson.put("memOldPwderror", "舊密碼錯誤請重新確認");
+            out.write(MsgsJson.toString());
+            return;
+        }
+
+        memberVO.setMemPwd(memNewPwd);
+        memSvc.updatePwd(memberVO);
+        MsgsJson.put("state", true);
+        out.write(MsgsJson.toString());
+
     }
 
     private void forgetPwd(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -69,10 +147,10 @@ public class MemberLoginServlet extends HttpServlet {
 
         boolean state = memSvc.forgetPwd(memEmail);
 
-        if(state){
+        if (state) {
             MsgsJson.put("state", state);
             out.write(MsgsJson.toString());
-        }else {
+        } else {
             MsgsJson.put("state", state);
             MsgsJson.put("memEmailerror", "查無此帳號請重新確認或進行註冊");
             out.write(MsgsJson.toString());
@@ -94,20 +172,23 @@ public class MemberLoginServlet extends HttpServlet {
             MsgsJson.put("memEmailerror", "帳號請勿空白");
         } else if (!memEmail.trim().matches(emailReg)) {
             MsgsJson.put("memEmailerror", "帳號格式異常");
-        } else if (memSvc.selectByMemEmail(memEmail)!=null) {
+        } else if (memSvc.selectByMemEmail(memEmail) != null) {
             MsgsJson.put("memEmailerror", "帳號已存在請確認或使用忘記密碼");
         }
 
 
         // 密碼驗證
         String memPwd = request.getParameter("memPwd");
-
+        String memcfPwd = request.getParameter("memcfPwd");
         String memPwdReg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
         if (memPwd == null || memPwd.trim().length() == 0) {
             MsgsJson.put("memPwderror", "密碼請勿空白");
         } else if (!memPwd.trim().matches(memPwdReg)) {
             MsgsJson.put("memPwderror", "密碼格式異常");
+        } else if (!memPwd.equals("memcfPwd")) {
+            MsgsJson.put("memPwderror", "密碼與確認密碼不相符");
         }
+
 
         // 姓名驗證
         String memName = request.getParameter("memName");
@@ -158,7 +239,7 @@ public class MemberLoginServlet extends HttpServlet {
             return;
         }
         MsgsJson.put("state", false);
-        MsgsJson.put("dataError", "系統異常請稍後在進行作業");
+        MsgsJson.put("dataError", "系統忙碌中請稍後在進行作業");
 
 
     }
@@ -229,7 +310,16 @@ public class MemberLoginServlet extends HttpServlet {
 
 
         if (memberVO == null) {
-            msgsJson.put("memNotFoundError", "帳號或密碼錯誤請重新輸入");
+            System.out.println("hi2");
+            msgsJson.put("memError", "帳號或密碼錯誤請重新輸入");
+            msgsJson.put("state", false);
+            out.write(msgsJson.toString());
+            return;
+        }
+
+        if (memberVO.getAccStat() == 1) {
+            System.out.println("hi");
+            msgsJson.put("memError", "帳號已被停權，若有疑慮請聯絡客服人員");
             msgsJson.put("state", false);
             out.write(msgsJson.toString());
             return;
@@ -247,7 +337,7 @@ public class MemberLoginServlet extends HttpServlet {
 
         if (location != null) {
             session.removeAttribute("location");
-            msgsJson.put("location",(String) location);
+            msgsJson.put("location", (String) location);
         }
 
         msgsJson.put("state", true);

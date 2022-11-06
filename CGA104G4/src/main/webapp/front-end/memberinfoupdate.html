@@ -30,7 +30,6 @@
     <title>個人資料修改</title>
 
 
-
 </head>
 
 <body>
@@ -38,10 +37,128 @@
 <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 <!--下面可自由新增內容 -->
 
+<div class="wrapper">
+    <section class="pager-section text-center" style="padding-bottom: 30px; padding-top: 140px;">
+        <div class="container">
+            <div class="pager-head">
+                <h2 style="color: #ffa500; font-size: 2rem; font-weight: 400;">個人基本資料</h2>
+            </div>
+            <!--pager-head end-->
+        </div>
+    </section>
+    <!--pager-section end-->
 
+    <section class="">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="delitaste-form text-center">
+                        <div>
+                            <h4 class="text-left" style="font-size: 1rem;">帳號:</h4>
 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="email" name="memEmail" id="memEmail" placeholder="信箱*"
+                                               class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="memName" id="memName" placeholder="姓名*"
+                                               class="form-control" readonly>
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="memMobile" id="memMobile" placeholder="手機號碼*"
+                                               class="form-control" readonly>
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select style="height: 55px;" class="form-control" name="memCity"
+                                                id="memCity" disabled>
+                                            <option disabled selected>縣市</option>
+                                        </select>
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select style="height: 55px;" class="form-control" name="memDist"
+                                                id="memDist" disabled>
+                                            <option disabled selected>鄉鎮區</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="路段" class="form-control" name="memAdr"
+                                               id="memAdr" readonly>
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div>
+                                    <h4 class="text-left" style="font-size: 1rem; margin-left: 8px;margin-right: 9rem">
+                                        個人照片
+                                    </h4>
+                                </div>
+                                <div class="form-group" style="position: relative">
+                                        <span id="imgbtnspan" style="position: absolute;display:none; left: 10%">
+                                        <label class="btn btn-info">
+                                            <input type="file" style="display:none;"></iuput>
+                                            <i class="fa fa-photo"></i> 上傳圖片
+                                        </label>
+                                        </span>
+                                    <img src="" id="personalImage" width="200px" height="auto"
+                                         style="background: #F5F5F5">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button type="button" class="btn-default w-100" style="outline: none;"
+                                                id="update">
+                                            修改
+                                            <span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none;" id="checkRow">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button type="button" class="btn-default w-100" style="outline: none;"
+                                                id="confirm">
+                                            確認<span></span></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button type="button" class="btn-default w-100" style="outline: none;"
+                                                id="cancel">
+                                            取消<span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
@@ -50,5 +167,96 @@
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
 </body>
+<script>
+    let locat;
+    let formDate = new FormData();
+    memberInfoUpdate();
+
+    async function memberInfoUpdate() {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/member/memberfront.do?action=memberInfoUpdate";
+
+        let response = await fetch(url, {method: 'get'}).then(e => e.json());
+        if (response.memEmail) {
+            $("#memEmail").val(`${response.memEmail}`);
+        }
+        if (response.memName) {
+            $("#memName").val(`${response.memName}`);
+            formDate.append("memName",response.memName);
+        }
+        if (response.memMobile) {
+            $("#memMobile").val(`${response.memMobile}`);
+            formDate.append("memMobile",response.memMobile);
+        }
+
+        if (response.memAdr) {
+            $("#memAdr").val(`${response.memAdr}`);
+            formDate.append("memAdr",response.memAdr);
+        }
+
+        locat = await fetch("../resources/js/taiwan_districts.json").then(response => response.json());
+        locat.forEach(e => {
+            $("#memCity").append(`<option value="${e.name}">${e.name}</option>`);
+        });
+
+        if(response.memCity){
+            $("#memCity").val(`${response.memCity}`);
+            formDate.append("memCity",response.memCity);
+        }
+
+        showDist();
+
+        if(response.memDist){
+            $("#memDist").val(`${response.memDist}`);
+            formDate.append("memDist",response.memDist);
+        }
+
+
+        let memData = JSON.parse(sessionStorage.getItem("memData"));
+        if (memData.memPic) {
+            $("#personalImage").attr("src", "data:image/png;base64," + memData.memPic);
+        } else {
+            $("#personalImage").attr("src", "../resources/images/personal.jpg");
+        }
+    };
+
+
+    $("#update").click(function () {
+        $("#memName").prop("readonly", false);
+        $("#memMobile").prop("readonly", false);
+        $("#memAdr").prop("readonly", false);
+        $("#memCity").prop("disabled", false);
+        $("#memDist").prop("disabled", false);
+        $("#memCity").change(showDist);
+        $("#imgbtnspan").html(
+            '<label class="btn btn-info">' +
+            '<input type="file" style="display:none;"></iuput>' +
+            '<i class="fa fa-photo"></i> 上傳圖片</label>'
+        );
+        $("#update").toggle();
+        $("#checkRow").toggle();
+        $("#imgbtnspan").toggle();
+    });
+
+    function showDist() {
+        locat.forEach(e => {
+            let memDist;
+            if (e.name === $("#memCity").val()) {
+                $("#memDist").empty();
+                $("#memDist").append("<option disabled selected>請選擇</option>");
+                memDist = e.districts;
+                memDist.forEach(e => {
+                    $("#memDist").append(`<option  value="${e.name}">${e.name}</option>`);
+                })
+            }
+        })
+    };
+
+
+
+
+
+</script>
 
 </html>

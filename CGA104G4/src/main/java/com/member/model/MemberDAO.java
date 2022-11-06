@@ -67,6 +67,20 @@ public class MemberDAO implements MemberDAO_interface {
     }
 
     @Override
+    public void insert(MemberVO memberVO) {
+        try {
+            beginTransaction();
+            getSession().persist(memberVO);
+
+        } catch (Exception e) {
+            rollback();
+            e.printStackTrace();
+        }
+    }
+
+    //以下是MemberFrontServlet會用到的方法
+
+    @Override
     public MemberVO findByPrimaryKey(Integer memId) {
         MemberVO memberVO;
         try {
@@ -80,19 +94,6 @@ public class MemberDAO implements MemberDAO_interface {
         }
     }
 
-    @Override
-    public void insert(MemberVO memberVO) {
-        try {
-            beginTransaction();
-            getSession().persist(memberVO);
-
-        } catch (Exception e) {
-            rollback();
-            e.printStackTrace();
-        }
-    }
-
-    //以下是MemberLoginServlet會用到的方法
     @Override
     public MemberVO login(String memEmail, String memPwd) {
         MemberVO memberVO;

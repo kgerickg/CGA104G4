@@ -84,7 +84,6 @@
 
     $("#forgetPwd").click(
         async function () {
-            console.log("我有跑道1");
             let email = $("#memEmail").val();
             if (email === null || email.trim().length === 0) {
                 $("#memEmailerror").html("<p style='color:red;'>帳號請勿空白</p>");
@@ -96,7 +95,7 @@
 
             let path = window.location.pathname;
             let webCtx = path.substring(0, path.indexOf('/', 1));
-            let url = webCtx + "/member/memberlogin.do";
+            let url = webCtx + "/member/memberfront.do";
             let reponse = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
 
             if (!reponse.state) {
