@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <h4 class="text-left" style="font-size: 1rem;">基本資料:</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -81,6 +81,11 @@
                                     <!--form-group end-->
                                 </div>
                             </div>
+                            <span style="display: flex; justify-content:space-around">
+                                    <span  style="color: red"
+                                          id="memNameerror"></span>
+                                    <span  id="memMobileerror" style="color: red"></span>
+                            </span>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -117,7 +122,7 @@
                                 <div class="form-group" style="position: relative">
                                         <span id="imgbtnspan" style="position: absolute;display:none; left: 10%">
                                         <label class="btn btn-info">
-                                            <input type="file" style="display:none;"></iuput>
+                                            <input type="file" style="display:none;" id="imgInput"></iuput>
                                             <i class="fa fa-photo"></i> 上傳圖片
                                         </label>
                                         </span>
@@ -168,59 +173,67 @@
 <script src="../resources/js/isotope.js"></script>
 </body>
 <script>
-    let locat;
-    let formDate = new FormData();
-    memberInfoUpdate();
 
-    async function memberInfoUpdate() {
+    let locat = getLocation();
+
+    async function getLocation() {
+        locat = await fetch("../resources/js/taiwan_districts.json").then(res => res.json());
+        return locat;
+    }
+
+    let memData = new FormData();
+    (async function memberInfoUpdate() {
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/member/memberfront.do?action=memberInfoUpdate";
+        let url = webCtx + "/member/memberfront.do?action=getMemberInfo";
 
         let response = await fetch(url, {method: 'get'}).then(e => e.json());
         if (response.memEmail) {
-            $("#memEmail").val(`${response.memEmail}`);
+            $("#memEmail").val(response.memEmail);
         }
         if (response.memName) {
-            $("#memName").val(`${response.memName}`);
-            formDate.append("memName",response.memName);
+            $("#memName").val(response.memName);
+            memData.append("memName", response.memName);
         }
         if (response.memMobile) {
-            $("#memMobile").val(`${response.memMobile}`);
-            formDate.append("memMobile",response.memMobile);
+            $("#memMobile").val(response.memMobile);
+            memData.append("memMobile", response.memMobile);
         }
 
         if (response.memAdr) {
-            $("#memAdr").val(`${response.memAdr}`);
-            formDate.append("memAdr",response.memAdr);
+            $("#memAdr").val(response.memAdr);
+            memData.append("memAdr", response.memAdr);
         }
 
-        locat = await fetch("../resources/js/taiwan_districts.json").then(response => response.json());
-        locat.forEach(e => {
-            $("#memCity").append(`<option value="${e.name}">${e.name}</option>`);
-        });
+        showCity();
 
-        if(response.memCity){
-            $("#memCity").val(`${response.memCity}`);
-            formDate.append("memCity",response.memCity);
+        if (response.memCity) {
+            $("#memCity").val(response.memCity);
+            memData.append("memCity", response.memCity);
         }
 
         showDist();
 
-        if(response.memDist){
-            $("#memDist").val(`${response.memDist}`);
-            formDate.append("memDist",response.memDist);
+        if (response.memDist) {
+            $("#memDist").val(response.memDist);
+            memData.append("memDist", response.memDist);
         }
 
+        showOriginalImg()
+    })();
 
-        let memData = JSON.parse(sessionStorage.getItem("memData"));
-        if (memData.memPic) {
-            $("#personalImage").attr("src", "data:image/png;base64," + memData.memPic);
+    $("#imgInput").change(function () {
+        if (this.files.length > 0) {
+            let reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+            reader.addEventListener("load", function () {
+                $("#personalImage").attr("src", reader.result);
+            })
         } else {
-            $("#personalImage").attr("src", "../resources/images/personal.jpg");
+            $("#imgInput").val("");
+            showOriginalImg();
         }
-    };
-
+    })
 
     $("#update").click(function () {
         $("#memName").prop("readonly", false);
@@ -228,33 +241,130 @@
         $("#memAdr").prop("readonly", false);
         $("#memCity").prop("disabled", false);
         $("#memDist").prop("disabled", false);
+
         $("#memCity").change(showDist);
-        $("#imgbtnspan").html(
-            '<label class="btn btn-info">' +
-            '<input type="file" style="display:none;"></iuput>' +
-            '<i class="fa fa-photo"></i> 上傳圖片</label>'
-        );
+
         $("#update").toggle();
         $("#checkRow").toggle();
         $("#imgbtnspan").toggle();
     });
 
+    $("#cancel").click(function () {
+        $("#memNameerror").html("");
+        $("#memMobileerror").html("");
+        $("#memName").val(memData.get("memName"));
+        $("#memMobile").val(memData.get("memMobile"));
+        $("#memAdr").val(memData.get("memAdr"));
+
+        if (memData.get("memCity")) {
+            $("#memCity").val(memData.get("memCity"));
+        } else {
+            showCity();
+        }
+
+        if (memData.get("memDist")) {
+            showDist();
+            $("#memDist").val(memData.get("memDist"));
+        } else {
+            showDist();
+        }
+
+        $("#imgInput").val("");
+
+        showOriginalImg()
+
+        setReadonly();
+
+    })
+
+    $("#confirm").click(function () {
+        $("#memNameerror").html("");
+        $("#memMobileerror").html("");
+        let formData = new FormData();
+        formData.append("memName", $("#memName").val());
+        formData.append("memMobile", $("#memMobile").val());
+        formData.append("memAdr", $("#memAdr").val());
+        formData.append("memCity", $("#memCity").val());
+        formData.append("memDist", $("#memDist").val());
+
+
+        if ($("#imgInput").val()) {
+            let memPic = document.querySelector("#imgInput").files[0];
+            formData.append("memPic", memPic);
+        }
+
+        formData.append("action", "updateData")
+
+        updateData(formData);
+
+    })
+
+    async function updateData(formData) {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/member/memberfront.do";
+        let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
+        if (!response.state) {
+            if (response.memNameerror) {
+                $("#memNameerror").html(response.memNameerror);
+            }
+            if (response.memMobileerror) {
+                $("#memMobileerror").html(response.memMobileerror);
+            }
+            return;
+        }
+        await sessionStorage.removeItem("memData");
+        window.location.reload();
+
+
+
+    }
+
+
+    function showCity() {
+        $("#memCity").empty();
+        $("#memCity").append("<option disabled selected>縣市</option>");
+        locat.forEach(e => {
+            $("#memCity").append(`<option value="${e.name}">${e.name}</option>`);
+        });
+    }
+
     function showDist() {
+        $("#memDist").empty();
+        $("#memDist").append("<option disabled selected>鄉鎮區</option>");
         locat.forEach(e => {
             let memDist;
             if (e.name === $("#memCity").val()) {
-                $("#memDist").empty();
-                $("#memDist").append("<option disabled selected>請選擇</option>");
                 memDist = e.districts;
                 memDist.forEach(e => {
                     $("#memDist").append(`<option  value="${e.name}">${e.name}</option>`);
                 })
             }
         })
-    };
+    }
 
+    function setReadonly() {
+        $("#memName").prop("readonly", true);
+        $("#memMobile").prop("readonly", true);
+        $("#memAdr").prop("readonly", true);
+        $("#memCity").prop("disabled", true);
+        $("#memDist").prop("disabled", true);
 
+        $("#update").toggle();
+        $("#checkRow").toggle();
+        $("#imgbtnspan").toggle();
 
+    }
+
+    function showOriginalImg() {
+        let memData = JSON.parse(sessionStorage.getItem("memData"));
+        if (memData.memPic) {
+            $("#personalImage").attr("src", "data:image/png;base64," + memData.memPic);
+        } else {
+            $("#personalImage").attr("src", "../resources/images/personal.jpg");
+        }
+
+    }
 
 
 </script>

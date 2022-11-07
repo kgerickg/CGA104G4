@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.util.Base64;
 
@@ -44,13 +45,92 @@ public class MemberFrontServlet extends HttpServlet {
                 break;
             case "updatePassword":
                 updatePassword(request, response);
-            case "memberInfoUpdate":
-                memberInfoUpdate(request,response);
-
+                break;
+            case "getMemberInfo":
+                getMemberInfo(request,response);
+                break;
+            case "updateData":
+                updateData(request,response);
+                break;
         }
     }
 
-    private void memberInfoUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateData(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        MemberService memSvc = new MemberService();
+        JSONObject MsgsJson = new JSONObject();
+        Writer out = response.getWriter();
+
+        Integer memId =(Integer) request.getSession().getAttribute("memId");
+
+        // 姓名驗證
+        String memName = request.getParameter("memName");
+        String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,10}$";
+        if (memName == null || memName.trim().length() == 0) {
+            MsgsJson.put("memNameerror", "姓名請勿空白");
+        } else if (!memName.trim().matches(memNameReg)) {
+            MsgsJson.put("memNameerror", "姓名格式異常");
+        }
+
+        // 手機驗證
+        String memMobile = request.getParameter("memMobile");
+        String memMobileReg = "^[0][9]\\d{8}$";
+        if (memMobile == null || memMobile.trim().length() == 0) {
+            MsgsJson.put("memMobileerror", "手機號碼請勿空白");
+        } else if (!memMobile.trim().matches(memMobileReg)) {
+            MsgsJson.put("memMobileerror", "手機號碼格式異常");
+        }
+
+        // 地址驗證
+        String memCity = request.getParameter("memCity");
+        String memDist = request.getParameter("memDist");
+        String memAdr = request.getParameter("memAdr");
+
+
+        if (memCity.equals("null") || memDist.equals("null") || memAdr.trim().length() == 0) {
+            memCity = null;
+            memDist = null;
+            memAdr = null;
+        }
+
+        if (!MsgsJson.isEmpty()) {
+            MsgsJson.put("state", false);
+            out.write(MsgsJson.toString());
+            return;
+        }
+
+        // 圖片
+        byte[] memPic=null;
+        InputStream memPicis = null;
+        Part memPicPart = request.getPart("memPic");
+        if (memPicPart != null) {
+            try {
+                memPicis = memPicPart.getInputStream();
+                memPic = new byte[memPicis.available()];
+                memPicis.read(memPic);
+                request.getSession().setAttribute("memPic",memPic);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                memPicis.close();
+            }
+        }
+
+        MemberVO memberVO = new MemberVO();
+        memberVO.setMemId(memId);
+        memberVO.setMemName(memName);
+        memberVO.setMemMobile(memMobile);
+        memberVO.setMemCity(memCity);
+        memberVO.setMemAdr(memAdr);
+        memberVO.setMemDist(memDist);
+        memberVO.setMemPic(memPic);
+        memSvc.update(memberVO);
+
+        MsgsJson.put("state", true);
+        out.write(MsgsJson.toString());
+
+    }
+
+    private void getMemberInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         JSONObject memberJson = new JSONObject();
         MemberService memSvc = new MemberService();
         Writer out = response.getWriter();
@@ -72,7 +152,7 @@ public class MemberFrontServlet extends HttpServlet {
 
     }
 
-    private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         JSONObject MsgsJson = new JSONObject();
         MemberService memSvc = new MemberService();
         Writer out = response.getWriter();
@@ -122,6 +202,7 @@ public class MemberFrontServlet extends HttpServlet {
         memSvc.updatePwd(memberVO);
         MsgsJson.put("state", true);
         out.write(MsgsJson.toString());
+
 
     }
 
@@ -244,7 +325,7 @@ public class MemberFrontServlet extends HttpServlet {
 
     }
 
-    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void logout(HttpServletRequest request, HttpServletResponse response)  {
         request.getSession().removeAttribute("memId");
         request.getSession().invalidate();
     }

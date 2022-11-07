@@ -127,7 +127,7 @@ public class MemberServlet extends HttpServlet {
         } else {
 
             MemberService memSvc = new MemberService();
-            memSvc.update(memId, memEmail, memPwd, accStat, memName, memMobile, memCity, memDist, memAdr,memToken);
+//            memSvc.update(memId, memEmail, memPwd, accStat, memName, memMobile, memCity, memDist, memAdr,memToken);
             JSONObject currentState = new JSONObject();
             currentState.put("state", "true");
             out.write(currentState.toString());
