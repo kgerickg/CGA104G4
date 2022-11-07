@@ -31,8 +31,6 @@ public class MemberService {
 
     }
 
-
-    //以下是MemberFrontServlet使用到的方法
     public MemberVO findByPrimaryKey(Integer memId) {
 
         return dao.findByPrimaryKey(memId);
@@ -93,5 +91,9 @@ public class MemberService {
 
         return false;
 
+    }
+
+    public void updateAccState(MemberVO memberVO) {
+        dao.updateAccState(memberVO);
     }
 }

@@ -160,6 +160,21 @@ public class MemberDAO implements MemberDAO_interface {
     }
 
     @Override
+    public void updateAccState(MemberVO memberVO) {
+        try {
+            beginTransaction();
+            MemberVO memberVOorignal = getSession().get(MemberVO.class, memberVO.getMemId());
+            memberVOorignal.setAccStat(memberVO.getAccStat());
+            getSession().merge(memberVOorignal);
+            commit();
+        } catch (Exception e) {
+            rollback();
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     public void delete(Integer memId) {
 
 
