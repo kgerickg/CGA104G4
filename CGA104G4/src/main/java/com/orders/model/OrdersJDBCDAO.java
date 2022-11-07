@@ -21,7 +21,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	private static final String INSERT_STMT = "insert into ORDERS (MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME) VALUES (?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS";
 	private static final String GET_ONE_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where ORD_ID = ?";
-	private static final String GET_Details_ByOrdId_STMT = "select PROD_ID, PROD_QTY, ORD_ID from DETAIL where ORDID = ? order by PROD_ID";
+	private static final String GET_Details_ByOrdId_STMT = "select PROD_ID, PROD_QTY, ORD_ID from DETAIL where ORD_ID = ? order by PROD_ID";
 	
 	private static final String DELETE_DETAILs = "delete from DETAIL where ORD_ID = ?";
 	private static final String DELETE_ORDERS = "delete from ORDERS where ORD_ID = ?";
@@ -379,7 +379,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 		OrdersJDBCDAO dao = new OrdersJDBCDAO();
 
 		// 新增
-//		OrdersVO ordersVO1 = new OrdersVO();
+//		ProdVO ordersVO1 = new ProdVO();
 //		ordersVO1.setOrdId(1);
 //		ordersVO1.setMemId(1);
 //		ordersVO1.setStoreId(1);
@@ -389,7 +389,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 //		dao.insert(ordersVO1);
 
 		// 修改
-//		OrdersVO ordersVO2 = new OrdersVO();
+//		ProdVO ordersVO2 = new ProdVO();
 //		ordersVO2.setOrdId(2);
 //		ordersVO2.setMemId(2);
 //		ordersVO2.setStoreId(2);
@@ -423,7 +423,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 			System.out.println();
 		}
 		
-		// 查詢某部門的員工
+		// 查詢某訂單的明細
 		Set<DetailVO> set = dao.getDetailsByOrdId(1);
 		for (DetailVO aDetail : set) {
 			System.out.print(aDetail.getProdId() + ",");

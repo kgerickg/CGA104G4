@@ -1,23 +1,16 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.orders.model.*"%>
-<%-- æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
+<%@ page import="com.detail.model.*"%>
 
-<%
-    OrdersService ordersSvc = new OrdersService();
-    List<OrdersVO> list = ordersSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
-
+<jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 
 <html>
-<head>
-<title>æ­·å²è¨‚å–®</title>
+<head><title>©Ò¦³­q³æ - listAllOrders.jsp</title>
 
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
+	background-color: orange;
     border: 2px solid black;
     text-align: center;
   }
@@ -49,29 +42,29 @@
 </style>
 
 </head>
-<body bgcolor='white'>
-
+<body>
 
 <table id="table-1">
 	<tr><td>
-		 <h3>æ­·å²è¨‚å–®</h3>
+		 <h3>©Ò¦³­q³æ - listAllOrders.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>è¨‚å–®ç·¨è™Ÿ</th>
-		<th>æœƒå“¡ç·¨è™Ÿ</th>
-		<th>å•†å®¶ç·¨è™Ÿ</th>
-		<th>çµå¸³é‡‘é¡</th>
-		<th>è¨‚å–®ç‹€æ…‹</th>
-		<th>è¨‚å–®æˆç«‹æ—¥æœŸ</th>
-		<th>ä¿®æ”¹</th>
-		<th>åˆªé™¤</th>		
+		<th>­q³æ½s¸¹</th>
+		<th>·|­û½s¸¹</th>
+		<th>°Ó®a½s¸¹</th>
+		<th>­q³æª÷ÃB</th>
+		<th>­q³æª¬ºA</th>
+		<th>­q³æ¦¨¥ß®É¶¡</th>
+		<th>­×§ï</th>
+		<th>§R°£<font color=red>(ÃöÁp´ú¸Õ»P¥æ©ö-¤p¤ß)</font></th>
+		<th>¬d¸ß­q³æ©ú²Ó</th>
 	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="ordersVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		
+	
+	<c:forEach var="ordersVO" items="${ordersSvc.all}">
 		<tr>
 			<td>${ordersVO.ordId}</td>
 			<td>${ordersVO.memId}</td>
@@ -81,20 +74,29 @@
 			<td>${ordersVO.ordTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="ä¿®æ”¹">
-			     <input type="hidden" name="ordId"  value="${ordersVO.ordId}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			    <input type="submit" value="­×§ï"   disabled="disabled"> 
+			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
+			    <input type="hidden" name="action" value="getOne_For_Update_Orders"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="åˆªé™¤">
-			     <input type="hidden" name="ordId"  value="${ordersVO.ordId}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>			 
+			    <input type="submit" value="§R°£">
+			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
+			    <input type="hidden" name="action" value="delete_Orders"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
+			    <input type="submit" value="°e¥X¬d¸ß"> 
+			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
+			    <input type="hidden" name="action" value="listDetails_ByOrdId_B"></FORM>
+			</td>
 		</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+
+<%if (request.getAttribute("listDetails_ByOrdId")!=null){%>
+       <jsp:include page="listDetails_ByOrdId.jsp" />
+<%} %>
 
 </body>
 </html>

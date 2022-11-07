@@ -1,5 +1,6 @@
 package com.detail.model;
 import java.sql.Date;
+import com.prod.model.*;
 
 public class DetailVO implements java.io.Serializable{
 	
@@ -31,10 +32,10 @@ public class DetailVO implements java.io.Serializable{
 		this.ordId = ordId;
 	}
 	
-    // for join dname from deptno
-//    public com.dept.model.DeptVO getDeptVO() {
-//	    com.dept.model.DeptService deptSvc = new com.dept.model.DeptService();
-//	    com.dept.model.DeptVO deptVO = deptSvc.getOneDept(deptno);
-//	    return deptVO;
-//    }
+    // for join prodName, prodPrc from prodId
+    public ProdVO getProdVO() {
+	    ProdService prodSvc = new ProdService();
+	    ProdVO prodVO = prodSvc.getOneProd(prodId);
+	    return prodVO;
+    }
 }

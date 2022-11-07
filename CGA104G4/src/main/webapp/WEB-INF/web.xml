@@ -42,4 +42,20 @@
       <dispatcher>ERROR</dispatcher>
       <dispatcher>ASYNC</dispatcher>
     </filter-mapping>
+    <servlet>
+    <servlet-name>DetailServlet</servlet-name>
+    <servlet-class>com.detail.controller.DetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailServlet</servlet-name>
+    <url-pattern>/detail/detail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OrdersServlet</servlet-name>
+    <servlet-class>com.orders.controller.OrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrdersServlet</servlet-name>
+    <url-pattern>/orders/orders.do</url-pattern>
+  </servlet-mapping>
 </web-app>
