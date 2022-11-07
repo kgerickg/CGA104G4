@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.detail.model.*"%>
@@ -6,7 +6,7 @@
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 
 <html>
-<head><title>©Ò¦³­q³æ - listAllOrders.jsp</title>
+<head><title>æ‰€æœ‰è¨‚å–® - listAllOrders.jsp</title>
 
 <style>
   table#table-1 {
@@ -46,22 +46,22 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>©Ò¦³­q³æ - listAllOrders.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>æ‰€æœ‰è¨‚å–® - listAllOrders.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›žé¦–é </a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>­q³æ½s¸¹</th>
-		<th>·|­û½s¸¹</th>
-		<th>°Ó®a½s¸¹</th>
-		<th>­q³æª÷ÃB</th>
-		<th>­q³æª¬ºA</th>
-		<th>­q³æ¦¨¥ß®É¶¡</th>
-		<th>­×§ï</th>
-		<th>§R°£<font color=red>(ÃöÁp´ú¸Õ»P¥æ©ö-¤p¤ß)</font></th>
-		<th>¬d¸ß­q³æ©ú²Ó</th>
+		<th>è¨‚å–®ç·¨è™Ÿ</th>
+		<th>æœƒå“¡ç·¨è™Ÿ</th>
+		<th>å•†å®¶ç·¨è™Ÿ</th>
+		<th>è¨‚å–®é‡‘é¡</th>
+		<th>è¨‚å–®ç‹€æ…‹</th>
+		<th>è¨‚å–®æˆç«‹æ™‚é–“</th>
+		<th>ä¿®æ”¹</th>
+		<th>åˆªé™¤<font color=red>(é—œè¯æ¸¬è©¦èˆ‡äº¤æ˜“-å°å¿ƒ)</font></th>
+		<th>æŸ¥è©¢è¨‚å–®æ˜Žç´°</th>
 	</tr>
 	
 	<c:forEach var="ordersVO" items="${ordersSvc.all}">
@@ -74,19 +74,19 @@
 			<td>${ordersVO.ordTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="­×§ï"   disabled="disabled"> 
+			    <input type="submit" value="ä¿®æ”¹"   disabled="disabled"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="getOne_For_Update_Orders"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="§R°£">
+			    <input type="submit" value="åˆªé™¤">
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="delete_Orders"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="°e¥X¬d¸ß"> 
+			    <input type="submit" value="é€å‡ºæŸ¥è©¢"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="listDetails_ByOrdId_B"></FORM>
 			</td>

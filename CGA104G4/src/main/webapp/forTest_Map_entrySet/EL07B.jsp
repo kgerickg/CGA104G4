@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=Big5" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%
@@ -21,8 +21,8 @@
 		<li>${message.key}:${message.value}</li>
 	</c:forEach>
 	
-<!-- ¸É¥R»¡©ú: -->
-<!-- java.util.Map ªº  entrySet()¤èªk¡A¶Ç¦^ Set<Map.Entry<K,V>> -->
+<!-- è£œå……èªªæ˜: -->
+<!-- java.util.Map çš„  entrySet()æ–¹æ³•ï¼Œå‚³å› Set<Map.Entry<K,V>> -->
 <!-- Set<Map.Entry<K,V>> entrySet() -->
 
 </body>

@@ -58,4 +58,13 @@
     <servlet-name>OrdersServlet</servlet-name>
     <url-pattern>/orders/orders.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ProdServlet</servlet-name>
+    <servlet-class>com.prod.controller.ProdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProdServlet</servlet-name>
+    <url-pattern>/prod/prod.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
