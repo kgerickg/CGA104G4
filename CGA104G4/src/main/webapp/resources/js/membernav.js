@@ -26,8 +26,8 @@ header.innerHTML =
                     </li>
                     <li><a href="" >個人資訊+</a>
                         <ul>
-                            <li><a href="./memberinfoupdate.html" class="">個人基本資料</a></li>
-                            <li><a href="./memberupatepassword.html" >更改密碼</a></li>
+                            <li><a href="../front-end/memberinfoupdate.html" class="">個人基本資料</a></li>
+                            <li><a href="../front-end/memberupatepassword.html" >更改密碼</a></li>
                             <li><a href="" >錢包專區</a></li>
                             <li><a href="" >個人訊息</a></li>
                         </ul>
@@ -62,10 +62,10 @@ header.innerHTML =
                 <ul id="logul">
                     <li><a href="" title="">登入|註冊</a>
                         <ul class="uladjust">
-                            <li><a href="./membersignup.html" title="">會員註冊</a></li>
-                            <li><a href="./memberlogin.html" title="">會員登入</a></li>
+                            <li><a href="../front-end/membersignup.html" title="">會員註冊</a></li>
+                            <li><a href="../front-end/memberlogin.html" title="">會員登入</a></li>
                             <li><a href="" title="">商家註冊</a></li>
-                            <li><a href="./storelogin.html" title="">商家登入</a></li>
+                            <li><a href="../front-end/storelogin.html" title="">商家登入</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -99,10 +99,10 @@ div.innerHTML =
         </li>
         <li id="log-il-response"><a href="">登入|註冊</a>
             <ul>
-                <li><a href="./membersignup.html">會員註冊</a></li>
-                <li><a href="./memberlogin.html">會員登入</a></li>
+                <li><a href="../front-end/membersignup.html">會員註冊</a></li>
+                <li><a href="../front-end/memberlogin.html">會員登入</a></li>
                 <li><a href="" title="">商家註冊</a></li>
-                <li><a href="./storelogin.html" title="">商家登入</a></li>
+                <li><a href="../front-end/storelogin.html" title="">商家登入</a></li>
             </ul>
         </li>
     </ul>`
@@ -181,7 +181,7 @@ async function logout() {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
                 window.location.reload();
-                window.location.href = "./index.html";
+                window.location.href = "../front-end/index.html";
             }
         })
 

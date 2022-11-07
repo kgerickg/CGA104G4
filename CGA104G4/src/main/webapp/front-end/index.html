@@ -24,6 +24,30 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
     <!-- 請將覆蓋用的css放置此註解下方 -->
+    <style>
+        body{
+            background-color: black;
+        }
+        div.positon-set{
+            position: absolute;
+            top:85%;
+            left: 50%;
+           translate: -50%;
+        }
+        .btn-my{
+            height: 6rem;
+            width: 12rem;
+            background-color: #22262F;
+            border-radius: 10px;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            translate: -50%;
+            color: #dee2e6;
+            font-size: 1.2rem;
+            border: #ced4da 1px solid;
+        }
+    </style>
 
 
     <!-- 頁籤顯示的title -->
@@ -34,11 +58,65 @@
 
 </head>
 
-<body>
+<body style="position: relative">
     <script src="../resources/js/membernav.js"></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
     <!--下面可自由新增內容 -->
-    <img src="../resources/images/123.jpg" style="margin-top: 100px">
+    <section class="main-banner">
+        <div class="container">
+            <div class="banner-text">
+                <h2>立即享受美味食物</h2>
+                <span class="semi-bold text-capitalize">珍惜每一份餐點</span>
+                <form id="searchfood">
+                    <input type="text" name="location" class="half-radius" placeholder="搜索">
+                    <button type="submit" class="btn-default">搜索食物<span></span></button>
+                </form>
+
+                <form style="display: none" id="locationShop">
+                    <input type="text" name="location" class="half-radius" placeholder="搜索">
+                    <button type="submit" class="btn-default">找尋附近的店家<span></span></button>
+                </form>
+
+                <form style="display: none" id="lucky">
+                    <input type="text" name="location" class="half-radius" placeholder="搜索">
+                    <button type="submit" class="btn-default">福袋搜索<span></span></button>
+                </form>
+            </div><!--banner-text end-->
+        </div>
+    </section><!--main-banner end-->
+
+    <div class="container positon-set">
+        <div class="services-sec">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="service" style="height: 15rem">
+                        <h2 class="semi-bold">01.</h2>
+                        <h4 class="semi-bold text-capitalize"><a href="#" title="">找尋美食</a></h4>
+                        <button type="button" class="btn-my" id="searchfoodbutton">搜索食物<span></span></button>
+                    </div><!--service end-->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="service" style="height: 15rem">
+                        <h2 class="semi-bold">02.</h2>
+                        <h4 class="semi-bold text-capitalize"><a href="#" title="">找尋附近美食</a></h4>
+                        <button type="button" class="btn-my" id="locationShopbutton">找尋店家<span></span></button>
+                    </div><!--service end-->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="service" style="height: 15rem">
+                        <h2 class="semi-bold">03.</h2>
+                        <h4 class="semi-bold text-capitalize"><a href="#" title="">珍惜食物</a></h4>
+                        <button type="button" class="btn-my" id="luckybutton">福袋搜索<span></span></button>
+                    </div><!--service end-->
+                </div>
+            </div>
+        </div><!--services end-->
+    </div>
+
+
+
+
+
 
 
 
@@ -50,6 +128,26 @@
     <script src="../resources/js/slick.js"></script>
     <script src="../resources/js/scripts.js"></script>
     <script src="../resources/js/isotope.js"></script>
+
+    <script>
+        $("#searchfoodbutton").click(function () {
+            $("#searchfood").show();
+            $("#locationShop").hide();
+            $("#lucky").hide();
+        })
+        $("#locationShopbutton").click(function () {
+            $("#locationShop").show();
+            $("#searchfood").hide();
+            $("#lucky").hide();
+        })
+        $("#luckybutton").click(function () {
+            $("#lucky").show();
+            $("#locationShop").hide();
+            $("#searchfood").hide();
+        })
+    </script>
+
+
 </body>
 
 </html>
