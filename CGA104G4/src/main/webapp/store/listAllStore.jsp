@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.store.model.*"%>
@@ -13,7 +13,7 @@ pageContext.setAttribute("list", list);
 
 <html>
 <head>
-<title>©Ò¦³©±®a¸ê®Æ</title>
+<title>æ‰€æœ‰åº—å®¶è³‡æ–™</title>
 
 <style>
 table#table-1 {
@@ -60,9 +60,9 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>©Ò¦³©±®a¸ê®Æ</h3>
+				<h3>æ‰€æœ‰åº—å®¶è³‡æ–™</h3>
 				<h4>
-					<a href="select_page.jsp">¦^­º­¶</a>
+					<a href="select_page.jsp">å›žé¦–é </a>
 				</h4>
 			</td>
 		</tr>
@@ -70,21 +70,21 @@ th, td {
 
 	<table>
 		<tr>
-			<th>·|­û½s¸¹</th>
-			<th>·|­û±b¸¹</th>
-			<th>·|­û±K½X</th>
-			<th>·|­û¦WºÙ</th>
-			<th>·|­û²Î½s</th>
-			<th>­t³d¤H</th>
-			<th>©±®a¹q¸Ü</th>
-			<th>©±®a¶Ç¯u</th>
-			<th>©±®a¦a§}</th>
-			<th>Ápµ¸¤H</th>
-			<th>Ápµ¸¤H¹q¸Ü</th>
-			<th>Ápµ¸¤H¦a§}</th>
-			<th>©±®a«H½c</th>
-			<th>­×§ï</th>
-			<th>§R°£</th>
+			<th>æœƒå“¡ç·¨è™Ÿ</th>
+			<th>æœƒå“¡å¸³è™Ÿ</th>
+			<th>æœƒå“¡å¯†ç¢¼</th>
+			<th>æœƒå“¡åç¨±</th>
+			<th>æœƒå“¡çµ±ç·¨</th>
+			<th>è² è²¬äºº</th>
+			<th>åº—å®¶é›»è©±</th>
+			<th>åº—å®¶å‚³çœŸ</th>
+			<th>åº—å®¶åœ°å€</th>
+			<th>è¯çµ¡äºº</th>
+			<th>è¯çµ¡äººé›»è©±</th>
+			<th>è¯çµ¡äººåœ°å€</th>
+			<th>åº—å®¶ä¿¡ç®±</th>
+			<th>ä¿®æ”¹</th>
+			<th>åˆªé™¤</th>
 		</tr>
 		<%@ include file="page1.file"%>
 		<c:forEach var="storeVO" items="${list}" begin="<%=pageIndex%>"
@@ -108,7 +108,7 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/store/store.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="­×§ï"> <input type="hidden"
+						<input type="submit" value="ä¿®æ”¹"> <input type="hidden"
 							name="storeId" value="${storeVO.storeId}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
@@ -117,7 +117,7 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/store/store.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="§R°£"> <input type="hidden"
+						<input type="submit" value="åˆªé™¤"> <input type="hidden"
 							name="storeId" value="${storeVO.storeId}"> <input
 							type="hidden" name="action" value="delete">
 					</FORM>

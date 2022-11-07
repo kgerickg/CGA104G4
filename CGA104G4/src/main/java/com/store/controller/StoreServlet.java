@@ -4,11 +4,13 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
+@WebServlet(name = "StoreServlet", urlPatterns = { "/StoreServlet", "/store/store.do" })
 public class StoreServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -126,7 +128,6 @@ public class StoreServlet extends HttpServlet {
 			String storeConAd = req.getParameter("storeConAd").trim();
 			String storeEmail = req.getParameter("storeEmail").trim();
 
-			
 			StoreVO storeVO = new StoreVO();
 			storeVO.setStoreId(storeId);
 			storeVO.setStoreAcc(storeAcc);
@@ -152,8 +153,9 @@ public class StoreServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			StoreService storeSvc = new StoreService();
-			storeVO = storeSvc.updateStore(storeId, storeAcc, storePwd, storeName, storeGui, storeRep, storeTel, storeFax, storeAd, storeCon, storeConTel, storeConAd, storeEmail );
-			
+			storeVO = storeSvc.updateStore(storeId, storeAcc, storePwd, storeName, storeGui, storeRep, storeTel,
+					storeFax, storeAd, storeCon, storeConTel, storeConAd, storeEmail);
+
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("storeVO", storeVO); // 資料庫update成功後,正確的StoreVO物件,存入req
 			String url = "/store/listOneStore.jsp";
@@ -190,22 +192,22 @@ public class StoreServlet extends HttpServlet {
 			}
 			String storeGui = req.getParameter("storeGui").trim();
 			String storeGuiReg = "^\\d{8}$";
-			if(!storeGui.trim().matches(storeGuiReg)) {
+			if (!storeGui.trim().matches(storeGuiReg)) {
 				errorMsgs.add("統一編號格式不符");
 			}
 			String storeRep = req.getParameter("storeRep").trim();
 			String storeRepReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-			if(!storeRep.trim().matches(storeRepReg)) {
+			if (!storeRep.trim().matches(storeRepReg)) {
 				errorMsgs.add("負責人姓名只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 			}
 			String storeTel = req.getParameter("storeTel").trim();
 			String storeTelReg = "^0[1-9]{1}[0-9]{8}$";
-			if(!storeTel.trim().matches(storeTelReg)) {
+			if (!storeTel.trim().matches(storeTelReg)) {
 				errorMsgs.add("電話號碼格式錯誤");
 			}
 			String storeFax = req.getParameter("storeFax").trim();
 			String storeFaxReg = "^0[1-9]{1}[0-9]{8}$";
-			if(!storeFax.trim().matches(storeFaxReg)) {
+			if (!storeFax.trim().matches(storeFaxReg)) {
 				errorMsgs.add("傳真號碼格式錯誤");
 			}
 			String storeAd = req.getParameter("storeAd").trim();
@@ -213,7 +215,7 @@ public class StoreServlet extends HttpServlet {
 			String storeConTel = req.getParameter("storeConTel").trim();
 			String storeConAd = req.getParameter("storeConAd").trim();
 			String storeEmail = req.getParameter("storeEmail").trim();
-			
+
 			StoreVO storeVO = new StoreVO();
 			storeVO.setStoreId(storeId);
 			storeVO.setStoreAcc(storeAcc);
@@ -239,7 +241,8 @@ public class StoreServlet extends HttpServlet {
 
 			/*************************** 2.開始新增資料 ***************************************/
 			StoreService storeSvc = new StoreService();
-			storeVO = storeSvc.addStore(storeAcc, storePwd, storeName, storeGui, storeRep, storeTel, storeFax, storeAd, storeCon, storeConTel, storeConAd, storeEmail);
+			storeVO = storeSvc.addStore(storeAcc, storePwd, storeName, storeGui, storeRep, storeTel, storeFax, storeAd,
+					storeCon, storeConTel, storeConAd, storeEmail);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = "/store/listAllStore.jsp";
