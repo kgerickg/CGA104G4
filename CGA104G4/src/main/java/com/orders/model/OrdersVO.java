@@ -2,6 +2,13 @@ package com.orders.model;
 
 import java.sql.Date;
 
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
+import com.prod.model.ProdService;
+import com.prod.model.ProdVO;
+import com.store.model.StoreService;
+import com.store.model.StoreVO;
+
 public class OrdersVO implements java.io.Serializable{
 	private Integer ordId;
 	private Integer memId;
@@ -47,4 +54,16 @@ public class OrdersVO implements java.io.Serializable{
 		this.ordTime = ordTime;
 		
 	}
+	// for join storeName, from storeId
+    public StoreVO getStoreVO() {
+    	StoreService storeSvc = new StoreService();
+	    StoreVO storeVO = storeSvc.getOneStore(storeId);
+	    return storeVO;
+    }
+    // for join memName, from memId
+    public MemberVO getMemberVO() {
+    	MemberService memberSvc = new MemberService();
+    	MemberVO memberVO = memberSvc.getOneMember(memId);
+    	return memberVO;
+    }
 }
