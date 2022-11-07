@@ -1,16 +1,16 @@
-/** ¦Û¦æ¨ú±oDataSourceªº servlet
+/** è‡ªè¡Œå–å¾—DataSourceçš„ servlet
  
- 1.»İ°t¦X web.xml ¦p¤U:
+ 1.éœ€é…åˆ web.xml å¦‚ä¸‹:
     <resource-ref>
       <description>DB Connection</description>
       <res-ref-name>jdbc/TestDB</res-ref-name>
       <res-type>javax.sql.DataSource</res-type>
       <res-auth>Container</res-auth>
     </resource-ref>
- 2.»İ°t¦X server.xml
-    -°Ñ¦Ò: http://localhost:8080/index.jsp ­º­¶
-             ¤§ Tomcat Documentation ¤§ JNDI DataSource HOW-TO ªº»¡©ú
-    -ª`·N: ÀH servlet container ª©¥»¼gªk·|¤£¦P              
+ 2.éœ€é…åˆ server.xml
+    -åƒè€ƒ: http://localhost:8080/index.jsp é¦–é 
+             ä¹‹ Tomcat Documentation ä¹‹ JNDI DataSource HOW-TO çš„èªªæ˜
+    -æ³¨æ„: éš¨ servlet container ç‰ˆæœ¬å¯«æ³•æœƒä¸åŒ              
  */
 import java.io.*;
 import javax.servlet.*;

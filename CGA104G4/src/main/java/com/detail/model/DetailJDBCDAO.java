@@ -174,7 +174,7 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo 也稱為 Domain objects
+				// detailVO 也稱為 Domain objects
 				detailVO = new DetailVO();
 				detailVO.setProdId(rs.getInt("prodId"));
 				detailVO.setProdQty(rs.getInt("prodQty"));
@@ -233,7 +233,7 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO 也稱為 Domain objects
+				// detailVO 也稱為 Domain objects
 				detailVO = new DetailVO();
 				detailVO.setProdId(rs.getInt("prodId"));
 				detailVO.setProdQty(rs.getInt("prodQty"));
@@ -309,7 +309,7 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			System.out.print(aDetail.getProdId() + ",");
 			System.out.print(aDetail.getProdQty() + ",");
 			System.out.print(aDetail.getOrdId() + ",\t");
-//			System.out.print(aDetail.getProdVO()); // join ProdVO
+			System.out.print(aDetail.getProdVO()); // join ProdVO
 			System.out.println();
 		}
 	}

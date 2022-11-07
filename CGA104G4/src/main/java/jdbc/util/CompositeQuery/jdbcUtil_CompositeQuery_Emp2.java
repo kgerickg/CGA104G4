@@ -1,7 +1,7 @@
 /*
- *  1. ¸U¥Î½Æ¦X¬d¸ß-¥i¥Ñ«È¤áºİÀH·N¼W´î¥ô¦ó·Q¬d¸ßªºÄæ¦ì
- *  2. ¬°¤FÁ×§K¼vÅT®Ä¯à:
- *     ©Ò¥H°ÊºA²£¥Í¸U¥ÎSQLªº³¡¥÷,¥»½d¨ÒµL·N±Ä¥ÎMetaDataªº¤è¦¡,¤]¥u°w¹ï­Ó§OªºTable¦Û¦æµø»İ­n¦Ó­Ó§O»s§@¤§
+ *  1. è¬ç”¨è¤‡åˆæŸ¥è©¢-å¯ç”±å®¢æˆ¶ç«¯éš¨æ„å¢æ¸›ä»»ä½•æƒ³æŸ¥è©¢çš„æ¬„ä½
+ *  2. ç‚ºäº†é¿å…å½±éŸ¿æ•ˆèƒ½:
+ *     æ‰€ä»¥å‹•æ…‹ç”¢ç”Ÿè¬ç”¨SQLçš„éƒ¨ä»½,æœ¬ç¯„ä¾‹ç„¡æ„æ¡ç”¨MetaDataçš„æ–¹å¼,ä¹Ÿåªé‡å°å€‹åˆ¥çš„Tableè‡ªè¡Œè¦–éœ€è¦è€Œå€‹åˆ¥è£½ä½œä¹‹
  * */
 
 
@@ -15,13 +15,13 @@ public class jdbcUtil_CompositeQuery_Emp2 {
 
 		String aCondition = null;
 
-		if ("empno".equals(columnName) || "sal".equals(columnName) || "comm".equals(columnName) || "deptno".equals(columnName)) // ¥Î©ó¨ä¥L
+		if ("empno".equals(columnName) || "sal".equals(columnName) || "comm".equals(columnName) || "deptno".equals(columnName)) // ç”¨æ–¼å…¶ä»–
 			aCondition = columnName + "=" + value;
-		else if ("ename".equals(columnName) || "job".equals(columnName)) // ¥Î©óvarchar
+		else if ("ename".equals(columnName) || "job".equals(columnName)) // ç”¨æ–¼varchar
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("hiredate".equals(columnName))                          // ¥Î©ódate
-			aCondition = columnName + "=" + "'"+ value +"'";                          //for ¨ä¥¦DB  ªº date
-//		    aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";  //for Oracle ªº date
+		else if ("hiredate".equals(columnName))                          // ç”¨æ–¼date
+			aCondition = columnName + "=" + "'"+ value +"'";                          //for å…¶å®ƒDB  çš„ date
+//		    aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";  //for Oracle çš„ date
 		
 		return aCondition + " ";
 	}
@@ -41,7 +41,7 @@ public class jdbcUtil_CompositeQuery_Emp2 {
 				else
 					whereCondition.append(" and " + aCondition);
 
-				System.out.println("¦³°e¥X¬d¸ß¸ê®ÆªºÄæ¦ì¼Æcount = " + count);
+				System.out.println("æœ‰é€å‡ºæŸ¥è©¢è³‡æ–™çš„æ¬„ä½æ•¸count = " + count);
 			}
 		}
 		
@@ -50,7 +50,7 @@ public class jdbcUtil_CompositeQuery_Emp2 {
 
 	public static void main(String argv[]) {
 
-		// °t¦X req.getParameterMap()¤èªk ¦^¶Ç java.util.Map<java.lang.String,java.lang.String[]> ¤§´ú¸Õ
+		// é…åˆ req.getParameterMap()æ–¹æ³• å›å‚³ java.util.Map<java.lang.String,java.lang.String[]> ä¹‹æ¸¬è©¦
 		Map<String, String[]> map = new TreeMap<String, String[]>();
 		map.put("empno", new String[] { "7001" });
 		map.put("ename", new String[] { "KING" });
@@ -59,12 +59,12 @@ public class jdbcUtil_CompositeQuery_Emp2 {
 		map.put("sal", new String[] { "5000.5" });
 		map.put("comm", new String[] { "0.0" });
 		map.put("deptno", new String[] { "10" });
-		map.put("action", new String[] { "getXXX" }); // ª`·NMap¸Ì­±·|§t¦³actionªºkey
+		map.put("action", new String[] { "getXXX" }); // æ³¨æ„Mapè£¡é¢æœƒå«æœ‰actionçš„key
 
 		String finalSQL = "select * from emp2 "
 				          + jdbcUtil_CompositeQuery_Emp2.get_WhereCondition(map)
 				          + "order by empno";
-		System.out.println("¡´¡´finalSQL = " + finalSQL);
+		System.out.println("â—â—finalSQL = " + finalSQL);
 
 	}
 }

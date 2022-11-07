@@ -1,13 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.detail.model.*"%>
 
-<jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" /> <!-- ©óEL¦¹¦æ¥i¬Ù²¤ -->
+<jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" /> <!-- æ–¼ELæ­¤è¡Œå¯çœç•¥ -->
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 
 
 <html>
-<head><title>­q³æ©ú²Ó - listDetails_ByOrdId.jsp</title>
+<head><title>è¨‚å–®æ˜ç´° - listDetails_ByOrdId.jsp</title>
 
 <style>
   table#table-2 {
@@ -47,24 +47,24 @@
 
 <table id="table-2">
 	<tr><td>
-		 <h3>­q³æ©ú²Ó - listDetails_ByOrdId.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>è¨‚å–®æ˜ç´° - listDetails_ByOrdId.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>°Ó«~½s¸¹</th>
-		<th>°Ó«~¼Æ¶q</th>
-		<th>°Ó«~¦WºÙ</th>
-		<th>°Ó«~³æ»ù</th>
-		<th>­q³æ½s¸¹</th>
-		<th>­×§ï</th>
-		<th>§R°£</th>
+		<th>å•†å“ç·¨è™Ÿ</th>
+		<th>å•†å“æ•¸é‡</th>
+		<th>å•†å“åç¨±</th>
+		<th>å•†å“å–®åƒ¹</th>
+		<th>è¨‚å–®ç·¨è™Ÿ</th>
+		<th>ä¿®æ”¹</th>
+		<th>åˆªé™¤</th>
 	</tr>
 	
 	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
-		<tr ${(detailVO.prodId==param.prodId) ? 'bgcolor=#CCCCFF':''}><!--±N­×§ïªº¨º¤@µ§¥[¤J¹ï¤ñ¦â-->
+		<tr ${(detailVO.prodId==param.prodId) ? 'bgcolor=#CCCCFF':''}><!--å°‡ä¿®æ”¹çš„é‚£ä¸€ç­†åŠ å…¥å°æ¯”è‰²-->
 			<td>${detailVO.prodId}</td>
 			<td>${detailVO.prodQty}</td>
 			<td>${detailVO.prodVO.prodName}</td>
@@ -72,23 +72,23 @@
 			<td>${detailVO.ordId}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/detail/detail.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="­×§ï"> 
+			    <input type="submit" value="ä¿®æ”¹"> 
 			    <input type="hidden" name="prodId"      value="${detailVO.prodId}">
-			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--°e¥X¥»ºô­¶ªº¸ô®|µ¹Controller--><!-- ¥Ø«e©|¥¼¥Î¨ì  -->
+			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--é€å‡ºæœ¬ç¶²é çš„è·¯å¾‘çµ¦Controller--><!-- ç›®å‰å°šæœªç”¨åˆ°  -->
 			    <input type="hidden" name="action"	   value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/detail/detail.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="§R°£">
+			    <input type="submit" value="åˆªé™¤">
 			    <input type="hidden" name="prodId"      value="${detailVO.prodId}">
-			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--°e¥X¥»ºô­¶ªº¸ô®|µ¹Controller-->
+			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"><!--é€å‡ºæœ¬ç¶²é çš„è·¯å¾‘çµ¦Controller-->
 			    <input type="hidden" name="action"     value="delete"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
 
-<br>¥»ºô­¶ªº¸ô®|:<br><b>
+<br>æœ¬ç¶²é çš„è·¯å¾‘:<br><b>
    <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
    <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
 
