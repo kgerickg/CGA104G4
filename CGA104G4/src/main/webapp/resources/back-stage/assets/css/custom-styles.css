@@ -869,3 +869,12 @@ ul.dropdown-menu.dropdown-messages li a div {
 
 /* --------- 商家登入↑↑↑ ---------- */
 
+/* --------- 內容區↓↓↓ ---------- */
+#wrapper-container{
+	width: 100%;
+	min-height: 90vh;
+	padding-top: 15px; 
+	padding-bottom: 30px
+}
+
+/* --------- 內容區↑↑↑ ---------- */
