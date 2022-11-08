@@ -124,7 +124,7 @@ thead th{
 	<thead>
 		<tr>
 			<th>會員名稱</th>
-			<th>每日福袋訂單編號</th>
+			<th>福袋訂單編號</th>
 			<th>福袋名稱</th>
 			<th>每日福袋編號</th>
 			<th>結帳金額</th>
@@ -143,7 +143,22 @@ thead th{
 				<td>${LkOrderSelectVO.lkName}</td>
 				<td>${LkOrderSelectVO.lkTodayId}</td>
 				<td>${LkOrderSelectVO.lkOrdAmt}</td>
-				<td>${LkOrderSelectVO.lkOrdStat}</td>
+				
+
+							<c:if test="${LkOrderSelectVO.lkOrdStat == '0'}">
+									<td>待取貨</td>
+							</c:if> 
+							<c:if test="${LkOrderSelectVO.lkOrdStat == '1'}">
+									<td>已取貨</td>
+							</c:if> 
+							<c:if test="${LkOrderSelectVO.lkOrdStat == '2'}">
+									<td>完成</td>
+							</c:if> 
+							<c:if test="${LkOrderSelectVO.lkOrdStat == '3'}">
+									<td>客訴處理中</td>
+							</c:if> 
+								
+
 				<td>${LkOrderSelectVO.lkOrdTimeS}</td>
 				<td>${LkOrderSelectVO.lkOrdTaketime}</td>
 				<td>${LkOrderSelectVO.lkOrdTimeE}</td>

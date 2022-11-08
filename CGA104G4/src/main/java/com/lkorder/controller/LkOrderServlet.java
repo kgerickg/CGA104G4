@@ -119,7 +119,7 @@ public class LkOrderServlet extends HttpServlet {
                 }
 			} catch (Exception e) {
 				memId = 0;
-				errorMsgs.add("請輸入正確編號");
+				errorMsgs.add("請輸入正確會員編號");
 			}	
 			
 			Integer lkId = null;
@@ -127,7 +127,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkId = Integer.valueOf(req.getParameter("lkId").trim());
 			} catch (Exception e) {
 				lkId = 0;
-				errorMsgs.add("請輸入正確編號");
+				errorMsgs.add("請輸入正確福袋編號");
 			}
 
 			Integer lkTodayId = null;
@@ -135,7 +135,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkTodayId = Integer.valueOf(req.getParameter("lkTodayId").trim());
 			} catch (Exception e) {
 				lkTodayId = 0;
-				errorMsgs.add("請輸入正確編號");
+				errorMsgs.add("請輸入正確每日福袋編號");
 			}
 
 			Integer lkOrdAmt = null;
@@ -158,7 +158,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkOrdTimeS = java.sql.Date.valueOf(req.getParameter("lkOrdTimeS"));
 			} catch (IllegalArgumentException e) {
 				lkOrdTimeS = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入正確訂單成立日期!");
+				errorMsgs.add("請輸入正確訂單成立日期");
 			}
 			
 
@@ -167,7 +167,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkOrdTaketime = java.sql.Date.valueOf(req.getParameter("lkOrdTaketime"));
 			} catch (IllegalArgumentException e) {
 				lkOrdTaketime = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入正確取貨日期!");
+				errorMsgs.add("請輸入正確取貨日期");
 			}
 
 			java.sql.Date lkOrdTimeE = null;
@@ -175,7 +175,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkOrdTimeE = java.sql.Date.valueOf(req.getParameter("lkOrdTimeE"));
 			} catch (IllegalArgumentException e) {
 				lkOrdTimeE = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入正確訂單完成日期!");
+				errorMsgs.add("請輸入正確訂單完成日期");
 			}
 
 			LkOrderVO lkorderVO = new LkOrderVO();
@@ -232,7 +232,7 @@ public class LkOrderServlet extends HttpServlet {
                 }
 			} catch (Exception e) {
 				lkId = 0;
-				 errorMsgs.add("請輸入正確編號");
+				 errorMsgs.add("請輸入正確福袋編號");
 			}
 
 			Integer memId = null;
@@ -240,7 +240,7 @@ public class LkOrderServlet extends HttpServlet {
 				memId = Integer.valueOf(req.getParameter("memId").trim());
 			} catch (Exception e) {
 				memId = 0;
-				 errorMsgs.add("請輸入正確編號");
+				 errorMsgs.add("請輸入正確會員編號");
 			}
 
 			Integer lkTodayId = null;
@@ -248,7 +248,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkTodayId = Integer.valueOf(req.getParameter("lkTodayId").trim());
 			} catch (Exception e) {
 				lkTodayId = 0;
-				 errorMsgs.add("請輸入正確編號");
+				 errorMsgs.add("請輸入正確每日福袋編號");
 			}
 
 			Integer lkOrdAmt = null;
@@ -271,7 +271,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkOrdTimeS = java.sql.Date.valueOf(req.getParameter("lkOrdTimeS"));
 			} catch (IllegalArgumentException e) {
 				lkOrdTimeS = new java.sql.Date(System.currentTimeMillis());
-				 errorMsgs.add("請輸入日期!");
+				 errorMsgs.add("請輸入正確訂單成立日期");
 			}
 
 			java.sql.Date lkOrdTaketime = null;
@@ -279,7 +279,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkOrdTaketime = java.sql.Date.valueOf(req.getParameter("lkOrdTaketime"));
 			} catch (IllegalArgumentException e) {
 				lkOrdTaketime = new java.sql.Date(System.currentTimeMillis());
-				 errorMsgs.add("請輸入日期!");
+				 errorMsgs.add("請輸入正確取貨日期");
 			}
 
 			java.sql.Date lkOrdTimeE = null;
@@ -287,7 +287,7 @@ public class LkOrderServlet extends HttpServlet {
 				lkOrdTimeE = java.sql.Date.valueOf(req.getParameter("lkOrdTimeE"));
 			} catch (IllegalArgumentException e) {
 				lkOrdTimeE = new java.sql.Date(System.currentTimeMillis());
-				 errorMsgs.add("請輸入日期!");
+				 errorMsgs.add("請輸入正確訂單完成日期");
 			}
 
 			LkOrderVO lkorderVO = new LkOrderVO();

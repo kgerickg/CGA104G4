@@ -17,25 +17,19 @@ LkOrderVO lkorderVO = (LkOrderVO) request.getAttribute("lkorderVO"); //EmpServle
     <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- GOOGLEFONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+    <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
 
-    <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
-    <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <!-- Bootstrap Styles-->
+<link href=${pageContext.request.contextPath}/resources/back-stage/assets/css/bootstrap.css	rel="stylesheet" />
+<!-- FontAwesome Styles-->
+<link href=${pageContext.request.contextPath}/resources/back-stage/assets/css/font-awesome.css	rel="stylesheet" />
+<!-- Google Fonts-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<!-- Custom Styles-->
+<link href=${pageContext.request.contextPath}/resources/back-stage/assets/css/custom-styles.css	rel="stylesheet" />
 
-    <!-- 請將覆蓋用的css放置此註解下方 -->
-
+<!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
 
 <style>
   a {
@@ -60,13 +54,14 @@ LkOrderVO lkorderVO = (LkOrderVO) request.getAttribute("lkorderVO"); //EmpServle
 
 table tr td:nth-of-type(odd) {
 	display: block;
-	padding: auto 5%;
+	padding-left: 20px;
 	background: #35544E;
 	color: white;
 	font-size: 14px;
-	line-height: 25px;
+	line-height: 35px;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
+	margin-bottom: 10px;
 }
 
 .table tr td input {
@@ -79,7 +74,8 @@ table tr td:nth-of-type(odd) {
 	margin: 0;
 	width: 100%;
 	color: #35544E;
-	
+	margin-bottom: 10px;
+	line-height: 27px;
 }
 
 
@@ -115,13 +111,130 @@ padding: 2%;
 </head>
 <body>
 
-<script src="../resources/js/storenav.js"></script>
-    <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
-    <!--下面可自由新增內容 -->
-	<div style="padding: 3.5%;"></div>
+<!-- 從這複製↓↓↓ -->
+	
+    <div id="wrapper">
+        <!-- 上方Nav ↓↓↓  -->
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong>後台管理</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!-- 上方Nav ↑↑↑  -->
+        <!-- 左側Nav ↓↓↓  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> 吉食享樂</a>
+                    </li>
+
+                    <li>
+                        <a href="#">一般商品<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">一般商品管理</a>
+                            </li>
+                            <li>
+                                <a href="#">一般訂單管理</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">福袋商品<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">福袋商品管理</a>
+                            </li>
+                            <li>
+                                <a href="#">福袋訂單管理</a>
+                            </li>
+                        </ul>
+                    </li>
 
 
-<table id="table-1">
+                    <li>
+                        <a href="#">員工帳號管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">員工帳號管理</a>
+                            </li>
+                            <li>
+                                <a href="#">員工權限管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">代幣系統管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">客訴處理</a>
+                            </li>
+                            <li>
+                                <a href="#">優惠活動管理</a>
+                            </li>
+                            <li>
+                                <a href="#">代幣儲值</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">會員管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">合作店家資格審核</a>
+                            </li>
+                            <li>
+                                <a href="#">合作店家帳號管理</a>
+                            </li>
+                            <li>
+                                <a href="#">一般會員管理</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"> 評論檢舉管理 </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- 左側Nav ↑↑↑  -->
+
+       <div id="page-wrapper">
+			<div id="wrapper" style="min-height: 90vh;padding-top: 1px">
+			<!-- ******內容寫在這邊 ↓↓↓****** -->
+			
+			
+			<table id="table-1">
 	<tr><td>
 		 <h1>每日福袋訂單資料修改</h1>
 		 <h4><a href=${pageContext.request.contextPath}/back-lkorder/BackIndexLkorder.jsp>回首頁</a></h4>
@@ -188,13 +301,32 @@ padding: 2%;
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="lkOrderId" value="<%=lkorderVO.getLkOrderId()%>">
 <input type="submit" value="送出修改" class="btn-secondary"></FORM>
+			
+			
+			
+			<!-- ******內容寫在這邊 ↑↑↑****** -->
+			</div>
+        </div>
+        
+    </div>
+    <!-- 複製到這裡↑↑↑ -->
 
 
-<!-- 下面是這個版需要的js可添加各自需要的js檔-->
-    <script src="../resources/js/bootstrap.min.js"></script>
-    <script src="../resources/js/slick.js"></script>
-    <script src="../resources/js/scripts.js"></script>
-    <script src="../resources/js/isotope.js"></script>
+
+
+
+<!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
+
+	<!-- jQuery Js -->
+	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/jquery-1.10.2.js></script>
+	<!-- Bootstrap Js -->
+	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/bootstrap.min.js></script>
+	<!-- 左側Nav Dropdown -->
+	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/jquery.metisMenu.js></script>
+	<!-- Custom Js -->
+	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/custom-scripts.js></script>
+
+	<!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
 
 </body>
 

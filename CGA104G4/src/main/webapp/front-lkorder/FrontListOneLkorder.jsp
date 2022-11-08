@@ -19,13 +19,13 @@
         rel="stylesheet">
 
     <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/nav.css">
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
@@ -120,22 +120,13 @@ thead th{
 						<td>${lkorderVO.lkOrdTimeS}</td>
 						<td>${lkorderVO.lkOrdTaketime}</td>
 						<td>${lkorderVO.lkOrdTimeE}</td>
-<%-- 					<td><%=lkorderselectVO.getLkOrderId() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkId() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getMemId() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkTodayId() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkOrdAmt() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkOrdStat() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkOrdTimeS() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkOrdTaketime() %></td> --%>
-<%-- 					<td><%=lkorderselectVO.getLkOrdTimeE() %></td> --%>
 		</tr>
 	</table>
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
-    <script src="../resources/js/bootstrap.min.js"></script>
-    <script src="../resources/js/slick.js"></script>
-    <script src="../resources/js/scripts.js"></script>
-    <script src="../resources/js/isotope.js"></script>
+    <script src="CGA104G4/resources/js/bootstrap.min.js"></script>
+    <script src="CGA104G4/resources/js/slick.js"></script>
+    <script src="CGA104G4/resources/js/scripts.js"></script>
+    <script src="CGA104G4/resources/js/isotope.js"></script>
 </body>
 </html>

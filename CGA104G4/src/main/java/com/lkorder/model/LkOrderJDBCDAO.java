@@ -101,7 +101,7 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 		return null;
 	}
 	
-	@Override
+	@Override								// 查詢以會員當PK
 	public List<LkOrderSelectVO> selectAll(Integer memId) {
 		String sql = "select LK_ORD_ID, LK_NAME, MEM_NAME, LK_TODAY_ID , LK_ORD_AMT, LK_ORD_STAT, LK_ORD_TIME_S, LK_ORD_TAKETIME, LK_ORD_TIME_E "
 						+"from LUCKY LK "
@@ -139,6 +139,39 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 	}
 	
 	public List<LkOrderVO> getAll(){
+		return null;
+	}
+	
+	public List<LkOrderSelectVO> findAll(){
+		String sql = "select LK_ORD_ID, LK_NAME, MEM_NAME, LK_TODAY_ID , LK_ORD_AMT, LK_ORD_STAT, LK_ORD_TIME_S, LK_ORD_TAKETIME, LK_ORD_TIME_E "
+				+"from LUCKY LK "
+				+"join LK_ORDER LKO "
+					+"on LKO.LK_ID = LK.LK_ID "
+				+"join MEMBER MEM "
+					+"on LKO.MEM_ID = MEM.MEM_ID ";
+		try (
+			Connection conn = DriverManager.getConnection(url, userid, passwd);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery()
+		) {
+			List<LkOrderSelectVO> list = new ArrayList<>();		
+			while (rs.next()) {								
+				LkOrderSelectVO vo = new LkOrderSelectVO();			
+				vo.setLkOrderId(rs.getInt(1));	// 後面的數字對應到SQL的欄位 (可以下SQL的欄位名，也可以下數字)
+				vo.setLkName(rs.getString(2));
+				vo.setMemName(rs.getString(3));
+				vo.setLkTodayId(rs.getInt(4));
+				vo.setLkOrdAmt(rs.getInt(5));
+				vo.setLkOrdStat(rs.getInt(6));
+				vo.setLkOrdTimeS(rs.getDate(7));
+				vo.setLkOrdTaketime(rs.getDate(8));
+				vo.setLkOrdTimeE(rs.getDate(9));
+				list.add(vo);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 //	@Override		【備份原本】

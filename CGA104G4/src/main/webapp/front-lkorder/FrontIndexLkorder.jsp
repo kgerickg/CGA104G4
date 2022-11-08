@@ -81,7 +81,7 @@
       <br>
   <li>
     <FORM METHOD="post" ACTION=${pageContext.request.contextPath}/LkOrderFrontServlet >
-        <b style="color:black">輸入每日福袋訂單編號：</b>
+        <b style="color:black">輸入福袋訂單編號：</b>
         <input type="text" name="lkOrderId">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出" class="btn-secondary">

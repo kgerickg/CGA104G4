@@ -75,4 +75,8 @@ public class LkOrderService {
 	public List<LkOrderSelectVO> selectAll(Integer memId){
 		return dao.selectAll(memId);
 	}
+	
+	public List<LkOrderSelectVO> findAll(){
+		return dao.findAll();
+	}
 }

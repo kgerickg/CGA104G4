@@ -16,4 +16,6 @@ public interface LkOrderinterface {
 	public List<LkOrderVO> getAll();
 
 	public List<LkOrderSelectVO> selectAll(Integer memId);
+
+	public List<LkOrderSelectVO> findAll();
 }
