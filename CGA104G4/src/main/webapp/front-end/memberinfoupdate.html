@@ -177,7 +177,10 @@
     let locat = getLocation();
 
     async function getLocation() {
-        locat = await fetch("../resources/js/taiwan_districts.json").then(res => res.json());
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/resources/js/taiwan_districts.json";
+        locat = await fetch(url).then(res => res.json());
         return locat;
     }
 
