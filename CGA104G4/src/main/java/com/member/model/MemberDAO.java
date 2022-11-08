@@ -15,18 +15,15 @@ public class MemberDAO implements MemberDAO_interface {
 
             MemberVO memberVOorignal = getSession().get(MemberVO.class, memberVO.getMemId());
 
-            memberVOorignal.setMemEmail(memberVO.getMemEmail());
-            memberVOorignal.setMemPwd(memberVO.getMemPwd());
-            memberVOorignal.setAccStat(memberVO.getAccStat());
             memberVOorignal.setMemName(memberVO.getMemName());
             memberVOorignal.setMemMobile(memberVO.getMemMobile());
             memberVOorignal.setMemCity(memberVO.getMemCity());
             memberVOorignal.setMemDist(memberVO.getMemDist());
             memberVOorignal.setMemAdr(memberVO.getMemAdr());
-            memberVOorignal.setMemToken(memberVO.getMemToken());
-            memberVOorignal.setMemPic(null);
-
-            getSession().merge(memberVOorignal);
+            if(memberVO.getMemPic()!=null){
+                memberVOorignal.setMemPic(memberVO.getMemPic());
+                getSession().merge(memberVOorignal);
+            }
             commit();
         } catch (Exception e) {
             rollback();
@@ -160,6 +157,21 @@ public class MemberDAO implements MemberDAO_interface {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public void updateAccState(MemberVO memberVO) {
+        try {
+            beginTransaction();
+            MemberVO memberVOorignal = getSession().get(MemberVO.class, memberVO.getMemId());
+            memberVOorignal.setAccStat(memberVO.getAccStat());
+            getSession().merge(memberVOorignal);
+            commit();
+        } catch (Exception e) {
+            rollback();
+            e.printStackTrace();
+        }
+
     }
 
     @Override

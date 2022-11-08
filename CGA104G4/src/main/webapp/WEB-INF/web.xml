@@ -33,8 +33,8 @@
     </filter>
     <filter-mapping>
       <filter-name>memberLoginFilter</filter-name>
-      <url-pattern>/front-end/memberinfoupdate.html</url-pattern>
-      <url-pattern>/front-end/memberupatepassword.html</url-pattern>
+      <url-pattern>/front-member/memberinfoupdate.html</url-pattern>
+      <url-pattern>/front-member/memberupatepassword.html</url-pattern>
 <!--      <servlet-name></servlet-name>-->
       <dispatcher>REQUEST</dispatcher>
       <dispatcher>FORWARD</dispatcher>
@@ -42,4 +42,29 @@
       <dispatcher>ERROR</dispatcher>
       <dispatcher>ASYNC</dispatcher>
     </filter-mapping>
+    <servlet>
+    <servlet-name>DetailServlet</servlet-name>
+    <servlet-class>com.detail.controller.DetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailServlet</servlet-name>
+    <url-pattern>/detail/detail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OrdersServlet</servlet-name>
+    <servlet-class>com.orders.controller.OrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrdersServlet</servlet-name>
+    <url-pattern>/orders/orders.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProdServlet</servlet-name>
+    <servlet-class>com.prod.controller.ProdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProdServlet</servlet-name>
+    <url-pattern>/prod/prod.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

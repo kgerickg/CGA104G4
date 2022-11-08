@@ -25,28 +25,12 @@ public class MemberService {
         return dao.getMemId();
     }
 
-    public void update(Integer memId, String memEmail, String memPwd, Integer accStat, String memName, String memMobile,
-                       String memCity, String memDist, String memAdr, Integer memToken) {
-
-        MemberVO memberVO = new MemberVO();
-
-        memberVO.setMemId(memId);
-        memberVO.setMemEmail(memEmail);
-        memberVO.setMemPwd(memPwd);
-        memberVO.setAccStat(accStat);
-        memberVO.setMemName(memName);
-        memberVO.setMemMobile(memMobile);
-        memberVO.setMemCity(memCity);
-        memberVO.setMemDist(memDist);
-        memberVO.setMemAdr(memAdr);
-        memberVO.setMemToken(memToken);
+    public void update(MemberVO memberVO) {
 
         dao.update(memberVO);
 
     }
 
-
-    //以下是MemberFrontServlet使用到的方法
     public MemberVO findByPrimaryKey(Integer memId) {
 
         return dao.findByPrimaryKey(memId);
@@ -107,5 +91,9 @@ public class MemberService {
 
         return false;
 
+    }
+
+    public void updateAccState(MemberVO memberVO) {
+        dao.updateAccState(memberVO);
     }
 }

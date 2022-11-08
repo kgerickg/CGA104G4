@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<html>
 <head>
-    <meta charset="UTF-8">
+<title>會員訂單查詢</title>
+
     <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,23 +27,75 @@
 
     <!-- 請將覆蓋用的css放置此註解下方 -->
 
+<style>
+  
 
-    <!-- 頁籤顯示的title -->
-    <title>首頁</title>
-
-
-
+/*   a{ */
+/*   color: #5c636a; */
+/*   text-decoration: none; */
+/*   font-weight: bold; */
+/* } */
+.table-lkorder ul{
+	width: 40%;
+	height: 70%;
+ 	margin: 10% auto auto auto; 
+	padding: 50px 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+	background: white;
+}
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border: 1px solid #6c757d;
+  border-radius: 10%;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #5c636a;
+  border: 1px solid #6c757d;
+  border-radius: 10%;
+}
+</style>
 
 </head>
-
 <body>
-    <script src="../resources/js/membernav.js"></script>
+
+  <script src="../resources/js/membernav.js"></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
     <!--下面可自由新增內容 -->
-    <img src="../resources/images/123.jpg" style="margin-top: 100px">
+<div class="table-lkorder">
+	
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+	    <c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+  <br>  
+<ul>
+      <li style="color:black; font-weight:bolder; font-size: 1.2em"><a href=${pageContext.request.contextPath}/front-lkorder/FrontListAllLkorder.jsp>查詢所有訂單</a></li> 
+      <br>
+  <li>
+    <FORM METHOD="post" ACTION=${pageContext.request.contextPath}/LkOrderFrontServlet >
+        <b style="color:black">輸入福袋訂單編號：</b>
+        <input type="text" name="lkOrderId">
+        <input type="hidden" name="action" value="getOne_For_Display">
+        <input type="submit" value="送出" class="btn-secondary">
+    </FORM>
+
+  <br>
+  </li>
 
 
+  <jsp:useBean id="lkorderSvc " scope="page" class="com.lkorder.model.LkOrderService" />
+   
+</ul>
 
+</div>
 
 
 
@@ -51,5 +105,4 @@
     <script src="../resources/js/scripts.js"></script>
     <script src="../resources/js/isotope.js"></script>
 </body>
-
 </html>

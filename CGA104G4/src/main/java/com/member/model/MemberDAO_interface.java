@@ -16,4 +16,5 @@ public interface MemberDAO_interface extends BasicDAO_interface<MemberVO> {
 
     public boolean updatePwd(MemberVO memberVO);
 
+    public void updateAccState(MemberVO memberVO);
 }

@@ -161,4 +161,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		return false;
 	}
 
+	@Override
+	public void updateAccState(MemberVO memberVO) {
+
+	}
+
 }
