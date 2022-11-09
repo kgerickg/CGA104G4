@@ -25,6 +25,14 @@ public class OrdersService {
 	public Set<DetailVO> getDetailsByOrdId(Integer ordId) {
 		return dao.getDetailsByOrdId(ordId);
 	}
+	
+	public Set<OrdersVO> getOrdersByMemId(Integer memId) {
+		return dao.getOrdersByMemId(memId);
+	}
+	
+	public Set<OrdersVO> getOrdersByStoreId(Integer storeId) {
+		return dao.getOrdersByStoreId(storeId);
+	}
 
 	public void deleteOrders(Integer ordId) {
 		dao.delete(ordId);

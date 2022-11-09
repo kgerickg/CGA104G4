@@ -23,7 +23,7 @@ header.innerHTML =
                         <ul>
                             <li><a href="" >最愛店家</a></li>
                             <li><a href="" >預約福袋</a></li>
-                            <li><a href="" >訂單資訊</a></li>
+                            <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp" >訂單資訊</a></li>
                         </ul>
                     </li>
                     <li><a href="" >個人資訊+</a>
@@ -88,7 +88,7 @@ div.innerHTML =
             <ul>
                 <li><a href="">最愛店家</a></li>
                 <li><a href="">預約福袋</a></li>
-                <li><a href="">訂單資訊</a></li>
+                <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp">訂單資訊</a></li>
             </ul>
         </li>
         <li><a href="#" >個人資訊+</a>
