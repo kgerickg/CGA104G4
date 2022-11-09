@@ -28,7 +28,7 @@ public class OrdersServlet extends HttpServlet {
 		
 		String action = req.getParameter("action");
 
-		     // 來自select_page.jsp的請求               // 來自 orders/listAllOrders.jsp的請求
+		     // 來自front-orders/storeListAllOrders.jsp的請求               // 來自front-orders/memberListAllOrders.jsp的請求
 		if ("listDetails_ByOrdId_A".equals(action) || "listDetails_ByOrdId_B".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -42,13 +42,13 @@ public class OrdersServlet extends HttpServlet {
 			Set<DetailVO> set = ordersSvc.getDetailsByOrdId(ordId);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("listDetails_ByOrdId", set);    // 資料庫取出的list物件,存入request
+			req.setAttribute("memberListDetails_ByOrdId", set);    // 資料庫取出的list物件,存入request
 
 			String url = null;
 			if ("listDetails_ByOrdId_A".equals(action))
-				url = "/orders/listDetails_ByOrdId.jsp";        // 成功轉交 orders/listDetails_ByOrdId.jsp
+				url = "/orders/listDetails_ByOrdId.jsp";        // 成功轉交 front-orders/storeListAllOrders.jsp
 			else if ("listDetails_ByOrdId_B".equals(action))
-				url = "/orders/listAllOrders.jsp";              // 成功轉交 orders/listAllOrders.jsp
+				url = "/front-orders/memberListAllOrders.jsp";              // 成功轉交 front-orders/memberListAllOrders.jsp
 
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
