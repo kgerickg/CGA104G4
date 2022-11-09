@@ -183,7 +183,7 @@ async function logout() {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
                 window.location.reload();
-                window.location.href = webCtx+"/front-member/index.html";
+                window.location.href = webCtx+"/front-index/index.html";
             }
         })
 
