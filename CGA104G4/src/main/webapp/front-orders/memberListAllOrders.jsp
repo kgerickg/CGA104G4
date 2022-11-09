@@ -85,18 +85,18 @@
 <body>
     <script src="../resources/js/membernav.js"></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
-    <!--下面可自由新增內容 -->
-<div id="block">
-
-</div>    
+    <!--下面可自由新增內容 -->  
 <table id="table-1">
-	<tr><td><h3>訂單資訊</h3></td></tr>
+	<tr><td>
+		<h3>訂單資訊</h3>
+		<FORM><input type="hidden" name="action" value="listOrders_ByMemdId"></FORM>
+	</td></tr>
 </table>
 <table>
 	<tr>
-		<th>訂單編號</th>
 		<th>會員編號</th>
 		<th>會員姓名</th>
+		<th>訂單編號</th>
 		<th>商家編號</th>
 		<th>商家名稱</th>
 		<th>訂單金額</th>
@@ -104,11 +104,11 @@
 		<th>訂單成立時間</th>
 		<th>查詢訂單明細</th>
 	</tr>
-	<c:forEach var="ordersVO" items="${ordersSvc.all}">
+	<c:forEach var="ordersVO" items="${ordersSvc.getOrdersByMemId(memId)}">
 		<tr>
-			<td>${ordersVO.ordId}</td>
 			<td>${ordersVO.memId}</td>
 			<td>${ordersVO.memberVO.memName}</td>
+			<td>${ordersVO.ordId}</td>
 			<td>${ordersVO.storeId}</td>
 			<td>${ordersVO.storeVO.storeName}</td>
 			<td>${ordersVO.ordAmt}</td>
@@ -124,7 +124,7 @@
 	</c:forEach>
 </table>
 
-<%if (request.getAttribute("memberListDetails_ByOrdId")!=null){%>
+<%if (request.getAttribute("listDetails_ByOrdId")!=null){%>
        <jsp:include page="memberListDetails_ByOrdId.jsp" />
 <%} %>
     <!-- 下面是這個版需要的js可添加各自需要的js檔-->

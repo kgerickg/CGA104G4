@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.detail.model.*"%>
 
-<jsp:useBean id="memberListDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" /> <!-- 於EL此行可省略 -->
+<jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" /> <!-- 於EL此行可省略 -->
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 <!DOCTYPE html>
 <html lang="en">
@@ -88,14 +88,14 @@
 		<th>商品數量</th>
 	</tr>
 	
-	<c:forEach var="detailVO" items="${memberListDetails_ByOrdId}" >
+	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
 	<tr>
-			<td>${detailVO.ordId}</td>
-			<td>${detailVO.prodId}</td>
-			<td>${detailVO.prodVO.prodName}</td>
-			<td>${detailVO.prodVO.prodPrc}</td>
-			<td>${detailVO.prodQty}</td>
-		</tr>
+		<td>${detailVO.ordId}</td>
+		<td>${detailVO.prodId}</td>
+		<td>${detailVO.prodVO.prodName}</td>
+		<td>${detailVO.prodVO.prodPrc}</td>
+		<td>${detailVO.prodQty}</td>
+	</tr>
 	</c:forEach>
 </table>
     <!-- 下面是這個版需要的js可添加各自需要的js檔-->
@@ -104,5 +104,4 @@
     <script src="../resources/js/scripts.js"></script>
     <script src="../resources/js/isotope.js"></script>
 </body>
-
 </html>
