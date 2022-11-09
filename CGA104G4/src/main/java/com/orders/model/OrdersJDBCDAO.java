@@ -334,9 +334,9 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	
 			while (rs.next()) {
 				detailVO = new DetailVO();
-				detailVO.setProdId(rs.getInt("prodId"));
-				detailVO.setProdQty(rs.getInt("prodQty"));
-				detailVO.setOrdId(rs.getInt("ordId"));
+				detailVO.setProdId(rs.getInt("PROD_ID"));
+				detailVO.setProdQty(rs.getInt("PROD_QTY"));
+				detailVO.setOrdId(rs.getInt("ORD_ID"));
 				set.add(detailVO); // Store the row in the vector
 			}
 	

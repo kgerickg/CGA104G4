@@ -55,7 +55,9 @@
 	<tr>
 		<th>訂單編號</th>
 		<th>會員編號</th>
+		<th>會員姓名</th>
 		<th>商家編號</th>
+		<th>商家名稱</th>
 		<th>訂單金額</th>
 		<th>訂單狀態</th>
 		<th>訂單成立時間</th>
@@ -68,7 +70,9 @@
 		<tr>
 			<td>${ordersVO.ordId}</td>
 			<td>${ordersVO.memId}</td>
+			<td>${ordersVO.memberVO.memName}</td>
 			<td>${ordersVO.storeId}</td>
+			<td>${ordersVO.storeVO.storeName}</td>
 			<td>${ordersVO.ordAmt}</td>
 			<td>${ordersVO.ordStat}</td>
 			<td>${ordersVO.ordTime}</td>
