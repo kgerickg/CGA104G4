@@ -9,7 +9,7 @@ header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center">
             <div class="logo">
-                <a href="index.html" title="">
+                <a href="${webCtx}/front-index/index.html" title="">
                     <img class="logoimg" src="${webCtx}/resources/images/1.png" alt="">
                 </a>
             </div>
