@@ -14,7 +14,7 @@ public class OrdersVO implements java.io.Serializable{
 	private Integer memId;
 	private Integer storeId;
 	private Integer ordAmt;
-	private Integer ordStat;
+	private Integer ordStat; //0 確認中 1 待完成 2 退單 3 完成 4 客訴處理中
 	private Date ordTime;
 	
 	public Integer getOrdId() {

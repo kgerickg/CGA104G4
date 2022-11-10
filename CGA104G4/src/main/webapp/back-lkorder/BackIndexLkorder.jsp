@@ -1,15 +1,15 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
 <meta charset="utf-8" />
-<title>«á¥x</title>
+<title>å¾Œå°</title>
 
-<!-- ÅTÀ³¦¡­¶­± -->
+<!-- éŸ¿æ‡‰å¼é é¢ -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ¡õ¡õ¡õ¤U­±¬O³o­Óª©»Ý­nªºcss¥i²K¥[¦U¦Û»Ý­nªºcssÀÉ-->
+<!-- â†“â†“â†“ä¸‹é¢æ˜¯é€™å€‹ç‰ˆéœ€è¦çš„csså¯æ·»åŠ å„è‡ªéœ€è¦çš„cssæª”-->
 
 <!-- Bootstrap Styles-->
 <link href=${pageContext.request.contextPath}/resources/back-stage/assets/css/bootstrap.css	rel="stylesheet" />
@@ -21,7 +21,7 @@
 <!-- Custom Styles-->
 <link href=${pageContext.request.contextPath}/resources/back-stage/assets/css/custom-styles.css	rel="stylesheet" />
 
-<!-- ¡ô¡ô¡ô¤U­±¬O³o­Óª©»Ý­nªºcss¥i²K¥[¦U¦Û»Ý­nªºcssÀÉ-->
+<!-- â†‘â†‘â†‘ä¸‹é¢æ˜¯é€™å€‹ç‰ˆéœ€è¦çš„csså¯æ·»åŠ å„è‡ªéœ€è¦çš„cssæª”-->
 
 <style>
 table#table-1 {
@@ -49,6 +49,7 @@ a {
 	color: #5c636a;
 	text-decoration: none;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .table-order {
@@ -87,10 +88,10 @@ a {
 <body>
 
 
-	<!-- ±q³o½Æ»s¡õ¡õ¡õ -->
+	<!-- å¾žé€™è¤‡è£½â†“â†“â†“ -->
 
 	<div id="wrapper">
-		<!-- ¤W¤èNav ¡õ¡õ¡õ  -->
+		<!-- ä¸Šæ–¹Nav â†“â†“â†“  -->
 		<nav class="navbar navbar-default top-navbar" role="navigation">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -99,7 +100,7 @@ a {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html"><strong>«á¥xºÞ²z</strong></a>
+				<a class="navbar-brand" href="index.html"><strong>å¾Œå°ç®¡ç†</strong></a>
 			</div>
 
 			<ul class="nav navbar-top-links navbar-right">
@@ -109,75 +110,75 @@ a {
 						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"><i class="fa fa-sign-in fa-fw"></i>µn¤J</a></li>
-						<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> µn¥X</a></li>
+						<li><a href="#"><i class="fa fa-sign-in fa-fw"></i>ç™»å…¥</a></li>
+						<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> ç™»å‡º</a></li>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
 		</nav>
-		<!-- ¤W¤èNav ¡ô¡ô¡ô  -->
-		<!-- ¥ª°¼Nav ¡õ¡õ¡õ  -->
+		<!-- ä¸Šæ–¹Nav â†‘â†‘â†‘  -->
+		<!-- å·¦å´Nav â†“â†“â†“  -->
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
 
 					<li><a class="active-menu" href="#"><i
-							class="fa fa-dashboard"></i> ¦N­¹¨É¼Ö</a></li>
+							class="fa fa-dashboard"></i> å‰é£Ÿäº«æ¨‚</a></li>
 
-					<li><a href="#">¤@¯ë°Ó«~<span class="fa arrow"></span></a>
+					<li><a href="#">ä¸€èˆ¬å•†å“<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">¤@¯ë°Ó«~ºÞ²z</a></li>
-							<li><a href="#">¤@¯ë­q³æºÞ²z</a></li>
+							<li><a href="#">ä¸€èˆ¬å•†å“ç®¡ç†</a></li>
+							<li><a href="#">ä¸€èˆ¬è¨‚å–®ç®¡ç†</a></li>
 						</ul></li>
 
-					<li><a href="#">ºÖ³U°Ó«~<span class="fa arrow"></span></a>
+					<li><a href="#">ç¦è¢‹å•†å“<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">ºÖ³U°Ó«~ºÞ²z</a></li>
-							<li><a href="#">ºÖ³U­q³æºÞ²z</a></li>
+							<li><a href="#">ç¦è¢‹å•†å“ç®¡ç†</a></li>
+							<li><a href="#">ç¦è¢‹è¨‚å–®ç®¡ç†</a></li>
 						</ul></li>
 
 
-					<li><a href="#">­û¤u±b¸¹ºÞ²z<span class="fa arrow"></span></a>
+					<li><a href="#">å“¡å·¥å¸³è™Ÿç®¡ç†<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">­û¤u±b¸¹ºÞ²z</a></li>
-							<li><a href="#">­û¤uÅv­­ºÞ²z</a></li>
+							<li><a href="#">å“¡å·¥å¸³è™Ÿç®¡ç†</a></li>
+							<li><a href="#">å“¡å·¥æ¬Šé™ç®¡ç†</a></li>
 						</ul></li>
-					<li><a href="#">¥N¹ô¨t²ÎºÞ²z<span class="fa arrow"></span></a>
+					<li><a href="#">ä»£å¹£ç³»çµ±ç®¡ç†<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">«È¶D³B²z</a></li>
-							<li><a href="#">Àu´f¬¡°ÊºÞ²z</a></li>
-							<li><a href="#">¥N¹ôÀx­È</a></li>
+							<li><a href="#">å®¢è¨´è™•ç†</a></li>
+							<li><a href="#">å„ªæƒ æ´»å‹•ç®¡ç†</a></li>
+							<li><a href="#">ä»£å¹£å„²å€¼</a></li>
 						</ul></li>
-					<li><a href="#">·|­ûºÞ²z<span class="fa arrow"></span></a>
+					<li><a href="#">æœƒå“¡ç®¡ç†<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">¦X§@©±®a¸ê®æ¼f®Ö</a></li>
-							<li><a href="#">¦X§@©±®a±b¸¹ºÞ²z</a></li>
-							<li><a href="#">¤@¯ë·|­ûºÞ²z</a></li>
+							<li><a href="#">åˆä½œåº—å®¶è³‡æ ¼å¯©æ ¸</a></li>
+							<li><a href="#">åˆä½œåº—å®¶å¸³è™Ÿç®¡ç†</a></li>
+							<li><a href="#">ä¸€èˆ¬æœƒå“¡ç®¡ç†</a></li>
 						</ul></li>
 
-					<li><a href="#"> µû½×ÀËÁ|ºÞ²z </a></li>
+					<li><a href="#"> è©•è«–æª¢èˆ‰ç®¡ç† </a></li>
 
 				</ul>
 
 			</div>
 
 		</nav>
-		<!-- ¥ª°¼Nav ¡ô¡ô¡ô  -->
+		<!-- å·¦å´Nav â†‘â†‘â†‘  -->
 
 
-		<!-- ¤º®e¼g¦b³oÃä ¡õ¡õ¡õ -->
+		<!-- å…§å®¹å¯«åœ¨é€™é‚Š â†“â†“â†“ -->
 
 		<div id="page-wrapper">
-			<div id="wrapper" style="min-height: 90vh;padding-top: 1px">
+			<div id="wrapper-container">
 
 
 
 			<div class="table-order">
 
 
-				<%-- ¿ù»~ªí¦C --%>
+				<%-- éŒ¯èª¤è¡¨åˆ— --%>
 				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+					<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 					<ul>
 						<c:forEach var="message" items="${errorMsgs}">
 							<li style="color: red">${message}</li>
@@ -186,35 +187,29 @@ a {
 				</c:if>
 
 				<ul>
-					<li style="font-weight: bolder; font-size: 1.2em;"><a 
-						href=${pageContext.request.contextPath}/back-lkorder/BackListAllLkorder.jsp>¬d¸ß©Ò¦³­q³æ</a></li>
+					<li style="font-weight: bolder; font-size: 1.2em;"><a style="text-decoration: none"
+						href=${pageContext.request.contextPath}/back-lkorder/BackListAllLkorder.jsp>æŸ¥è©¢æ‰€æœ‰è¨‚å–®</a></li>
 					<br>
 
-					<li style="font-weight: bolder; font-size: 1.2em"><a 
-						href=${pageContext.request.contextPath}/back-lkorder/BackAddLkorder.jsp>·s¼WºÖ³U­q³æ</a></li>
+					<li style="font-weight: bolder; font-size: 1.2em"><a style="text-decoration: none"
+						href=${pageContext.request.contextPath}/back-lkorder/BackAddLkorder.jsp>æ–°å¢žç¦è¢‹è¨‚å–®</a></li>
 
 					<br>
 					<li>
 						<FORM METHOD="post"
 							ACTION=${pageContext.request.contextPath}/LkOrderServlet>
-							<b style="color: black">¿é¤JºÖ³U­q³æ½s¸¹¡G</b> <input type="text"
-								name="lkOrderId"> <input type="hidden" name="action"
-								value="getOne_For_Display"> <input type="submit"
-								value="°e¥X" class="btn-secondary">
+							<b style="color: black">è¼¸å…¥ç¦è¢‹è¨‚å–®ç·¨è™Ÿï¼š</b> 
+							<input type="text"	name="lkOrderId"> 
+							<input type="hidden" name="action"	value="getOne_For_Display">
+							<input type="submit" value="é€å‡º" class="btn-secondary">
 						</FORM>
 					</li>
 
-
 					<jsp:useBean id="lkorderSvc " scope="page" class="com.lkorder.model.LkOrderService" />
-
 
 				</ul>
 
 				<hr>
-
-
-
-
 
 			</div>
 			</div>
@@ -222,26 +217,26 @@ a {
 		</div>
 
 
-		<!-- ¤º®e¼g¦b³oÃä ¡ô¡ô¡ô -->
+		<!-- å…§å®¹å¯«åœ¨é€™é‚Š â†‘â†‘â†‘ -->
 
 	</div>
-	<!-- ½Æ»s¨ì³o¸Ì¡ô¡ô¡ô -->
+	<!-- è¤‡è£½åˆ°é€™è£¡â†‘â†‘â†‘ -->
 
 
 
 
 
-	<!-- ¡õ¡õ¡õ¤U­±¬O³o­Óª©»Ý­nªºjs¥i²K¥[¦U¦Û»Ý­nªºjsÀÉ-->
+	<!-- â†“â†“â†“ä¸‹é¢æ˜¯é€™å€‹ç‰ˆéœ€è¦çš„jså¯æ·»åŠ å„è‡ªéœ€è¦çš„jsæª”-->
 
 	<!-- jQuery Js -->
 	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/jquery-1.10.2.js></script>
 	<!-- Bootstrap Js -->
 	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/bootstrap.min.js></script>
-	<!-- ¥ª°¼Nav Dropdown -->
+	<!-- å·¦å´Nav Dropdown -->
 	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/jquery.metisMenu.js></script>
 	<!-- Custom Js -->
 	<script src=${pageContext.request.contextPath}/resources/back-stage/assets/js/custom-scripts.js></script>
 
-	<!-- ¡ô¡ô¡ô¤U­±¬O³o­Óª©»Ý­nªºjs¥i²K¥[¦U¦Û»Ý­nªºjsÀÉ-->
+	<!-- â†‘â†‘â†‘ä¸‹é¢æ˜¯é€™å€‹ç‰ˆéœ€è¦çš„jså¯æ·»åŠ å„è‡ªéœ€è¦çš„jsæª”-->
 </body>
 </html>

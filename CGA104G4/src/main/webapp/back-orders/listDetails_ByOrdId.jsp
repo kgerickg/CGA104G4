@@ -7,13 +7,13 @@
 
 
 <html>
-<head><title>訂單明細 - listDetails_ByOrdId.jsp</title>
+<head><title>訂單明細</title>
 
 <style>
   table#table-2 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
     text-align: center;
+    margin-left:auto; 
+	margin-right:auto;
   }
   table#table-2 h4 {
     color: red;
@@ -28,10 +28,12 @@
 
 <style>
   table {
-	width: 800px;
+	width: 1100px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	margin-left:auto; 
+	margin-right:auto;
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -47,29 +49,28 @@
 
 <table id="table-2">
 	<tr><td>
-		 <h3>訂單明細 - listDetails_ByOrdId.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>訂單明細</h3>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
+		<th>訂單編號</th>
 		<th>商品編號</th>
-		<th>商品數量</th>
 		<th>商品名稱</th>
 		<th>商品單價</th>
-		<th>訂單編號</th>
+		<th>商品數量</th>
 		<th>修改</th>
 		<th>刪除</th>
 	</tr>
 	
 	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
 		<tr ${(detailVO.prodId==param.prodId) ? 'bgcolor=#CCCCFF':''}><!--將修改的那一筆加入對比色-->
+			<td>${detailVO.ordId}</td>
 			<td>${detailVO.prodId}</td>
-			<td>${detailVO.prodQty}</td>
 			<td>${detailVO.prodVO.prodName}</td>
 			<td>${detailVO.prodVO.prodPrc}</td>
-			<td>${detailVO.ordId}</td>
+			<td>${detailVO.prodQty}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/detail/detail.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="修改"> 
@@ -87,10 +88,5 @@
 		</tr>
 	</c:forEach>
 </table>
-
-<br>本網頁的路徑:<br><b>
-   <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
-   <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
-
 </body>
 </html>
