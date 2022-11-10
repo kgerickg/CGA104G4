@@ -211,7 +211,14 @@
 			<td>${ordersVO.storeId}</td>
 			<td>${ordersVO.storeVO.storeName}</td>
 			<td>${ordersVO.ordAmt}</td>
-			<td>${ordersVO.ordStat}</td>
+			<td>
+				<c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>
+				<c:if test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if>
+				<c:if test="${ordersVO.ordStat==2}">訂單已備妥，請前往領取</c:if>
+				<c:if test="${ordersVO.ordStat==3}">訂單已完成</c:if>
+				<c:if test="${ordersVO.ordStat==4}">訂單已取消</c:if>
+				<c:if test="${ordersVO.ordStat==5}">客訴處理中</c:if>
+			</td>
 			<td>${ordersVO.ordTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
