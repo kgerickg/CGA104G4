@@ -1,5 +1,6 @@
 package com.member.model;
 
+import com.refill.model.RefillVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,6 +44,10 @@ public class MemberVO implements Serializable {
 	private byte[] memPic;
 	@Column(name="MEM_TOKEN",insertable = false)
 	private Integer memToken;
+
+	@OneToMany
+	@JoinColumn(name="MEM_ID",referencedColumnName = "MEM_ID")
+	private List<RefillVO> refillVO;
 
 
 }

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 響應式頁面 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLEFONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+
+    <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+    <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <style>
+        .outside {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .shadow-box{
+            box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.07);
+            color: #555;
+            width: 30%;
+            border-radius: 10px;
+
+        }
+
+        .inside {
+            margin: auto;
+            line-height: 1;
+            font-weight: 400;
+            color: #555;
+
+        }
+
+        .insideflex {
+            display: flex;
+            justify-content: center;
+
+        }
+        .insideflex2 {
+            display: flex;
+            justify-content: center;
+
+
+        }
+        .insideflex P{
+            font-size: 1.2rem;
+            color: #2F3237;
+        }
+        .insideflexbutton{
+            width: 50%;
+            height: 40px;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+            line-height: 40px;
+            color: #fff;
+            background-color: #000;
+            transition: all .3s linear;
+        }
+        .insideflexbutton:hover{
+            background-color: rgb(38 38 38);
+        }
+
+    </style>
+    <!-- 請將覆蓋用的css放置此註解下方 -->
+
+
+    <!-- 頁籤顯示的title -->
+    <title>錢包專區</title>
+
+
+</head>
+
+<body>
+<script src="../resources/js/membernav.js"></script>
+<div style="padding: 2.8rem"></div>
+<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
+<!--下面可自由新增內容 -->
+
+<div class="outside">
+    <div class="shadow-box">
+        <div class="inside">
+            <div><img src="../resources/images/refill1.jpg" style="width: 100%; border-radius: 10px 10px 0 0"></div>
+            <h2 style="margin-bottom: 2rem;font-weight: 400; margin-left: 1rem">親愛的會員</h2>
+            <div class="insideflex" style="margin-bottom: 2rem;">
+                    <p>
+                        您的帳號尚有:
+                    </p>
+                    <p id="showToken">
+                        1450
+                    </p>
+                    <p>
+                        點
+                    </p>
+            </div>
+            <div class="insideflex2">
+                <button class="insideflexbutton" style="border-radius: 0 0 0 10px">進行儲值</button>
+                <button class="insideflexbutton" style="border-radius: 0 0 10px 0">儲值紀錄查詢</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table id="table_id"></table>
+
+
+<!-- 下面是這個版需要的js可添加各自需要的js檔-->
+<script src="../resources/js/bootstrap.min.js"></script>
+<script src="../resources/js/slick.js"></script>
+<script src="../resources/js/scripts.js"></script>
+<script src="../resources/js/isotope.js"></script>
+<script>
+    (async function getToken(){
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=getToken";
+        let response = await fetch(url,{method: 'get'}).then(res=>res.json());
+        let memToken = response.memToken;
+        $("#showToken").html(memToken);
+    })();
+
+    // $(document).ready( function () {
+    //     $('#table_id').DataTable();
+    // } );
+
+</script>
+</body>
+
+</html>

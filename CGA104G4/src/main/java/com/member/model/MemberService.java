@@ -1,6 +1,5 @@
 package com.member.model;
 
-import com.prod.model.ProdVO;
 import com.utils.MailService;
 
 import com.utils.RandomPassword;
