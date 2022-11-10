@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lkorder.model.LkOrderSelectVO;
 import com.lkorder.model.LkOrderService;
 import com.lkorder.model.LkOrderVO;
 
@@ -61,6 +62,10 @@ public class LkOrderServlet extends HttpServlet {
 			/*************************** 2.開始查詢資料 *****************************************/
 			LkOrderService lkorderSvc = new LkOrderService();
 			LkOrderVO lkorderVO = lkorderSvc.lkorderVO(lkOrderId);
+			
+			LkOrderSelectVO lkOrderSelectVO =(LkOrderSelectVO) lkorderVO;
+			
+			
 			if (lkorderVO == null) {
 				errorMsgs.add("查無資料");
 			}
@@ -70,9 +75,10 @@ public class LkOrderServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
+			
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("lkorderVO", lkorderVO); // 資料庫取出的empVO物件,存入req
+			req.setAttribute("lkOrderSelectVO", lkOrderSelectVO); // 資料庫取出的empVO物件,存入req
 			String url = "/back-lkorder/BackListOneLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
@@ -178,7 +184,7 @@ public class LkOrderServlet extends HttpServlet {
 				errorMsgs.add("請輸入正確訂單完成日期");
 			}
 
-			LkOrderVO lkorderVO = new LkOrderVO();
+			LkOrderVO lkorderVO = new LkOrderSelectVO();
 			lkorderVO.setLkOrderId(lkOrderId);
 			lkorderVO.setLkId(lkId);
 			lkorderVO.setMemId(memId);
@@ -201,20 +207,19 @@ public class LkOrderServlet extends HttpServlet {
 			LkOrderService lkorderSvc = new LkOrderService();
 			lkorderVO = lkorderSvc.update(lkOrderId, lkId, memId, lkTodayId, lkOrdAmt, lkOrdStat, lkOrdTimeS, lkOrdTaketime,
 					lkOrdTimeE);
+			
+			LkOrderSelectVO lkOrderSelectVO =(LkOrderSelectVO) lkorderVO;
+			
+			lkOrderSelectVO.setLkName(req.getParameter("lkName"));
+			lkOrderSelectVO.setMemName(req.getParameter("memName"));
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("lkorderVO", lkorderVO); // 資料庫update成功後,正確的的empVO物件,存入req
+			req.setAttribute("lkOrderSelectVO", lkOrderSelectVO); // 資料庫update成功後,正確的的empVO物件,存入req
 			String url = "/back-lkorder/BackListOneLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
 		
-		if ("updata".equals(action)) {  // 廢CODE 但刪掉會崩
-			LkOrderService lkorderService = new LkOrderService();
-			List<LkOrderVO> list = lkorderService.getAll();
-			req.setAttribute( "list" , list);
-			req.getRequestDispatcher("/back-lkorder/BackListAllLkorder.jsp").forward(req, res);
-		}
 
 		if ("insert".equals(action)) { // 來自【AddLkorder.jsp】的請求-----------------------------------------------------------
 

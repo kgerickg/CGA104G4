@@ -4,7 +4,7 @@
 <%@ page import="com.lkorder.model.*"%>
 
 <%
-LkOrderVO lkorderVO = (LkOrderVO) request.getAttribute("lkorderVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+LkOrderSelectVO lkOrderSelectVO = (LkOrderSelectVO) request.getAttribute("lkOrderSelectVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
 
 <html>
@@ -43,12 +43,14 @@ LkOrderVO lkorderVO = (LkOrderVO) request.getAttribute("lkorderVO"); //EmpServle
 	border-bottom-right-radius: 10px;
 	padding: 15px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+	border-radius: 10px;
 }
 
 a {
 	color: #5c636a;
 	display: inline;
 	text-decoration: none;
+	font-weight: bold;
 }
 
 table {
@@ -59,7 +61,7 @@ table {
 	min-width: 400px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	text-align: center;
-	border-radius: 1%;
+	border-radius: 10px;
 }
 
 table  tr:nth-of-type(even) {
@@ -76,11 +78,6 @@ table th, td {
 	width: 60vw;
 	text-align: center;
 	background-color: #F0F0F0;
-}
-
-a {
-	text-decoration: none;
-	font-weight: bold;
 }
 
 thead th {
@@ -189,16 +186,16 @@ thead th {
 		<!-- 左側Nav ↑↑↑  -->
 
 		<div id="page-wrapper">
-			<div id="wrapper" style="min-height: 90vh; padding-top: 30px">
+			<div id="wrapper-container">
 				<!-- ******內容寫在這邊 ↓↓↓****** -->
 
 
 				<table id="table-1">
 					<tr>
 						<td>
-							<h1>福袋訂單資料</h1>
+							<h1 style="font-weight: 700;">福袋訂單資料</h1>
 							<h4>
-								<a
+								<a style="text-decoration: none;"
 									href=${pageContext.request.contextPath}/back-lkorder/BackIndexLkorder.jsp>回首頁</a>
 							</h4>
 						</td>
@@ -208,9 +205,11 @@ thead th {
 				<table>
 					<thead>
 						<tr>
-							<th>會員名稱</th>
 							<th>福袋訂單編號</th>
+							<th>福袋編號</th>
 							<th>福袋名稱</th>
+							<th>會員編號</th>
+							<th>會員名稱</th>
 							<th>每日福袋編號</th>
 							<th>結帳金額</th>
 							<th>訂單狀態</th>
@@ -222,36 +221,37 @@ thead th {
 						</tr>
 					</thead>
 					<tr>
-						<td>${lkorderVO.memName}</td>
-						<td>${lkorderVO.lkOrderId}</td>
-						<td>${lkorderVO.lkName}</td>
-						<td>${lkorderVO.lkTodayId}</td>
-						<td>${lkorderVO.lkOrdAmt}</td>
+						<td>${lkOrderSelectVO.lkOrderId}</td>
+						<td>${lkOrderSelectVO.lkId}</td>
+						<td>${lkOrderSelectVO.lkName}</td>
+						<td>${lkOrderSelectVO.memId}</td>
+						<td>${lkOrderSelectVO.memName}</td>
+						<td>${lkOrderSelectVO.lkTodayId}</td>
+						<td>${lkOrderSelectVO.lkOrdAmt}</td>
 						
-						<c:if test="${lkorderVO.lkOrdStat == '0'}">
+						<c:if test="${lkOrderSelectVO.lkOrdStat == '0'}">
 									<td>待取貨</td>
 							</c:if> 
-							<c:if test="${lkorderVO.lkOrdStat == '1'}">
+							<c:if test="${lkOrderSelectVO.lkOrdStat == '1'}">
 									<td>已取貨</td>
 							</c:if> 
-							<c:if test="${lkorderVO.lkOrdStat == '2'}">
+							<c:if test="${lkOrderSelectVO.lkOrdStat == '2'}">
 									<td>完成</td>
 							</c:if> 
-							<c:if test="${lkorderVO.lkOrdStat == '3'}">
+							<c:if test="${lkOrderSelectVO.lkOrdStat == '3'}">
 									<td>客訴處理中</td>
 						</c:if> 
 
-						<td>${lkorderVO.lkOrdTimeS}</td>
-						<td>${lkorderVO.lkOrdTaketime}</td>
-						<td>${lkorderVO.lkOrdTimeE}</td>
+						<td>${lkOrderSelectVO.lkOrdTimeS}</td>
+						<td>${lkOrderSelectVO.lkOrdTaketime}</td>
+						<td>${lkOrderSelectVO.lkOrdTimeE}</td>
 						<td>
 								<FORM METHOD="post"
 									ACTION=${pageContext.request.contextPath}/back-lkorder/lkorderback.do
 									style="margin-bottom: 0px;">
-									<input type="hidden" name="action" value="getOne_For_Update">
 									<input type="submit" value="修改" class="btn-secondary" class="btn-secondary">
-									<input type="hidden" name="lkOrderId"
-										value="${lkorderVO.lkOrderId}">
+									<input type="hidden" name="lkOrderId" value="${lkOrderSelectVO.lkOrderId}">
+									<input type="hidden" name="action" value="getOne_For_Update">
 									<!-- 															value="getOne_For_Update" -->
 								</FORM>
 							</td>
@@ -260,9 +260,8 @@ thead th {
 									ACTION=${pageContext.request.contextPath}/back-lkorder/lkorderback.do
 									style="margin-bottom: 0px;">
 									<input type="submit" value="刪除" class="btn-secondary" class="btn-secondary">
-									<input type="hidden" name="lkOrderId"
-										value="${lkorderVO.lkOrderId}"> <input
-										type="hidden" name="action" value="delete">
+									<input type="hidden" name="lkOrderId" value="${lkOrderSelectVO.lkOrderId}"> 
+									<input type="hidden" name="action" value="delete">
 								</FORM>
 							</td>
 					</tr>

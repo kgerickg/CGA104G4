@@ -192,8 +192,7 @@ table tr td:nth-of-type(odd) {
 		<!-- 左側Nav ↑↑↑  -->
 
 		<div id="page-wrapper">
-			<div id="wrapper"
-				style="min-height: 90vh; padding-top: 20px; padding-bottom: 20px">
+			<div id="wrapper-container">
 				<!-- ******內容寫在這邊 ↓↓↓****** -->
 
 
