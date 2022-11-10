@@ -1,5 +1,6 @@
 package com.member.model;
 
+import com.refill.model.RefillVO;
 import com.utils.MailService;
 
 import com.utils.RandomPassword;
