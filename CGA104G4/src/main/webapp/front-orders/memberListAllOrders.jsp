@@ -89,7 +89,7 @@
 <table id="table-1">
 	<tr><td>
 		<h3>訂單資訊</h3>
-		<FORM><input type="hidden" name="action" value="listOrders_ByMemdId"></FORM>
+		<FORM><input type="hidden" name="action" value="listOrders_ByMemId"></FORM>
 	</td></tr>
 </table>
 <table>

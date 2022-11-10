@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.detail.model.*"%>
 
-<jsp:useBean id="storeListDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" /> <!-- 於EL此行可省略 -->
+<jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" /> <!-- 於EL此行可省略 -->
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +88,7 @@
 		<th>商品數量</th>
 	</tr>
 	
-	<c:forEach var="detailVO" items="${storeListDetails_ByOrdId}" >
+	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
 	<tr>
 			<td>${detailVO.ordId}</td>
 			<td>${detailVO.prodId}</td>

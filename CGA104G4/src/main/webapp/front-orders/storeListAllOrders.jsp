@@ -89,27 +89,30 @@
 
 </div>    
 <table id="table-1">
-	<tr><td><h3>訂單資訊</h3></td></tr>
+	<tr><td>
+	<h3>訂單資訊</h3>
+	<FORM><input type="hidden" name="action" value="listOrders_ByStoreId"></FORM>
+	</td></tr>
 </table>
 <table>
 	<tr>
 		<th>訂單編號</th>
-		<th>會員編號</th>
-		<th>會員姓名</th>
 		<th>商家編號</th>
 		<th>商家名稱</th>
+		<th>會員編號</th>
+		<th>會員姓名</th>
 		<th>訂單金額</th>
 		<th>訂單狀態</th>
 		<th>訂單成立時間</th>
 		<th>查詢訂單明細</th>
 	</tr>
-	<c:forEach var="ordersVO" items="${ordersSvc.all}">
+	<c:forEach var="ordersVO" items="${ordersSvc.getOrdersByStoreId(storeId)}">
 		<tr>
 			<td>${ordersVO.ordId}</td>
-			<td>${ordersVO.memId}</td>
-			<td>${ordersVO.storeVO.memName}</td>
 			<td>${ordersVO.storeId}</td>
 			<td>${ordersVO.storeVO.storeName}</td>
+			<td>${ordersVO.memId}</td>
+			<td>${ordersVO.memberVO.memName}</td>
 			<td>${ordersVO.ordAmt}</td>
 			<td>${ordersVO.ordStat}</td>
 			<td>${ordersVO.ordTime}</td>
@@ -117,13 +120,13 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="訂單明細"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="listDetails_ByOrdId_B"></FORM>
+			    <input type="hidden" name="action" value="listDetails_ByOrdId_A"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
 
-<%if (request.getAttribute("storeListDetails_ByOrdId")!=null){%>
+<%if (request.getAttribute("listDetails_ByOrdId")!=null){%>
        <jsp:include page="storeListDetails_ByOrdId.jsp" />
 <%} %>
     <!-- 下面是這個版需要的js可添加各自需要的js檔-->

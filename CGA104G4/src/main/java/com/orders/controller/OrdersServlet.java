@@ -74,8 +74,12 @@ public class OrdersServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
-	 // 來自front-orders/storeListAllOrders.jsp的請求 // 來自front-orders/memberListAllOrders.jsp的請求
-		if ("listDetails_ByOrdId_A".equals(action) || "listDetails_ByOrdId_B".equals(action)) {
+		// 來自front-orders/storeListAllOrders.jsp的請求
+		if ("listDetails_ByOrdId_A".equals(action)
+		// 來自front-orders/memberListAllOrders.jsp的請求
+		 || "listDetails_ByOrdId_B".equals(action)
+		// 來自back-orders/listAllOrders.jsp的請求
+		 || "listDetails_ByOrdId_C".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -88,20 +92,22 @@ public class OrdersServlet extends HttpServlet {
 			Set<DetailVO> set = ordersSvc.getDetailsByOrdId(ordId);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("listDetails_ByOrdId", set);    // 資料庫取出的list物件,存入request
+			req.setAttribute("listDetails_ByOrdId", set);	// 資料庫取出的list物件,存入request
 
 			String url = null;
 			if ("listDetails_ByOrdId_A".equals(action))
-				url = "/front-orders/storeListDetails_ByOrdId.jsp";        // 成功轉交 front-orders/storeListAllOrders.jsp
+				url = "/front-orders/storeListAllOrders.jsp";	// 成功轉交 front-orders/storeListAllOrders.jsp
 			else if ("listDetails_ByOrdId_B".equals(action))
-				url = "/front-orders/memberListAllOrders.jsp";              // 成功轉交 front-orders/memberListAllOrders.jsp
+				url = "/front-orders/memberListAllOrders.jsp";	// 成功轉交 front-orders/memberListAllOrders.jsp
+			else if ("listDetails_ByOrdId_C".equals(action))
+				url = "/back-orders/listAllOrders.jsp";	// 成功轉交 back-orders/listAllOrders.jsp
 
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
 				
 				
-			if ("delete_Order".equals(action)) { // 來自/orders/listAllOrders.jsp的請求
+			if ("delete_Order".equals(action)) { // 來自/back-orders/listAllOrders.jsp的請求
 
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
@@ -114,8 +120,8 @@ public class OrdersServlet extends HttpServlet {
 				ordersSvc.deleteOrders(ordId);
 						
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
-				String url = "/orders/listAllOrders.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後, 成功轉交 回到 /orders/listAllOrders.jsp
+				String url = "/back-orders/listAllOrders.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後, 成功轉交 回到 /back-orders/listAllOrders.jsp
 				successView.forward(req, res);
 			}
 		}
