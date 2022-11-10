@@ -2,33 +2,22 @@
 <html>
 
 <head>
-	<title>後台</title>
     <meta charset="utf-8" />
-    
-    
-    <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
-
+    <title>後台</title>
     <!-- Bootstrap Styles-->
     <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet" />
     <!-- FontAwesome Styles-->
     <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet" />
-    <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <!-- Custom Styles-->
     <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet" />
-
-    <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
-
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href=/resources/back-stage/assets/js/Lightweight-Chart/cssCharts.css>
 </head>
 
 
 <body>
-
-	<!-- 從這複製↓↓↓ -->
-	
     <div id="wrapper">
         <!-- 上方Nav ↓↓↓  -->
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -49,7 +38,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="../back-stage/adminlogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+                        <li><a href="../back-index/storelogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
                         </li>
                         <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
@@ -76,7 +65,7 @@
                                 <a href="#">一般商品管理</a>
                             </li>
                             <li>
-                                <a href="#">一般訂單管理</a>
+                                <a href="../back-orders/listAllOrders.jsp">一般訂單管理</a>
                             </li>
                         </ul>
                     </li>
@@ -88,7 +77,7 @@
                                 <a href="#">福袋商品管理</a>
                             </li>
                             <li>
-                                <a href="../back-lkorder/BackIndexLkorder.jsp">福袋訂單管理</a>
+                                <a href="#">福袋訂單管理</a>
                             </li>
                         </ul>
                     </li>
@@ -145,24 +134,22 @@
         </nav>
         <!-- 左側Nav ↑↑↑  -->
 
-       <div id="page-wrapper">
-			<div id="wrapper-container">
-			<!-- ******內容寫在這邊 ↓↓↓****** -->
-			
-			
-			
-			
-			
-			
-			<!-- ******內容寫在這邊 ↑↑↑****** -->
-			</div>
-        </div>
-        
-    </div>
-    <!-- 複製到這裡↑↑↑ -->
-    
 
-    <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
+        <!-- 內容寫在這邊 ↓↓↓ -->
+
+        <div id="page-wrapper">
+
+            <div id="wrapper-container">
+                <img src="https://i0.wp.com/60smcln.com/wp-content/uploads/2021/05/20180330221854-dd56f22e.jpg"
+                    style="width: 70%;margin: auto;display: block;">
+            </div>
+
+        </div>
+
+
+        <!-- 內容寫在這邊 ↑↑↑ -->
+
+    </div>
 
     <!-- jQuery Js -->
     <script src=../resources/back-stage/assets/js/jquery-1.10.2.js></script>
@@ -172,8 +159,6 @@
     <script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
     <!-- Custom Js -->
     <script src=../resources/back-stage/assets/js/custom-scripts.js></script>
-
-    <!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
 
 </body>
 

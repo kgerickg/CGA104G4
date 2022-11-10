@@ -2,12 +2,19 @@ package com.orders.model;
 
 import java.sql.Date;
 
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
+import com.prod.model.ProdService;
+import com.prod.model.ProdVO;
+import com.store.model.StoreService;
+import com.store.model.StoreVO;
+
 public class OrdersVO implements java.io.Serializable{
 	private Integer ordId;
 	private Integer memId;
 	private Integer storeId;
 	private Integer ordAmt;
-	private Integer ordStat;
+	private Integer ordStat; //0 確認中 1 待完成 2 退單 3 完成 4 客訴處理中
 	private Date ordTime;
 	
 	public Integer getOrdId() {
@@ -47,4 +54,16 @@ public class OrdersVO implements java.io.Serializable{
 		this.ordTime = ordTime;
 		
 	}
+	// for join storeName, from storeId
+    public StoreVO getStoreVO() {
+    	StoreService storeSvc = new StoreService();
+	    StoreVO storeVO = storeSvc.getOneStore(storeId);
+	    return storeVO;
+    }
+    // for join memName, from memId
+    public MemberVO getMemberVO() {
+    	MemberService memberSvc = new MemberService();
+    	MemberVO memberVO = memberSvc.getOneMember(memId);
+    	return memberVO;
+    }
 }

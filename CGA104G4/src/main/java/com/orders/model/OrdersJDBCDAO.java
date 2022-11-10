@@ -19,9 +19,12 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	String passwd = "password";
 
 	private static final String INSERT_STMT = "insert into ORDERS (MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME) VALUES (?, ?, ?, ?, ?)";
+	
 	private static final String GET_ALL_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS";
 	private static final String GET_ONE_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where ORD_ID = ?";
 	private static final String GET_Details_ByOrdId_STMT = "select PROD_ID, PROD_QTY, ORD_ID from DETAIL where ORD_ID = ? order by PROD_ID";
+	private static final String GET_Orders_ByMemId_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where MEM_ID = ? order by ORD_ID";
+	private static final String GET_Orders_ByStoreId_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where STORE_ID = ? order by ORD_ID";
 	
 	private static final String DELETE_DETAILs = "delete from DETAIL where ORD_ID = ?";
 	private static final String DELETE_ORDERS = "delete from ORDERS where ORD_ID = ?";
@@ -334,9 +337,9 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	
 			while (rs.next()) {
 				detailVO = new DetailVO();
-				detailVO.setProdId(rs.getInt("prodId"));
-				detailVO.setProdQty(rs.getInt("prodQty"));
-				detailVO.setOrdId(rs.getInt("ordId"));
+				detailVO.setProdId(rs.getInt("PROD_ID"));
+				detailVO.setProdQty(rs.getInt("PROD_QTY"));
+				detailVO.setOrdId(rs.getInt("ORD_ID"));
 				set.add(detailVO); // Store the row in the vector
 			}
 	
@@ -374,62 +377,127 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 		return set;
 	}
 	
-	public static void main(String[] args) {
-
-		OrdersJDBCDAO dao = new OrdersJDBCDAO();
-
-		// 新增
-//		ProdVO ordersVO1 = new ProdVO();
-//		ordersVO1.setOrdId(1);
-//		ordersVO1.setMemId(1);
-//		ordersVO1.setStoreId(1);
-//		ordersVO1.setOrdAmt(100);
-//		ordersVO1.setOrdStat(0);
-//		ordersVO1.setOrdTime(java.sql.Date.valueOf("2022-10-16"));
-//		dao.insert(ordersVO1);
-
-		// 修改
-//		ProdVO ordersVO2 = new ProdVO();
-//		ordersVO2.setOrdId(2);
-//		ordersVO2.setMemId(2);
-//		ordersVO2.setStoreId(2);
-//		ordersVO2.setOrdAmt(110);
-//		ordersVO2.setOrdStat(1);
-//		ordersVO2.setOrdTime(java.sql.Date.valueOf("2022-10-17"));
-//		dao.update(ordersVO2);
-
-		// 刪除
-//		dao.delete(2);
-
-		// 查詢
-		OrdersVO ordersVO3 = dao.findByPrimaryKey(1);
-		System.out.print(ordersVO3.getOrdId() + ",");
-		System.out.print(ordersVO3.getMemId() + ",");
-		System.out.print(ordersVO3.getStoreId() + ",");
-		System.out.print(ordersVO3.getOrdAmt() + ",");
-		System.out.print(ordersVO3.getOrdStat() + ",");
-		System.out.print(ordersVO3.getOrdTime());
-		System.out.println("---------------------");
-
-		// 查詢訂單
-		List<OrdersVO> list = dao.getAll();
-		for (OrdersVO aOrders : list) {
-			System.out.print(aOrders.getOrdId() + ",");
-			System.out.print(aOrders.getMemId() + ",");
-			System.out.print(aOrders.getStoreId() + ",");
-			System.out.print(aOrders.getOrdAmt() + ",");
-			System.out.print(aOrders.getOrdStat() + ",");
-			System.out.print(aOrders.getOrdTime());
-			System.out.println();
-		}
+	@Override
+	public Set<OrdersVO> getOrdersByMemId(Integer memId) {
+		Set<OrdersVO> set = new LinkedHashSet<OrdersVO>();
+		OrdersVO ordersVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
-		// 查詢某訂單的明細
-		Set<DetailVO> set = dao.getDetailsByOrdId(1);
-		for (DetailVO aDetail : set) {
-			System.out.print(aDetail.getProdId() + ",");
-			System.out.print(aDetail.getProdQty() + ",");
-			System.out.print(aDetail.getOrdId() + ",");
-			System.out.println();
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_Orders_ByMemId_STMT);
+			pstmt.setInt(1, memId);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				ordersVO = new OrdersVO();
+				ordersVO.setOrdId(rs.getInt("ORD_ID"));
+				ordersVO.setMemId(rs.getInt("MEM_ID"));
+				ordersVO.setStoreId(rs.getInt("STORE_ID"));
+				ordersVO.setOrdAmt(rs.getInt("ORD_AMT"));
+				ordersVO.setOrdStat(rs.getInt("ORD_STAT"));
+				ordersVO.setOrdTime(rs.getDate("ORD_TIME"));
+				set.add(ordersVO); // Store the row in the vector
+			}
+	
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
 		}
+		return set;
+	}
+	
+	@Override
+	public Set<OrdersVO> getOrdersByStoreId(Integer storeId) {
+		Set<OrdersVO> set = new LinkedHashSet<OrdersVO>();
+		OrdersVO ordersVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_Orders_ByStoreId_STMT);
+			pstmt.setInt(1, storeId);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				ordersVO = new OrdersVO();
+				ordersVO.setOrdId(rs.getInt("ORD_ID"));
+				ordersVO.setMemId(rs.getInt("MEM_ID"));
+				ordersVO.setStoreId(rs.getInt("STORE_ID"));
+				ordersVO.setOrdAmt(rs.getInt("ORD_AMT"));
+				ordersVO.setOrdStat(rs.getInt("ORD_STAT"));
+				ordersVO.setOrdTime(rs.getDate("ORD_TIME"));
+				set.add(ordersVO); // Store the row in the vector
+			}
+	
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}
 }

@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>會員管理頁面</title>
+    <!-- 響應式頁面 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
+
+    <!-- Bootstrap Styles-->
+    <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- Custom Styles-->
+    <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
+
     <style>
         div.flexdiv {
             display: flex;
@@ -63,22 +78,150 @@
 </head>
 
 <body>
-<div class="flexdiv">
-    <div>
-        <span>選擇會員編號:</span>
-        <select id="memIdSelecter" name="memId"></select>
-        <button id="memIdSelecterButton">搜索</button>
+<!-- 從這複製↓↓↓ -->
+
+<div id="wrapper">
+    <!-- 上方Nav ↓↓↓  -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><strong>後台管理</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!-- 上方Nav ↑↑↑  -->
+    <!-- 左側Nav ↓↓↓  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> 吉食享樂</a>
+                </li>
+
+                <li>
+                    <a href="#">一般商品<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">一般商品管理</a>
+                        </li>
+                        <li>
+                            <a href="#">一般訂單管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">福袋商品<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">福袋商品管理</a>
+                        </li>
+                        <li>
+                            <a href="#">福袋訂單管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#">員工帳號管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">員工帳號管理</a>
+                        </li>
+                        <li>
+                            <a href="#">員工權限管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">代幣系統管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">客訴處理</a>
+                        </li>
+                        <li>
+                            <a href="#">優惠活動管理</a>
+                        </li>
+                        <li>
+                            <a href="#">代幣儲值</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">會員管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">合作店家資格審核</a>
+                        </li>
+                        <li>
+                            <a href="#">合作店家帳號管理</a>
+                        </li>
+                        <li>
+                            <a href="#">一般會員管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"> 評論檢舉管理 </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- 左側Nav ↑↑↑  -->
+
+    <div id="page-wrapper">
+        <div id="wrapper-container">
+            <!-- ******內容寫在這邊 ↓↓↓****** -->
+            <div class="flexdiv">
+                <div>
+                    <span>選擇會員編號:</span>
+                    <select id="memIdSelecter" name="memId"></select>
+                    <button id="memIdSelecterButton">搜索</button>
+                </div>
+                <div>
+                    <span>輸入會員編號:</span>
+                    <input type="text" id="selectByInputinput" name="memId">
+                    <button id="selectByInputbutton">搜索</button>
+                </div>
+                <div>
+                    <button id="getAll">顯示所有會員</button>
+                </div>
+            </div>
+            <div id="listTable"></div>
+            <!-- ******內容寫在這邊 ↑↑↑****** -->
+        </div>
     </div>
-    <div>
-        <span>輸入會員編號:</span>
-        <input type="text" id="selectByInputinput" name="memId">
-        <button id="selectByInputbutton">搜索</button>
-    </div>
-    <div>
-        <button id="getAll">顯示所有會員</button>
-    </div>
+
 </div>
-<div id="listTable"></div>
+<!-- 複製到這裡↑↑↑ -->
+
 
 <script>
 
@@ -203,8 +346,8 @@
                 tr.insertAdjacentHTML("beforeend", `<td><select disabled id="select${members[i].memId}"><option selected value="0">正常</option><option selected value="1">停權</option></select></td>`);
             }
             let buttonhtml = "<td><button id='accStateModify' name='aSTMbutton"+members[i].memId+"' value='"+members[i].memId+ "'>修改帳號狀態</button>" +
-                             "<button style='display: none;margin-right: 0.5rem' id='cfbutton"+members[i].memId+"'>確認</button>"+
-                             "<button style='display: none' id='clbutton"+members[i].memId+"'>取消</button></td>"
+                             "<button style='display: none;margin-right: 0.5rem' id='cfbutton"+members[i].memId+"'value='"+members[i].memId+ "'>確認</button>"+
+                             "<button style='display: none' id='clbutton"+members[i].memId+"'value='"+members[i].memId+ "'>取消</button></td>"
 
             tr.insertAdjacentHTML("beforeend", buttonhtml);
 
@@ -223,60 +366,76 @@
     }
     //綁定修改帳號狀態與查詢會員儲值紀錄事件
     function addTableButtonWithFunction() {
-        let accStatebutton = document.querySelectorAll("#accStateModify");
-        accStatebutton.forEach(e => e.addEventListener('click', accStateModify));
+        document.querySelectorAll("#accStateModify").forEach(e => e.addEventListener('click', accStateModify));
+
+        document.querySelectorAll("button[id^='cfbutton']").forEach(e=>e.addEventListener('click',updateAccState));
+
+        document.querySelectorAll("button[id^='clbutton']").forEach(e=>e.addEventListener('click',recoverAccState));
 
         // let memberTopUpListbutton = document.querySelectorAll("#memberTopUpList");
         // memberTopUpListbutton.forEach(e => e.addEventListener('click', memberTopUpList));
-
     }
-
+    let OriginalAccState;
     function accStateModify(e){
         let memId =  e.target.value;
         let selected = "select"+memId;
-        let accState = $(`#${selected}`).val();
-        let cfbutton = "cfbutton"+memId;
-        let clbutton = "clbutton"+memId;
         let aSTMbutton = "aSTMbutton"+memId;
+
+        OriginalAccState = $(`#${selected}`).val();
 
         $(`#${selected}`).prop("disabled",false);
         $(`[name=${aSTMbutton}]`).hide();
-        $(`#${cfbutton}`).show();
-        $(`#${clbutton}`).show();
+        $("#cfbutton"+memId).show();
+        $("#clbutton"+memId).show();
 
-        document.querySelector(`#${cfbutton}`).addEventListener("click",function () {
-            changeButtonDisplay(selected,cfbutton,clbutton,aSTMbutton);
-            updateAccState(accState,memId);
-        })
 
-        document.querySelector(`#${clbutton}`).addEventListener("click",function () {
-            $(`#${selected}`).children(`[value='${accState}']`).prop("selected",true);
-            changeButtonDisplay(selected, cfbutton, clbutton, aSTMbutton);
-        })
     }
 
+    function updateAccState(e){
+        let memId =  e.target.value;
+        let selected = "select"+memId;
+        let aSTMbutton = "aSTMbutton"+memId;
 
-
-    function changeButtonDisplay(selected,cfbutton,clbutton,aSTMbutton){
         $(`#${selected}`).prop("disabled",true);
         $(`[name=${aSTMbutton}]`).show();
-        $(`#${cfbutton}`).hide();
-        $(`#${clbutton}`).hide();
-    }
+        $("#cfbutton"+memId).hide();
+        $("#clbutton"+memId).hide();
+         let accState = $(`#${selected}`).val();
 
-
-    function updateAccState(accState,memId){
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
         let url = webCtx + "/member/member.do?action=updateAccState&accState="+accState+"&memId="+memId;
         fetch(url, { method: 'get' });
     }
 
+    function recoverAccState(e){
+        let memId =  e.target.value;
+        let selected = "select"+memId;
+        let aSTMbutton = "aSTMbutton"+memId;
+
+        $(`#${selected}`).prop("disabled",true);
+        $(`[name=${aSTMbutton}]`).show();
+        $("#cfbutton"+memId).hide();
+        $("#clbutton"+memId).hide();
+        $(`#${selected}`).children(`[value='${OriginalAccState}']`).prop("selected",true);
+    }
 
 
 
 
 
 </script>
+<!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
+
+<!-- jQuery Js -->
+<script src=../resources/back-stage/assets/js/jquery-1.10.2.js></script>
+<!-- Bootstrap Js -->
+<script src=../resources/back-stage/assets/js/bootstrap.min.js></script>
+<!-- 左側Nav Dropdown -->
+<script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
+<!-- Custom Js -->
+<script src=../resources/back-stage/assets/js/custom-scripts.js></script>
+
+<!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
 </body>
 </html>

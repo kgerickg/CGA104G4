@@ -1,5 +1,6 @@
 package com.member.model;
 
+import com.prod.model.ProdVO;
 import com.utils.MailService;
 
 import com.utils.RandomPassword;
@@ -19,6 +20,10 @@ public class MemberService {
 
         return dao.getAll();
     }
+    
+    public MemberVO getOneMember(Integer memId) {
+		return dao.findByPrimaryKey(memId);
+	}
 
     public List<Integer> getMemId() {
 

@@ -29,7 +29,7 @@ public class memberFilter implements Filter {
         Object memId = session.getAttribute("memId");
         if (memId == null) {
             session.setAttribute("location", req.getRequestURI());
-            res.sendRedirect(req.getContextPath() + "/front-end/memberlogin.html");
+            res.sendRedirect(req.getContextPath() + "/front-member/memberlogin.html");
             return;
         } else {
             chain.doFilter(request, response);
