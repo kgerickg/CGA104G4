@@ -1,8 +1,9 @@
 let body = document.querySelector("body");
 let divwrapper = document.createElement("div");
 divwrapper.setAttribute("class", "wrapper");
-
 let header = document.createElement("header");
+let path = window.location.pathname;
+let webCtx = path.substring(0, path.indexOf('/', 1));
 header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center">

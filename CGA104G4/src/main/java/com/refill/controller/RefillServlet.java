@@ -59,14 +59,12 @@ public class RefillServlet extends HttpServlet {
                 reFillJson.put("refillTime",refillTime);
                refillArray.put(reFillJson);
             }
-            System.out.println("hi");
             out.write(refillArray.toString());
             return;
         }
 
         JSONObject JsonMsg = new JSONObject();
         JsonMsg.put("state",true);
-        System.out.println("hi2");
         out.write(JsonMsg.toString());
 
     }

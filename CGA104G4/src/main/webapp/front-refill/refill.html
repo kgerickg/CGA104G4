@@ -123,7 +123,7 @@
         </div>
     </div>
 </div>
-<table id="table_id"></table>
+<table id="table_id" class="display" style="width: 80%"></table>
 
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
@@ -149,18 +149,33 @@
             let url = webCtx + "/refill/refill.do?action=getRefillRecord";
             let response = await fetch(url,{method: 'get'}).then(res=>res.json());
             if(!response.state){
-                console.log(response);
+                showTokenRefill(response);
                 return;
             }
-            console.log("我不知道")
-
 
     }
 
 
-    // $(document).ready( function () {
-    //     $('#table_id').DataTable();
-    // } );
+    function showTokenRefill(refillRecord){
+            $('#table_id').DataTable({
+                "pageLength":'5',
+                "data": refillRecord,
+                "autoWidth": true,
+                "destroy": true,
+                "searching": false,
+                "lengthChange":false,
+                "columns": [
+                    { data: 'refillTime', title: "儲值時間" },
+                    { data: 'RefillAmt', title: "花費金額" },
+                    { data: 'RefillToken', title: "取得點數" },
+                ],
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/zh_Hant.json"
+                }
+            });
+
+    }
+
 
 </script>
 </body>
