@@ -1,6 +1,6 @@
 package com.detail.model;
-import java.sql.Date;
-import com.prod.model.*;
+import com.prod.model.ProdService;
+import com.prod.model.ProdVO;
 
 public class DetailVO implements java.io.Serializable{
 	

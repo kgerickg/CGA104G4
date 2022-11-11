@@ -176,9 +176,9 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			while (rs.next()) {
 				// detailVO 也稱為 Domain objects
 				detailVO = new DetailVO();
-				detailVO.setProdId(rs.getInt("prodId"));
-				detailVO.setProdQty(rs.getInt("prodQty"));
-				detailVO.setOrdId(rs.getInt("ordId"));
+				detailVO.setProdId(rs.getInt("PROD_ID"));
+				detailVO.setProdQty(rs.getInt("PROD_QTY"));
+				detailVO.setOrdId(rs.getInt("ORD_ID"));
 			}
 
 			// Handle any driver errors
@@ -235,9 +235,9 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			while (rs.next()) {
 				// detailVO 也稱為 Domain objects
 				detailVO = new DetailVO();
-				detailVO.setProdId(rs.getInt("prodId"));
-				detailVO.setProdQty(rs.getInt("prodQty"));
-				detailVO.setOrdId(rs.getInt("ordId"));
+				detailVO.setProdId(rs.getInt("PROD_ID"));
+				detailVO.setProdQty(rs.getInt("PROD_QTY"));
+				detailVO.setOrdId(rs.getInt("ORD_ID"));
 				list.add(detailVO); // Store the row in the list
 			}
 

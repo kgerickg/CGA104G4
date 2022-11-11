@@ -3,12 +3,14 @@ let body = document.querySelector("body");
 let divwrapper = document.createElement("div");
 divwrapper.setAttribute("class", "wrapper");
 let header = document.createElement("header");
+let path = window.location.pathname;
+let webCtx = path.substring(0, path.indexOf('/', 1));
 header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center">
             <div class="logo">
-                <a href="index.html" title="">
-                    <img class="logoimg" src="../resources/images/1.png" alt="">
+                <a href="${webCtx}/front-index/index.html" title="">
+                    <img class="logoimg" src="${webCtx}/resources/images/1.png" alt="">
                 </a>
             </div>
             <nav>
@@ -21,14 +23,14 @@ header.innerHTML =
                         <ul>
                             <li><a href="" >最愛店家</a></li>
                             <li><a href="" >預約福袋</a></li>
-                            <li><a href="" >訂單資訊</a></li>
+                            <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp" >訂單資訊</a></li>
                         </ul>
                     </li>
                     <li><a href="" >個人資訊+</a>
                         <ul>
-                            <li><a href="../front-end/memberinfoupdate.html" class="">個人基本資料</a></li>
-                            <li><a href="../front-end/memberupatepassword.html" >更改密碼</a></li>
-                            <li><a href="" >錢包專區</a></li>
+                            <li><a href="${webCtx}/front-member/memberinfoupdate.html" class="">個人基本資料</a></li>
+                            <li><a href="${webCtx}/front-member/memberupatepassword.html" >更改密碼</a></li>
+                            <li><a href="${webCtx}/front-refill/refill.html">錢包專區</a></li>
                             <li><a href="" >個人訊息</a></li>
                         </ul>
                     </li>
@@ -47,13 +49,13 @@ header.innerHTML =
                 </li>
                 <li>
                     <a href="#" title="" class="">
-                        <img alt="" src="../resources/images/bell.svg" style="width:2rem">
+                        <img alt="" src="${webCtx}/resources/images/bell.svg" style="width:2rem">
                     </a>
                     <span class="cart-item-num">0</span>
                 </li>
                 <li>
                     <a href="#" title="" class="">
-                        <img alt="" src="../resources/images/shopping-cart.svg" style="width:2rem">
+                        <img alt="" src="${webCtx}/resources/images/shopping-cart.svg" style="width:2rem">
                     </a>
                      <span class="cart-item-num">0</span>
                 </li>
@@ -62,10 +64,10 @@ header.innerHTML =
                 <ul id="logul">
                     <li><a href="" title="">登入|註冊</a>
                         <ul class="uladjust">
-                            <li><a href="../front-end/membersignup.html" title="">會員註冊</a></li>
-                            <li><a href="../front-end/memberlogin.html" title="">會員登入</a></li>
+                            <li><a href="${webCtx}/front-member/membersignup.html" title="">會員註冊</a></li>
+                            <li><a href="${webCtx}/front-member/memberlogin.html" title="">會員登入</a></li>
                             <li><a href="" title="">商家註冊</a></li>
-                            <li><a href="../front-end/storelogin.html" title="">商家登入</a></li>
+                            <li><a href="${webCtx}/front-member/storelogin.html" title="">商家登入</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -86,23 +88,23 @@ div.innerHTML =
             <ul>
                 <li><a href="">最愛店家</a></li>
                 <li><a href="">預約福袋</a></li>
-                <li><a href="">訂單資訊</a></li>
+                <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp">訂單資訊</a></li>
             </ul>
         </li>
         <li><a href="#" >個人資訊+</a>
             <ul>
-                <li><a href="./memberinfoupdate.html" class="mem-info">個人基本資料</a></li>
-                <li><a href="./memberupatepassword.html" >更改密碼</a></li>
-                <li><a href="" >錢包專區</a></li>
+                <li><a href="${webCtx}/front-member/memberinfoupdate.html" class="mem-info">個人基本資料</a></li>
+                <li><a href="${webCtx}/front-member/memberupatepassword.html" >更改密碼</a></li>
+                <li><a href="${webCtx}/front-refill/refill.html" >錢包專區</a></li>
                 <li><a href="" >個人訊息</a></li>
             </ul>
         </li>
         <li id="log-il-response"><a href="">登入|註冊</a>
             <ul>
-                <li><a href="../front-end/membersignup.html">會員註冊</a></li>
-                <li><a href="../front-end/memberlogin.html">會員登入</a></li>
+                <li><a href="${webCtx}/front-member/membersignup.html">會員註冊</a></li>
+                <li><a href="${webCtx}/front-member/memberlogin.html">會員登入</a></li>
                 <li><a href="" title="">商家註冊</a></li>
-                <li><a href="../front-end/storelogin.html" title="">商家登入</a></li>
+                <li><a href="${webCtx}/front-member/storelogin.html" title="">商家登入</a></li>
             </ul>
         </li>
     </ul>`
@@ -181,7 +183,7 @@ async function logout() {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
                 window.location.reload();
-                window.location.href = "../front-end/index.html";
+                window.location.href = webCtx+"/front-index/index.html";
             }
         })
 

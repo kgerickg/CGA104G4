@@ -1,5 +1,7 @@
 package com.member.model;
 
+import com.refill.model.RefillVO;
+import org.hibernate.Hibernate;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
@@ -176,8 +178,6 @@ public class MemberDAO implements MemberDAO_interface {
 
     @Override
     public void delete(Integer memId) {
-
-
     }
 
 }
