@@ -196,10 +196,9 @@
 		<th>商家編號</th>
 		<th>商家名稱</th>
 		<th>訂單金額</th>
-		<th>訂單狀態</th>
 		<th>訂單成立時間</th>
-		<th>修改</th>
-		<th>刪除</th>
+		<th>訂單狀態</th>
+		<th>修改訂單狀態</th>
 		<th>查詢訂單明細</th>
 	</tr>
 	
@@ -211,26 +210,29 @@
 			<td>${ordersVO.storeId}</td>
 			<td>${ordersVO.storeVO.storeName}</td>
 			<td>${ordersVO.ordAmt}</td>
+			<td>${ordersVO.ordTime}</td>
 			<td>
 				<c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>
 				<c:if test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if>
-				<c:if test="${ordersVO.ordStat==2}">訂單已備妥，請前往領取</c:if>
+				<c:if test="${ordersVO.ordStat==2}">訂單已備妥，待領取</c:if>
 				<c:if test="${ordersVO.ordStat==3}">訂單已完成</c:if>
 				<c:if test="${ordersVO.ordStat==4}">訂單已取消</c:if>
 				<c:if test="${ordersVO.ordStat==5}">客訴處理中</c:if>
 			</td>
-			<td>${ordersVO.ordTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
+			  <select name=ordStat style=width:100>
+			  	<option value="0">正在等待商家接單</option>
+			  	<option value="1">商家已接單，訂單準備中</option>
+			  	<option value="2">訂單已備妥，待領取</option>
+			  	<option value="3">訂單已完成</option>
+			  	<option value="4">訂單已取消</option>
+			  	<option value="5">客訴處理中</option>
+			  </select>
 			    <input type="submit" value="修改"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="getOne_For_Update_Orders"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="刪除">
-			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="delete_Orders"></FORM>
+			    <input type="hidden" name="action" value="updateOrdStat_C">
+			  </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
