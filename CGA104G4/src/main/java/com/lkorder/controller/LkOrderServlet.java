@@ -15,7 +15,7 @@ import com.lkorder.model.LkOrderSelectVO;
 import com.lkorder.model.LkOrderService;
 import com.lkorder.model.LkOrderVO;
 
-@WebServlet(name = "LkOrderServlet", urlPatterns = {"/LkOrderServlet", "/back-lkorder/lkorderback.do"} )
+@WebServlet(name = "LkOrderServlet", urlPatterns = {"/LkOrderServlet", "/store-lkorder/lkorderstore.do"} )
 public class LkOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -71,7 +71,7 @@ public class LkOrderServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-lkorder/BackIndexLkorder.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-lkorder/StoreIndexLkorder.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -79,7 +79,7 @@ public class LkOrderServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("lkOrderSelectVO", lkOrderSelectVO); // 資料庫取出的empVO物件,存入req
-			String url = "/back-lkorder/BackListOneLkorder.jsp";
+			String url = "/front-lkorder/StoreListOneLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -100,7 +100,7 @@ public class LkOrderServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("lkorderVO", lkorderVO); // 資料庫取出的empVO物件,存入req
-			String url = "/back-lkorder/BackUpdateLkOrderInput.jsp";
+			String url = "/front-lkorder/StoreUpdateLkOrderInput.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -198,7 +198,7 @@ public class LkOrderServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("lkorderVO", lkorderVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-lkorder/BackUpdateLkOrderInput.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-lkorder/StoreUpdateLkOrderInput.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -215,7 +215,7 @@ public class LkOrderServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("lkOrderSelectVO", lkOrderSelectVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/back-lkorder/BackListOneLkorder.jsp";
+			String url = "/front-lkorder/StoreListOneLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -308,7 +308,7 @@ public class LkOrderServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("lkorderVO", lkorderVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-lkorder/BackAddLkorder.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-lkorder/StoreAddLkorder.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -318,7 +318,7 @@ public class LkOrderServlet extends HttpServlet {
 			lkorderSvc.insert(lkId, memId, lkTodayId, lkOrdAmt, lkOrdStat, lkOrdTimeS, lkOrdTaketime, lkOrdTimeE);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-lkorder/BackListAllLkorder.jsp";
+			String url = "/front-lkorder/StoreListAllLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -338,7 +338,7 @@ public class LkOrderServlet extends HttpServlet {
 			lkorderSvc.delete(lkOrderId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-lkorder/BackListAllLkorder.jsp";
+			String url = "/front-lkorder/StoreListAllLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}

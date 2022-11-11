@@ -80,7 +80,7 @@ thead th{
 
 </head>
 <body>
-  <script src="../resources/js/membernav.js"></script>
+  <script src=${pageContext.request.contextPath}/resources/js/membernav.js></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
     <!--下面可自由新增內容 -->
 

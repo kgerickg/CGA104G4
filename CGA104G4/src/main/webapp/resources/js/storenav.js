@@ -1,8 +1,9 @@
 let body = document.querySelector("body");
 let divwrapper = document.createElement("div");
 divwrapper.setAttribute("class", "wrapper");
-
 let header = document.createElement("header");
+let path = window.location.pathname;
+let webCtx = path.substring(0, path.indexOf('/', 1));
 header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center">
@@ -20,7 +21,7 @@ header.innerHTML =
                     <li><a href="" >一般商品管理+</a>
                         <ul>
                             <li><a href="" >商品變更</a></li>
-                            <li><a href="${webCtx}/front-orders/storeListAllOrders.jsp" >訂單管理</a></li>
+                            <li><a href="" >訂單管理</a></li>
                         </ul>
                     </li>
                     <li><a href="" >福袋商品管理+</a>

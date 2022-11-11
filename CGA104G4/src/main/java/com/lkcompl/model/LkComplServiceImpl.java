@@ -2,39 +2,42 @@ package com.lkcompl.model;
 
 import java.util.List;
 
+import com.member.model.MemberVO;
+import com.utils.MailService;
+import com.utils.RandomPassword;
+
 public class LkComplServiceImpl implements LkComplService {
 	
 	private LkComplDao dao;
 	
 	public LkComplServiceImpl() {
-		dao = new LkComplDaoImpl();
+		this.dao = new LkComplDaoImpl();
 	}
 
 	@Override
-	public boolean insert(LkComplVO lkComplVO) {
-		// TODO Auto-generated method stub
-		return false;
+	public void insert(LkComplVO lkComplVO) {
+		dao.insert(lkComplVO);
 	}
 
 	@Override
-	public boolean update(LkComplVO lkComplVO) {
-		// TODO Auto-generated method stub
-		return false;
+	public void update(LkComplVO lkComplVO) {
+		dao.update(lkComplVO);
 	}
 
 	@Override
 	public LkComplVO selectByLkCcId(Integer lkCcId) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectByLkCcId(lkCcId);
 	}
-
 
 	@Override
 	public List<LkComplVO> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectAll();
 	}
 
+	
+
+	
+	
 	
 
 }

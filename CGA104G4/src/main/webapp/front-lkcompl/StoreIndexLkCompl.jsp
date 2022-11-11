@@ -17,16 +17,19 @@
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/all.min.css">
+	href=${pageContext.request.contextPath}/resources/css/all.min.css>
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/animate.min.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+	href=${pageContext.request.contextPath}/resources/css/animate.min.css>
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/slick-theme.css">
+	href=${pageContext.request.contextPath}/resources/css/slick.css>
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/flaticon.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+	href=${pageContext.request.contextPath}/resources/css/slick-theme.css>
+<link rel="stylesheet" type="text/css"
+	href=${pageContext.request.contextPath}/resources/css/flaticon.css>
+<link rel="stylesheet" type="text/css"
+	href=${pageContext.request.contextPath}/resources/css/style.css>
+<link rel="stylesheet" type="text/css"
+	href=${pageContext.request.contextPath}/resources/css/nav.css>
 <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
@@ -64,8 +67,12 @@
 </head>
 <body>
 
-	<script src="../resources/js/membernav.js"></script>
+	<script src=${pageContext.request.contextPath}/resources/js/storenav.js></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
+	
+	
+	
+	
 	<!--下面可自由新增內容 -->
 	<div class="table">
 
@@ -111,9 +118,10 @@
 
 
 	<!-- 下面是這個版需要的js可添加各自需要的js檔-->
-	<script src="../resources/js/bootstrap.min.js"></script>
-	<script src="../resources/js/slick.js"></script>
-	<script src="../resources/js/scripts.js"></script>
-	<script src="../resources/js/isotope.js"></script>
+	<script
+		src=${pageContext.request.contextPath}/resources/js/bootstrap.min.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/slick.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/scripts.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
 </body>
 </html>

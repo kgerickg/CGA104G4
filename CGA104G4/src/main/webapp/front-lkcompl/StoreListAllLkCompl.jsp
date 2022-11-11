@@ -1,14 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.lkcompl.model.*"%>
+<%@ page import="com.lkcompl.model.*, java.util.*"%>
 
 
 
+<!DOCTYPE html>
 <html>
 <head>
-<!-- 頁籤顯示的title -->
-<title>查詢客訴訂單</title>
 <meta charset="UTF-8">
+<!-- 頁籤顯示的title -->
+<title>查詢所有客訴訂單</title>
+
 <!-- 響應式頁面 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,37 +23,35 @@
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/all.min.css">
+	href=${pageContext.request.contextPath}/resources/css/all.min.css>
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/animate.min.css">
+	href=${pageContext.request.contextPath}/resources/css/animate.min.css>
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/slick.css">
+	href=${pageContext.request.contextPath}/resources/css/slick.css>
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/slick-theme.css">
+	href=${pageContext.request.contextPath}/resources/css/slick-theme.css>
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/flaticon.css">
+	href=${pageContext.request.contextPath}/resources/css/flaticon.css>
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/style.css">
+	href=${pageContext.request.contextPath}/resources/css/style.css>
 <link rel="stylesheet" type="text/css"
-	href="CGA104G4/resources/css/nav.css">
+	href=${pageContext.request.contextPath}/resources/css/nav.css>
 <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
 
 
-
-
-
 <style>
 table {
 	border-collapse: collapse;
-	margin: 25px auto;
 	font-size: 0.9em;
 	font-family: sans-serif;
 	min-width: 400px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	text-align: center;
+	border-radius: 1%;
+	margin: 1vw auto;
 }
 
 table  tr:nth-of-type(even) {
@@ -68,6 +68,20 @@ table th, td {
 	width: 60vw;
 	text-align: center;
 	background-color: #F0F0F0;
+}
+
+.btn-secondary {
+	color: #fff;
+	background-color: #6c757d;
+	border: 1px solid #6c757d;
+	border-radius: 10%;
+}
+
+.btn-secondary:hover {
+	color: #fff;
+	background-color: #5c636a;
+	border: 1px solid #6c757d;
+	border-radius: 10%;
 }
 
 a {
@@ -87,19 +101,23 @@ thead th {
 </style>
 
 </head>
+
 <body>
-	<script src="../resources/js/membernav.js"></script>
+
+	<script src=${pageContext.request.contextPath}/resources/js/storenav.js></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
+	<div style="padding: 3vw;"></div>
+	
 
 
 	<table id="upper-table">
 		<tr>
 			<td>
-				<h3 style="font-size: 40px; font-weight: 700;">客訴訂單資料</h3>
+				<h1>查詢所有客訴訂單</h1>
 				<h4>
-					<a style="color: #6c757d"
-						href=${pageContext.request.contextPath}/front-lkcompl/FrontIndexLkCompl.jsp>回首頁</a>
+					<a
+						href=${pageContext.request.contextPath}/front-lkorder/FrontIndexLkorder.jsp>回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -113,6 +131,7 @@ thead th {
 				<th>處理狀態</th>
 				<th>客訴內容</th>
 				<th>退款狀態</th>
+				<th>修改</th>
 			</tr>
 		</thead>
 		<c:forEach var="" items="">
@@ -144,7 +163,6 @@ thead th {
 					<td>已完成</td>
 				</c:if>
 
-
 				<td>
 					<FORM METHOD="post"
 						ACTION=${pageContext.request.contextPath}/back-lkcompl/lkcompl.do
@@ -154,15 +172,17 @@ thead th {
 						 <input type="hidden" name="lkOrderId" value="${LkOrderSelectVO.lkOrderId}">
 					</FORM>
 				</td>
-				
+
 			</tr>
 		</c:forEach>
 	</table>
 
+
 	<!-- 下面是這個版需要的js可添加各自需要的js檔-->
-	<script src="CGA104G4/resources/js/bootstrap.min.js"></script>
-	<script src="CGA104G4/resources/js/slick.js"></script>
-	<script src="CGA104G4/resources/js/scripts.js"></script>
-	<script src="CGA104G4/resources/js/isotope.js"></script>
+	<script
+		src=${pageContext.request.contextPath}/resources/js/bootstrap.min.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/slick.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/scripts.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
 </body>
 </html>
