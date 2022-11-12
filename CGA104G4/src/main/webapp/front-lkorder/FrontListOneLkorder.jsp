@@ -45,8 +45,8 @@ table {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, .6);
     text-align: center;
-    border-radius: 1%;
     }
+    
 table  tr:nth-of-type(even) {
     background-color: #f3f3f3;
     color: black;
@@ -88,9 +88,9 @@ thead th{
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>每日福袋訂單資料</h3>
+				<h3 style="font-size: 40px; font-weight: 700;">福袋訂單資料</h3>
 				<h4>
-					<a href=${pageContext.request.contextPath}/front-lkorder/FrontIndexLkorder.jsp>回首頁</a>
+					<a style="color:#6c757d" href=${pageContext.request.contextPath}/front-lkorder/FrontIndexLkorder.jsp>回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -116,7 +116,20 @@ thead th{
 						<td>${lkorderVO.lkName}</td>
 						<td>${lkorderVO.lkTodayId}</td>
 						<td>${lkorderVO.lkOrdAmt}</td>
-						<td>${lkorderVO.lkOrdStat}</td>
+						
+						<c:if test="${lkorderVO.lkOrdStat == '0'}">
+									<td>待取貨</td>
+							</c:if> 
+							<c:if test="${lkorderVO.lkOrdStat == '1'}">
+									<td>已取貨</td>
+							</c:if> 
+							<c:if test="${lkorderVO.lkOrdStat == '2'}">
+									<td>完成</td>
+							</c:if> 
+							<c:if test="${lkorderVO.lkOrdStat == '3'}">
+									<td>客訴處理中</td>
+							</c:if> 
+
 						<td>${lkorderVO.lkOrdTimeS}</td>
 						<td>${lkorderVO.lkOrdTaketime}</td>
 						<td>${lkorderVO.lkOrdTimeE}</td>

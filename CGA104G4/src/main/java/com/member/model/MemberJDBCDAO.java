@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.refill.model.RefillVO;
 import com.utils.JDBCUtils;
 
 public class MemberJDBCDAO implements MemberDAO_interface {

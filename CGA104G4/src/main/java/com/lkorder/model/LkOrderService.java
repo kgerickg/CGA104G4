@@ -40,20 +40,20 @@ public class LkOrderService {
 	public LkOrderVO update(Integer lkOrderId, Integer lkId, Integer memId, Integer lkTodayId, Integer lkOrdAmt,
 			Integer lkOrdStat, java.sql.Date lkOrdTimeS, Date lkOrdTaketime, Date lkOrdTimeE) {
 
-		LkOrderVO lkorderVO = new LkOrderVO();
+		LkOrderVO lkOrderSelectVO = new LkOrderSelectVO();
 
-		lkorderVO.setLkOrderId(lkOrderId);
-		lkorderVO.setLkId(lkId);
-		lkorderVO.setMemId(memId);
-		lkorderVO.setLkTodayId(lkTodayId);
-		lkorderVO.setLkOrdAmt(lkOrdAmt);
-		lkorderVO.setLkOrdStat(lkOrdStat);
-		lkorderVO.setLkOrdTimeS(lkOrdTimeS);
-		lkorderVO.setLkOrdTaketime(lkOrdTaketime);
-		lkorderVO.setLkOrdTimeE(lkOrdTimeE);
-		dao.update(lkorderVO);
+		lkOrderSelectVO.setLkOrderId(lkOrderId);
+		lkOrderSelectVO.setLkId(lkId);
+		lkOrderSelectVO.setMemId(memId);
+		lkOrderSelectVO.setLkTodayId(lkTodayId);
+		lkOrderSelectVO.setLkOrdAmt(lkOrdAmt);
+		lkOrderSelectVO.setLkOrdStat(lkOrdStat);
+		lkOrderSelectVO.setLkOrdTimeS(lkOrdTimeS);
+		lkOrderSelectVO.setLkOrdTaketime(lkOrdTaketime);
+		lkOrderSelectVO.setLkOrdTimeE(lkOrdTimeE);
+		dao.update(lkOrderSelectVO);
 
-		return lkorderVO;
+		return lkOrderSelectVO;
 	}
 	
 	public void delete(Integer lkordId) {

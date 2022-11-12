@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>後台</title>
     <!-- Bootstrap Styles-->
-    <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet" />
+    <link href="../resources/back-stage/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet" />
+    <link href="../resources/back-stage/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet" />
+    <link href="../resources/back-stage/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href=/resources/back-stage/assets/js/Lightweight-Chart/cssCharts.css>
+    <link rel="stylesheet" href="../resources/back-stage/assets/js/Lightweight-Chart/cssCharts.css">
 </head>
 
 
@@ -38,7 +38,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+                        <li><a href="../back-index/storelogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
                         </li>
                         <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
@@ -65,7 +65,7 @@
                                 <a href="#">一般商品管理</a>
                             </li>
                             <li>
-                                <a href="#">一般訂單管理</a>
+                                <a href="../back-orders/listAllOrders.jsp">一般訂單管理</a>
                             </li>
                         </ul>
                     </li>
@@ -140,8 +140,28 @@
         <div id="page-wrapper">
 
             <div id="wrapper-container">
-                <img src="https://i0.wp.com/60smcln.com/wp-content/uploads/2021/05/20180330221854-dd56f22e.jpg"
-                    style="width: 70%;margin: auto;display: block;">
+
+                <!--pager-section end-->
+                <section>
+                    <div class="store-tittle">
+                        <h1>管理員登入</h1>
+                    </div>
+                    <div class=" store-form-container">
+                        <div>
+                            <div class="form-group">
+                                <input type="email" name="" placeholder="帳號(信箱)*" class="form-control">
+                            </div>
+                            <!--form-group end-->
+                            <div class="form-group">
+                                <input type="password" name="" placeholder="密碼*" class="form-control">
+                            </div>
+                            <!--form-group end-->
+                            <div>
+                                <button type="submit" class="formbutton" style="outline: none;">商家登入</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
         </div>
@@ -152,13 +172,13 @@
     </div>
 
     <!-- jQuery Js -->
-    <script src=../resources/back-stage/assets/js/jquery-1.10.2.js></script>
+    <script src="../resources/back-stage/assets/js/jquery-1.10.2.js"></script>
     <!-- Bootstrap Js -->
-    <script src=../resources/back-stage/assets/js/bootstrap.min.js></script>
+    <script src="../resources/back-stage/assets/js/bootstrap.min.js"></script>
     <!-- 左側Nav Dropdown -->
-    <script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
+    <script src="../resources/back-stage/assets/js/jquery.metisMenu.js"></script>
     <!-- Custom Js -->
-    <script src=../resources/back-stage/assets/js/custom-scripts.js></script>
+    <script src="../resources/back-stage/assets/js/custom-scripts.js"></script>
 
 </body>
 

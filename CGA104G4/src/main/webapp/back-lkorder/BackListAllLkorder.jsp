@@ -51,7 +51,7 @@ table {
 	min-width: 400px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	text-align: center;
-	border-radius: 1%;
+	border-radius: 10px;
 }
 
 table  tr:nth-of-type(even) {
@@ -68,6 +68,7 @@ table th, td {
 	width: 60vw;
 	text-align: center;
 	background-color: #F0F0F0;
+	border-radius: 10px;
 }
 
 .btn-secondary {
@@ -181,17 +182,16 @@ thead th {
 		<!-- 左側Nav ↑↑↑  -->
 
 		<div id="page-wrapper">
-			<div id="wrapper"
-				style="min-height: 90vh; padding-top: 15px; padding-bottom: 30px">
+			<div id="wrapper-container">
 				<!-- ******內容寫在這邊 ↓↓↓****** -->
 
 
 				<table id="table-1">
 					<tr>
 						<td>
-							<h1>查詢所有訂單</h1>
+							<h1 style="font-weight: 700">查詢所有訂單</h1>
 							<h4>
-								<a
+								<a style="text-decoration: none; color: #5c636a"
 									href=${pageContext.request.contextPath}/back-lkorder/BackIndexLkorder.jsp>回首頁</a>
 							</h4>
 						</td>
@@ -202,7 +202,9 @@ thead th {
 					<thead>
 						<tr>
 							<th>福袋訂單編號</th>
+							<th>福袋編號</th>
 							<th>福袋名稱</th>
+							<th>會員編號</th>
 							<th>會員名稱</th>
 							<th>每日福袋編號</th>
 							<th>結帳金額</th>
@@ -219,7 +221,9 @@ thead th {
 
 						<tr>
 							<td>${LkOrderSelectVO.lkOrderId}</td>
+							<td>${LkOrderSelectVO.lkId}</td>
 							<td>${LkOrderSelectVO.lkName}</td>
+							<td>${LkOrderSelectVO.memId}</td>
 							<td>${LkOrderSelectVO.memName}</td>
 							<td>${LkOrderSelectVO.lkTodayId}</td>
 							<td>${LkOrderSelectVO.lkOrdAmt}</td>

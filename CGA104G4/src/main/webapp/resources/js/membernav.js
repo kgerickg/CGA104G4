@@ -9,7 +9,7 @@ header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center">
             <div class="logo">
-                <a href="index.html" title="">
+                <a href="${webCtx}/front-index/index.html" title="">
                     <img class="logoimg" src="${webCtx}/resources/images/1.png" alt="">
                 </a>
             </div>
@@ -23,14 +23,14 @@ header.innerHTML =
                         <ul>
                             <li><a href="" >最愛店家</a></li>
                             <li><a href="" >預約福袋</a></li>
-                            <li><a href="" >訂單資訊</a></li>
+                            <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp" >訂單資訊</a></li>
                         </ul>
                     </li>
                     <li><a href="" >個人資訊+</a>
                         <ul>
                             <li><a href="${webCtx}/front-member/memberinfoupdate.html" class="">個人基本資料</a></li>
                             <li><a href="${webCtx}/front-member/memberupatepassword.html" >更改密碼</a></li>
-                            <li><a href="" >錢包專區</a></li>
+                            <li><a href="${webCtx}/front-refill/refill.html">錢包專區</a></li>
                             <li><a href="" >個人訊息</a></li>
                         </ul>
                     </li>
@@ -88,14 +88,14 @@ div.innerHTML =
             <ul>
                 <li><a href="">最愛店家</a></li>
                 <li><a href="">預約福袋</a></li>
-                <li><a href="">訂單資訊</a></li>
+                <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp">訂單資訊</a></li>
             </ul>
         </li>
         <li><a href="#" >個人資訊+</a>
             <ul>
                 <li><a href="${webCtx}/front-member/memberinfoupdate.html" class="mem-info">個人基本資料</a></li>
                 <li><a href="${webCtx}/front-member/memberupatepassword.html" >更改密碼</a></li>
-                <li><a href="" >錢包專區</a></li>
+                <li><a href="${webCtx}/front-refill/refill.html" >錢包專區</a></li>
                 <li><a href="" >個人訊息</a></li>
             </ul>
         </li>
@@ -183,7 +183,7 @@ async function logout() {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
                 window.location.reload();
-                window.location.href = webCtx+"/front-member/index.html";
+                window.location.href = webCtx+"/front-index/index.html";
             }
         })
 

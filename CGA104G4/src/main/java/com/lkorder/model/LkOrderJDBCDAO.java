@@ -35,16 +35,17 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 	}
 	@Override
 	public void update(LkOrderVO lkOrderVO) {
-		String sql = "update LK_ORDER set LK_ORD_AMT = ?, LK_ORD_STAT = ?, LK_ORD_TAKETIME = ?, LK_ORD_TIME_E = ? where LK_ORD_ID = ?";
+		String sql = "update LK_ORDER set LK_ID = ?, LK_ORD_AMT = ?, LK_ORD_STAT = ?, LK_ORD_TAKETIME = ?, LK_ORD_TIME_E = ? where LK_ORD_ID = ?";
 		try (
 			Connection conn = DriverManager.getConnection(url, userid, passwd);
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 		) {
-			pstmt.setInt(1, lkOrderVO.getLkOrdAmt());
-			pstmt.setInt(2, lkOrderVO.getLkOrdStat());
-			pstmt.setDate(3, lkOrderVO.getLkOrdTaketime());
-			pstmt.setDate(4, lkOrderVO.getLkOrdTimeE());
-			pstmt.setInt(5, lkOrderVO.getLkOrderId());	// 修改要抓取PK當條件
+			pstmt.setInt(1, lkOrderVO.getLkId());
+			pstmt.setInt(2, lkOrderVO.getLkOrdAmt());
+			pstmt.setInt(3, lkOrderVO.getLkOrdStat());
+			pstmt.setDate(4, lkOrderVO.getLkOrdTaketime());
+			pstmt.setDate(5, lkOrderVO.getLkOrdTimeE());
+			pstmt.setInt(6, lkOrderVO.getLkOrderId());	// 修改要抓取PK當條件
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,9 +67,9 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 		
 	}
 	
-	@Override
+	@Override				// 以編號查詢，查詢單筆
 	public LkOrderSelectVO findByPrimaryKey(Integer lkordId) {
-		String sql = "select LK_ORD_ID, LK_NAME, MEM_NAME, LK_TODAY_ID , LK_ORD_AMT, LK_ORD_STAT, LK_ORD_TIME_S, LK_ORD_TAKETIME, LK_ORD_TIME_E "
+		String sql = "select LK_ORD_ID, LKO.LK_ID, LK_NAME, MEM.MEM_ID, MEM_NAME, LK_TODAY_ID , LK_ORD_AMT, LK_ORD_STAT, LK_ORD_TIME_S, LK_ORD_TAKETIME, LK_ORD_TIME_E "
 				+"from LUCKY LK "
 					+"join LK_ORDER LKO "
 						+"on LKO.LK_ID = LK.LK_ID "
@@ -84,14 +85,16 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 				if (rs.next()) {
 					LkOrderSelectVO vo = new LkOrderSelectVO();			
 					vo.setLkOrderId(rs.getInt(1));	// 後面的數字對應到SQL的欄位 (可以下SQL的欄位名，也可以下數字)
-					vo.setLkName(rs.getString(2));
-					vo.setMemName(rs.getString(3));
-					vo.setLkTodayId(rs.getInt(4));
-					vo.setLkOrdAmt(rs.getInt(5));
-					vo.setLkOrdStat(rs.getInt(6));
-					vo.setLkOrdTimeS(rs.getDate(7));
-					vo.setLkOrdTaketime(rs.getDate(8));
-					vo.setLkOrdTimeE(rs.getDate(9));
+					vo.setLkId(rs.getInt(2));
+					vo.setLkName(rs.getString(3));
+					vo.setMemId(rs.getInt(4));
+					vo.setMemName(rs.getString(5));
+					vo.setLkTodayId(rs.getInt(6));
+					vo.setLkOrdAmt(rs.getInt(7));
+					vo.setLkOrdStat(rs.getInt(8));
+					vo.setLkOrdTimeS(rs.getDate(9));
+					vo.setLkOrdTaketime(rs.getDate(10));
+					vo.setLkOrdTimeE(rs.getDate(11));
 					return vo;
 				}
 			}
@@ -143,7 +146,7 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 	}
 	
 	public List<LkOrderSelectVO> findAll(){
-		String sql = "select LK_ORD_ID, LK_NAME, MEM_NAME, LK_TODAY_ID , LK_ORD_AMT, LK_ORD_STAT, LK_ORD_TIME_S, LK_ORD_TAKETIME, LK_ORD_TIME_E "
+		String sql = "select LK_ORD_ID, LKO.LK_ID, LK_NAME, MEM.MEM_ID, MEM_NAME, LK_TODAY_ID , LK_ORD_AMT, LK_ORD_STAT, LK_ORD_TIME_S, LK_ORD_TAKETIME, LK_ORD_TIME_E "
 				+"from LUCKY LK "
 				+"join LK_ORDER LKO "
 					+"on LKO.LK_ID = LK.LK_ID "
@@ -158,14 +161,16 @@ public class LkOrderJDBCDAO implements LkOrderinterface {
 			while (rs.next()) {								
 				LkOrderSelectVO vo = new LkOrderSelectVO();			
 				vo.setLkOrderId(rs.getInt(1));	// 後面的數字對應到SQL的欄位 (可以下SQL的欄位名，也可以下數字)
-				vo.setLkName(rs.getString(2));
-				vo.setMemName(rs.getString(3));
-				vo.setLkTodayId(rs.getInt(4));
-				vo.setLkOrdAmt(rs.getInt(5));
-				vo.setLkOrdStat(rs.getInt(6));
-				vo.setLkOrdTimeS(rs.getDate(7));
-				vo.setLkOrdTaketime(rs.getDate(8));
-				vo.setLkOrdTimeE(rs.getDate(9));
+				vo.setLkId(rs.getInt(2));
+				vo.setLkName(rs.getString(3));
+				vo.setMemId(rs.getInt(4));
+				vo.setMemName(rs.getString(5));
+				vo.setLkTodayId(rs.getInt(6));
+				vo.setLkOrdAmt(rs.getInt(7));
+				vo.setLkOrdStat(rs.getInt(8));
+				vo.setLkOrdTimeS(rs.getDate(9));
+				vo.setLkOrdTaketime(rs.getDate(10));
+				vo.setLkOrdTimeE(rs.getDate(11));
 				list.add(vo);
 			}
 			return list;
