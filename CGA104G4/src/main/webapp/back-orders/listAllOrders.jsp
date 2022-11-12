@@ -6,7 +6,7 @@
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 
 <html>
-<head><title>所有訂單</title>
+<head><title>訂單管理</title>
 
 <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,38 +25,36 @@
     <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
 
 <style>
-  table#table-1 {
-  	margin-left:auto; 
-	margin-right:auto;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
   table {
-	width: 1100px;
-	background-color: white;
+	width: 1000px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left:auto; 
 	margin-right:auto;
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
   th, td {
     padding: 5px;
     text-align: center;
   }
+  tr:nth-child(odd){
+  background:#D7FFEE;
+}
+
+tr:nth-child(even){
+  background:white;
+}
+tr:nth-child(1){
+  background:none;
+}
+td:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+td:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 </style>
 
 </head>
@@ -181,13 +179,6 @@
        <div id="page-wrapper">
 			<div id="wrapper-container">
 			<!-- ******內容寫在這邊 ↓↓↓****** -->
-
-<table id="table-1">
-	<tr><td>
-		 <h3>所有訂單</h3>
-	</td></tr>
-</table>
-
 <table>
 	<tr>
 		<th>訂單編號</th>
