@@ -1,25 +1,26 @@
 package com.refill.model;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
+
+@Repository
 public class RefillDAO implements RefillDAO_interface{
 
-    public List<RefillVO> findByFK(Integer memId){
-        List<RefillVO> list;
-        try {
-            beginTransaction();
-            Query<RefillVO> query = getSession().createQuery("FROM RefillVO WHERE memId = :memId ", RefillVO.class);
-            list = query.setParameter("memId",memId).list();
-            commit();
-            return list;
-        } catch (Exception e) {
-            rollback();
-            e.printStackTrace();
-            return null;
-        }
+    @PersistenceContext
+    private Session session;
+
+    public List<RefillVO> findByFK(Integer memId) {
+
+        Query<RefillVO> query = session.createQuery("FROM RefillVO WHERE memId = :memId ", RefillVO.class);
+        return query.setParameter("memId", memId).list();
+
     }
+
 
     @Override
     public void insert(RefillVO VO) {
