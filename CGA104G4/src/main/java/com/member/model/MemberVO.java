@@ -47,7 +47,7 @@ public class MemberVO implements Serializable {
 
 	@OneToMany
 	@JoinColumn(name="MEM_ID",referencedColumnName = "MEM_ID")
-	private List<RefillVO> refillVO;
+	private List<RefillVO> refillVOs;
 
 
 }

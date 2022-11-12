@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="REFILL")
 public class RefillVO implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,7 @@ public class RefillVO implements Serializable {
 	private Integer refillId;
 	@Column(name = "MEM_ID")
 	private Integer memId;
-	@Column(name= "REFILL_TIME")
+	@Column(name= "REFILL_TIME",insertable = false)
 	private Timestamp refillTime;
 	@Column(name="REFILL_AMT")
 	private Integer refillAmt;

@@ -49,6 +49,7 @@
         .insideflex {
             display: flex;
             justify-content: center;
+            margin-bottom: 2rem;
 
         }
         .insideflex2 {
@@ -75,6 +76,13 @@
         .insideflexbutton:hover{
             background-color: rgb(38 38 38);
         }
+        .leftbutton{
+            border-radius: 0 0 0 10px;
+        }
+        .rightbutton{
+            border-radius: 0 0 10px 0;
+        }
+
 
     </style>
     <!-- 請將覆蓋用的css放置此註解下方 -->
@@ -97,7 +105,7 @@
         <div class="inside">
             <div><img src="../resources/images/refill1.jpg" style="width: 100%; border-radius: 10px 10px 0 0"></div>
             <h2 style="margin-bottom: 2rem;font-weight: 400; margin-left: 1rem">親愛的會員</h2>
-            <div class="insideflex" style="margin-bottom: 2rem;">
+            <div class="insideflex">
                     <p>
                         您的帳號尚有:
                     </p>
@@ -109,13 +117,13 @@
                     </p>
             </div>
             <div class="insideflex2">
-                <button class="insideflexbutton" style="border-radius: 0 0 0 10px">進行儲值</button>
-                <button class="insideflexbutton" style="border-radius: 0 0 10px 0">儲值紀錄查詢</button>
+                <button class="insideflexbutton leftbutton" id="refill">進行儲值</button>
+                <button class="insideflexbutton rightbutton" id="refillRecord">儲值紀錄查詢</button>
             </div>
         </div>
     </div>
 </div>
-<table id="table_id"></table>
+<table id="table_id" class="display" style="width: 80%"></table>
 
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
@@ -133,9 +141,41 @@
         $("#showToken").html(memToken);
     })();
 
-    // $(document).ready( function () {
-    //     $('#table_id').DataTable();
-    // } );
+    $("#refillRecord").click(getRefillRecord)
+
+    async function getRefillRecord(){
+            let path = window.location.pathname;
+            let webCtx = path.substring(0, path.indexOf('/', 1));
+            let url = webCtx + "/refill/refill.do?action=getRefillRecord";
+            let response = await fetch(url,{method: 'get'}).then(res=>res.json());
+            if(!response.state){
+                showTokenRefill(response);
+                return;
+            }
+
+    }
+
+
+    function showTokenRefill(refillRecord){
+            $('#table_id').DataTable({
+                "pageLength":'5',
+                "data": refillRecord,
+                "autoWidth": true,
+                "destroy": true,
+                "searching": false,
+                "lengthChange":false,
+                "columns": [
+                    { data: 'refillTime', title: "儲值時間" },
+                    { data: 'RefillAmt', title: "花費金額" },
+                    { data: 'RefillToken', title: "取得點數" },
+                ],
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/zh_Hant.json"
+                }
+            });
+
+    }
+
 
 </script>
 </body>
