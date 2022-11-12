@@ -2,208 +2,50 @@
 <html>
 
 <head>
-	<title>後台</title>
-    <meta charset="utf-8" />
-    
-    
-    <!-- 響應式頁面 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
-
-    <!-- Bootstrap Styles-->
-    <link href=css/bootstrap.css rel="stylesheet" />
-    <!-- FontAwesome Styles-->
-    <link href=css/font-awesome.css rel="stylesheet" />
-    <!-- Google Fonts-->
-    <link href=css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <!-- Custom Styles-->
-    <link href=css/custom-styles.css rel="stylesheet" />
-
-    <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
-
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../index/css/nav.css" />
+<link rel="stylesheet" href="css/member.css" />
+<title>edit.html</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
 </head>
 
 
 <body>
+	<div>
+		<label for="admAcc">帳號: </label> <input type="text" name="admAcc"
+			id="admAcc" disabled />
+	</div>
+	<div>
+		<label for="admPwd">舊密碼: </label> <input type="password"
+			name="oAdmPwd" id="oAdmPwd" />
+	</div>
+	<div>
+		<label for="admPwd">新密碼: </label> <input type="password"
+			name="nAdmPwd" id="nAdmPwd" />
+	</div>
+	<div>
+		<label for="confirmPassword">確認密碼: </label> <input type="password"
+			name="confirmPassword" id="confirmPassword" />
+	</div>
+	<div>
+		<label for="admName">暱稱: </label> <input type="text" name="admName"
+			id="admName" />
+	</div>
+	<div>
+		<button id="btn1" type="button" class="btn btn-primary" disabled>儲存</button>
+	</div>
+	<div id="msg" class="error"></div>
 
-	<!-- 從這複製↓↓↓ -->
-	
-    <div id="wrapper">
-        <!-- 上方Nav ↓↓↓  -->
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html"><strong>後台管理</strong></a>
-            </div>
-
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-sign-in fa-fw"></i>登入</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-        </nav>
-        <!-- 上方Nav ↑↑↑  -->
-        <!-- 左側Nav ↓↓↓  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-
-                    <li>
-                        <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> 吉食享樂</a>
-                    </li>
-
-                    <li>
-                        <a href="#">一般商品<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">一般商品管理</a>
-                            </li>
-                            <li>
-                                <a href="#">一般訂單管理</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#">福袋商品<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">福袋商品管理</a>
-                            </li>
-                            <li>
-                                <a href="#">福袋訂單管理</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li>
-                        <a href="#">員工帳號管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">員工帳號管理</a>
-                            </li>
-                            <li>
-                                <a href="#">員工權限管理</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">代幣系統管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">客訴處理</a>
-                            </li>
-                            <li>
-                                <a href="#">優惠活動管理</a>
-                            </li>
-                            <li>
-                                <a href="#">代幣儲值</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">會員管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">合作店家資格審核</a>
-                            </li>
-                            <li>
-                                <a href="#">合作店家帳號管理</a>
-                            </li>
-                            <li>
-                                <a href="#">一般會員管理</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#"> 評論檢舉管理 </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </nav>
-        <!-- 左側Nav ↑↑↑  -->
-
-       <div id="page-wrapper">
-			<div id="wrapper-container">
-			<!-- ******內容寫在這邊 ↓↓↓****** -->
-			<div>
-    <div>
-      <label for="admAcc">帳號: </label>
-      <input type="text" name="admAcc" id="admAcc" disabled />
-    </div>
-    <div>
-      <label for="admPwd">舊密碼: </label>
-      <input type="password" name="oAdmPwd" id="oAdmPwd" />
-    </div>
-    <div>
-      <label for="admPwd">新密碼: </label>
-      <input type="password" name="nAdmPwd" id="nAdmPwd" />
-    </div>
-    <div>
-      <label for="confirmPassword">確認密碼: </label>
-      <input type="password" name="confirmPassword" id="confirmPassword" />
-    </div>
-    <div>
-      <label for="admName">暱稱: </label>
-      <input type="text" name="admName" id="admName" />
-    </div>
-    <div>
-      <button id="btn1" type="button" class="btn btn-primary" disabled>儲存</button>
-    </div>
-  </div>
-  <div id="msg" class="error"></div>
-  
-			
-			
-			
-			
-			
-			<!-- ******內容寫在這邊 ↑↑↑****** -->
-			</div>
-        </div>
-        
-    </div>
-    <!-- 複製到這裡↑↑↑ -->
-    
-
-    <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-    crossorigin="anonymous"></script>
-  <script src="../index/js/nav.js"></script>
-  <script src="js/edit.js"></script>
-    <!-- jQuery Js -->
-    <script src=js/jquery-1.10.2.js></script>
-    <!-- Bootstrap Js -->
-    <script src=js/bootstrap.min.js></script>
-    <!-- 左側Nav Dropdown -->
-    <script src=js/jquery.metisMenu.js></script>
-    <!-- Custom Js -->
-    <script src=js/custom-scripts.js></script>
-
-    <!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+	<script src="../index/js/nav.js"></script>
+	<script src="js/edit.js"></script>
 
 </body>
 
