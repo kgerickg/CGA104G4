@@ -29,7 +29,7 @@ h4 {
 </style>
 </head>
 <body bgcolor='white'>
-
+	<a href="http://localhost:8080/CGA104G4/index.html">123</a>
 	<table id="table-1">
 		<tr>
 			<td><h3>首頁</h3></td>

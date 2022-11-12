@@ -32,8 +32,8 @@ public class AdminDaoImpl implements AdminDao {
 	public int update(Admin admin) {
 		final StringBuilder hql = new StringBuilder()
 				.append("UPDATE Admin SET ");
-		final String password = admin.getAdmPwd();
-		if (password != null && !password.isEmpty()) {
+		final String admPwd = admin.getAdmPwd();
+		if (admPwd != null && !admPwd.isEmpty()) {
 			hql.append("ADM_PWD = :ADM_PWD,");
 		}
 		hql.append("ADM_ACC_STAT = :ADM_ACC_STAT,")
@@ -42,10 +42,10 @@ public class AdminDaoImpl implements AdminDao {
 			.append("ADM_NAME = :ADM_NAME,")
 		    .append("where ADM_ACC = :ADM_ACC");
 		Query query = session.createQuery(hql.toString());
-		if (password != null && !password.isEmpty()) {
+		if (admPwd != null && !admPwd.isEmpty()) {
 			query.setParameter("ADM_PWD", admin.getAdmPwd());
 		}
-		return query.setParameter("ADM_ACC_STAT", admin.getAdmAccStat())
+		return query.setParameter("ADM_ACC_STAT", admin.isAdmAccStat())
 				.setParameter("ADM_STAT", admin.getAdmStat())
 				.setParameter("ADM_PIC", admin.getAdmPic())
 				.setParameter("ADM_NAME", admin.getAdmName())
@@ -59,7 +59,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	@Override
 	public List<Admin> selectAll() {
-		final String hql = "from ADMIN order by ADM_ID";
+		final String hql = "from Admin order by ADM_ID";
 		return session
 				.createQuery(hql, Admin.class)
 				.list();
@@ -69,13 +69,13 @@ public class AdminDaoImpl implements AdminDao {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<Admin> criteriaQuery = criteriaBuilder.createQuery(Admin.class);
 		Root<Admin> root = criteriaQuery.from(Admin.class);
-		criteriaQuery.where(criteriaBuilder.equal(root.get("ADM_ACC"), admAcc));
+		criteriaQuery.where(criteriaBuilder.equal(root.get("admAcc"), admAcc));
 		return session.createQuery(criteriaQuery).uniqueResult();
 	}
 	@Override
 	public Admin selectForLogin(String admAcc, String admPwd) {
 		final String sql = "select * from ADMIN "
-				+ "where ADM_ACC = :admAcc and ADM_PWD = :admPwd";
+				+ "where ADM_ACC = :ADM_ACC and ADM_PWD = :ADM_PWD";
 		return session.createNativeQuery(sql, Admin.class)
 				.setParameter("ADM_ACC", admAcc)
 				.setParameter("ADM_PWD", admPwd)

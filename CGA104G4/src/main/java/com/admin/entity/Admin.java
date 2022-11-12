@@ -26,7 +26,7 @@ public class Admin extends Core {
 	@Column(name = "ADM_ID")
 	private Integer admId;
 	@Column(name = "ADM_ACC_STAT")
-	private Integer admAccStat;
+	private boolean admAccStat;
 	@Column(name = "ADM_ACC")
 	private String admAcc;
 	@Column(name = "ADM_PWD")

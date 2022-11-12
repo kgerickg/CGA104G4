@@ -1,14 +1,14 @@
 (() => {
-  const username = document.querySelector('#username');
-  const password = document.querySelector('#password');
+  const admAcc = document.querySelector('#admAcc');
+  const admPwd = document.querySelector('#admPwd');
   const errMsg = document.querySelector('#errMsg');
   document.getElementById('btn1').addEventListener('click', () => {
     fetch('login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: username.value,
-        password: password.value
+        admAcc: admAcc.value,
+        admPwd: admPwd.value
       }),
     })
       .then(resp => resp.json())
@@ -16,10 +16,9 @@
         errMsg.textContent = '';
         const { successful, message } = body;
         if (successful) {
-          const { id, nickname, roleId } = body;
-          sessionStorage.setItem('id', id);
-          sessionStorage.setItem('nickname', nickname);
-          sessionStorage.setItem('roleId', roleId);
+          const { admId, admName } = body;
+          sessionStorage.setItem('admId', admId);
+          sessionStorage.setItem('admName', admName);
           location = '../index.html';
         } else {
           errMsg.textContent = message;

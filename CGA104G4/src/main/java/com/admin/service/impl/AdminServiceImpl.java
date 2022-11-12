@@ -51,10 +51,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Admin login(Admin admin) {
-		final String adminAcc = admin.getAdmAcc();
+		final String admAcc = admin.getAdmAcc();
 		final String admPwd = admin.getAdmPwd();
 
-		if (adminAcc == null) {
+		if (admAcc == null) {
 			admin.setMessage("帳號未輸入");
 			admin.setSuccessful(false);
 			return admin;
@@ -66,7 +66,7 @@ public class AdminServiceImpl implements AdminService {
 			return admin;
 		}
 
-		admin = dao.selectForLogin(adminAcc, admPwd);
+		admin = dao.selectForLogin(admAcc, admPwd);
 		if (admin == null) {
 			admin = new Admin();
 			admin.setMessage("帳號或密碼錯誤");

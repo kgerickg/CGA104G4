@@ -1,22 +1,18 @@
-function onSaveClick(id) {
-    const username = document.querySelector(`#username${id}`).textContent;
-    const password = document.querySelector(`#password${id}`).textContent;
-    const nickname = document.querySelector(`#nickname${id}`).textContent;
-    const pass = !!+document.querySelector(`#pass${id}`).value;
-    const roleId = document.querySelector(`#roleId${id}`).value;
-    const updater = sessionStorage.getItem('nickname');
+function onSaveClick(admId) {
+    const admAcc = document.querySelector(`#admAcc${admId}`).textContent;
+    const admPwd = document.querySelector(`#admPwd${admId}`).textContent;
+    const admName = document.querySelector(`#admName${admId}`).textContent;
+    const admAccStat = !!+document.querySelector(`#admAccStat${admId}`).value;
 
     fetch('save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            id,
-            username,
-            password,
-            nickname,
-            pass,
-            roleId,
-            updater
+            admId,
+            admAcc,
+            admPwd,
+            admName,
+            admAccStat
         })
     })
         .then(resp => resp.json())
@@ -31,19 +27,3 @@ function onSaveClick(id) {
         });
 }
 
-function onRemoveClick(id) {
-    if (!confirm('確定刪除?')) {
-        return;
-    }
-    fetch('remove', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-    })
-        .then(resp => resp.json())
-        .then(body => {
-            if (body.successful) {
-                location.reload();
-            }
-        });
-}

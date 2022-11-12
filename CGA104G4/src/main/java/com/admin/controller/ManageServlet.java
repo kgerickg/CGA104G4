@@ -32,6 +32,6 @@ public class ManageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		List<Admin> adminList = service.findAll();
 		request.setAttribute("adminList", adminList);
-		request.getRequestDispatcher(PREFIX_WEB_INF + "/admin/admin.jsp").forward(request, response);
+		request.getRequestDispatcher(PREFIX_WEB_INF + "/admin/manage.jsp").forward(request, response);
 	}
 }

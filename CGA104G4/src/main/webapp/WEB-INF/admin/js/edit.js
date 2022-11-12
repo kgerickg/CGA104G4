@@ -1,8 +1,8 @@
 (() => {
   const btn1 = document.querySelector('#btn1');
-  const username = document.querySelector('#username');
-  const nickname = document.querySelector('#nickname');
-  const oPassword = document.querySelector('#oPassword');
+  const admAcc = document.querySelector('#admAcc');
+  const admName = document.querySelector('#admName');
+  const oAdmPwd = document.querySelector('#oAdmPwd');
   init();
 
   function init() {
@@ -14,18 +14,18 @@
     })
       .then(resp => resp.json())
       .then(body => {
-        username.value = body['username'];
-        nickname.value = body['nickname'];
+        admAcc.value = body['admAcc'];
+        admName.value = body['admName'];
       });
 
-    oPassword.addEventListener('blur', checkOldPassword);
+    oAdmPwd.addEventListener('blur', checkOldPassword);
   }
 
   function checkOldPassword() {
     fetch('checkPassword', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: oPassword.value })
+      body: JSON.stringify({ password: oAdmPwd.value })
     })
       .then(resp => resp.json())
       .then(body => {
@@ -34,25 +34,25 @@
   }
 
   const msg = document.querySelector('#msg');
-  const nPassword = document.querySelector('#nPassword');
+  const nAdmPwd = document.querySelector('#nAdmPwd');
   const confirmPassword = document.querySelector('#confirmPassword');
   const currentUser = document.querySelector('#currentUser');
 
   function edit() {
-    if (nPassword.value && confirmPassword.value) {
-      if (nPassword.value.length < 6 || nPassword.value.length > 12) {
+    if (nAdmPwd.value && confirmPassword.value) {
+      if (nAdmPwd.value.length < 6 || nAdmPwd.value.length > 12) {
         msg.textContent = '密碼長度須介於6~12字元';
         return;
       }
 
-      if (confirmPassword.value !== nPassword.value) {
+      if (confirmPassword.value !== nAdmPwd.value) {
         msg.textContent = '密碼與確認密碼不相符';
         return;
       }
     }
 
-    const nicknameLength = nickname.value.length;
-    if (nicknameLength < 1 || nicknameLength > 20) {
+    const admNameLength = admName.value.length;
+    if (admNameLength < 1 || admNameLength > 20) {
       msg.textContent = '暱稱長度須介於1~20字元';
       return;
     }
@@ -65,21 +65,21 @@
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        password: nPassword.value,
-        nickname: nickname.value
+        admPwd: nAdmPwd.value,
+        admName: admName.value
       }),
     })
       .then(resp => resp.json())
       .then(body => {
-        const { successful, message, nickname: nicknameValue } = body;
+        const { successful, message, admName: admNameValue } = body;
         if (successful) {
           msg.className = 'info';
-          sessionStorage.setItem('nickname', nicknameValue);
-          currentUser.textContent = nicknameValue;
-          oPassword.value = '';
-          nPassword.value = '';
+          sessionStorage.setItem('admName', admNameValue);
+          currentUser.textContent = admNameValue;
+          oAdmPwd.value = '';
+          nAdmPwd.value = '';
           confirmPassword.value = '';
-          nickname.value = nicknameValue;
+          admName.value = admNameValue;
           btn1.disabled = true;
         } else {
           msg.className = 'error';

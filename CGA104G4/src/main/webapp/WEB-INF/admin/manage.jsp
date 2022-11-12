@@ -3,29 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet" />
-    <!-- FontAwesome Styles-->
-    <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet" />
-    <!-- Custom Styles-->
-    <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet" />
-    <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href=/resources/back-stage/assets/js/Lightweight-Chart/cssCharts.css>
-    <title>manager.jsp</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../index/css/nav.css" />
+<link rel="stylesheet" href="css/member.css" />
+<title>manager.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
 </head>
 <body>
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">USERNAME</th>
-				<th scope="col">PASSWORD</th>
-				<th scope="col">NICKNAME</th>
-				<th scope="col">PASS</th>
-				<th scope="col">ROLE</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
+				<th scope="col">編號</th>
+				<th scope="col">管理員帳號</th>
+				<th scope="col">密碼</th>
+				<th scope="col">姓名</th>
+				<th scope="col">狀態</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,19 +29,16 @@
 					<tr>
 						<td>${admin.admId}</td>
 						<td id="admAcc${admin.admId}">${admin.admAcc}</td>
-						<td id="admPwd${admin.admId}">${admin.adminPwd}</td>
-						<td id="admName${admin.admId}" contenteditable="true">${admin.adminName}</td>
+						<td id="admPwd${admin.admId}">${admin.admPwd}</td>
+						<td id="admName${admin.admId}" contenteditable="true">${admin.admName}</td>
 						<td>
 							<select id="pass${admin.admId}">
-								<option value="0">false</option>
-								<option value="1" <c:if test="${admin.admAccStat}">selected</c:if>>true</option>
+								<option value="0">停權</option>
+								<option value="1" <c:if test="${admin.admAccStat}">selected</c:if>>正常</option>
 							</select>
 						</td>
 						<td>
-							<button type="button" class="btn btn-dark" onclick="onSaveClick(${admin.admiId})">Save</button>
-						</td>
-						<td>
-							<button type="button" class="btn btn-danger" onclick="onRemoveClick(${admin.admId})">Remove</button>
+							<button type="button" class="btn btn-dark" onclick="onSaveClick(${admin.admId})">儲存</button>
 						</td>
 					</tr>
 				</c:forEach>

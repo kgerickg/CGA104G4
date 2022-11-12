@@ -5,7 +5,7 @@
 	version="4.0">
 	<display-name>CGA104G4</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/WEB-INF/index.html</welcome-file>
 	</welcome-file-list>
 
 	<listener>
