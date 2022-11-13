@@ -19,6 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("com.refill.model")
+@ComponentScan("com.member.model")
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
@@ -44,7 +45,7 @@ public class AppConfig {
     @Bean
     public SessionFactory sessionFactory() throws IllegalArgumentException, NamingException {
         return new LocalSessionFactoryBuilder(dataSource())
-                .scanPackages("com.refill.model")
+                .scanPackages("com.refill.model","com.member.model")
                 .addProperties(getHibernateProperties())
                 .buildSessionFactory();
     }

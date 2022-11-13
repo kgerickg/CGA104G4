@@ -158,8 +158,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	@Override
-	public boolean updatePwd(MemberVO memberVO) {
-		return false;
+	public void updatePwd(MemberVO memberVO) {
+
 	}
 
 	@Override

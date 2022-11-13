@@ -195,62 +195,73 @@
         </div>
     </div>
 </div>
-<div class="tablediv" style="display: none">
-    <table id="table_id" class="row-border hover"></table>
-</div>
 
-<div style="display:flex;justify-content: center;margin: 5rem 0 2rem 0">
-    <div style="width: 80%;">
-        <div style="color: #2F3237;font-weight: 600;font-size: 1.5rem">儲值專區</div>
+<section style="display: none" id="refillRecordSection">
+    <div style="display:flex;justify-content: center;margin: 5rem 0 2rem 0">
+        <div style="width: 80%;">
+            <div style="color: #2F3237;font-weight: 600;font-size: 1.5rem">儲值紀錄</div>
+        </div>
     </div>
-</div>
-
-
-<div style="display:flex; justify-content:center;">
-    <div class="griddiv">
-        <button value="50" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">50點</div>
-            </div>
-        </button>
-        <button value="100" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">100點</div>
-            </div>
-        </button>
-        <button value="200" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">200點</div>
-            </div>
-        </button>
-        <button value="500" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">500點</div>
-            </div>
-        </button>
-
-        <button value="1000" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">1000點</div>
-            </div>
-        </button>
-        <button value="2000" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">2000點</div>
-            </div>
-        </button>
-        <button value="5000" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">5000點</div>
-            </div>
-        </button>
-        <button value="10000" class="pointbutton">
-            <div class="cardparent">
-                <div class="card">10000點</div>
-            </div>
-        </button>
+    <div class="tablediv">
+        <table id="table_id" class="row-border hover"></table>
     </div>
-</div>
+</section>
+
+
+
+<section style="display: none" id="refillSection">
+    <div style="display:flex;justify-content: center;margin: 5rem 0 2rem 0">
+        <div style="width: 80%;">
+            <div style="color: #2F3237;font-weight: 600;font-size: 1.5rem">儲值專區</div>
+        </div>
+    </div>
+    <div style="display:flex; justify-content:center;">
+        <div class="griddiv">
+            <button value="50" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">50點</div>
+                </div>
+            </button>
+            <button value="100" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">100點</div>
+                </div>
+            </button>
+            <button value="200" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">200點</div>
+                </div>
+            </button>
+            <button value="500" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">500點</div>
+                </div>
+            </button>
+
+            <button value="1000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">1000點</div>
+                </div>
+            </button>
+            <button value="2000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">2000點</div>
+                </div>
+            </button>
+            <button value="5000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">5000點</div>
+                </div>
+            </button>
+            <button value="10000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">10000點</div>
+                </div>
+            </button>
+        </div>
+    </div>
+</section>
+
 
 <div id="greenshow"></div>
 
@@ -270,9 +281,16 @@
         $("#showToken").html(memToken);
     })();
 
+    $("#refill").click(function (){
+        $("#refillRecordSection").hide();
+        $("#refillSection").show();
+    })
+
     $("#refillRecord").click(getRefillRecord)
 
     async function getRefillRecord() {
+        $("#refillRecordSection").show();
+        $("#refillSection").hide();
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
         let url = webCtx + "/refill/refill.do?action=getRefillRecord";

@@ -18,11 +18,11 @@ import java.util.List;
 public class RefillService {
         @Autowired
         private RefillDAO_interface dao;
-
+        @Autowired
+        private MemberDAO_interface memdao;
 
 
     public Integer getToken(Integer memId) {
-        MemberDAO_interface memdao = new MemberDAO();
         MemberVO memberVO = memdao.findByPrimaryKey(memId);
         Integer memToken = memberVO.getMemToken();
        return memToken;

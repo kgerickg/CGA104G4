@@ -11,7 +11,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -47,7 +46,6 @@ public class RefillServlet extends HttpServlet {
     }
 
     private void buyToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("hi~");
         Integer refillToken = Integer.valueOf(request.getParameter("refillToken"));
         Writer out = response.getWriter();
         RefillService refillService = SpringUtil.getBean(getServletContext(), RefillService.class);
@@ -56,9 +54,7 @@ public class RefillServlet extends HttpServlet {
         String url = sb.append(request.getScheme()).append("://")
                 .append(request.getServerName()).append(":")
                 .append(request.getServerPort())
-                .append(request.getContextPath()).append("/front-index/index.html").toString();
-
-
+                .append(request.getContextPath()).append("/RefillResultServlet").toString();
         try {
             String result = refillService.buyToken(refillToken, url);
             if (result == null) {

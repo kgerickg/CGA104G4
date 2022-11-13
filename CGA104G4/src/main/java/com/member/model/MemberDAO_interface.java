@@ -15,7 +15,7 @@ public interface MemberDAO_interface extends BasicDAO_interface<MemberVO> {
 
     public Integer insertWithReturn(MemberVO memberVO);
 
-    public boolean updatePwd(MemberVO memberVO);
+    public void updatePwd(MemberVO memberVO);
 
     public void updateAccState(MemberVO memberVO);
 }
