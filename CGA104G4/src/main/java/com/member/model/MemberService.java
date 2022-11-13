@@ -32,7 +32,7 @@ public class MemberService {
     public MemberVO getOneMember(Integer memId) {
         try {
             dao.beginTransaction();
-            MemberVO memberVO = dao.findByPrimaryKey(memId);
+            MemberVO memberVO = dao.findByMemId(memId);
             dao.commit();
             return memberVO;
         } catch (Exception e) {
@@ -69,10 +69,10 @@ public class MemberService {
 
     }
 
-    public MemberVO findByPrimaryKey(Integer memId) {
+    public MemberVO findByMemId(Integer memId) {
         try {
             dao.beginTransaction();
-            MemberVO memberVO = dao.findByPrimaryKey(memId);
+            MemberVO memberVO = dao.findByMemId(memId);
             dao.commit();
             return memberVO;
         } catch (Exception e) {

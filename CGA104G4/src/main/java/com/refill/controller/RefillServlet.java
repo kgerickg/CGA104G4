@@ -47,16 +47,19 @@ public class RefillServlet extends HttpServlet {
 
     private void buyToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer refillToken = Integer.valueOf(request.getParameter("refillToken"));
+        Integer memId = (Integer)(request.getSession().getAttribute("memId"));
         Writer out = response.getWriter();
         RefillService refillService = SpringUtil.getBean(getServletContext(), RefillService.class);
         JSONObject JsonMsg = new JSONObject();
+
         StringBuffer sb = new StringBuffer();
         String url = sb.append(request.getScheme()).append("://")
                 .append(request.getServerName()).append(":")
                 .append(request.getServerPort())
-                .append(request.getContextPath()).append("/RefillResultServlet").toString();
+                .append(request.getContextPath()).toString();
         try {
-            String result = refillService.buyToken(refillToken, url);
+            String result = refillService.buyToken(refillToken, url,memId);
+
             if (result == null) {
                 JsonMsg.put("erroMsg", "綠界支付連接異常，請稍後在試");
                 out.write(JsonMsg.toString());

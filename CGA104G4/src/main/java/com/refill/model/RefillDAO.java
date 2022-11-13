@@ -15,15 +15,14 @@ public class RefillDAO implements RefillDAO_interface{
     private Session session;
 
     public List<RefillVO> findByFK(Integer memId) {
-
         Query<RefillVO> query = session.createQuery("FROM RefillVO WHERE memId = :memId ", RefillVO.class);
         return query.setParameter("memId", memId).list();
-
     }
 
 
     @Override
-    public void insert(RefillVO VO) {
+    public void insert(RefillVO refillVO) {
+        session.merge(refillVO);
 
     }
 

@@ -6,12 +6,14 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class MemberDAO implements MemberDAO_interface {
 
-
+    @PersistenceContext
+    private Session session;
 
     @Override
     public void update(MemberVO memberVO) {
@@ -51,10 +53,25 @@ public class MemberDAO implements MemberDAO_interface {
     }
 
     //以下是MemberFrontServlet會用到的方法
+    @Override
+    public MemberVO findByMemId(Integer memId) {
+        MemberVO memberVO = getSession().get(MemberVO.class, memId);
+        return memberVO;
+    }
+
+    @Override
+    public void updateToKen(Integer memId, Integer refillToken) {
+        MemberVO memberVO = new MemberVO();
+        memberVO.setMemId(memId);
+        MemberVO memberVOorignal = session.get(MemberVO.class, memberVO.getMemId());
+        Integer NewToken = memberVOorignal.getMemToken()+refillToken;
+        memberVOorignal.setMemToken(NewToken);
+        session.merge(memberVOorignal);
+    }
 
     @Override
     public MemberVO findByPrimaryKey(Integer memId) {
-        MemberVO memberVO = getSession().get(MemberVO.class, memId);
+        MemberVO memberVO = session.get(MemberVO.class, memId);
         return memberVO;
     }
 

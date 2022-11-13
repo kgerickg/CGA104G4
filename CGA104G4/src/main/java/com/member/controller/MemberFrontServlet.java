@@ -138,7 +138,7 @@ public class MemberFrontServlet extends HttpServlet {
         Integer memId =(Integer) request.getSession().getAttribute("memId");
 
 
-       MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+       MemberVO memberVO = memSvc.findByMemId(memId);
 
        memberJson.put("memEmail",memberVO.getMemEmail());
        memberJson.put("memName",memberVO.getMemName());
@@ -189,7 +189,7 @@ public class MemberFrontServlet extends HttpServlet {
         }
 
         Integer memId = (Integer) request.getSession().getAttribute("memId");
-        MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+        MemberVO memberVO = memSvc.findByMemId(memId);
         String MemPwd = memberVO.getMemPwd();
         if (!MemPwd.equals(memOldPwd)) {
             MsgsJson.put("state", false);

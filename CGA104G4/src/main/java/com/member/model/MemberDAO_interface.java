@@ -18,4 +18,8 @@ public interface MemberDAO_interface extends BasicDAO_interface<MemberVO> {
     public void updatePwd(MemberVO memberVO);
 
     public void updateAccState(MemberVO memberVO);
+
+    public MemberVO findByMemId(Integer memId);
+
+    void updateToKen(Integer memId, Integer refillToken);
 }

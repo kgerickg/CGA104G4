@@ -167,4 +167,14 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	}
 
+	@Override
+	public MemberVO findByMemId(Integer memId) {
+		return null;
+	}
+
+	@Override
+	public void updateToKen(Integer memId, Integer refillToken) {
+
+	}
+
 }

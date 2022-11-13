@@ -1,7 +1,6 @@
 package com.refill.model;
 
 
-import com.member.model.MemberDAO;
 import com.member.model.MemberDAO_interface;
 import com.member.model.MemberVO;
 import com.utils.RandomPassword;
@@ -9,7 +8,8 @@ import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,29 +17,32 @@ import java.util.List;
 @Service
 public class RefillService {
         @Autowired
-        private RefillDAO_interface dao;
+        private RefillDAO_interface refillDao;
         @Autowired
-        private MemberDAO_interface memdao;
+        private MemberDAO_interface memDao;
 
-
+    @Transactional
     public Integer getToken(Integer memId) {
-        MemberVO memberVO = memdao.findByPrimaryKey(memId);
+        MemberVO memberVO = memDao.findByPrimaryKey(memId);
         Integer memToken = memberVO.getMemToken();
-       return memToken;
+        return memToken;
     }
 
     @Transactional
     public List<RefillVO> getRefillRecord(Integer memId) {
-            List<RefillVO> list = dao.findByFK(memId);
+            List<RefillVO> list = refillDao.findByFK(memId);
             return list;
     }
 
-    public String buyToken(Integer refillToken, String url) {
+    public String buyToken(Integer refillToken, String url,Integer memId) {
         Date date = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String dateString = dateFormat.format(date);
-        String itemName = refillToken +"";
+        String itemName = "吉食響樂點數:"+refillToken +"點";
         String rdp = new RandomPassword().genRandomPassword();
+        String indexUrl = url+"/front-index/index.html";
+        String getDataUrl = url +"/RefillResultServlet";
+        String customField1 = ""+memId+","+refillToken;
 
         AllInOne allInOne = new AllInOne("");
         AioCheckOutALL aco = new AioCheckOutALL();
@@ -48,11 +51,25 @@ public class RefillService {
         aco.setTotalAmount(refillToken.toString());
         aco.setTradeDesc("test");
         aco.setItemName(itemName);
-        aco.setClientBackURL(url);
-        aco.setReturnURL(url);
+        aco.setReturnURL(indexUrl);
+        aco.setClientBackURL(indexUrl);
+        aco.setOrderResultURL(getDataUrl);
+        aco.setCustomField1(customField1);
         aco.setNeedExtraPaidInfo("N");
 
+
         return allInOne.aioCheckOut(aco,null);
+
+    }
+    @Transactional
+    public void insert(Integer memId, Integer refillToken, Integer refillAmt) {
+        RefillVO refillVO = new RefillVO();
+        refillVO.setMemId(memId);
+        refillVO.setRefillToken(refillToken);
+        refillVO.setRefillAmt(refillAmt);
+        refillDao.insert(refillVO);
+
+        memDao.updateToKen(memId,refillToken);
 
     }
 }
