@@ -45,7 +45,7 @@ public class AdminDaoImpl implements AdminDao {
 		if (admPwd != null && !admPwd.isEmpty()) {
 			query.setParameter("ADM_PWD", admin.getAdmPwd());
 		}
-		return query.setParameter("ADM_ACC_STAT", admin.isAdmAccStat())
+		return query.setParameter("ADM_ACC_STAT", admin.getAdmAccStat())
 				.setParameter("ADM_STAT", admin.getAdmStat())
 				.setParameter("ADM_PIC", admin.getAdmPic())
 				.setParameter("ADM_NAME", admin.getAdmName())
