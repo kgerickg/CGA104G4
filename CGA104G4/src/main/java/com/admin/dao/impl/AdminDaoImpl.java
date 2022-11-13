@@ -20,7 +20,7 @@ public class AdminDaoImpl implements AdminDao {
 	
 	@Override
 	public int insert(Admin admin) {
-		session.persist(admin);
+		session.merge(admin);
 		return 1;
 	}
 

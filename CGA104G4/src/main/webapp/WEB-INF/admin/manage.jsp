@@ -32,9 +32,9 @@
 						<td id="admPwd${admin.admId}">${admin.admPwd}</td>
 						<td id="admName${admin.admId}" contenteditable="true">${admin.admName}</td>
 						<td>
-							<select id="pass${admin.admId}">
+							<select id="admAccStat${admin.admId}">
 								<option value="0">停權</option>
-								<option value="1" <c:if test="${admin.admAccStat}">selected</c:if>>正常</option>
+								
 							</select>
 						</td>
 						<td>
