@@ -50,7 +50,7 @@ public class AdminServiceTest {
 		Admin admin = new Admin();
 		admin.setAdmAcc("admin01");
 		admin.setAdmName("password1");
-		admin.setAdmAccStat(0);
+		admin.setAdmAccStat("1");
 		admin = service.edit(admin);
 		assertThat(admin.isSuccessful(), equalTo(true));
 	}
