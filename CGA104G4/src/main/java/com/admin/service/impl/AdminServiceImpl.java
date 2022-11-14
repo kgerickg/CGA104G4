@@ -14,7 +14,7 @@ import com.admin.service.AdminService;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao dao;
-	
+
 	@Transactional
 	@Override
 	public Admin register(Admin admin) {
@@ -29,21 +29,19 @@ public class AdminServiceImpl implements AdminService {
 			admin.setSuccessful(false);
 			return admin;
 		}
-		
+
 		if (admin.getAdmName() == null) {
 			admin.setMessage("暱稱未輸入");
 			admin.setSuccessful(false);
 			return admin;
 		}
 
-
 		if (dao.selectByAdmAcc(admin.getAdmAcc()) != null) {
 			admin.setMessage("帳號重複");
 			admin.setSuccessful(false);
 			return admin;
 		}
-
-
+		dao.insert(admin);
 		admin.setMessage("註冊成功");
 		admin.setSuccessful(true);
 		return admin;
@@ -78,6 +76,7 @@ public class AdminServiceImpl implements AdminService {
 		admin.setSuccessful(true);
 		return admin;
 	}
+
 	@Transactional
 	@Override
 	public Admin edit(Admin admin) {
@@ -99,6 +98,5 @@ public class AdminServiceImpl implements AdminService {
 	public boolean save(Admin admin) {
 		return dao.update(admin) > 0;
 	}
-	
-	
+
 }
