@@ -1,6 +1,8 @@
 package com.refill.model;
 
+import com.member.model.MemberVO;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public class RefillDAO implements RefillDAO_interface{
+public class RefillDAO implements RefillDAO_interface {
 
     @PersistenceContext
     private Session session;
@@ -37,14 +39,17 @@ public class RefillDAO implements RefillDAO_interface{
     }
 
     @Override
-    public RefillVO findByPrimaryKey(Integer tableId) {
-        return null;
+    public RefillVO findByPrimaryKey(Integer refillId) {
+        RefillVO refillVO = session.get(RefillVO.class, refillId);
+        return refillVO;
     }
 
 
     @Override
     public List<RefillVO> getAll() {
-        return null;
+        NativeQuery<RefillVO> nativeQuery = session.createNativeQuery("select * from Refill", RefillVO.class);
+        List<RefillVO> Refills= nativeQuery.list();
+        return Refills;
     }
 
 }

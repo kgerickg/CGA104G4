@@ -6,6 +6,8 @@ import com.member.model.MemberVO;
 import com.utils.RandomPassword;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,6 @@ public class RefillService {
         return memToken;
     }
 
-    @Transactional
     public List<RefillVO> getRefillRecord(Integer memId) {
             List<RefillVO> list = refillDao.findByFK(memId);
             return list;
@@ -68,8 +69,43 @@ public class RefillService {
         refillVO.setRefillToken(refillToken);
         refillVO.setRefillAmt(refillAmt);
         refillDao.insert(refillVO);
-
         memDao.updateToKen(memId,refillToken);
 
+    }
+
+    public RefillVO findByPrimaryKey(Integer refillId) {
+        return refillDao.findByPrimaryKey(refillId);
+    }
+
+    public List<RefillVO> getAll() {
+       return refillDao.getAll();
+    }
+    @Transactional
+    public JSONArray selectByMemEmail(String memEmail) {
+        List<MemberVO> members = memDao.selectMemEmail(memEmail);
+        JSONArray refillArray = new JSONArray();
+
+        for(MemberVO member : members){
+            List<RefillVO> refills = member.getRefillVOs();
+            System.out.println(refills.size()==0);
+            if(refills.size()!=0){
+                for (RefillVO refillVO : refills) {
+                    JSONObject reFillJson = new JSONObject();
+                    reFillJson.put("RefillId", refillVO.getRefillId());
+                    reFillJson.put("memId", member.getMemId());
+                    reFillJson.put("memEmail", member.getMemEmail());
+                    reFillJson.put("memName", member.getMemName());
+                    reFillJson.put("RefillToken", refillVO.getRefillToken());
+                    reFillJson.put("RefillAmt", refillVO.getRefillAmt());
+                    SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+                    String refillTime = ft.format(refillVO.getRefillTime());
+                    reFillJson.put("refillTime", refillTime);
+                    refillArray.put(reFillJson);
+                }
+            }
+        }
+
+
+        return refillArray;
     }
 }

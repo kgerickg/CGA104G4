@@ -1,5 +1,6 @@
 package com.member.model;
 
+import com.refill.model.RefillVO;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
@@ -67,6 +68,31 @@ public class MemberDAO implements MemberDAO_interface {
         Integer NewToken = memberVOorignal.getMemToken()+refillToken;
         memberVOorignal.setMemToken(NewToken);
         session.merge(memberVOorignal);
+    }
+
+    @Override
+    public List<MemberVO> selectMemEmail(String memEmail) {
+        StringBuilder sb = new StringBuilder();
+
+        if(memEmail.length()>=2){
+            for(int i=0 ; i< memEmail.length();i++){
+                if(i==0){
+                    sb.append("'%").append(memEmail.charAt(i)).append("%");
+                }else if(i== memEmail.length()-1){
+                    sb.append(memEmail.charAt(i)).append("%'");
+                }else {
+                    sb.append(memEmail.charAt(i)).append("%");
+                }
+            }
+        }else {
+            sb.append("'%").append(memEmail).append("%'");
+        }
+        System.out.println(sb.toString());
+        String selectSQL = "select * from Member where MEM_EMAIL like"+ sb.toString();
+        NativeQuery<MemberVO> nativeQuery =
+                session.createNativeQuery(selectSQL, MemberVO.class);
+        List<MemberVO> members = nativeQuery.list();
+        return members;
     }
 
     @Override
