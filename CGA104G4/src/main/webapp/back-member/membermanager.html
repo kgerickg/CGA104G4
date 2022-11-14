@@ -214,7 +214,7 @@
                     <button id="getAll">顯示所有會員</button>
                 </div>
             </div>
-            <div id="listTable"></div>
+            <div id="listTable" style="margin-left: 0.5rem;margin-right: 0.5rem"></div>
             <!-- ******內容寫在這邊 ↑↑↑****** -->
         </div>
     </div>
@@ -312,7 +312,7 @@
         //生成表頭
         table.innerHTML += "<thead><tr><th>編號</th><th>帳號</th>"
             + "<th>姓名</th><th>手機</th><th>縣市</th><th>區域</th><th>路段</th>"
-            + "<th>註冊時間</th><th>代幣數量</th><th>照片</th><th>帳號狀態</th><th>修改帳號狀態</th><th>會員儲值紀錄</th></tr></thead>";
+            + "<th>註冊時間</th><th>代幣數量</th><th>照片</th><th>帳號狀態</th><th>修改帳號狀態</th></tr></thead>";
 
         //生成表格內容
         let tbody = document.createElement("tbody");
@@ -351,8 +351,6 @@
 
             tr.insertAdjacentHTML("beforeend", buttonhtml);
 
-            tr.insertAdjacentHTML("beforeend", `<td><button id="memberTopUpList" value="${members[i].memId}">會員儲值紀錄</button></td></td>`);
-
             tbody.append(tr);
             tbody.append(tr);
         }
@@ -372,8 +370,6 @@
 
         document.querySelectorAll("button[id^='clbutton']").forEach(e=>e.addEventListener('click',recoverAccState));
 
-        // let memberTopUpListbutton = document.querySelectorAll("#memberTopUpList");
-        // memberTopUpListbutton.forEach(e => e.addEventListener('click', memberTopUpList));
     }
     let OriginalAccState;
     function accStateModify(e){

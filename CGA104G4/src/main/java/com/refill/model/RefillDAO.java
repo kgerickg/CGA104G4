@@ -1,28 +1,30 @@
 package com.refill.model;
 
+import com.member.model.MemberVO;
+import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class RefillDAO implements RefillDAO_interface{
 
-    public List<RefillVO> findByFK(Integer memId){
-        List<RefillVO> list;
-        try {
-            beginTransaction();
-            Query<RefillVO> query = getSession().createQuery("FROM RefillVO WHERE memId = :memId ", RefillVO.class);
-            list = query.setParameter("memId",memId).list();
-            commit();
-            return list;
-        } catch (Exception e) {
-            rollback();
-            e.printStackTrace();
-            return null;
-        }
+@Repository
+public class RefillDAO implements RefillDAO_interface {
+
+    @PersistenceContext
+    private Session session;
+
+    public List<RefillVO> findByFK(Integer memId) {
+        Query<RefillVO> query = session.createQuery("FROM RefillVO WHERE memId = :memId ", RefillVO.class);
+        return query.setParameter("memId", memId).list();
     }
 
+
     @Override
-    public void insert(RefillVO VO) {
+    public void insert(RefillVO refillVO) {
+        session.merge(refillVO);
 
     }
 
@@ -37,14 +39,17 @@ public class RefillDAO implements RefillDAO_interface{
     }
 
     @Override
-    public RefillVO findByPrimaryKey(Integer tableId) {
-        return null;
+    public RefillVO findByPrimaryKey(Integer refillId) {
+        RefillVO refillVO = session.get(RefillVO.class, refillId);
+        return refillVO;
     }
 
 
     @Override
     public List<RefillVO> getAll() {
-        return null;
+        NativeQuery<RefillVO> nativeQuery = session.createNativeQuery("select * from Refill", RefillVO.class);
+        List<RefillVO> Refills= nativeQuery.list();
+        return Refills;
     }
 
 }
