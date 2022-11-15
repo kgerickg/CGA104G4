@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- 頁籤顯示的title -->
-<title>查詢所有客訴訂單</title>
+<title>商家查詢所有客訴訂單</title>
 
 <!-- 響應式頁面 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,10 +62,11 @@ table  tr:nth-of-type(even) {
 
 table th, td {
 	padding: 5px 5px;
+	color: black;
 }
 
 #upper-table td {
-	width: 60vw;
+	width: 43vw;
 	text-align: center;
 	background-color: #F0F0F0;
 }
@@ -82,6 +83,7 @@ table th, td {
 	background-color: #5c636a;
 	border: 1px solid #6c757d;
 	border-radius: 10%;
+	transition: .5s;
 }
 
 a {
@@ -107,8 +109,8 @@ thead th {
 	<script src=${pageContext.request.contextPath}/resources/js/storenav.js></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
-	<div style="padding: 3vw;"></div>
-	
+	<div style="padding: 4vw;"></div>
+
 
 
 	<table id="upper-table">
@@ -117,7 +119,7 @@ thead th {
 				<h1>查詢所有客訴訂單</h1>
 				<h4>
 					<a
-						href=${pageContext.request.contextPath}/front-lkorder/FrontIndexLkorder.jsp>回首頁</a>
+						href=${pageContext.request.contextPath}/front-lkcompl/StoreIndexLkCompl.jsp>回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -134,8 +136,8 @@ thead th {
 				<th>修改</th>
 			</tr>
 		</thead>
-		<c:forEach var="" items="">
-			<%-- <c:forEach var="LkOrderSelectVO" items="${list}"> --%>
+		<c:forEach var="LkComplVO" items="${lkcomplVOlist}">
+			<!-- 還沒寫前台controller所以沒有lkcomplVOlist這東西-->
 
 			<tr>
 				<td>${LkComplVO.lkCcId}</td>
@@ -163,15 +165,11 @@ thead th {
 					<td>已完成</td>
 				</c:if>
 
-				<td>
-					<FORM METHOD="post"
-						ACTION=${pageContext.request.contextPath}/back-lkcompl/lkcompl.do
-						style="margin-bottom: 0px;">
-						<input type="hidden" name="action" value="getOne_For_Update">
+				<td><a
+					href=${pageContext.request.contextPath}/front-lkcompl/StoreUpdateLkCompl.jsp>
 						<input type="submit" value="修改" class="btn-secondary">
-						 <input type="hidden" name="lkOrderId" value="${LkOrderSelectVO.lkOrderId}">
-					</FORM>
-				</td>
+				</a></td>
+
 
 			</tr>
 		</c:forEach>
@@ -186,3 +184,7 @@ thead th {
 	<script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
 </body>
 </html>
+
+
+<!-- mapping沒有註冊lk -->
+<!-- action -->

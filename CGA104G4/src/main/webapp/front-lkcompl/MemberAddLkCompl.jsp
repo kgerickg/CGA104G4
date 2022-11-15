@@ -89,7 +89,7 @@ margin-bottom: 20px;
 				<h3 style="font-size: 40px; font-weight: 700;color: black;">會員客訴</h3>
 				<h4>
 					<a style="color: #6c757d"
-						href=${pageContext.request.contextPath}/front-lkcompl/FrontIndexLkCompl.jsp>回首頁</a>
+						href=${pageContext.request.contextPath}/front-lkcompl/MemberIndexLkCompl.jsp>回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -102,7 +102,7 @@ margin-bottom: 20px;
 		<ul>
 			<li>
 
-				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/LkComplFrontServlet>
+				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
 					<b style="color: black">輸入訂單編號：</b> <br>
 					<input type="text" name="lkOrderId" style="border-radius: 8px ; border: .5px solid grey"> 
 				<br><br>

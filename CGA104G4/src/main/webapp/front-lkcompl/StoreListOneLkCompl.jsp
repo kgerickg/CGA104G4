@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.lkcompl.model.*"%>
 
-
+<% LkComplVO lkComplVO = (LkComplVO) request.getAttribute("lkComplVO"); %>
 
 <html>
 <head>
 <!-- 頁籤顯示的title -->
-<title>查詢客訴訂單</title>
+<title>商家單筆客訴訂單查詢</title>
 <meta charset="UTF-8">
 <!-- 響應式頁面 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,12 +62,28 @@ table  tr:nth-of-type(even) {
 
 table th, td {
 	padding: 5px 5px;
+	color: black;
 }
 
 #upper-table td {
-	width: 60vw;
+	width: 40vw;
 	text-align: center;
 	background-color: #F0F0F0;
+}
+
+.btn-secondary {
+	color: #fff;
+	background-color: #6c757d;
+	border: 1px solid #6c757d;
+	border-radius: 10%;
+}
+
+.btn-secondary:hover {
+	color: #fff;
+	background-color: #5c636a;
+	border: 1px solid #6c757d;
+	border-radius: 10%;
+	transition: .5s;
 }
 
 a {
@@ -91,7 +107,7 @@ thead th {
 	<script src=${pageContext.request.contextPath}/resources/js/storenav.js></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
-
+<div style="padding: 4vw;"></div>
 
 	<table id="upper-table">
 		<tr>
@@ -99,7 +115,7 @@ thead th {
 				<h3 style="font-size: 40px; font-weight: 700;">客訴訂單資料</h3>
 				<h4>
 					<a style="color: #6c757d"
-						href=${pageContext.request.contextPath}/front-lkcompl/FrontIndexLkCompl.jsp>回首頁</a>
+						href=${pageContext.request.contextPath}/front-lkcompl/StoreIndexLkCompl.jsp>回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -113,55 +129,49 @@ thead th {
 				<th>處理狀態</th>
 				<th>客訴內容</th>
 				<th>退款狀態</th>
+				<th>修改</th>
 			</tr>
 		</thead>
-		<c:forEach var="" items="">
-			<%-- <c:forEach var="LkOrderSelectVO" items="${list}"> --%>
-
 			<tr>
-				<td>${LkComplVO.lkCcId}</td>
-				<td>${LkComplVO.lkOrdId}</td>
+				<td>${lkComplVO.lkCcId}</td>
+				<td>${lkComplVO.lkOrdId}</td>
 
-				<c:if test="${LkComplVO.lkCcStat == '0'}">
+				<c:if test="${lkComplVO.lkCcStat == '0'}">
 					<td>待處理</td>
 				</c:if>
-				<c:if test="${LkComplVO.lkCcStat == '1'}">
+				<c:if test="${lkComplVO.lkCcStat == '1'}">
 					<td>處理中</td>
 				</c:if>
-				<c:if test="${LkComplVO.lkCcStat == '2'}">
+				<c:if test="${lkComplVO.lkCcStat == '2'}">
 					<td>已完成</td>
 				</c:if>
 
-				<td>${LkComplVO.lkCcCont}</td>
+				<td>${lkComplVO.lkCcCont}</td>
 
-				<c:if test="${LkComplVO.lkRfdStat == '0'}">
+				<c:if test="${lkComplVO.lkRfdStat == '0'}">
 					<td>待處理</td>
 				</c:if>
-				<c:if test="${LkComplVO.lkRfdStat == '1'}">
+				<c:if test="${lkComplVO.lkRfdStat == '1'}">
 					<td>處理中</td>
 				</c:if>
-				<c:if test="${LkComplVO.lkRfdStat == '2'}">
+				<c:if test="${lkComplVO.lkRfdStat == '2'}">
 					<td>已完成</td>
 				</c:if>
 
 
 				<td>
-					<FORM METHOD="post"
-						ACTION=${pageContext.request.contextPath}/back-lkcompl/lkcompl.do
-						style="margin-bottom: 0px;">
-						<input type="hidden" name="action" value="getOne_For_Update">
-						<input type="submit" value="修改" class="btn-secondary">
-						 <input type="hidden" name="lkOrderId" value="${LkOrderSelectVO.lkOrderId}">
-					</FORM>
+					<a href=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do?action=update>
+					 	<input type="hidden" name="action" value="update">
+						<input type="submit" value="修改" class="btn-secondary"> 
+					</a>
 				</td>
 				
+				
 			</tr>
-		</c:forEach>
 	</table>
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
-	<script
-		src=${pageContext.request.contextPath}/resources/js/bootstrap.min.js></script>
+	<script src=${pageContext.request.contextPath}/resources/js/bootstrap.min.js></script>
 	<script src=${pageContext.request.contextPath}/resources/js/slick.js></script>
 	<script src=${pageContext.request.contextPath}/resources/js/scripts.js></script>
 	<script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
