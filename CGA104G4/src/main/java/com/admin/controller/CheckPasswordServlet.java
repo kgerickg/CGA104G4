@@ -21,6 +21,9 @@ public class CheckPasswordServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		final String admPwd = json2Pojo(request, Admin.class).getAdmPwd();
+		System.out.println(admPwd);
+		System.out.println(Admin.class);
+		
 		final Admin admin = (Admin) request.getSession().getAttribute("admin");
 		final Core core = new Core();
 		if (admin == null) {

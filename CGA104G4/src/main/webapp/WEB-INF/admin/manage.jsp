@@ -34,7 +34,7 @@
 						<td>
 							<select id="admAccStat${admin.admId}">
 								<option value="0">停權</option>
-								<option value="1" <c:if test="${admin.admAccStat}">selected</c:if>>正常</option>
+								<option value="1" <c:if test="${admin.admAccStat == 1}">selected</c:if>>正常</option>
 							</select>
 						</td>
 						<td>

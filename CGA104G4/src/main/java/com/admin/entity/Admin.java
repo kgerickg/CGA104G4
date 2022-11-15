@@ -25,15 +25,15 @@ public class Admin extends Core {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ADM_ID")
 	private Integer admId;
-	@Column(name = "ADM_ACC_STAT")
-	private Boolean admAccStat;
+	@Column(name = "ADM_ACC_STAT", insertable = false)
+	private Integer admAccStat;
 	@Column(name = "ADM_ACC")
 	private String admAcc;
 	@Column(name = "ADM_PWD")
 	private String admPwd;
 	@Column(name = "ADM_NAME")
 	private String admName;
-	@Column(name = "ADM_STAT")
+	@Column(name = "ADM_STAT", insertable = false)
 	private Integer admStat;
 	@Column(name = "ADM_PIC")
 	private byte[] admPic;
