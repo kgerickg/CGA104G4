@@ -6,7 +6,7 @@
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
 
 <html>
-<head><title>所有訂單</title>
+<head><title>訂單管理</title>
 
 <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,38 +25,36 @@
     <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
 
 <style>
-  table#table-1 {
-  	margin-left:auto; 
-	margin-right:auto;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
   table {
-	width: 1100px;
-	background-color: white;
+	width: 1000px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left:auto; 
 	margin-right:auto;
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
   th, td {
     padding: 5px;
     text-align: center;
   }
+  tr:nth-child(odd){
+  background:#D7FFEE;
+}
+
+tr:nth-child(even){
+  background:white;
+}
+tr:nth-child(1){
+  background:none;
+}
+td:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+td:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 </style>
 
 </head>
@@ -181,13 +179,6 @@
        <div id="page-wrapper">
 			<div id="wrapper-container">
 			<!-- ******內容寫在這邊 ↓↓↓****** -->
-
-<table id="table-1">
-	<tr><td>
-		 <h3>所有訂單</h3>
-	</td></tr>
-</table>
-
 <table>
 	<tr>
 		<th>訂單編號</th>
@@ -196,10 +187,9 @@
 		<th>商家編號</th>
 		<th>商家名稱</th>
 		<th>訂單金額</th>
-		<th>訂單狀態</th>
 		<th>訂單成立時間</th>
-		<th>修改</th>
-		<th>刪除</th>
+		<th>訂單狀態</th>
+		<th>修改訂單狀態</th>
 		<th>查詢訂單明細</th>
 	</tr>
 	
@@ -211,26 +201,29 @@
 			<td>${ordersVO.storeId}</td>
 			<td>${ordersVO.storeVO.storeName}</td>
 			<td>${ordersVO.ordAmt}</td>
+			<td>${ordersVO.ordTime}</td>
 			<td>
 				<c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>
 				<c:if test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if>
-				<c:if test="${ordersVO.ordStat==2}">訂單已備妥，請前往領取</c:if>
+				<c:if test="${ordersVO.ordStat==2}">訂單已備妥，待領取</c:if>
 				<c:if test="${ordersVO.ordStat==3}">訂單已完成</c:if>
 				<c:if test="${ordersVO.ordStat==4}">訂單已取消</c:if>
 				<c:if test="${ordersVO.ordStat==5}">客訴處理中</c:if>
 			</td>
-			<td>${ordersVO.ordTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
+			  <select name=ordStat style=width:100>
+			  	<option value="0">正在等待商家接單</option>
+			  	<option value="1">商家已接單，訂單準備中</option>
+			  	<option value="2">訂單已備妥，待領取</option>
+			  	<option value="3">訂單已完成</option>
+			  	<option value="4">訂單已取消</option>
+			  	<option value="5">客訴處理中</option>
+			  </select>
 			    <input type="submit" value="修改"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="getOne_For_Update_Orders"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="刪除">
-			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="delete_Orders"></FORM>
+			    <input type="hidden" name="action" value="updateOrdStat_C">
+			  </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">

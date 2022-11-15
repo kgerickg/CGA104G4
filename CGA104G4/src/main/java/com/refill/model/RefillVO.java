@@ -1,5 +1,6 @@
 package com.refill.model;
 
+import com.member.model.MemberVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,8 @@ public class RefillVO implements Serializable {
 	@Column(name = "REFILL_TOKEN")
 	private Integer refillToken;
 
-
+	@ManyToOne
+	@JoinColumn(name = "MEM_ID",insertable = false,updatable = false)
+	private MemberVO memberVO;
 
 }

@@ -22,14 +22,12 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	
 	private static final String GET_ALL_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS";
 	private static final String GET_ONE_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where ORD_ID = ?";
+	
 	private static final String GET_Details_ByOrdId_STMT = "select PROD_ID, PROD_QTY, ORD_ID from DETAIL where ORD_ID = ? order by PROD_ID";
 	private static final String GET_Orders_ByMemId_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where MEM_ID = ? order by ORD_ID";
 	private static final String GET_Orders_ByStoreId_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where STORE_ID = ? order by ORD_ID";
 	
-	private static final String DELETE_DETAILs = "delete from DETAIL where ORD_ID = ?";
-	private static final String DELETE_ORDERS = "delete from ORDERS where ORD_ID = ?";
-	
-	private static final String UPDATE = "update ORDERS set MEM_ID=?, STORE_ID=?, ORD_AMT=?, ORD_STAT=?, ORD_TIME=?, where ORD_ID = ?";
+	private static final String UPDATE_OrdStat = "update ORDERS set ORD_STAT=? where ORD_ID = ?";
 
 	@Override
 	public void insert(OrdersVO ordersVO) {
@@ -80,7 +78,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	}
 
 	@Override
-	public void update(OrdersVO ordersVO) {
+	public void updateOrdStat(OrdersVO ordersVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -89,14 +87,10 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE);
+			pstmt = con.prepareStatement(UPDATE_OrdStat);
 
-			pstmt.setInt(1, ordersVO.getMemId());
-			pstmt.setInt(2, ordersVO.getStoreId());
-			pstmt.setInt(3, ordersVO.getOrdAmt());
-			pstmt.setInt(4, ordersVO.getOrdStat());
-			pstmt.setDate(5, ordersVO.getOrdTime());
-			pstmt.setInt(6, ordersVO.getOrdId());
+			pstmt.setInt(1, ordersVO.getOrdStat());
+			pstmt.setInt(2, ordersVO.getOrdId());
 
 			pstmt.executeUpdate();
 
@@ -126,73 +120,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 			}
 		}
 	}
-
-	@Override
-	public void delete(Integer ordId) {
-		int updateCount_DETAILs = 0;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			
-			// 1●設定於 pstm.executeUpdate()之前
-			con.setAutoCommit(false);
-			
-			// 先刪除明細
-			pstmt = con.prepareStatement(DELETE_DETAILs);
-			pstmt.setInt(1, ordId);
-			pstmt.executeUpdate();
-			// 再刪除訂單
-			pstmt = con.prepareStatement(DELETE_ORDERS);
-			pstmt.setInt(1, ordId);
-			pstmt.executeUpdate();
-			
-			// 2●設定於 pstm.executeUpdate()之後
-			con.commit();
-			con.setAutoCommit(true);
-			System.out.println("刪除訂單編號" + ordId + "時,共有明細" + updateCount_DETAILs
-					+ "筆同時被刪除");
-			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			if (con != null) {
-				try {
-					// 3●設定於當有exception發生時之catch區塊內
-					con.rollback();
-				} catch (SQLException excep) {
-					throw new RuntimeException("rollback error occured. "
-							+ excep.getMessage());
-				}
-			}
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-	}
-
+	
 	@Override
 	public OrdersVO findByPrimaryKey(Integer ordId) {
 

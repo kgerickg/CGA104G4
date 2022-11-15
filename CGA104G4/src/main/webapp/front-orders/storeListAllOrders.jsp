@@ -4,11 +4,13 @@
 <%@ page import="com.detail.model.*"%>
 
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    
     <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,121 +28,125 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+    
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
+    
     <!-- 請將覆蓋用的css放置此註解下方 -->
-<div class="wrapper">
-	<section class="pager-section text-center"
-		style="padding-bottom: 30px; padding-top: 5px;">
-		<div class="container">
-			<div class="pager-head">
-				<h2 style="color: #ffa500; font-size: 2rem; font-weight: 400;">訂單資訊</h2>
-			</div>
-		</div>
-	</section>
-</div>
+   
     <!-- 頁籤顯示的title -->
-<title>訂單資訊</title>
-<style>
-  table#table-1 {
-  	margin-left:auto; 
-	margin-right:auto;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 1100px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left:auto; 
-	margin-right:auto;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
-
-
-
+	<title>歷史訂單</title>
+	
 </head>
 
 <body>
-     <script src="../resources/js/storenav.js"></script>
+   <script src="../resources/js/storenav.js"></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
-    <!--下面可自由新增內容 -->
-<div id="block">
+    
+    <!--下面可自由新增內容 -->  
+<div class="page-loading">
+	<img src="../resources/images/loader.gif" alt="">
+</div><!--page-loading end-->
 
-</div>    
-<table id="table-1">
-	<tr><td>
-	<h3>訂單資訊</h3>
-	<FORM><input type="hidden" name="action" value="listOrders_ByStoreId"></FORM>
-	</td></tr>
-</table>
-<table>
-	<tr>
-		<th>訂單編號</th>
-		<th>商家編號</th>
-		<th>商家名稱</th>
-		<th>會員編號</th>
-		<th>會員姓名</th>
-		<th>訂單金額</th>
-		<th>訂單狀態</th>
-		<th>訂單成立時間</th>
-		<th>查詢訂單明細</th>
-	</tr>
-	<c:forEach var="ordersVO" items="${ordersSvc.getOrdersByStoreId(storeId)}">
-		<tr>
-			<td>${ordersVO.ordId}</td>
-			<td>${ordersVO.storeId}</td>
-			<td>${ordersVO.storeVO.storeName}</td>
-			<td>${ordersVO.memId}</td>
-			<td>${ordersVO.memberVO.memName}</td>
-			<td>${ordersVO.ordAmt}</td>
-			<td>
-				<c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>
-				<c:if test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if>
-				<c:if test="${ordersVO.ordStat==2}">訂單已備妥，請前往領取</c:if>
-				<c:if test="${ordersVO.ordStat==3}">訂單已完成</c:if>
-				<c:if test="${ordersVO.ordStat==4}">訂單已取消</c:if>
-				<c:if test="${ordersVO.ordStat==5}">客訴處理中</c:if>
-			</td>
-			<td>${ordersVO.ordTime}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
+<div class="wrapper">
+ <section class="sec-block">
+  <div class="container">
+   <div class="row">
+    <div class="col-lg-8">
+     <div class="profile-section">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+       <li class="nav-item">
+        <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">歷史訂單</a>
+       </li>
+      </ul>
+     <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+       <div class="order-tables-sec">
+        <div class="ord-head">
+         <ul>
+          <li class="date">訂單成立時間</li>
+          <li class="delivery">客戶</li>
+          <li class="amount">訂單金額</li>
+          <li>訂單狀態</li>
+         </ul>
+        </div><!--ord-head end-->
+                                        
+        <div class="ord-tablez">
+
+         <c:forEach var="ordersVO" items="${ordersSvc.getOrdersByStoreId(storeId)}">
+         <div class="oc-table">
+      
+          <div class="oct-table-head">
+           <ul>
+             <li class="date">${ordersVO.ordTime}</li>
+             <li class="delivery">${ordersVO.memberVO.memberName}</li>
+             <li class="amount">$${ordersVO.ordAmt}</li>
+             <li class="status">
+              <c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>
+			  <c:if test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if>
+			  <c:if test="${ordersVO.ordStat==2}">訂單已備妥，待領取</c:if>
+			  <c:if test="${ordersVO.ordStat==3}">訂單已完成</c:if>
+			  <c:if test="${ordersVO.ordStat==4}">訂單已取消</c:if>
+			  <c:if test="${ordersVO.ordStat==5}">客訴處理中</c:if>
+             </li>
+             
+           </ul>
+           <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="">
 			    <input type="submit" value="訂單明細"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="listDetails_ByOrdId_A"></FORM>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-
+            <a href="#" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
+		  </div><!--oct-table-head end-->
+         
+          
+		  <div class="oct-table-body">
+		   <ul>
+      	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
+		    <li>
+		     <h4>${detailVO.prodVO.prodName}&nbsp;&nbsp;$${detailVO.prodVO.prodPrc}&nbsp;&nbsp;&nbsp;<span>x${detailVO.prodQty}</span></h4>
+		    </li>
+		     </c:forEach>	  
+		   </ul>
+		  </div><!--oct-table-body end-->	
+		  
+          </div><!--oc-table end-->
+          </c:forEach>
+       
+        </div><!--ord-tablez end-->
+         
+		  
+       </div><!--order-tables-sec end-->
+      </div>     
+      <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+       <div class="order-tables-sec">
+        <div class="ord-tablez">
+        </div><!--ord-tablez end-->
+       </div><!--order-tables-sec end-->
+      </div>
+     </div>
+    </div><!--profile-section end-->
+   </div>             
+    <div class="col-lg-4">
+     <div class="sidebar">
+      <div class="widget widget-help">
+       <h3 class="widget-title">Need help?</h3>
+       <p>If you have more questions please let us know. We will answer as soon as possible.</p>
+       <a href="#" title="" class="btn-default height-2">Contact us <span></span></a>
+      </div><!--widget-help end-->
+     </div><!--sidebar end-->
+    </div>
+   </div>
+  </div>
+ </section>
+</div><!--wrapper end-->
 <%if (request.getAttribute("listDetails_ByOrdId")!=null){%>
-       <jsp:include page="storeListDetails_ByOrdId.jsp" />
+       <jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" />
 <%} %>
-    <!-- 下面是這個版需要的js可添加各自需要的js檔-->
-    <script src="../resources/js/bootstrap.min.js"></script>
-    <script src="../resources/js/slick.js"></script>
-    <script src="../resources/js/scripts.js"></script>
-    <script src="../resources/js/isotope.js"></script>
-</body>
+<!-- 下面是這個版需要的js可添加各自需要的js檔-->
+<script src="../resources/js/bootstrap.min.js"></script>
+<script src="../resources/js/slick.js"></script>
+<script src="../resources/js/scripts.js"></script>
+<script src="../resources/js/isotope.js"></script>
 
+</body>
 </html>

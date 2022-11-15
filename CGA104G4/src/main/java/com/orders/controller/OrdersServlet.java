@@ -29,7 +29,45 @@ public class OrdersServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		String action = req.getParameter("action");
+		
+		 // 來自front-orders/storeListAllOrders.jsp的請求
+		if ("updateOrdStat_A".equals(action)
+		
+		 // 來自front-orders/memberListAllOrders.jsp的請求
+		 || "updateOrdStat_B".equals(action)
+				
+		 // 來自back-orders/listAllOrders.jsp的請求
+		 || "updateOrdStat_C".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer ordId = Integer.valueOf(req.getParameter("ordId"));	
+			Integer ordStat = Integer.valueOf(req.getParameter("ordStat"));	
+		
+			OrdersVO ordersVO = new OrdersVO();
+			ordersVO.setOrdId(ordId);
+			ordersVO.setOrdStat(ordStat);
+			
+			/*************************** 2.開始修改資料 ****************************************/
+			OrdersService ordersSvc = new OrdersService();
+			ordersVO = ordersSvc.updateOrdStat(ordId, ordStat);
+			
+			/*************************** 3.修改完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("ordersVO", ordersVO);
+			
+			String url = null;
+			if ("updateOrdStat_A".equals(action))
+				url = "/front-orders/storeListAllOrders.jsp";	// 成功轉交 front-orders/storeListAllOrders.jsp
+			else if ("updateOrdStat_B".equals(action))
+				url = "/front-orders/memberListAllOrders.jsp";	// 成功轉交 front-orders/memberListAllOrders.jsp
+			else if ("updateOrdStat_C".equals(action))
+				url = "/back-orders/listAllOrders.jsp";	// 成功轉交 back-orders/listAllOrders.jsp
 
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 		// 來自front-orders/storeListAllOrders.jsp的請求
 		if ("listOrders_ByStoreId".equals(action)) {
 					
@@ -105,24 +143,5 @@ public class OrdersServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
-				
-				
-			if ("delete_Order".equals(action)) { // 來自/back-orders/listAllOrders.jsp的請求
-
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-			
-				/***************************1.接收請求參數***************************************/
-				Integer ordId = Integer.valueOf(req.getParameter("ordId"));
-						
-				/***************************2.開始刪除資料***************************************/
-				OrdersService ordersSvc = new OrdersService();
-				ordersSvc.deleteOrders(ordId);
-						
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
-				String url = "/back-orders/listAllOrders.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後, 成功轉交 回到 /back-orders/listAllOrders.jsp
-				successView.forward(req, res);
-			}
-		}
 	}
+}

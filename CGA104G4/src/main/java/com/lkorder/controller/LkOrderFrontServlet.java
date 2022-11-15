@@ -28,7 +28,6 @@ public class LkOrderFrontServlet extends HttpServlet {
 		String action = req.getParameter("action");
 
 		if ("getOne_For_Display".equals(action)) { // 來自【FrontIndexLkorder.jsp】的請求
-//【getOne_For_Display未改】
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.

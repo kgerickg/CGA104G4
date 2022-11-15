@@ -309,7 +309,7 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			System.out.print(aDetail.getProdId() + ",");
 			System.out.print(aDetail.getProdQty() + ",");
 			System.out.print(aDetail.getOrdId() + ",\t");
-			System.out.print(aDetail.getProdVO()); // join ProdVO
+			System.out.print(aDetail.getProdVO()); // join ProdTypeVO
 			System.out.println();
 		}
 	}

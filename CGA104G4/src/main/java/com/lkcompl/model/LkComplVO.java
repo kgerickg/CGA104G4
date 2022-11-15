@@ -1,59 +1,33 @@
 package com.lkcompl.model;
 
-public class LkComplVO {
-	private static final long serialVersionUID = 1L;
-	private Integer lkCcId;		// 客訴編號PK
-	private Integer lkOrdId;	// 福袋訂單編號
-	private Integer lkCcStat;	// 處理狀態
-	private String lkCcCont;	// 客訴內容
-	private Integer lkRfdStat;	// 退款狀態
-	
-	public Integer getLkCcId() {
-		return lkCcId;
-	}
-	public void setLkCcId(Integer lkCcId) {
-		this.lkCcId = lkCcId;
-	}
-	public Integer getLkOrdId() {
-		return lkOrdId;
-	}
-	public void setLkOrdId(Integer lkOrdId) {
-		this.lkOrdId = lkOrdId;
-	}
-	public Integer getLkCcStat() {
-		return lkCcStat;
-	}
-	public void setLkCcStat(Integer lkCcStat) {
-		this.lkCcStat = lkCcStat;
-	}
-	public String getLkCcCont() {
-		return lkCcCont;
-	}
-	public void setLkCcCont(String lkCcCont) {
-		this.lkCcCont = lkCcCont;
-	}
-	public Integer getLkRfdStat() {
-		return lkRfdStat;
-	}
-	public void setLkRfdStat(Integer lkRfdStat) {
-		this.lkRfdStat = lkRfdStat;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	public LkComplVO() {
+import java.io.Serializable;
 
-	}
-	
-	public LkComplVO(Integer lkCcId, Integer lkOrdId, Integer lkCcStat, String lkCcCont, Integer lkRfdStat) {
-		super();
-		this.lkCcId = lkCcId;
-		this.lkOrdId = lkOrdId;
-		this.lkCcStat = lkCcStat;
-		this.lkCcCont = lkCcCont;
-		this.lkRfdStat = lkRfdStat;
-	}
-	
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter					
+@AllArgsConstructor		// 使用後為類別生成一個"全參數"構造函數
+@NoArgsConstructor		// 使用後為類別生成一個"無參數"構造函數
+@Entity					// 設定為實體類別
+@Table(name="LK_COMPL")	// 設定映射資料表，name="資料表名稱"
+public class LkComplVO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id					// 設定識別屬性，Hibernate底層會參考識別屬性，所以⼀定要設定此Annotation
+	@GeneratedValue(strategy = GenerationType.IDENTITY)		// 
+	@Column(name="LK_CC_ID")
+	private Integer lkCcId;		// 客訴編號PK
+	@Column(name="LK_ORD_ID")
+	private Integer lkOrdId;	// 福袋訂單編號
+	@Column(name="LK_CC_STAT")
+	private Integer lkCcStat;	// 處理狀態
+	@Column(name="LK_CC_CONT")
+	private String lkCcCont;	// 客訴內容
+	@Column(name="LK_RFD_STAT")
+	private Integer lkRfdStat;	// 退款狀態
 
 }

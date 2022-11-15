@@ -4,8 +4,6 @@ import java.sql.Date;
 
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
-import com.prod.model.ProdService;
-import com.prod.model.ProdVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
@@ -14,7 +12,7 @@ public class OrdersVO implements java.io.Serializable{
 	private Integer memId;
 	private Integer storeId;
 	private Integer ordAmt;
-	private Integer ordStat; //0 確認中 1 待完成 2 退單 3 完成 4 客訴處理中
+	private Integer ordStat;
 	private Date ordTime;
 	
 	public Integer getOrdId() {

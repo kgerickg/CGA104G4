@@ -1,6 +1,5 @@
 package com.orders.model;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -34,8 +33,14 @@ public class OrdersService {
 		return dao.getOrdersByStoreId(storeId);
 	}
 
-	public void deleteOrders(Integer ordId) {
-		dao.delete(ordId);
+	public OrdersVO updateOrdStat(Integer ordId, Integer ordStat) { 
+	
+		OrdersVO ordersVO = new OrdersVO();
+	
+		ordersVO.setOrdId(ordId);
+		ordersVO.setOrdStat(ordStat);
+		dao.updateOrdStat(ordersVO);
+	
+		return ordersVO;
 	}
 }
-
