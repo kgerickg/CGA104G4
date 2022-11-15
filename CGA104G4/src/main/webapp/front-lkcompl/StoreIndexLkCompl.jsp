@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>客訴頁面</title>
+<title>商家客訴首頁</title>
 
 <!-- 響應式頁面 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,8 +36,6 @@
 <!-- 請將覆蓋用的css放置此註解下方 -->
 
 <style>
-
-
 .table ul {
 	width: 40%;
 	height: 70%;
@@ -46,7 +44,6 @@
 	border-radius: 10px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	background: white;
-	
 }
 
 .btn-secondary {
@@ -61,6 +58,7 @@
 	background-color: #5c636a;
 	border: 1px solid #6c757d;
 	border-radius: 10%;
+	transition: .5s;
 }
 </style>
 
@@ -69,49 +67,32 @@
 
 	<script src=${pageContext.request.contextPath}/resources/js/storenav.js></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
-	
-	
-	
-	
+	<div style="padding: .5vw;"></div>
+
+
+
 	<!--下面可自由新增內容 -->
 	<div class="table">
-
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-		<br>
 		<ul>
 
-			<li style="color: black; font-weight: bolder; font-size: 1.2em"><a
-				href=${pageContext.request.contextPath}/back-lkcompl/BackListAllLkorder.jsp>查詢所有客訴訂單</a></li>
+			<li style="color: black; font-weight: bolder; font-size: 1.2em">
+				<a
+				href=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do?action=selectAll>查詢所有客訴訂單</a>
+			</li>
 			<br>
+
 			<li>
-				<FORM METHOD="post"
-					ACTION=${pageContext.request.contextPath}/LkOrderFrontServlet>
-					<b style="color: black">輸入客訴編號：</b> <input type="text"
-						name="lkOrderId"> <input type="submit" value="送出"
-						class="btn-secondary">
+				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do?action=selectByLkCcId>
+					<b style="color: black">輸入客訴編號：</b>
+					 <input type="text" name="lkCcId" value="">
+					 <input type="hidden" name="action" value="selectByLkCcId">
+					  <input type="submit" value="送出" class="btn-secondary">
 				</FORM>
 			</li>
 
 			<br>
 
-		
-
-			<%--   <jsp:useBean id="lkorderSvc " scope="page" class="com.lkcompl.model.LkComplService" /> --%>
-
-
-
-
 		</ul>
-
-
 
 	</div>
 

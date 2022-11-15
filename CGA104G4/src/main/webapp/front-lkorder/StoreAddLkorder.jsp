@@ -87,7 +87,6 @@ table tr td:nth-of-type(odd) {
 
 #table-1 {
 	margin: auto;
-	padding: 2%;
 }
 
 #table-1 h1, h4 {
@@ -120,6 +119,7 @@ table tr td:nth-of-type(odd) {
     <script src="../resources/js/storenav.js"></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
     <!--下面可自由新增內容 -->
+    <div style="padding: 5%"></div>
 
 
 

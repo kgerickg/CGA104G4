@@ -42,5 +42,6 @@
 
 
         <mapping class="com.member.model.MemberVO" />
+        <mapping class="com.lkcompl.model.LkComplVO" />
     </session-factory>
 </hibernate-configuration>

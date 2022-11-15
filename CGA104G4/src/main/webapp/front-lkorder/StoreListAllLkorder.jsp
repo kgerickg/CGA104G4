@@ -68,6 +68,7 @@ table  tr:nth-of-type(even) {
 
 table th, td {
 	padding: 5px 5px;
+	color: black;
 }
 
 #table-1 td {

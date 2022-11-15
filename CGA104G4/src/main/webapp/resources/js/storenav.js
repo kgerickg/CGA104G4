@@ -9,7 +9,7 @@ header.innerHTML =
         <div class="header-content d-flex flex-wrap align-items-center">
             <div class="logo">
                 <a href="index.html" title="">
-                    <img class="logoimg" src="../resources/images/1.png" alt="">
+                    <img class="logoimg" src="${webCtx}/resources/images/1.png" alt="">
                 </a>
             </div>
             <nav>
@@ -40,7 +40,7 @@ header.innerHTML =
             <ul class="oth-lnks ml-auto">
                 <li>
                      <a href="" title="" class="">
-                         <img alt="" src="../resources/images/sign-out.svg" style="width:2rem">
+                         <img alt="" src="${webCtx}/resources/images/sign-out.svg" style="width:2rem">
                          <span>登出</span>
                      </a>
                 </li>

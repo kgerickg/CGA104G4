@@ -63,6 +63,7 @@ table  tr:nth-of-type(even) {
 
 table th,td {
     padding: 5px 5px;
+    color: black;
 }
 
 #table-1 td{
@@ -134,7 +135,7 @@ thead th{
 			<th>訂單完成日期</th>
 		</tr>
 		</thead>
-<%-- 		<%@ include file="page1.file"%> --%>
+		
 		<c:forEach var="LkOrderSelectVO" items="${list}">
 
 			<tr>
@@ -166,7 +167,6 @@ thead th{
 			</tr>
 		</c:forEach>
 	</table>
-<%-- 	<%@ include file="page2.file"%> --%>
 
 
     <!-- 下面是這個版需要的js可添加各自需要的js檔-->

@@ -99,7 +99,7 @@ thead th {
 				<h3 style="font-size: 40px; font-weight: 700;">客訴訂單資料</h3>
 				<h4>
 					<a style="color: #6c757d"
-						href=${pageContext.request.contextPath}/front-lkcompl/FrontIndexLkCompl.jsp>回首頁</a>
+						href=${pageContext.request.contextPath}/front-lkcompl/MemberIndexLkCompl.jsp>回首頁</a>
 				</h4>
 			</td>
 		</tr>
