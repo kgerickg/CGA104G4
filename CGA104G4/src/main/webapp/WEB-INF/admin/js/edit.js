@@ -20,19 +20,19 @@
 
     oAdmPwd.addEventListener('blur', checkOldPassword);
   }
-
+  const data = { admPwd: 'kgerickg' };
   function checkOldPassword() {
     fetch('checkPassword', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ admPwd: oAdmPwd.value })
+      body: JSON.stringify(data)
     })
       .then(resp => resp.json()
       )
       .then(body => {
         btn1.disabled = !body['successful']
       });
-      
+
   }
 
   const msg = document.querySelector('#msg');

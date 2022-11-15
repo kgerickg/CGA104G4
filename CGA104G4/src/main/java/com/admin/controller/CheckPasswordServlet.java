@@ -3,6 +3,8 @@ package com.admin.controller;
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Objects;
 
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +21,9 @@ public class CheckPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		BufferedReader br = request.getReader();
+		System.out.println("br.readLine() = " + br.readLine());
 		final String admPwd = json2Pojo(request, Admin.class).getAdmPwd();
 		System.out.println(admPwd);
 		System.out.println(Admin.class);
