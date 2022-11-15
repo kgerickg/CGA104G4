@@ -1,57 +1,38 @@
 package com.refill.model;
 
-import java.io.Serializable;
-import java.sql.Date;
+import com.member.model.MemberVO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
+import java.sql.Timestamp;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="REFILL")
 public class RefillVO implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "REFILL_ID")
 	private Integer refillId;
+	@Column(name = "MEM_ID")
 	private Integer memId;
-	private Date refillTime;
+	@Column(name= "REFILL_TIME",insertable = false)
+	private Timestamp refillTime;
+	@Column(name="REFILL_AMT")
 	private Integer refillAmt;
+	@Column(name = "REFILL_TOKEN")
 	private Integer refillToken;
 
-	public RefillVO() {
-
-	}
-
-	public Integer getRefillId() {
-		return refillId;
-	}
-
-	public void setRefillId(Integer refillId) {
-		this.refillId = refillId;
-	}
-
-	public Integer getMemId() {
-		return memId;
-	}
-
-	public void setMemId(Integer memId) {
-		this.memId = memId;
-	}
-
-	public Date getRefillTime() {
-		return refillTime;
-	}
-
-	public void setRefillTime(Date refillTime) {
-		this.refillTime = refillTime;
-	}
-
-	public Integer getRefillAmt() {
-		return refillAmt;
-	}
-
-	public void setRefillAmt(Integer refillAmt) {
-		this.refillAmt = refillAmt;
-	}
-
-	public Integer getRefillToken() {
-		return refillToken;
-	}
-
-	public void setRefillToken(Integer refillToken) {
-		this.refillToken = refillToken;
-	}
+	@ManyToOne
+	@JoinColumn(name = "MEM_ID",insertable = false,updatable = false)
+	private MemberVO memberVO;
 
 }

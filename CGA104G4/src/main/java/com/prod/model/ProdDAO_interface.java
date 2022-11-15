@@ -9,7 +9,8 @@ public interface ProdDAO_interface {
           public void update(ProdVO ProdVO);
           public void delete(Integer prodId);
           public ProdVO findByPrimaryKey(Integer prodId);
+          public Set<ProdVO> getProdsByStoreId(Integer storeId);
           public List<ProdVO> getAll();
-          public Set<DetailVO> getDetailsByProdId(Integer prodId);
-    
+        //萬用複合查詢(傳入參數型態Map)(回傳 List)
+          public List<ProdVO> getAll(Map<String, String[]> map);
 }

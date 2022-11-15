@@ -97,7 +97,7 @@ public class MemberServlet extends HttpServlet {
     private void selectById(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer memId = Integer.parseInt(request.getParameter("memId"));
         MemberService memSvc = new MemberService();
-        MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+        MemberVO memberVO = memSvc.findByMemId(memId);
         Writer out = response.getWriter();
         JSONObject memberJsonObject = new JSONObject();
         JSONArray memberJSONArray = new JSONArray();

@@ -8,14 +8,15 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailService {
 
-    public void sendMail(String to, String subject, String messageText) {
+    public void sendMail(String to, String subject, String messageText) throws MessagingException {
 
-        try {
+
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
@@ -41,11 +42,7 @@ public class MailService {
             message.setText(messageText);
 
             Transport.send(message);
-            System.out.println("傳送成功!");
-        } catch (MessagingException e) {
-            System.out.println("傳送失敗!");
-            e.printStackTrace();
-        }
+
     }
 
 }

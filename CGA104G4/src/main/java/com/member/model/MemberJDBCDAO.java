@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.refill.model.RefillVO;
 import com.utils.JDBCUtils;
 
 public class MemberJDBCDAO implements MemberDAO_interface {
@@ -157,13 +158,28 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	@Override
-	public boolean updatePwd(MemberVO memberVO) {
-		return false;
+	public void updatePwd(MemberVO memberVO) {
+
 	}
 
 	@Override
 	public void updateAccState(MemberVO memberVO) {
 
+	}
+
+	@Override
+	public MemberVO findByMemId(Integer memId) {
+		return null;
+	}
+
+	@Override
+	public void updateToKen(Integer memId, Integer refillToken) {
+
+	}
+
+	@Override
+	public List<MemberVO> selectMemEmail(String memEmail) {
+		return null;
 	}
 
 }

@@ -138,7 +138,7 @@ public class MemberFrontServlet extends HttpServlet {
         Integer memId =(Integer) request.getSession().getAttribute("memId");
 
 
-       MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+       MemberVO memberVO = memSvc.findByMemId(memId);
 
        memberJson.put("memEmail",memberVO.getMemEmail());
        memberJson.put("memName",memberVO.getMemName());
@@ -189,7 +189,7 @@ public class MemberFrontServlet extends HttpServlet {
         }
 
         Integer memId = (Integer) request.getSession().getAttribute("memId");
-        MemberVO memberVO = memSvc.findByPrimaryKey(memId);
+        MemberVO memberVO = memSvc.findByMemId(memId);
         String MemPwd = memberVO.getMemPwd();
         if (!MemPwd.equals(memOldPwd)) {
             MsgsJson.put("state", false);
@@ -266,7 +266,7 @@ public class MemberFrontServlet extends HttpServlet {
             MsgsJson.put("memPwderror", "密碼請勿空白");
         } else if (!memPwd.trim().matches(memPwdReg)) {
             MsgsJson.put("memPwderror", "密碼格式異常");
-        } else if (!memPwd.equals("memcfPwd")) {
+        } else if (!memPwd.equals(memcfPwd)) {
             MsgsJson.put("memPwderror", "密碼與確認密碼不相符");
         }
 

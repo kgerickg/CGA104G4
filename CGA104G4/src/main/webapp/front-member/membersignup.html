@@ -212,6 +212,9 @@
         formData.append('memDist', $("select[name='memDist']").val());
         formData.append('memAdr', $("input[name='memAdr']").val());
 
+        console.log($("input[name='memPwd']").val());
+        console.log($("input[name='cfMemPwd']").val());
+
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
         let url = webCtx + "/member/memberfront.do";

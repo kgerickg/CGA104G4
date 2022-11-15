@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>後台</title>
+    <meta charset="utf-8"/>
+
+
+    <!-- 響應式頁面 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
+
+    <!-- Bootstrap Styles-->
+    <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <!-- Custom Styles-->
+    <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
+
+    <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
+    <style>
+        #selectBar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #nameSelector, #refillIdSelector, #memberIdSelector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<!-- 從這複製↓↓↓ -->
+
+<div id="wrapper">
+    <!-- 上方Nav ↓↓↓  -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../back-index/index.html"><strong>後台管理</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="../back-index/storelogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!-- 上方Nav ↑↑↑  -->
+    <!-- 左側Nav ↓↓↓  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> 吉食享樂</a>
+                </li>
+
+                <li>
+                    <a href="#">一般商品<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">一般商品管理</a>
+                        </li>
+                        <li>
+                            <a href="../back-orders/listAllOrders.jsp">一般訂單管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">福袋商品<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">福袋商品管理</a>
+                        </li>
+                        <li>
+                            <a href="#">福袋訂單管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#">員工帳號管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">員工帳號管理</a>
+                        </li>
+                        <li>
+                            <a href="#">員工權限管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">代幣系統管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">客訴處理</a>
+                        </li>
+                        <li>
+                            <a href="#">優惠活動管理</a>
+                        </li>
+                        <li>
+                            <a href="#">會員儲值紀錄查詢</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">會員管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">合作店家資格審核</a>
+                        </li>
+                        <li>
+                            <a href="#">合作店家帳號管理</a>
+                        </li>
+                        <li>
+                            <a href="../back-member/membermanager.html">一般會員管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"> 評論檢舉管理 </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- 左側Nav ↑↑↑  -->
+
+    <div id="page-wrapper">
+        <div id="wrapper-container">
+            <!-- ******內容寫在這邊 ↓↓↓****** -->
+            <section id="selectBar">
+                <div id="memberIdSelector">
+                    <div>依會員編號:</div>
+                    <input type="text" size="9" id="memberIdtext">
+                    <button id="memberIdbutton">搜索</button>
+                </div>
+
+                <div id="refillIdSelector">
+                    <div>依儲值編號:</div>
+                    <input type="text" size="9" id="refillIdtext">
+                    <button id="refillIdbutton">搜索</button>
+                </div>
+
+                <div id="nameSelector">
+                    <div>依會員帳號:</div>
+                    <input type="text" size="16" id="nameInput">
+                </div>
+
+                <div id="ShowAll">
+                    <button id="selectAll">查詢全部儲值紀錄</button>
+                </div>
+            </section>
+            <section id="errorSection" style="display: flex;justify-content: center;margin-top: 1.5rem">
+                <div style="font-size: 2rem;color: red" id="errodiv">
+                </div>
+            </section>
+            <div id="tablediv">
+                <table id="table_id" class="row-border hover"></table>
+            </div>
+
+
+
+            <!-- ******內容寫在這邊 ↑↑↑****** -->
+        </div>
+    </div>
+
+</div>
+<!-- 複製到這裡↑↑↑ -->
+
+
+<!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
+
+<!-- Bootstrap Js -->
+<script src=../resources/back-stage/assets/js/bootstrap.min.js></script>
+<!-- 左側Nav Dropdown -->
+<script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
+<!-- Custom Js -->
+<script src=../resources/back-stage/assets/js/custom-scripts.js></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+
+<!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
+
+</body>
+
+<script>
+
+    document.querySelector("#nameInput").addEventListener("input", async function () {
+        let memEmail = $("#nameInput").val();
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=selectByMemEmail&memEmail=" + memEmail;
+        let response = await fetch(url, {method: 'get'}).then(e => e.json())
+
+        if (!response.state) {
+            $("#errodiv").html(response.refillerror);
+            $("#tablediv").hide();
+            return;
+        }
+
+        $("#errodiv").html("");
+        let refillRecord = response.refills;
+        showTokenRefill(refillRecord);
+
+
+    })
+
+
+    $("#selectAll").click(async function () {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=selectAll"
+        let response = await fetch(url, {method: 'get'}).then(e => e.json());
+        $("#errodiv").html("");
+        let refillRecord = response.refills;
+        showTokenRefill(refillRecord);
+    })
+
+    $("#memberIdbutton").click(async function () {
+        let memId = $("#memberIdtext").val();
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=selectByMemId&memId=" + memId;
+        let response = await fetch(url, {method: 'get'}).then(e => e.json());
+        if (!response.state) {
+            $("#errodiv").html(response.refillerror);
+            $("#tablediv").hide();
+            return;
+        }
+        $("#errodiv").html("");
+        let refillRecord = response.refills;
+        showTokenRefill(refillRecord);
+    })
+
+    $("#refillIdbutton").click(async function () {
+        let refillId = $("#refillIdtext").val();
+
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=selectByRefillId&refillId=" + refillId;
+        let response = await fetch(url, {method: 'get'}).then(e => e.json());
+        if (!response.state) {
+            $("#errodiv").html(response.refillerror);
+            $("#tablediv").hide();
+            return;
+        }
+        $("#errodiv").html("");
+        let refillRecord = response.refills;
+        showTokenRefill(refillRecord);
+    })
+
+
+    function showTokenRefill(refillRecord) {
+        $("#tablediv").show();
+        $('#table_id').DataTable({
+            "dom": ` <'row'<'col-sm-12'tr>>
+                         <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>`,
+            "pageLength": 5,
+            "data": refillRecord,
+            "autoWidth": true,
+            "destroy": true,
+            "searching": false,
+            "lengthChange": false,
+            "columns": [
+                {data: 'RefillId', title: "儲值編號"},
+                {data: 'memId', title: "會員編號"},
+                {data: 'memEmail', title: "會員帳號"},
+                {data: 'memName', title: "會員姓名"},
+                {data: 'refillTime', title: "儲值時間"},
+                {data: 'RefillAmt', title: "花費金額"},
+                {data: 'RefillToken', title: "取得點數"},
+            ],
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/zh_Hant.json"
+            },
+
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 響應式頁面 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLEFONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+
+    <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+    <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <style>
+        .outside {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .shadow-box {
+            box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.07);
+            color: #555;
+            width: 30%;
+            border-radius: 10px;
+
+        }
+
+        .inside {
+            margin: auto;
+            line-height: 1;
+            font-weight: 400;
+            color: #555;
+
+        }
+
+        .insideflex {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+
+        }
+
+        .insideflex2 {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        .insideflex P {
+            font-size: 1.2rem;
+            color: #2F3237;
+        }
+
+        .insideflexbutton {
+            width: 50%;
+            height: 40px;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+            line-height: 40px;
+            color: #fff;
+            background-color: #000;
+            transition: all .3s linear;
+        }
+
+        .insideflexbutton:hover {
+            background-color: rgb(38 38 38);
+        }
+
+        .leftbutton {
+            border-radius: 0 0 0 10px;
+        }
+
+        .rightbutton {
+            border-radius: 0 0 10px 0;
+        }
+
+        .tablediv {
+            width: 80%;
+            margin: auto;
+            color: #2F3237;
+            margin-top: 3rem;
+        }
+
+        .mytableform {
+            border-bottom: #0a0a0a;
+            background-color: #fff;
+            box-shadow: none !important;
+        }
+
+        .card {
+            position: absolute;
+            font-style: italic;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+            color: #555;
+            font-size: 1.8rem;
+            border: none;
+            background-color: transparent;
+        }
+
+        .cardparent {
+            box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 130px;
+            border-radius: 10px;
+            position: relative;
+            background-image: linear-gradient(to bottom left, #fff9db, #ffd43b);
+
+        }
+
+        .cardparent:hover {
+            box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.1);
+            transform: translate(2%, -2%);
+            color: #555;
+            width: 100%;
+            height: 130px;
+            border-radius: 10px;
+            position: relative;
+            background-image: linear-gradient(to bottom left, #f1f3f5, #ced4da);
+            transition: .5s;
+        }
+
+        .griddiv {
+            width: 80%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-column-gap: 10px;
+            grid-row-gap: 1rem;
+            margin-bottom: 2rem;
+
+        }
+
+        .pointbutton {
+            background: transparent;
+            outline: none !important;
+            border-width: 0;
+        }
+
+
+    </style>
+    <!-- 請將覆蓋用的css放置此註解下方 -->
+
+
+    <!-- 頁籤顯示的title -->
+    <title>錢包專區</title>
+
+
+</head>
+
+<body>
+<script src="../resources/js/membernav.js"></script>
+<div style="padding: 2.8rem"></div>
+<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
+<!--下面可自由新增內容 -->
+
+<div class="outside">
+    <div class="shadow-box">
+        <div class="inside">
+            <div><img src="../resources/images/refill1.jpg" style="width: 100%; border-radius: 10px 10px 0 0"></div>
+            <h2 style="margin-bottom: 2rem;font-weight: 400; margin-left: 1rem">親愛的會員</h2>
+            <div class="insideflex">
+                <p>
+                    您的帳號尚有:
+                </p>
+                <p id="showToken">
+                    1450
+                </p>
+                <p>
+                    點
+                </p>
+            </div>
+            <div class="insideflex2">
+                <button class="insideflexbutton leftbutton" id="refill">進行儲值</button>
+                <button class="insideflexbutton rightbutton" id="refillRecord">儲值紀錄查詢</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section style="display: none" id="refillRecordSection">
+    <div style="display:flex;justify-content: center;margin: 5rem 0 2rem 0">
+        <div style="width: 80%;">
+            <div style="color: #2F3237;font-weight: 600;font-size: 1.5rem">儲值紀錄</div>
+        </div>
+    </div>
+    <div class="tablediv">
+        <table id="table_id" class="row-border hover"></table>
+    </div>
+</section>
+
+
+
+<section style="display: none" id="refillSection">
+    <div style="display:flex;justify-content: center;margin: 5rem 0 2rem 0">
+        <div style="width: 80%;">
+            <div style="color: #2F3237;font-weight: 600;font-size: 1.5rem">儲值專區</div>
+        </div>
+    </div>
+    <div style="display:flex; justify-content:center;">
+        <div class="griddiv">
+            <button value="50" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">50點</div>
+                </div>
+            </button>
+            <button value="100" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">100點</div>
+                </div>
+            </button>
+            <button value="200" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">200點</div>
+                </div>
+            </button>
+            <button value="500" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">500點</div>
+                </div>
+            </button>
+
+            <button value="1000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">1000點</div>
+                </div>
+            </button>
+            <button value="2000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">2000點</div>
+                </div>
+            </button>
+            <button value="5000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">5000點</div>
+                </div>
+            </button>
+            <button value="10000" class="pointbutton">
+                <div class="cardparent">
+                    <div class="card">10000點</div>
+                </div>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<div id="greenshow"></div>
+
+
+<!-- 下面是這個版需要的js可添加各自需要的js檔-->
+<script src="../resources/js/bootstrap.min.js"></script>
+<script src="../resources/js/slick.js"></script>
+<script src="../resources/js/scripts.js"></script>
+<script src="../resources/js/isotope.js"></script>
+<script>
+    (async function getToken() {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=getToken";
+        let response = await fetch(url, {method: 'get'}).then(res => res.json());
+        let memToken = response.memToken;
+        $("#showToken").html(memToken);
+    })();
+
+    $("#refill").click(function (){
+        $("#refillRecordSection").hide();
+        $("#refillSection").show();
+    })
+
+    $("#refillRecord").click(getRefillRecord)
+
+    async function getRefillRecord() {
+        $("#refillRecordSection").show();
+        $("#refillSection").hide();
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do?action=getRefillRecord";
+        let response = await fetch(url, {method: 'get'}).then(res => res.json());
+        if (!response.state) {
+            showTokenRefill(response);
+            $(".tablediv").show();
+            return;
+        }
+
+    }
+
+    function showTokenRefill(refillRecord) {
+        $('#table_id').DataTable({
+            "dom": ` <'row'<'col-sm-12'tr>>
+                         <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>`,
+            "pageLength": 5,
+            "data": refillRecord,
+            "autoWidth": true,
+            "destroy": true,
+            "searching": false,
+            "lengthChange": false,
+            "columns": [
+                {data: 'refillTime', title: "儲值時間"},
+                {data: 'RefillAmt', title: "花費金額"},
+                {data: 'RefillToken', title: "取得點數"},
+            ],
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/zh_Hant.json"
+            },
+            "columnDefs": [
+                {
+                    targets: '_all',
+                    width: "30%",
+                    className: "text-center mytableform",
+                },
+            ],
+        });
+    }
+
+    $(".pointbutton").click(async function () {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/refill/refill.do";
+        let refillToken = $(this).val();
+
+        let formData = new FormData();
+        formData.append('action', 'BuyToken');
+        formData.append("refillToken", refillToken);
+
+        let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
+        $("#greenshow").html(response.result)
+    })
+
+
+</script>
+</body>
+
+</html>

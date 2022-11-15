@@ -1,9 +1,8 @@
 package com.member.model;
 
-import com.prod.model.ProdVO;
 import com.utils.MailService;
-
 import com.utils.RandomPassword;
+
 
 
 import java.util.List;
@@ -17,37 +16,76 @@ public class MemberService {
     }
 
     public List<MemberVO> getAll() {
+        List<MemberVO> members;
+        try {
+            dao.beginTransaction();
+            members = dao.getAll();
+            dao.commit();
+            return members;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
 
-        return dao.getAll();
     }
-    
+
     public MemberVO getOneMember(Integer memId) {
-		return dao.findByPrimaryKey(memId);
-	}
+        try {
+            dao.beginTransaction();
+            MemberVO memberVO = dao.findByMemId(memId);
+            dao.commit();
+            return memberVO;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
+    }
 
     public List<Integer> getMemId() {
 
-        return dao.getMemId();
+        try {
+            dao.beginTransaction();
+            List<Integer> list = dao.getMemId();
+            dao.commit();
+            return list;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     public void update(MemberVO memberVO) {
+        try {
+            dao.beginTransaction();
+            dao.update(memberVO);
+            dao.commit();
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+        }
 
-        dao.update(memberVO);
 
     }
 
-    public MemberVO findByPrimaryKey(Integer memId) {
-
-        return dao.findByPrimaryKey(memId);
+    public MemberVO findByMemId(Integer memId) {
+        try {
+            dao.beginTransaction();
+            MemberVO memberVO = dao.findByMemId(memId);
+            dao.commit();
+            return memberVO;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
 
     }
-
 
     public Integer insertWithReturn(String memEmail, String memPwd, String memName, String memMobile, String memCity,
-                           String memDist, String memAdr) {
+                                    String memDist, String memAdr) {
 
         MemberVO memberVO = new MemberVO();
-
         memberVO.setMemEmail(memEmail);
         memberVO.setMemPwd(memPwd);
         memberVO.setMemName(memName);
@@ -56,49 +94,95 @@ public class MemberService {
         memberVO.setMemDist(memDist);
         memberVO.setMemAdr(memAdr);
 
-        return dao.insertWithReturn(memberVO);
+        try {
+            dao.beginTransaction();
+            Integer memId = dao.insertWithReturn(memberVO);
+            dao.commit();
+            return memId;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public MemberVO login(String memEmail, String memPwd) {
-        return dao.login(memEmail, memPwd);
+        try {
+            dao.beginTransaction();
+            MemberVO memberVO = dao.login(memEmail, memPwd);
+            dao.commit();
+            return memberVO;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
 
     }
 
-    public void updatePwd(MemberVO memberVO){
-        dao.updatePwd(memberVO);
+    public void updatePwd(MemberVO memberVO) {
+        try {
+            dao.beginTransaction();
+            dao.updatePwd(memberVO);
+            dao.commit();
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+        }
+
     }
 
-    public Integer selectByMemEmail(String memEmail){
-        return dao.selectByMemEmail(memEmail);
+    public Integer selectByMemEmail(String memEmail) {
+
+        try {
+            dao.beginTransaction();
+            Integer memId = dao.selectByMemEmail(memEmail);
+            dao.commit();
+            return memId;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean forgetPwd(String memEmail) {
-        Integer memId = dao.selectByMemEmail(memEmail);
 
-        if(memId==null){
-        return false;
-        }
-
-        String randomPwd = new RandomPassword().genRandomPassword();
-
-        MemberVO memberVO = new MemberVO();
-        memberVO.setMemId(memId);
-        memberVO.setMemPwd(randomPwd);
-
-        boolean updateresult = dao.updatePwd(memberVO);
-        if(updateresult){
+        try {
+            dao.beginTransaction();
+            Integer memId = dao.selectByMemEmail(memEmail);
+            if (memId == null) {
+                dao.commit();
+                return false;
+            }
+            String randomPwd = new RandomPassword().genRandomPassword();
+            MemberVO memberVO = new MemberVO();
+            memberVO.setMemId(memId);
+            memberVO.setMemPwd(randomPwd);
+            dao.updatePwd(memberVO);
 
             String title = "您的吉食響樂新密碼";
-            String message = "您的新密碼為:"+ randomPwd+"，請盡速登入並進行密碼變更。";
-            new MailService().sendMail(memEmail,title,message);
+            String message = "您的新密碼為:" + randomPwd + "，請盡速登入並進行密碼變更。";
+            new MailService().sendMail(memEmail, title, message);
+
+            dao.commit();
             return true;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return false;
         }
-
-        return false;
-
     }
 
     public void updateAccState(MemberVO memberVO) {
-        dao.updateAccState(memberVO);
+        try {
+            dao.beginTransaction();
+            dao.updateAccState(memberVO);
+            dao.commit();
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+        }
+
     }
 }
