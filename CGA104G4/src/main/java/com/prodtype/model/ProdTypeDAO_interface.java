@@ -1,16 +1,14 @@
 package com.prodtype.model;
 
-import java.util.*;
+import java.util.List;
 
-import com.detail.model.DetailVO;
+import com.basicDAO.BasicDAO_interface;
 import com.prod.model.ProdVO;
+import com.refill.model.RefillVO;
 
-public interface ProdTypeDAO_interface {
-          public void insert(ProdTypeVO prodTypeVO);
-          public void update(ProdTypeVO ProdTypeVO);
-          public void delete(Integer prodId);
-          public ProdTypeVO findByPrimaryKey(Integer prodTypeId);
-          public List<ProdTypeVO> getAll();
-        //查詢某商品類型的商品(一對多)(回傳 Set)
-          public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId);
+public interface ProdTypeDAO_interface extends BasicDAO_interface<ProdTypeVO> {
+
+    public List<Integer> getProdTypeId();
+
+	public List<ProdVO> getProdsByProdTypeId(Integer prodTypeId);
 }
