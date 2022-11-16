@@ -34,16 +34,29 @@
 
 <style>
 
+#upper-table{
+	width:40%;
+	text-align: center;
+	background-color: #F0F0F0;
+	margin: auto;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+	padding: 10px;
+	margin-bottom: 10px;
+}
 
-.table ul {
+#contain-table {
 	width: 40%;
 	height: 70%;
-	margin: 10% auto auto auto;
-	padding: 50px 20px;
+ 	padding: 50px 20px; 
+	margin: auto auto 5% auto;
 	border-radius: 10px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	background: white;
-	
+}
+
+ul li{
+margin-bottom: 20px;
 }
 
 .btn-secondary {
@@ -51,67 +64,58 @@
 	background-color: #6c757d;
 	border: 1px solid #6c757d;
 	border-radius: 10%;
+	margin: auto 10px;
 }
 
 .btn-secondary:hover {
 	color: #fff;
 	background-color: #5c636a;
-	border: 1px solid #6c757d;
-	border-radius: 10%;
+/* 	border: 1px solid #6c757d; */
 }
+
+
 </style>
 
 </head>
 <body>
-
 	<script src="../resources/js/membernav.js"></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
-	<div class="table">
+<div style="padding:5vw"></div>
 
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-		<br>
-		<ul>
-
-			<li style="color: black; font-weight: bolder; font-size: 1.2em"><a
-				href=${pageContext.request.contextPath}/front-lkcompl/FrontListAllLkorder.jsp>查詢所有客訴訂單</a></li>
-			<br>
-			<li>
-				<FORM METHOD="post"
-					ACTION=${pageContext.request.contextPath}/LkOrderFrontServlet>
-					<b style="color: black">輸入客訴編號：</b> <input type="text"
-						name="lkOrderId"> <input type="submit" value="送出"
-						class="btn-secondary">
-				</FORM>
-			</li>
-
-			<br>
-			<hr>
-
-			<li style="color: black; font-weight: bolder; font-size: 1.2em"><a
-				href=${pageContext.request.contextPath}/front-lkcompl/FrontAddLkCompl.jsp>會員客訴</a>
-			</li>
-
-			<%--   <jsp:useBean id="lkorderSvc " scope="page" class="com.lkcompl.model.LkComplService" /> --%>
-
-
-
-
-		</ul>
-
-
-
+	<div id="upper-table">
+		<tr>
+			<td>
+				<h3 style="font-size: 40px; font-weight: 700;color: black;">會員客訴</h3>
+				<h4>
+					<a style="color: #6c757d"
+						href=${pageContext.request.contextPath}/front-lkcompl/MemberIndexLkCompl.jsp>回首頁</a>
+				</h4>
+			</td>
+		</tr>
 	</div>
 
+	<br>
 
+	<div  id="contain-table">
+
+		<ul>
+			<li>
+
+				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
+					<b style="color: black">輸入訂單編號：</b> <br>
+					<input type="text" name="lkOrderId" style="border-radius: 8px ; border: .5px solid grey"> 
+				<br><br>
+					<b style="color: black">輸入客訴內容：</b><br>
+					<textarea name="lkcompltext" rows="6" cols="40" required style="border-radius: 10px"></textarea>
+					<br><br>
+					<input type="submit" value="送出" class="btn-secondary">
+					<input type="reset" value="清除" class="btn-secondary">
+
+				</FORM>
+			</li>
+		</ul>
+	</div>
 
 	<!-- 下面是這個版需要的js可添加各自需要的js檔-->
 	<script src="../resources/js/bootstrap.min.js"></script>

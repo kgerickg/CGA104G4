@@ -90,7 +90,7 @@ public class RefillServlet extends HttpServlet {
         }
         MsgsJson.put("state", false);
         out.write(MsgsJson.toString());
-        return;
+
 
     }
 

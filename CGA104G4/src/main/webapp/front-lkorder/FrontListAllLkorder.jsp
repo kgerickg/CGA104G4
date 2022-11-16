@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.lkorder.model.*"%>
@@ -6,7 +6,7 @@
 
 <%
 LkOrderService lkOrderService = new LkOrderService();
-List<LkOrderSelectVO> list = lkOrderService.selectAll(2);
+List<LkOrderSelectVO> list = lkOrderService.selectAll(2);	// æŠ“å–æœƒå“¡ID
 pageContext.setAttribute("list", list);
 %>
 
@@ -17,10 +17,10 @@ pageContext.setAttribute("list", list);
 <html>
 <head>
 <meta charset="BIG5">
-<title>¬d¸ß©Ò¦³­q³æ</title>
+<title>æŸ¥è©¢æ‰€æœ‰è¨‚å–®</title>
 
 
-    <!-- ÅTÀ³¦¡­¶­± -->
+    <!-- éŸ¿æ‡‰å¼é é¢ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- GOOGLEFONT -->
@@ -29,7 +29,7 @@ pageContext.setAttribute("list", list);
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
 
-    <!-- ¤U­±¬O³o­Ó¼ÒªO»İ­nªºcss½Ğ¤Å§ï°Ê ­Y¦³±Æª©»İ­n½Ğª½±µ¼g·sªºcss»\¹L¥h´N¥i¥H¤F -->
+    <!-- ä¸‹é¢æ˜¯é€™å€‹æ¨¡æ¿éœ€è¦çš„cssè«‹å‹¿æ”¹å‹• è‹¥æœ‰æ’ç‰ˆéœ€è¦è«‹ç›´æ¥å¯«æ–°çš„cssè“‹éå»å°±å¯ä»¥äº† -->
     <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
@@ -37,10 +37,10 @@ pageContext.setAttribute("list", list);
     <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
-    <!-- ¤w¸g¹w¸ü¤Jjquery¤F¦³»İ­njquery¥i¥Hª½±µ¨Ï¥Î -->
+    <!-- å·²ç¶“é è¼‰å…¥jqueryäº†æœ‰éœ€è¦jqueryå¯ä»¥ç›´æ¥ä½¿ç”¨ -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
-    <!-- ½Ğ±NÂĞ»\¥Îªºcss©ñ¸m¦¹µù¸Ñ¤U¤è -->
+    <!-- è«‹å°‡è¦†è“‹ç”¨çš„cssæ”¾ç½®æ­¤è¨»è§£ä¸‹æ–¹ -->
 
 
 <style>
@@ -63,6 +63,7 @@ table  tr:nth-of-type(even) {
 
 table th,td {
     padding: 5px 5px;
+    color: black;
 }
 
 #table-1 td{
@@ -104,17 +105,17 @@ thead th{
 <body>
 
 	<script src="../resources/js/membernav.js"></script>
-    <!-- ¤W­±¬ONAV¸ü¤J ½Ğ¤@©w­n©ñ¦bBODY¶}©lªº¦ì¸m -->
-    <!--¤U­±¥i¦Û¥Ñ·s¼W¤º®e -->
+    <!-- ä¸Šé¢æ˜¯NAVè¼‰å…¥ è«‹ä¸€å®šè¦æ”¾åœ¨BODYé–‹å§‹çš„ä½ç½® -->
+    <!--ä¸‹é¢å¯è‡ªç”±æ–°å¢å…§å®¹ -->
     <div style="padding:3vw;"></div>>
     
     
 	<table id="table-1">
 		<tr>
 			<td>
-				<h1>¬d¸ß©Ò¦³­q³æ</h1>
+				<h1>æŸ¥è©¢æ‰€æœ‰è¨‚å–®</h1>
 				<h4>
-					<a href=${pageContext.request.contextPath}/front-lkorder/FrontIndexLkorder.jsp>¦^­º­¶</a>
+					<a href=${pageContext.request.contextPath}/front-lkorder/FrontIndexLkorder.jsp>å›é¦–é </a>
 				</h4>
 			</td>
 		</tr>
@@ -123,18 +124,18 @@ thead th{
 	<table>
 	<thead>
 		<tr>
-			<th>·|­û¦WºÙ</th>
-			<th>ºÖ³U­q³æ½s¸¹</th>
-			<th>ºÖ³U¦WºÙ</th>
-			<th>¨C¤éºÖ³U½s¸¹</th>
-			<th>µ²±bª÷ÃB</th>
-			<th>­q³æª¬ºA</th>
-			<th>­q³æ¦¨¥ß¤é´Á</th>
-			<th>¨ú³f¤é´Á</th>
-			<th>­q³æ§¹¦¨¤é´Á</th>
+			<th>æœƒå“¡åç¨±</th>
+			<th>ç¦è¢‹è¨‚å–®ç·¨è™Ÿ</th>
+			<th>ç¦è¢‹åç¨±</th>
+			<th>æ¯æ—¥ç¦è¢‹ç·¨è™Ÿ</th>
+			<th>çµå¸³é‡‘é¡</th>
+			<th>è¨‚å–®ç‹€æ…‹</th>
+			<th>è¨‚å–®æˆç«‹æ—¥æœŸ</th>
+			<th>å–è²¨æ—¥æœŸ</th>
+			<th>è¨‚å–®å®Œæˆæ—¥æœŸ</th>
 		</tr>
 		</thead>
-<%-- 		<%@ include file="page1.file"%> --%>
+		
 		<c:forEach var="LkOrderSelectVO" items="${list}">
 
 			<tr>
@@ -146,16 +147,16 @@ thead th{
 				
 
 							<c:if test="${LkOrderSelectVO.lkOrdStat == '0'}">
-									<td>«İ¨ú³f</td>
+									<td>å¾…å–è²¨</td>
 							</c:if> 
 							<c:if test="${LkOrderSelectVO.lkOrdStat == '1'}">
-									<td>¤w¨ú³f</td>
+									<td>å·²å–è²¨</td>
 							</c:if> 
 							<c:if test="${LkOrderSelectVO.lkOrdStat == '2'}">
-									<td>§¹¦¨</td>
+									<td>å®Œæˆ</td>
 							</c:if> 
 							<c:if test="${LkOrderSelectVO.lkOrdStat == '3'}">
-									<td>«È¶D³B²z¤¤</td>
+									<td>å®¢è¨´è™•ç†ä¸­</td>
 							</c:if> 
 								
 
@@ -166,10 +167,9 @@ thead th{
 			</tr>
 		</c:forEach>
 	</table>
-<%-- 	<%@ include file="page2.file"%> --%>
 
 
-    <!-- ¤U­±¬O³o­Óª©»İ­nªºjs¥i²K¥[¦U¦Û»İ­nªºjsÀÉ-->
+    <!-- ä¸‹é¢æ˜¯é€™å€‹ç‰ˆéœ€è¦çš„jså¯æ·»åŠ å„è‡ªéœ€è¦çš„jsæª”-->
     <script src="../resources/js/bootstrap.min.js"></script>
     <script src="../resources/js/slick.js"></script>
     <script src="../resources/js/scripts.js"></script>

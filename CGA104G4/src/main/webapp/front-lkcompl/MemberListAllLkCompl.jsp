@@ -1,9 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.lkcompl.model.*, java.util.*"%>
 
+
+
+<!DOCTYPE html>
 <html>
 <head>
-<title>客訴頁面</title>
+<meta charset="UTF-8">
+<!-- 頁籤顯示的title -->
+<title>查詢所有客訴訂單</title>
 
 <!-- 響應式頁面 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,18 +38,34 @@
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
 
+
 <style>
-
-
-.table ul {
-	width: 40%;
-	height: 70%;
-	margin: 10% auto auto auto;
-	padding: 50px 20px;
-	border-radius: 10px;
+table {
+	border-collapse: collapse;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
-	background: white;
-	
+	text-align: center;
+	border-radius: 1%;
+	margin: 1vw auto;
+}
+
+table  tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+	color: black;
+	border-bottom: 1px solid #dddddd;
+}
+
+table th, td {
+	padding: 5px 5px;
+	color: black;
+}
+
+#upper-table td {
+	width: 60vw;
+	text-align: center;
+	background-color: #F0F0F0;
 }
 
 .btn-secondary {
@@ -59,55 +81,87 @@
 	border: 1px solid #6c757d;
 	border-radius: 10%;
 }
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+thead th {
+	color: #D5DDE5;;
+	background: #1b1e24;
+	border-bottom: 4px solid #9ea7af;
+	border-right: 1px solid #343a45;
+	font-size: 1rem;
+	font-weight: 100;
+	padding: 10px;
+}
 </style>
 
 </head>
+
 <body>
 
 	<script src="../resources/js/membernav.js"></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
-	<div class="table">
-
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-			<font style="color: red">請修正以下錯誤:</font>
-			<ul>
-				<c:forEach var="message" items="${errorMsgs}">
-					<li style="color: red">${message}</li>
-				</c:forEach>
-			</ul>
-		</c:if>
-		<br>
-		<ul>
-
-			<li style="color: black; font-weight: bolder; font-size: 1.2em"><a
-				href=${pageContext.request.contextPath}/back-lkcompl/BackListAllLkorder.jsp>查詢所有客訴訂單</a></li>
-			<br>
-			<li>
-				<FORM METHOD="post"
-					ACTION=${pageContext.request.contextPath}/LkOrderFrontServlet>
-					<b style="color: black">輸入客訴編號：</b> <input type="text"
-						name="lkOrderId"> <input type="submit" value="送出"
-						class="btn-secondary">
-				</FORM>
-			</li>
-
-			<br>
-
-		
-
-			<%--   <jsp:useBean id="lkorderSvc " scope="page" class="com.lkcompl.model.LkComplService" /> --%>
+	<div style="padding: 3vw;"></div>
+	>
 
 
+	<table id="upper-table">
+		<tr>
+			<td>
+				<h1>查詢所有客訴訂單</h1>
+				<h4>
+					<a
+						href=${pageContext.request.contextPath}/front-lkcompl/MemberIndexLkCompl.jsp>回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
 
+	<table>
+		<thead>
+			<tr>
+				<th>客訴編號</th>
+				<th>福袋訂單編號</th>
+				<th>處理狀態</th>
+				<th>客訴內容</th>
+				<th>退款狀態</th>
+			</tr>
+		</thead>
+			<c:forEach var="LkComplVO" items="${lkcomplVOlist}">
 
-		</ul>
+			<tr>
+				<td>${LkComplVO.lkCcId}</td>
+				<td>${LkComplVO.lkOrdId}</td>
 
+				<c:if test="${LkComplVO.lkCcStat == '0'}">
+					<td>待處理</td>
+				</c:if>
+				<c:if test="${LkComplVO.lkCcStat == '1'}">
+					<td>處理中</td>
+				</c:if>
+				<c:if test="${LkComplVO.lkCcStat == '2'}">
+					<td>已完成</td>
+				</c:if>
 
+				<td>${LkComplVO.lkCcCont}</td>
 
-	</div>
+				<c:if test="${LkComplVO.lkRfdStat == '0'}">
+					<td>待處理</td>
+				</c:if>
+				<c:if test="${LkComplVO.lkRfdStat == '1'}">
+					<td>處理中</td>
+				</c:if>
+				<c:if test="${LkComplVO.lkRfdStat == '2'}">
+					<td>已完成</td>
+				</c:if>
 
+			</tr>
+		</c:forEach>
+	</table>
 
 
 	<!-- 下面是這個版需要的js可添加各自需要的js檔-->
