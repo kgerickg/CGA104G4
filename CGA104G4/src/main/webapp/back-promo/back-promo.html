@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>後台</title>
+    <meta charset="utf-8"/>
+
+
+    <!-- 響應式頁面 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
+
+    <!-- Bootstrap Styles-->
+    <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <!-- Custom Styles-->
+    <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet"/>
+
+    <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
+    <style>
+        .show-modal {
+
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.2rem;
+            right: 2rem;
+            font-size: 5rem;
+            color: #333;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .modaol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            background-color: white;
+            padding: 6rem;
+            border-radius: 5px;
+            box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+            z-index: 310;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 305;
+        }
+    </style>
+
+</head>
+
+
+<body>
+<!-- 從這複製↓↓↓ -->
+<div id="wrapper">
+    <!-- 上方Nav ↓↓↓  -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><strong>後台管理</strong></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="../back-index/storelogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!-- 上方Nav ↑↑↑  -->
+    <!-- 左側Nav ↓↓↓  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+
+                <li>
+                    <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> 吉食享樂</a>
+                </li>
+
+                <li>
+                    <a href="#">員工帳號管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">員工帳號管理</a>
+                        </li>
+                        <li>
+                            <a href="#">員工權限管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">代幣系統管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">客訴處理</a>
+                        </li>
+                        <li>
+                            <a href="#">優惠活動管理</a>
+                        </li>
+                        <li>
+                            <a href="../back-refill/backrefill.html">會員儲值紀錄查詢</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">會員管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">合作店家資格審核</a>
+                        </li>
+                        <li>
+                            <a href="#">合作店家帳號管理</a>
+                        </li>
+                        <li>
+                            <a href="../back-member/membermanager.html">一般會員管理</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"> 評論檢舉管理 </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- 左側Nav ↑↑↑  -->
+
+    <div id="page-wrapper">
+        <div id="wrapper-container">
+            <!-- ******內容寫在這邊 ↓↓↓****** -->
+            <button class="show-modal">Show modal 1</button>
+
+
+            <!-- ******內容寫在這邊 ↑↑↑****** -->
+        </div>
+    </div>
+</div>
+<!-- 複製到這裡↑↑↑ -->
+<div class="modaol hidden">
+    <button class="close-modal">&times;</button>
+    <h1>I'm a modal window 😍</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+    </p>
+</div>
+
+<div class="overlay hidden"></div>
+
+
+<!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
+
+<!-- jQuery Js -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<!-- Bootstrap Js -->
+<script src=../resources/back-stage/assets/js/bootstrap.min.js></script>
+<!-- 左側Nav Dropdown -->
+<script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
+<!-- Custom Js -->
+<script src=../resources/back-stage/assets/js/custom-scripts.js></script>
+
+<!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
+<script>
+    const modaol = document.querySelector('.modaol');
+    const overlay = document.querySelector('.overlay');
+    const btnCloseModal = document.querySelector('.close-modal');
+
+    const btnsOpenModal = document.querySelectorAll('.show-modal');
+
+    const openModal = function () {
+        modaol.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+    };
+
+    const closeModal = function () {
+        modaol.classList.add('hidden');
+        overlay.classList.add('hidden');
+    };
+
+    for (let i = 0; i < btnsOpenModal.length; i++) {
+        btnsOpenModal[i].addEventListener('click', openModal);
+    }
+
+    btnCloseModal.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+
+</script>
+
+</body>
+
+</html>
