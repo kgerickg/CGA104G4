@@ -2,6 +2,7 @@ package com.admin.controller;
 
 import static core.util.CommonUtil.json2Pojo;
 import static core.util.CommonUtil.writePojo2Json;
+import static core.util.Constants.GSON;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,16 +24,18 @@ public class CheckPasswordServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		BufferedReader br = request.getReader();
-		System.out.println("br.readLine() = " + br.readLine());
-		final String admPwd = json2Pojo(request, Admin.class).getAdmPwd();
+		System.out.println(br.readLine());
+		final String admPwd = GSON.fromJson(br, Admin.class).getAdmPwd();
 		System.out.println(admPwd);
 		System.out.println(Admin.class);
 		
-		final Admin admin = (Admin) request.getSession().getAttribute("admin");
+		final Admin admin = (Admin) request.getSession().getAttribute("adminId");
+		System.out.println(admin);
 		final Core core = new Core();
 		if (admin == null) {
 			core.setMessage("無會員資訊");
 			core.setSuccessful(false);
+			System.out.println("123");
 		} else {
 			final String currentPassword = admin.getAdmPwd();
 			if (Objects.equals(admPwd, currentPassword)) {

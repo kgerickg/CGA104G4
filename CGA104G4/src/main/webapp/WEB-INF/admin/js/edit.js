@@ -20,7 +20,7 @@
 
     oAdmPwd.addEventListener('blur', checkOldPassword);
   }
-  const data = { admPwd: 'kgerickg' };
+  const data = { oAdmPwd: oAdmPwd.value };
   function checkOldPassword() {
     fetch('checkPassword', {
       method: 'POST',
