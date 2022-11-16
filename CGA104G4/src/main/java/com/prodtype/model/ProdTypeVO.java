@@ -1,31 +1,43 @@
 package com.prodtype.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.prod.model.ProdVO;
+import com.prodtype.model.ProdTypeVO;
+import com.store.model.StoreVO;
 
-public class ProdTypeVO implements java.io.Serializable{
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name="PROD_TYPE")
+public class ProdTypeVO implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="PROD_TYPE_ID")
 	private Integer prodTypeId;
-	private Integer prodTypeName;
-	private Set<ProdVO> prods = new HashSet<ProdVO>();
-	public Integer getProdTypeId() {
-		return prodTypeId;
-	}
-	public void setProdTypeId(Integer prodTypeId) {
-		this.prodTypeId = prodTypeId;
-	}
-	public Integer getProdTypeName() {
-		return prodTypeName;
-	}
-	public void setProdTypeName(Integer prodTypeName) {
-		this.prodTypeName = prodTypeName;
-	}
-	public Set<ProdVO> getProds() {
-		return prods;
-	}
-	public void setProds(Set<ProdVO> prods) {
-		this.prods = prods;
-	}
-}
+	@Column(name = "PROD_TYPE_NAME")
+	private String prodTypeName;
 	
+	@ManyToOne
+	@JoinColumn(name="PROD_TYPE_ID",referencedColumnName = "PROD_TYPE_ID")
+	private List<ProdVO> prodVO;
+}

@@ -66,7 +66,7 @@
         <div class="ord-head">
          <ul>
           <li class="date">訂單成立時間</li>
-          <li class="delivery">商店</li>
+          <li class="delivery">商店（商店編號）</li>
           <li class="amount">訂單金額</li>
           <li>訂單狀態</li>
          </ul>
@@ -80,7 +80,7 @@
           <div class="oct-table-head">
            <ul>
              <li class="date">${ordersVO.ordTime}</li>
-             <li class="delivery">${ordersVO.storeVO.storeName}</li>
+             <li class="delivery">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}）</li>
              <li class="amount">$${ordersVO.ordAmt}</li>
              <li class="status">
               <c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>

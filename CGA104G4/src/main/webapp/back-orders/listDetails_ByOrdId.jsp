@@ -10,7 +10,7 @@
 <head>
 <style>
   table#table-2 {
-	width: 450px;
+	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left:auto; 
