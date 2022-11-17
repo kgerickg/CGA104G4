@@ -18,6 +18,8 @@ import com.orders.model.OrdersVO;
 
 public class OrdersServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		doPost(req, res);
