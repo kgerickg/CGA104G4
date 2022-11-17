@@ -220,14 +220,14 @@ td:last-child{
 			  	<option value="4">訂單已取消</option>
 			  	<option value="5">客訴處理中</option>
 			  </select>
-			    <input type="submit" value="修改"> 
+			    <input type="submit" value="點我修改" style="border-style:none; background-color:transparent; color:blue;"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="updateOrdStat_C">
 			  </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="送出查詢"> 
+			    <input type="submit" value="點我查詢" style="border-style:none; background-color:transparent; color:blue;"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="listDetails_ByOrdId_C"></FORM>
 			</td>
