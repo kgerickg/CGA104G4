@@ -22,11 +22,11 @@
 
     <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
     <style>
-        .show-modal {
+        .show-form {
 
         }
 
-        .close-modal {
+        .close-form {
             position: absolute;
             top: 1.2rem;
             right: 2rem;
@@ -37,12 +37,11 @@
             background: none;
         }
 
-        .modaol {
+        .formBlock {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50%;
             background-color: white;
             padding: 6rem;
             border-radius: 5px;
@@ -59,6 +58,17 @@
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(3px);
             z-index: 305;
+        }
+        .flex-block{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .flex-block div {
+            display: block;
+        }
+        .flex-block div input{
+            width: 100%;
         }
     </style>
 
@@ -161,7 +171,7 @@
     <div id="page-wrapper">
         <div id="wrapper-container">
             <!-- ******內容寫在這邊 ↓↓↓****** -->
-            <button class="show-modal">Show modal 1</button>
+            <button class="show-form">新增優惠活動</button>
 
 
             <!-- ******內容寫在這邊 ↑↑↑****** -->
@@ -169,18 +179,36 @@
     </div>
 </div>
 <!-- 複製到這裡↑↑↑ -->
-<div class="modaol hidden">
-    <button class="close-modal">&times;</button>
-    <h1>I'm a modal window 😍</h1>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-    </p>
+<div class="formBlock flex-block hidden">
+    <button class="close-form">&times;</button>
+    <div class="flex-block">
+        <div>
+            <label for="promoName">活動名稱:</label>
+            <br>
+            <input type="text" id="promoName">
+        </div>
+        <div>
+            <label for="promoVal">活動折扣:</label>
+            <br>
+            <input type="range" id="promoVal" min="0" max="100" step="1" style="width: 80%">
+        </div>
+        <div>
+            <label for="promoStartTime">活動開始時間:</label>
+            <br>
+            <input type="text" id="promoStartTime">
+        </div>
+        <div>
+            <label for="promoFinishTime">活動結束時間:</label>
+            <br>
+            <input type="text" id="promoFinishTime">
+        </div>
+        <div>
+            <label for="promoCont">活動內容:</label>
+            <br>
+            <textarea id="promoCont" rows="5" cols="50"  maxlength="250"></textarea>
+        </div>
+    </div>
+
 </div>
 
 <div class="overlay hidden"></div>
@@ -199,33 +227,31 @@
 
 <!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
 <script>
-    const modaol = document.querySelector('.modaol');
+    const formBlock = document.querySelector('.formBlock');
     const overlay = document.querySelector('.overlay');
-    const btnCloseModal = document.querySelector('.close-modal');
+    const btnCloseForm = document.querySelector('.close-form');
+    const btnsOpen = document.querySelectorAll('.show-form');
 
-    const btnsOpenModal = document.querySelectorAll('.show-modal');
-
-    const openModal = function () {
-        modaol.classList.remove('hidden');
+    function openFormBlock () {
+        formBlock.classList.remove('hidden');
         overlay.classList.remove('hidden');
     };
 
-    const closeModal = function () {
-        modaol.classList.add('hidden');
+    const closeForm = function () {
+        formBlock.classList.add('hidden');
         overlay.classList.add('hidden');
     };
 
-    for (let i = 0; i < btnsOpenModal.length; i++) {
-        btnsOpenModal[i].addEventListener('click', openModal);
+    for (let i = 0; i < btnsOpen.length; i++) {
+        btnsOpen[i].addEventListener('click', openFormBlock);
     }
 
-    btnCloseModal.addEventListener('click', closeModal);
-
-    overlay.addEventListener('click', closeModal);
+    btnCloseForm.addEventListener('click', closeForm);
+    overlay.addEventListener('click', closeForm);
 
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-            closeModal();
+        if (e.key === 'Escape' && !formBlock.classList.contains('hidden')) {
+            closeForm();
         }
     });
 
