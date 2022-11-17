@@ -83,34 +83,6 @@ public class LkComplMemberServlet extends HttpServlet {
 	}
 	
 
-	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LkComplVO lkComplVO = new LkComplVO();
-		List<String> errorMsgs = new LinkedList<String>();
-		request.setAttribute("errorMsgs", errorMsgs);
-
-		Integer lkCcStat = Integer.parseInt(request.getParameter("lkCcStat"));
-		Integer lkRfdStat = Integer.parseInt(request.getParameter("lkRfdStat"));
-		Integer lkCcId = Integer.parseInt(request.getParameter("lkCcId"));
-		Integer lkOrdId = Integer.parseInt(request.getParameter("lkOrdId"));
-		String lkCcCont = request.getParameter("lkCcCont");
-
-		lkComplVO.setLkCcStat(lkCcStat);
-		lkComplVO.setLkRfdStat(lkRfdStat);
-		lkComplVO.setLkCcId(lkCcId);
-		lkComplVO.setLkOrdId(lkOrdId);
-		lkComplVO.setLkCcCont(lkCcCont);
-
-		if (!errorMsgs.isEmpty()) {
-			request.setAttribute("lkcomplVO", lkComplVO);
-			RequestDispatcher failureView = request.getRequestDispatcher("/front-lkcompl/StoreUpdateLkCompl.jsp");
-			failureView.forward(request, response);
-			return;// 程式中斷
-		}
-		LkComplService lkcomplSvc = new LkComplService();
-		lkcomplSvc.insert(lkComplVO);
-		selectAll(request, response);
-	}
-
 	private void selectAll(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		LkComplService lkcomplSvc = new LkComplService();
@@ -138,7 +110,7 @@ public class LkComplMemberServlet extends HttpServlet {
 	private void selectBymemId(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		LkComplService lkcomplSvc = new LkComplService();
-		Integer lkCcId = Integer.parseInt(request.getParameter("lkCcId"));
+		Integer lkCcId = Integer.parseInt(request.getParameter("memId"));
 
 		LkComplVO lkComplVO = lkcomplSvc.selectByLkCcId(lkCcId);
 
@@ -146,6 +118,34 @@ public class LkComplMemberServlet extends HttpServlet {
 		String url = "/front-lkcompl/StoreListOneLkCompl.jsp";
 		RequestDispatcher successView = request.getRequestDispatcher(url);
 		successView.forward(request, response);
+	}
+	
+	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LkComplVO lkComplVO = new LkComplVO();
+		List<String> errorMsgs = new LinkedList<String>();
+		request.setAttribute("errorMsgs", errorMsgs);
+
+		Integer lkCcStat = Integer.parseInt(request.getParameter("lkCcStat"));
+		Integer lkRfdStat = Integer.parseInt(request.getParameter("lkRfdStat"));
+		Integer lkCcId = Integer.parseInt(request.getParameter("lkCcId"));
+		Integer lkOrdId = Integer.parseInt(request.getParameter("lkOrdId"));
+		String lkCcCont = request.getParameter("lkCcCont");
+
+		lkComplVO.setLkCcStat(lkCcStat);
+		lkComplVO.setLkRfdStat(lkRfdStat);
+		lkComplVO.setLkCcId(lkCcId);
+		lkComplVO.setLkOrdId(lkOrdId);
+		lkComplVO.setLkCcCont(lkCcCont);
+
+		if (!errorMsgs.isEmpty()) {
+			request.setAttribute("lkcomplVO", lkComplVO);
+			RequestDispatcher failureView = request.getRequestDispatcher("/front-lkcompl/StoreUpdateLkCompl.jsp");
+			failureView.forward(request, response);
+			return;// 程式中斷
+		}
+		LkComplService lkcomplSvc = new LkComplService();
+		lkcomplSvc.insert(lkComplVO);
+		selectAll(request, response);
 	}
 
 }

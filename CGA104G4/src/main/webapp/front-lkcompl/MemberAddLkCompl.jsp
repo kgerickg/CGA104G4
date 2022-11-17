@@ -103,7 +103,7 @@ margin-bottom: 20px;
 			<li>
 
 				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
-					<b style="color: black">輸入訂單編號：</b> <br>
+					<b style="color: black">輸入訂單編號：</b> <br><!-- 抓取會員編號中的訂單 -->
 					<input type="text" name="lkOrderId" style="border-radius: 8px ; border: .5px solid grey"> 
 				<br><br>
 					<b style="color: black">輸入客訴內容：</b><br>
