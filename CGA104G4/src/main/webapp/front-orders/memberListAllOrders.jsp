@@ -94,7 +94,7 @@
              
            </ul>
           <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="">
-			    <input type="submit" value="訂單明細"> 
+			    <input type="submit" value="查看訂單明細" style="border-style:none; background-color:transparent; color:#5D6978;"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="listDetails_ByOrdId_B"></FORM>
             <a href="#" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>

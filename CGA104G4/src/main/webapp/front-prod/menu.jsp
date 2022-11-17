@@ -1,9 +1,15 @@
-<!doctype html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.prod.model.*"%>
+
+<jsp:useBean id="prodSvc" scope="page" class="com.prod.model.ProdService" />
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    
     <!-- 響應式頁面 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,19 +27,21 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
-   
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    
+
     <!-- 請將覆蓋用的css放置此註解下方 -->
-   
+
+
     <!-- 頁籤顯示的title -->
 	<title>MENU</title>
 	
 </head>
 
 <body>
-    
+    <script src="../resources/js/membernav.js"></script>
+    <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
+     <!--下面可自由新增內容 -->
     <div class="page-loading">
         <img src="../resources/images/loader.gif" alt="">
     </div><!--page-loading end-->
@@ -118,85 +126,118 @@
                     <div class="options">
                         <div class="option-isotop">
                             <ul id="filter" class="option-set filters-nav" data-option-key="filter">
-                                <li><a class="selected" data-option-value=".meat">麵類</a></li>
-                                <li><a data-option-value=".pizza">飯類</a></li>
-                                <li><a data-option-value=".fastfood">麵包類</a></li>
-                                <li><a data-option-value=".sushi">小菜類</a></li>
-                                <li><a data-option-value=".vegitarian">飲品</a></li>
-                                <li><a data-option-value=".vegitarian">點心類</a></li>
-                                <li><a data-option-value=".vegitarian">湯品</a></li>
-                                <li><a data-option-value=".vegitarian">其他</a></li>
+                 				<c:forEach var="prodVO" items="${prodSvc.getProdTypeIdsByStoreId(9)}">
+                               	 <li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>
+                    			</c:forEach>
                             </ul>
                         </div>
                     </div><!--options end-->
                     <div class="row">
                         <div class="masonary">
-                            <div class="col-lg-4 col-md-4 col-sm-6 meat pizza">
+                         <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(1)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 1">
                                 <div class="pd-item">
                                     <div class="pd-thumbnail">
                                         <img src="../resources/images/blg1.jpg" alt="" class="w-100">
                                     </div>
-                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">Rib-eye Steaks</a> </h3>
-                                    <p>Few things are better than a properly grilled steak.</p>
-                                    <strong class="semi-bold">$15.69</strong>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
                                     <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 meat fastfood">
+                             </c:forEach>
+                                    <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(2)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 2">
                                 <div class="pd-item">
                                     <div class="pd-thumbnail">
                                         <img src="../resources/images/blg2.jpg" alt="" class="w-100">
                                     </div>
-                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">Top Sirloin Steaks</a> </h3>
-                                    <p>Few things are better than a properly grilled steak.</p>
-                                    <strong class="semi-bold">$25.39</strong>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title=""></a>${prodVO.prodName}</h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
                                     <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 meat vegitarian">
+                                    </c:forEach>
+                                     <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(3)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 3">
                                 <div class="pd-item">
                                     <div class="pd-thumbnail">
                                         <img src="../resources/images/blg3.jpg" alt="" class="w-100">
                                     </div>
-                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">T-Bone Steaks</a> </h3>
-                                    <p>Few things are better than a properly grilled steak.</p>
-                                    <strong class="semi-bold">$18.99</strong>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
                                     <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 meat sushi">
+                            </c:forEach>
+                             <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(4)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 4">
                                 <div class="pd-item">
                                     <div class="pd-thumbnail">
                                         <img src="../resources/images/blg4.jpg" alt="" class="w-100">
                                     </div>
-                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">Strip Steaks</a> </h3>
-                                    <p>Few things are better than a properly grilled steak.</p>
-                                    <strong class="semi-bold">$16.89</strong>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
                                     <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 meat sushi fastfood">
+                             </c:forEach>
+                             <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(5)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 5">
                                 <div class="pd-item">
                                     <div class="pd-thumbnail">
                                         <img src="../resources/images/blg5.jpg" alt="" class="w-100">
                                     </div>
-                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">Rib-eye Steaks</a> </h3>
-                                    <p>Few things are better than a properly grilled steak.</p>
-                                    <strong class="semi-bold">$15.69</strong>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
                                     <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 meat vegitarian fastfood">
+                             </c:forEach>
+                               <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(6)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 6">
                                 <div class="pd-item">
                                     <div class="pd-thumbnail">
                                         <img src="../resources/images/blg6.jpg" alt="" class="w-100">
                                     </div>
-                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">Top Sirloin Steaks</a> </h3>
-                                    <p>Few things are better than a properly grilled steak.</p>
-                                    <strong class="semi-bold">$25.39</strong>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
                                     <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
                                 </div>
                             </div>
+                               </c:forEach>
+                               <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(7)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 7">
+                                <div class="pd-item">
+                                    <div class="pd-thumbnail">
+                                        <img src="../resources/images/blg1.jpg" alt="" class="w-100">
+                                    </div>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
+                                    <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
+                                </div>
+                            </div>
+                             </c:forEach>
+                              <c:forEach var="prodVO" items="${prodSvc.getProdsByProdTypeId(8)}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 meat 8">
+                                <div class="pd-item">
+                                    <div class="pd-thumbnail">
+                                        <img src="../resources/images/blg1.jpg" alt="" class="w-100">
+                                    </div>
+                                    <h3 class="semi-bold text-capitalize"><a href="#" title="">${prodVO.prodName}</a> </h3>
+                                    <p>${prodVO.prodCont}</p>
+                                    <strong class="semi-bold">$${prodVO.prodPrc}</strong>
+                                    <a href="cart.html" title="" class="btn-default gradient-bg half-radius height-2">加入購物車 <span></span></a>
+                                </div>
+                            </div>
+                             </c:forEach>
                         </div><!--masonary end-->
                     </div>
                 </div><!--popular-dishes end-->

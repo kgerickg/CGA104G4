@@ -2,6 +2,7 @@ package com.prod.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 public class ProdService {
 
@@ -11,7 +12,7 @@ public class ProdService {
 		dao = new ProdJDBCDAO();
 	}
 
-	public ProdVO addProd(Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodStat, Date prodTime) {
+	public ProdVO addProd(Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc,  Date prodTime, Integer prodStat) {
 
 		ProdVO ProdVO = new ProdVO();
 
@@ -19,6 +20,7 @@ public class ProdService {
 		ProdVO.setStoreId(storeId);
 		ProdVO.setProdName(prodName);
 		ProdVO.setProdCont(prodCont);
+		ProdVO.setProdPrc(prodPrc);
 		ProdVO.setProdStat(prodStat);
 		ProdVO.setProdTime(prodTime);
 
@@ -32,7 +34,7 @@ public class ProdService {
 		dao.insert(ProdVO);
 	}
 	
-	public ProdVO updateProd(Integer prodId, Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodStat, Date prodTime) {
+	public ProdVO updateProd(Integer prodId, Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc, Date prodTime, Integer prodStat) {
 
 		ProdVO ProdVO = new ProdVO();
 
@@ -41,6 +43,7 @@ public class ProdService {
 		ProdVO.setStoreId(storeId);
 		ProdVO.setProdName(prodName);
 		ProdVO.setProdCont(prodCont);
+		ProdVO.setProdStat(prodPrc);
 		ProdVO.setProdStat(prodStat);
 		ProdVO.setProdTime(prodTime);
 		dao.update(ProdVO);
@@ -63,5 +66,13 @@ public class ProdService {
 
 	public List<ProdVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public Set<ProdVO> getProdTypeIdsByStoreId(Integer storeId) {
+		return dao.getProdTypeIdsByStoreId(storeId);
+	}
+	
+	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId) {
+		return dao.getProdsByProdTypeId(prodTypeId);
 	}
 }
