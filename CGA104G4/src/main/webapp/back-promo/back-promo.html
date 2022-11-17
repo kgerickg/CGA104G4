@@ -22,8 +22,20 @@
 
     <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
     <style>
-        .show-form {
-
+        .promoIncrease {
+            margin: 2rem 3rem;
+            background-color: black;
+            color: white;
+            border-radius: 3px;
+            font-size: 1.8rem;
+            padding: 5px 5px;
+            box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+        }
+        .formTitle{
+            font-size: 2.5rem;
+            align-self: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         .close-form {
@@ -69,7 +81,27 @@
         }
         .flex-block div input{
             width: 100%;
+            margin-top: 0.2rem;
         }
+        .flex-block div label{
+            margin-top: 0.5rem;
+        }
+        #promoVal{
+            width: 80%;
+            display: inline-block;
+        }
+       #promoValSpan{
+           margin-left: 2rem;
+           font-size: 1.6rem;
+       }
+       .formBtn{
+           background-color: black;
+           color: white;
+           border-radius: 5px;
+           font-size: 2rem;
+           font-weight: 500;
+       }
+
     </style>
 
 </head>
@@ -171,7 +203,7 @@
     <div id="page-wrapper">
         <div id="wrapper-container">
             <!-- ******內容寫在這邊 ↓↓↓****** -->
-            <button class="show-form">新增優惠活動</button>
+            <button class="promoIncrease">新增儲值優惠活動</button>
 
 
             <!-- ******內容寫在這邊 ↑↑↑****** -->
@@ -181,6 +213,7 @@
 <!-- 複製到這裡↑↑↑ -->
 <div class="formBlock flex-block hidden">
     <button class="close-form">&times;</button>
+    <div class="formTitle">新增儲值優惠活動</div>
     <div class="flex-block">
         <div>
             <label for="promoName">活動名稱:</label>
@@ -190,26 +223,32 @@
         <div>
             <label for="promoVal">活動折扣:</label>
             <br>
-            <input type="range" id="promoVal" min="0" max="100" step="1" style="width: 80%">
+            <input type="range" id="promoVal" min="0" max="100" step="1">
+            <span id="promoValSpan"></span>
         </div>
         <div>
-            <label for="promoStartTime">活動開始時間:</label>
+            <label for="promoStartTime">開始時間:</label>
             <br>
-            <input type="text" id="promoStartTime">
+            <input type="datetime-local" id="promoStartTime">
         </div>
         <div>
-            <label for="promoFinishTime">活動結束時間:</label>
+            <label for="promoFinishTime">結束時間:</label>
             <br>
-            <input type="text" id="promoFinishTime">
+            <input type="datetime-local" id="promoFinishTime">
         </div>
         <div>
             <label for="promoCont">活動內容:</label>
             <br>
-            <textarea id="promoCont" rows="5" cols="50"  maxlength="250"></textarea>
+            <textarea id="promoCont" rows="5" cols="50"  maxlength="250" style="resize: none"></textarea>
         </div>
+    </div>
+    <div style="align-self: center;margin-top: 2rem">
+        <button class="formBtn">新增</button>
+        <button class="formBtn">取消</button>
     </div>
 
 </div>
+
 
 <div class="overlay hidden"></div>
 
@@ -230,22 +269,22 @@
     const formBlock = document.querySelector('.formBlock');
     const overlay = document.querySelector('.overlay');
     const btnCloseForm = document.querySelector('.close-form');
-    const btnsOpen = document.querySelectorAll('.show-form');
+    const promoIncrease = document.querySelector('.promoIncrease');
+    const promoVal = document.querySelector('#promoVal');
+    const promoValSpan = document.querySelector('#promoValSpan');
 
     function openFormBlock () {
         formBlock.classList.remove('hidden');
         overlay.classList.remove('hidden');
     };
 
-    const closeForm = function () {
+    function closeForm () {
         formBlock.classList.add('hidden');
         overlay.classList.add('hidden');
     };
 
-    for (let i = 0; i < btnsOpen.length; i++) {
-        btnsOpen[i].addEventListener('click', openFormBlock);
-    }
 
+    promoIncrease.addEventListener('click', openFormBlock);
     btnCloseForm.addEventListener('click', closeForm);
     overlay.addEventListener('click', closeForm);
 
@@ -254,6 +293,12 @@
             closeForm();
         }
     });
+
+    promoValSpan.innerHTML = (promoVal.value/10).toFixed(1) +"折";
+
+    promoVal.addEventListener('mousemove', function () {
+        promoValSpan.innerHTML = (promoVal.value/10).toFixed(1) +"折";
+    })
 
 </script>
 

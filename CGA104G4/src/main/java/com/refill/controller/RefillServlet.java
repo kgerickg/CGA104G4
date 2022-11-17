@@ -257,7 +257,6 @@ public class RefillServlet extends HttpServlet {
                 .append(request.getContextPath()).toString();
         try {
             String result = refillService.buyToken(refillToken, url, memId);
-
             if (result == null) {
                 JsonMsg.put("erroMsg", "綠界支付連接異常，請稍後在試");
                 out.write(JsonMsg.toString());
