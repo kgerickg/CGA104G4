@@ -30,6 +30,11 @@ public class LkComplService {
 	public void update(LkComplVO lkComplVO) {
 		System.out.println("修改service");
 	dao.update(lkComplVO);
+}
+	
+	public void goUpdate(LkComplVO lkComplVO) {
+		System.out.println("go修改service");
+	dao.goUpdate(lkComplVO);
 	
 
 }

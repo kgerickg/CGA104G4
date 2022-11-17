@@ -8,7 +8,7 @@ header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center">
             <div class="logo">
-                <a href="index.html" title="">
+                <a href="${webCtx}/front-index/index.html" title="">
                     <img class="logoimg" src="${webCtx}/resources/images/1.png" alt="">
                 </a>
             </div>
@@ -27,7 +27,7 @@ header.innerHTML =
                     <li><a href="" >福袋商品管理+</a>
                         <ul>
                             <li><a href="" >福袋變更</a></li>
-                            <li><a href="" >福袋訂單管理</a></li>
+                            <li><a href="${webCtx}/front-lkorder/StoreIndexLkorder.jsp" >福袋訂單管理</a></li>
                         </ul>
                      </li>
                  </ul>
