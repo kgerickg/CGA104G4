@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.store.model.*"%>
 
@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>·|­û¸ê®Æ­×§ï</title>
+<title>æœƒå“¡è³‡æ–™ä¿®æ”¹</title>
 
 <style>
   table#table-1 {
@@ -47,16 +47,16 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>·|­û¸ê®Æ­×§ï</h3>
-		 <h4><a href="select_page.jsp">¦^­º­¶</a></h4>
+		 <h3>æœƒå“¡è³‡æ–™ä¿®æ”¹</h3>
+		 <h4><a href="select_page.jsp">å›žé¦–é </a></h4>
 	</td></tr>
 </table>
 
-<h3>¸ê®Æ­×§ï:</h3>
+<h3>è³‡æ–™ä¿®æ”¹:</h3>
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -67,66 +67,66 @@
 <FORM METHOD="post" ACTION="store.do" name="form1">
 <table>
 	<tr>
-		<td>­û¤u½s¸¹:<font color=red><b>*</b></font></td>
+		<td>å“¡å·¥ç·¨è™Ÿ:<font color=red><b>*</b></font></td>
 		<td><%=storeVO.getStoreId()%></td>
 	</tr>
 	<tr>
-		<td>·|­û±b¸¹:</td>
+		<td>æœƒå“¡å¸³è™Ÿ:</td>
 		<td><input type="TEXT" name="storeAcc" size="45" 
 			 value="<%= (storeVO==null)? "aaa" : storeVO.getStoreAcc()%>" /></td>
 	</tr>
 	<tr>
-		<td>·|­û±K½X:</td>
+		<td>æœƒå“¡å¯†ç¢¼:</td>
 		<td><input type="TEXT" name="storePwd" size="45"
 			 value="<%= (storeVO==null)? "asdfg1234" : storeVO.getStorePwd()%>" /></td>
 	</tr>
 	<tr>
-		<td>·|­û¦WºÙ:</td>
+		<td>æœƒå“¡åç¨±:</td>
 		<td><input type="TEXT" name="storeName" size="45"
 			 value="<%= (storeVO==null)? "aaa" : storeVO.getStoreName()%>" /></td>
 	</tr>
 	<tr>
-		<td>·|­û²Î½s:</td>
+		<td>æœƒå“¡çµ±ç·¨:</td>
 		<td><input type="TEXT" name="storeGui" size="45"
 			 value="<%= (storeVO==null)? "12345678" : storeVO.getStoreGui()%>" /></td>
 	</tr>
 	<tr>
-		<td>­t³d¤H:</td>
+		<td>è² è²¬äºº:</td>
 		<td><input type="TEXT" name="storeRep" size="45"
 			 value="<%= (storeVO==null)? "aaa" : storeVO.getStoreRep()%>" /></td>
 	</tr>
 	<tr>
-		<td>©±®a¹q¸Ü:</td>
+		<td>åº—å®¶é›»è©±:</td>
 		<td><input type="TEXT" name="storeTel" size="45"
 			 value="<%= (storeVO==null)? "25252525" : storeVO.getStoreTel()%>" /></td>
 	</tr>
 	<tr>
-		<td>©±®a¶Ç¯u:</td>
+		<td>åº—å®¶å‚³çœŸ:</td>
 		<td><input type="TEXT" name="storeFax" size="45"
 			 value="<%= (storeVO==null)? "25252525" : storeVO.getStoreFax()%>" /></td>
 	</tr>
 	<tr>
-		<td>©±®a¦a§}:</td>
+		<td>åº—å®¶åœ°å€:</td>
 		<td><input type="TEXT" name="storeAd" size="45"
-			 value="<%= (storeVO==null)? "®ç¶é¬O¤¤Ãc°Ïxxx¸ô" : storeVO.getStoreAd()%>" /></td>
+			 value="<%= (storeVO==null)? "æ¡ƒåœ’æ˜¯ä¸­å£¢å€xxxè·¯" : storeVO.getStoreAd()%>" /></td>
 	</tr>
 	<tr>
-		<td>Ápµ¸¤H:</td>
+		<td>è¯çµ¡äºº:</td>
 		<td><input type="TEXT" name="storeCon" size="45"
 			 value="<%= (storeVO==null)? "bbb" : storeVO.getStoreCon()%>" /></td>
 	</tr>
 	<tr>
-		<td>Ápµ¸¤H¹q¸Ü:</td>
+		<td>è¯çµ¡äººé›»è©±:</td>
 		<td><input type="TEXT" name="storeConTel" size="45"
 			 value="<%= (storeVO==null)? "25252525" : storeVO.getStoreConTel()%>" /></td>
 	</tr>
 	<tr>
-		<td>Ápµ¸¤H¦a§}:</td>
+		<td>è¯çµ¡äººåœ°å€:</td>
 		<td><input type="TEXT" name="storeConAd" size="45"
 			 value="<%= (storeVO==null)? "25252525" : storeVO.getStoreConAd()%>" /></td>
 	</tr>
 	<tr>
-		<td>©±®a«H½c:</td>
+		<td>åº—å®¶ä¿¡ç®±:</td>
 		<td><input type="TEXT" name="storeEmail" size="45"
 			 value="<%= (storeVO==null)? "aaa@yahoo.com.tw" : storeVO.getStoreEmail()%>" /></td>
 	</tr>
@@ -137,5 +137,5 @@
 <br>
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="storeId" value="<%=storeVO.getStoreId()%>">
-<input type="submit" value="°e¥X­×§ï"></FORM>
+<input type="submit" value="é€å‡ºä¿®æ”¹"></FORM>
 </body>
