@@ -2,6 +2,8 @@ package com.orders.model;
 
 import java.sql.Date;
 
+import com.detail.model.DetailService;
+import com.detail.model.DetailVO;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 import com.store.model.StoreService;
