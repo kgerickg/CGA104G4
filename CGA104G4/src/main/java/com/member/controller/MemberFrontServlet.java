@@ -47,10 +47,10 @@ public class MemberFrontServlet extends HttpServlet {
                 updatePassword(request, response);
                 break;
             case "getMemberInfo":
-                getMemberInfo(request,response);
+                getMemberInfo(request, response);
                 break;
             case "updateData":
-                updateData(request,response);
+                updateData(request, response);
                 break;
         }
     }
@@ -60,7 +60,7 @@ public class MemberFrontServlet extends HttpServlet {
         JSONObject MsgsJson = new JSONObject();
         Writer out = response.getWriter();
 
-        Integer memId =(Integer) request.getSession().getAttribute("memId");
+        Integer memId = (Integer) request.getSession().getAttribute("memId");
 
         // 姓名驗證
         String memName = request.getParameter("memName");
@@ -99,7 +99,7 @@ public class MemberFrontServlet extends HttpServlet {
         }
 
         // 圖片
-        byte[] memPic=null;
+        byte[] memPic = null;
         InputStream memPicis = null;
         Part memPicPart = request.getPart("memPic");
         if (memPicPart != null) {
@@ -107,7 +107,7 @@ public class MemberFrontServlet extends HttpServlet {
                 memPicis = memPicPart.getInputStream();
                 memPic = new byte[memPicis.available()];
                 memPicis.read(memPic);
-                request.getSession().setAttribute("memPic",memPic);
+                request.getSession().setAttribute("memPic", memPic);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -131,23 +131,15 @@ public class MemberFrontServlet extends HttpServlet {
     }
 
     private void getMemberInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        JSONObject memberJson = new JSONObject();
+
         MemberService memSvc = new MemberService();
         Writer out = response.getWriter();
 
-        Integer memId =(Integer) request.getSession().getAttribute("memId");
+        Integer memId = (Integer) request.getSession().getAttribute("memId");
 
-
-       MemberVO memberVO = memSvc.findByMemId(memId);
-
-       memberJson.put("memEmail",memberVO.getMemEmail());
-       memberJson.put("memName",memberVO.getMemName());
-       memberJson.put("memMobile",memberVO.getMemMobile());
-       memberJson.put("memCity",memberVO.getMemCity());
-       memberJson.put("memDist",memberVO.getMemDist());
-       memberJson.put("memAdr",memberVO.getMemAdr());
-
-       out.write(memberJson.toString());
+        MemberVO memberVO = memSvc.findByMemId(memId);
+        JSONObject memberJson = new JSONObject(memberVO);
+        out.write(memberJson.toString());
 
 
     }
@@ -325,7 +317,7 @@ public class MemberFrontServlet extends HttpServlet {
 
     }
 
-    public void logout(HttpServletRequest request, HttpServletResponse response)  {
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("memId");
         request.getSession().invalidate();
     }

@@ -1,6 +1,6 @@
 package com.member.model;
 
-import com.refill.model.RefillVO;
+
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
@@ -87,8 +87,7 @@ public class MemberDAO implements MemberDAO_interface {
         }else {
             sb.append("'%").append(memEmail).append("%'");
         }
-        System.out.println(sb.toString());
-        String selectSQL = "select * from Member where MEM_EMAIL like"+ sb.toString();
+        String selectSQL = "select * from Member where MEM_EMAIL like"+ sb;
         NativeQuery<MemberVO> nativeQuery =
                 session.createNativeQuery(selectSQL, MemberVO.class);
         List<MemberVO> members = nativeQuery.list();

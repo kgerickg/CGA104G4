@@ -19,33 +19,96 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <!-- Custom Styles-->
     <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-
 
     <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
     <style>
-        #selectBar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+        .promoIncrease {
+            margin: 2rem 3rem;
+            background-color: black;
+            color: white;
+            border-radius: 3px;
+            font-size: 1.8rem;
+            padding: 5px 5px;
+            box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+        }
+        .formTitle{
+            font-size: 2.5rem;
+            align-self: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
-        #nameSelector, #refillIdSelector, #memberIdSelector {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-
+        .close-form {
+            position: absolute;
+            top: 1.2rem;
+            right: 2rem;
+            font-size: 5rem;
+            color: #333;
+            cursor: pointer;
+            border: none;
+            background: none;
         }
+
+        .formBlock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 6rem;
+            border-radius: 5px;
+            box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+            z-index: 310;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 305;
+        }
+        .flex-block{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .flex-block div {
+            display: block;
+        }
+        .flex-block div input{
+            width: 100%;
+            margin-top: 0.2rem;
+        }
+        .flex-block div label{
+            margin-top: 0.5rem;
+        }
+        #promoVal{
+            width: 80%;
+            display: inline-block;
+        }
+       #promoValSpan{
+           margin-left: 2rem;
+           font-size: 1.6rem;
+       }
+       .formBtn{
+           background-color: black;
+           color: white;
+           border-radius: 5px;
+           font-size: 2rem;
+           font-weight: 500;
+       }
+
     </style>
 
 </head>
 
 
 <body>
-
 <!-- 從這複製↓↓↓ -->
-
 <div id="wrapper">
     <!-- 上方Nav ↓↓↓  -->
     <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -140,154 +203,105 @@
     <div id="page-wrapper">
         <div id="wrapper-container">
             <!-- ******內容寫在這邊 ↓↓↓****** -->
-            <section id="selectBar">
-                <div id="memberIdSelector">
-                    <div>依會員編號:</div>
-                    <input type="text" size="9" id="memberIdtext">
-                    <button id="memberIdbutton">搜索</button>
-                </div>
-
-                <div id="refillIdSelector">
-                    <div>依儲值編號:</div>
-                    <input type="text" size="9" id="refillIdtext">
-                    <button id="refillIdbutton">搜索</button>
-                </div>
-
-                <div id="nameSelector">
-                    <div>依會員帳號:</div>
-                    <input type="text" size="16" id="nameInput">
-                </div>
-
-                <div id="ShowAll">
-                    <button id="selectAll">查詢全部儲值紀錄</button>
-                </div>
-            </section>
-            <section id="errorSection" style="display: flex;justify-content: center;margin-top: 1.5rem">
-                <div style="font-size: 2rem;color: red" id="errodiv">
-                </div>
-            </section>
-            <div id="tablediv">
-                <table id="table_id" class="row-border hover"></table>
-            </div>
-
+            <button class="promoIncrease">新增儲值優惠活動</button>
 
 
             <!-- ******內容寫在這邊 ↑↑↑****** -->
         </div>
     </div>
-
 </div>
 <!-- 複製到這裡↑↑↑ -->
+<div class="formBlock flex-block hidden">
+    <button class="close-form">&times;</button>
+    <div class="formTitle">新增儲值優惠活動</div>
+    <div class="flex-block">
+        <div>
+            <label for="promoName">活動名稱:</label>
+            <br>
+            <input type="text" id="promoName">
+        </div>
+        <div>
+            <label for="promoVal">活動折扣:</label>
+            <br>
+            <input type="range" id="promoVal" min="0" max="100" step="1">
+            <span id="promoValSpan"></span>
+        </div>
+        <div>
+            <label for="promoStartTime">開始時間:</label>
+            <br>
+            <input type="datetime-local" id="promoStartTime">
+        </div>
+        <div>
+            <label for="promoFinishTime">結束時間:</label>
+            <br>
+            <input type="datetime-local" id="promoFinishTime">
+        </div>
+        <div>
+            <label for="promoCont">活動內容:</label>
+            <br>
+            <textarea id="promoCont" rows="5" cols="50"  maxlength="250" style="resize: none"></textarea>
+        </div>
+    </div>
+    <div style="align-self: center;margin-top: 2rem">
+        <button class="formBtn">新增</button>
+        <button class="formBtn">取消</button>
+    </div>
+
+</div>
+
+
+<div class="overlay hidden"></div>
 
 
 <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
 
+<!-- jQuery Js -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <!-- Bootstrap Js -->
 <script src=../resources/back-stage/assets/js/bootstrap.min.js></script>
 <!-- 左側Nav Dropdown -->
 <script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
 <!-- Custom Js -->
 <script src=../resources/back-stage/assets/js/custom-scripts.js></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-
 
 <!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
+<script>
+    const formBlock = document.querySelector('.formBlock');
+    const overlay = document.querySelector('.overlay');
+    const btnCloseForm = document.querySelector('.close-form');
+    const promoIncrease = document.querySelector('.promoIncrease');
+    const promoVal = document.querySelector('#promoVal');
+    const promoValSpan = document.querySelector('#promoValSpan');
+
+    function openFormBlock () {
+        formBlock.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+    };
+
+    function closeForm () {
+        formBlock.classList.add('hidden');
+        overlay.classList.add('hidden');
+    };
+
+
+    promoIncrease.addEventListener('click', openFormBlock);
+    btnCloseForm.addEventListener('click', closeForm);
+    overlay.addEventListener('click', closeForm);
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !formBlock.classList.contains('hidden')) {
+            closeForm();
+        }
+    });
+
+    promoValSpan.innerHTML = (promoVal.value/10).toFixed(1) +"折";
+
+    promoVal.addEventListener('mousemove', function () {
+        promoValSpan.innerHTML = (promoVal.value/10).toFixed(1) +"折";
+    })
+
+</script>
 
 </body>
-
-<script>
-
-    document.querySelector("#nameInput").addEventListener("input", async function () {
-        let memEmail = $("#nameInput").val();
-        let path = window.location.pathname;
-        let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/refill/refill.do?action=selectByMemEmail&memEmail=" + memEmail;
-        let response = await fetch(url, {method: 'get'}).then(e => e.json())
-
-        if (!response.state) {
-            $("#errodiv").html(response.refillerror);
-            $("#tablediv").hide();
-            return;
-        }
-
-        $("#errodiv").html("");
-        let refillRecord = response.refills;
-        showTokenRefill(refillRecord);
-
-
-    })
-
-
-    $("#selectAll").click(async function () {
-        let path = window.location.pathname;
-        let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/refill/refill.do?action=selectAll"
-        let response = await fetch(url, {method: 'get'}).then(e => e.json());
-        $("#errodiv").html("");
-        let refillRecord = response.refills;
-        showTokenRefill(refillRecord);
-    })
-
-    $("#memberIdbutton").click(async function () {
-        let memId = $("#memberIdtext").val();
-        let path = window.location.pathname;
-        let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/refill/refill.do?action=selectByMemId&memId=" + memId;
-        let response = await fetch(url, {method: 'get'}).then(e => e.json());
-        if (!response.state) {
-            $("#errodiv").html(response.refillerror);
-            $("#tablediv").hide();
-            return;
-        }
-        $("#errodiv").html("");
-        let refillRecord = response.refills;
-        showTokenRefill(refillRecord);
-    })
-
-    $("#refillIdbutton").click(async function () {
-        let refillId = $("#refillIdtext").val();
-
-        let path = window.location.pathname;
-        let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/refill/refill.do?action=selectByRefillId&refillId=" + refillId;
-        let response = await fetch(url, {method: 'get'}).then(e => e.json());
-        if (!response.state) {
-            $("#errodiv").html(response.refillerror);
-            $("#tablediv").hide();
-            return;
-        }
-        $("#errodiv").html("");
-        let refillRecord = response.refills;
-        showTokenRefill(refillRecord);
-    })
-
-
-    function showTokenRefill(refillRecord) {
-        $("#tablediv").show();
-        $('#table_id').DataTable({
-            "dom": ` <'row'<'col-sm-12'tr>>
-                         <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>`,
-            "pageLength": 5,
-            "data": refillRecord,
-            "autoWidth": true,
-            "destroy": true,
-            "searching": false,
-            "lengthChange": false,
-            "columns": [
-                {data: 'RefillId', title: "儲值編號"},
-                {data: 'memId', title: "會員編號"},
-                {data: 'memEmail', title: "會員帳號"},
-                {data: 'memName', title: "會員姓名"},
-                {data: 'refillTime', title: "儲值時間"},
-                {data: 'RefillAmt', title: "花費金額"},
-                {data: 'RefillToken', title: "取得點數"},
-            ],
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/zh_Hant.json"
-            },
-
-        });
-    }
-</script>
 
 </html>
