@@ -165,10 +165,12 @@ thead th {
 					<td>已完成</td>
 				</c:if>
 
-				<td><a
+				<td>
+				<a
 					href=${pageContext.request.contextPath}/front-lkcompl/StoreUpdateLkCompl.jsp>
 						<input type="submit" value="修改" class="btn-secondary">
-				</a></td>
+				</a>
+				</td>
 
 
 			</tr>

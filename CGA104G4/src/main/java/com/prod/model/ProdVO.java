@@ -1,55 +1,64 @@
 package com.prod.model;
 
-import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.prodtype.model.ProdTypeVO;
-import com.store.model.StoreVO;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name="PROD")
-public class ProdVO implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="PROD_ID")
+public class ProdVO implements java.io.Serializable{
+	
 	private Integer prodId;
-	@Column(name="STORE_ID")
-	private Integer storeId;
-	@Column(name = "PROD_TYPE_ID")
 	private Integer prodTypeId;
-	@Column(name = "PROD_STAT")
-	private Integer prodStat;
-	@Column(name = "PROD_NAME")
+	private Integer storeId;
 	private String prodName;
-	@Column(name="PROD_CONT")
 	private String prodCont;
-	@Column(name="PROD_PRC")
 	private Integer prodPrc;
-	@Column(name="PROD_TIME")
 	private Date prodTime;
-	@OneToMany
-	@JoinColumn(name="STORE_ID",referencedColumnName = "STORE_ID")
-	private StoreVO storeVO;
-	@OneToMany
-	@JoinColumn(name="PROD_TYPE_ID",referencedColumnName = "PROD_TYPE_ID")
-	private ProdTypeVO prodTypeVO;
+	private Integer prodStat;
+	public Integer getProdId() {
+		return prodId;
+	}
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
+	}
+	public Integer getProdTypeId() {
+		return prodTypeId;
+	}
+	public void setProdTypeId(Integer prodTypeId) {
+		this.prodTypeId = prodTypeId;
+	}
+	public Integer getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getProdCont() {
+		return prodCont;
+	}
+	public void setProdCont(String prodCont) {
+		this.prodCont = prodCont;
+	}
+	public Date getProdTime() {
+		return prodTime;
+	}
+	public void setProdTime(Date prodTime) {
+		this.prodTime = prodTime;
+	}
+	public Integer getProdStat() {
+		return prodStat;
+	}
+	public void setProdStat(Integer prodStat) {
+		this.prodStat = prodStat;
+	}
+	public Integer getProdPrc() {
+		return prodPrc;
+	}
+	public void setProdPrc(Integer prodPrc) {
+		this.prodPrc = prodPrc;
+	}
+	
 }
