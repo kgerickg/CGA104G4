@@ -1,14 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.lucky.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%
-  LuckyVO luckyVO = (LuckyVO) request.getAttribute("luckyVO"); //LuckyServlet.java(Concroller), ¦s¤JreqªºluckyVOª«¥ó
+  LuckyVO luckyVO = (LuckyVO) request.getAttribute("luckyVO"); //LuckyServlet.java(Concroller), å­˜å…¥reqçš„luckyVOç‰©ä»¶
 %>
 
 <html>
 <head>
-<title>ºÖ³U¸ê®Æ - listOneLucky.jsp</title>
+<title>ç¦è¢‹è³‡æ–™ - listOneLucky.jsp</title>
 
 <style>
   table#table-1 {
@@ -46,23 +46,23 @@
 </head>
 <body bgcolor='white'>
 
-<h4>¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</h4>
+<h4>æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>ºÖ³U¸ê®Æ - ListOneLucky.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>ç¦è¢‹è³‡æ–™ - ListOneLucky.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/front-lucky/select_page.jsp"><img src="<%=request.getContextPath()%>/front-lucky/images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>ºÖ³U½s¸¹</th>
-		<th>°Ó®a½s¸¹</th>
-		<th>ºÖ³Uª¬ºA</th>
-		<th>ºÖ³U¦WºÙ</th>
-		<th>ºÖ³U¤º®e</th>
-		<th>ºÖ³U»ù®æ</th>
-		<th>¤W¬[¤é´Á</th>
+		<th>ç¦è¢‹ç·¨è™Ÿ</th>
+		<th>å•†å®¶ç·¨è™Ÿ</th>
+		<th>ç¦è¢‹ç‹€æ…‹</th>
+		<th>ç¦è¢‹åç¨±</th>
+		<th>ç¦è¢‹å…§å®¹</th>
+		<th>ç¦è¢‹åƒ¹æ ¼</th>
+		<th>ä¸Šæ¶æ—¥æœŸ</th>
 	</tr>
 	<tr>
 		<td><%=luckyVO.getLuckyId()%></td>

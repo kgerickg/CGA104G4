@@ -182,7 +182,7 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// luckyVo ¤]ºÙ¬° Domain objects
+				
 				luckyVO = new LuckyVO();
 				luckyVO.setLuckyId(rs.getInt("luckyId"));
 				luckyVO.setStoreId(rs.getInt("storeId"));
@@ -241,7 +241,7 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// luckyVO ¤]ºÙ¬° Domain objects
+				
 				luckyVO = new LuckyVO();
 				luckyVO.setLuckyId(rs.getInt("LK_ID"));
 				luckyVO.setStoreId(rs.getInt("STORE_ID"));
@@ -292,31 +292,31 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 
 		LuckyJDBCDAO dao = new LuckyJDBCDAO();
 
-		// ·s¼W
+		// æ–°å¢ž
 		LuckyVO luckyVO1 = new LuckyVO();
 		luckyVO1.setStoreId(1);
 		luckyVO1.setLkStat(1);
-		luckyVO1.setLkName("Âù³ßÁ{ªù");
-		luckyVO1.setLkCont("«K·í2­Ó");
+		luckyVO1.setLkName("éºµåŒ…");
+		luckyVO1.setLkCont("éºµåŒ…10å€‹");
 		luckyVO1.setLkPrc(100);
 		luckyVO1.setLkTime(java.sql.Date.valueOf("2002-01-01")); //
 		dao.insert(luckyVO1);
 
-		// ­×§ï
+		// ä¿®æ”¹
 		LuckyVO luckyVO2 = new LuckyVO();
 		luckyVO2.setLuckyId(1);		
 		luckyVO2.setStoreId(1);
 		luckyVO2.setLkStat(1);
-		luckyVO2.setLkName("¦n¨Æ¦¨Âù");
-		luckyVO2.setLkCont("«K·í2­Ó");
+		luckyVO2.setLkName("ä¾¿ç•¶");
+		luckyVO2.setLkCont("ä¾¿ç•¶2å€‹");
 		luckyVO2.setLkPrc(150);
 		luckyVO2.setLkTime(java.sql.Date.valueOf("2008-01-01")); //
 		dao.update(luckyVO2);
 
-		// §R°£
+		// åˆªé™¤
 		dao.delete(1);
 
-		// ¬d¸ß
+		// æŸ¥è©¢
 		LuckyVO luckyVO3 = dao.findByPrimaryKey(1);
 		System.out.print(luckyVO3.getLuckyId() + ",");
 		System.out.print(luckyVO3.getStoreId() + ",");
@@ -327,7 +327,7 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 		System.out.println(luckyVO3.getLkTime());
 		System.out.println("---------------------");
 
-		// ¬d¸ß
+		// æŸ¥è©¢
 		List<LuckyVO> list = dao.getAll();
 		for (LuckyVO aLucky : list) {
 			System.out.print(aLucky.getLuckyId() + ",");
@@ -342,8 +342,8 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 	}
 
 	@Override
-	public List<LuckyVO> getAll(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
+	public byte[] getImgById(Integer luckyId) {
 		return null;
 	}
+
 }

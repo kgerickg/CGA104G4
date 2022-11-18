@@ -1,15 +1,15 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.lucky.model.*"%>
 
 <%
-  LuckyVO luckyVO = (LuckyVO) request.getAttribute("lucky");
+  LuckyVO luckyVO = (LuckyVO) request.getAttribute("luckyVO"); //LuckyServlet.java (Concroller) å­˜å…¥reqçš„luckyVOç‰©ä»¶ (åŒ…æ‹¬å¹«å¿™å–å‡ºçš„luckyVO, ä¹ŸåŒ…æ‹¬è¼¸å…¥è³‡æ–™éŒ¯èª¤æ™‚çš„luckyVOç‰©ä»¶)
 %>
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>ºÖ³U¸ê®Æ·s¼W - addLucky.jsp</title>
+<title>ç¦è¢‹è³‡æ–™ä¿®æ”¹ - update_lucky_input.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,16 +48,16 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>ºÖ³U¸ê®Æ·s¼W - addLucky.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">¦^­º­¶</a></h4>
+		 <h3>ç¦è¢‹è³‡æ–™ä¿®æ”¹ - update_lucky_input.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/front-lucky/select_page.jsp"><img src="<%=request.getContextPath()%>/front-lucky/images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
 
-<h3>¸ê®Æ·s¼W:</h3>
+<h3>è³‡æ–™ä¿®æ”¹:</h3>
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -65,12 +65,12 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="lucky.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" name="form1">
 <table>
 
 	<jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
 	<tr>
-		<td>°Ó®a:<font color=red><b>*</b></font></td>
+		<td>å•†å®¶:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="storeId">
 			<c:forEach var="storeVO" items="${storeSvc.all}">
 				<option value="${storeVO.storeId}" ${(luckyVO.storeId==storeVO.storeId)? 'selected':'' } >${storeVO.storeName}
@@ -78,51 +78,44 @@
 		</select></td>
 	</tr>
 		<tr>
-		<td>ºÖ³Uª¬ºA:</td>
+		<td>ç¦è¢‹ç‹€æ…‹:</td>
 		<td><input type="TEXT" name="lkStat" size="45"
 			 value="<%= (luckyVO==null)? "1" : luckyVO.getLkStat()%>" /></td>
 	</tr>
 	<tr>
-		<td>ºÖ³U¦WºÙ:</td>
+		<td>ç¦è¢‹åç¨±:</td>
 		<td><input type="TEXT" name="lkName" size="45" 
-			 value="<%= (luckyVO==null)? "Âù³ßÁ{ªù" : luckyVO.getLkName()%>" /></td>
+			 value="<%= (luckyVO==null)? "é›™å–œè‡¨é–€" : luckyVO.getLkName()%>" /></td>
 	</tr>
 	<tr>
-		<td>ºÖ³U¤º®e:</td>
+		<td>ç¦è¢‹å…§å®¹:</td>
 		<td><input type="TEXT" name="lkCont" size="45"
-			 value="<%= (luckyVO==null)? "«K·í2­Ó" : luckyVO.getLkCont()%>" /></td>
+			 value="<%= (luckyVO==null)? "ä¾¿ç•¶2å€‹" : luckyVO.getLkCont()%>" /></td>
 	</tr>
 		<tr>
-		<td>»ù®æ:</td>
+		<td>åƒ¹æ ¼:</td>
 		<td><input type="TEXT" name="lkPrc" size="45"
 			 value="<%= (luckyVO==null)? "100" : luckyVO.getLkPrc()%>" /></td>
 	</tr>
 	<tr>
-		<td>¤W¬[¤é´Á:</td>
-		<td><input name="lkDate" id="f_date1" type="text"></td>
+		<td>ä¸Šæ¶æ—¥æœŸ:</td>
+		<td><input name="lkTime" id="f_date1" type="text"></td>
 	</tr>
-
+	
 </table>
 <br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="°e¥X·s¼W"></FORM>
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="luckyId" value="<%=luckyVO.getLuckyId()%>">
+<input type="submit" value="é€å‡ºä¿®æ”¹"></FORM>
 </body>
 
 
 
-<!-- =========================================¥H¤U¬° datetimepicker ¤§¬ÛÃö³]©w========================================== -->
+<!-- =========================================ä»¥ä¸‹ç‚º datetimepicker ä¹‹ç›¸é—œè¨­å®š========================================== -->
 
-<% 
-  java.sql.Date lkTime = null;
-  try {
-	    lkTime = luckyVO.getLkTime();
-   } catch (Exception e) {
-	   lkTime = new java.sql.Date(System.currentTimeMillis());
-   }
-%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/front-lucky/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/front-lucky/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/front-lucky/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -136,22 +129,22 @@
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=lkTime%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-           //startDate:	            '2017/07/10',  // °_©l¤é
-           //minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
-           //maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
+           theme: '',              //theme: 'dark',
+ 	       timepicker:false,       //timepicker:true,
+ 	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
+ 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+ 		   value: '<%=luckyVO.getLkTime()%>', // value:   new Date(),
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
+           //startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
+           //minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
+           //maxDate:               '+1970-01-01'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
         });
         
         
    
-        // ----------------------------------------------------------¥H¤U¥Î¨Ó±Æ©wµLªk¿ï¾Üªº¤é´Á-----------------------------------------------------------
+        // ----------------------------------------------------------ä»¥ä¸‹ç”¨ä¾†æ’å®šç„¡æ³•é¸æ“‡çš„æ—¥æœŸ-----------------------------------------------------------
 
-        //      1.¥H¤U¬°¬Y¤@¤Ñ¤§«eªº¤é´ÁµLªk¿ï¾Ü
+        //      1.ä»¥ä¸‹ç‚ºæŸä¸€å¤©ä¹‹å‰çš„æ—¥æœŸç„¡æ³•é¸æ“‡
         //      var somedate1 = new Date('2017-06-15');
         //      $('#f_date1').datetimepicker({
         //          beforeShowDay: function(date) {
@@ -165,7 +158,7 @@
         //      }});
 
         
-        //      2.¥H¤U¬°¬Y¤@¤Ñ¤§«áªº¤é´ÁµLªk¿ï¾Ü
+        //      2.ä»¥ä¸‹ç‚ºæŸä¸€å¤©ä¹‹å¾Œçš„æ—¥æœŸç„¡æ³•é¸æ“‡
         //      var somedate2 = new Date('2017-06-15');
         //      $('#f_date1').datetimepicker({
         //          beforeShowDay: function(date) {
@@ -179,7 +172,7 @@
         //      }});
 
 
-        //      3.¥H¤U¬°¨â­Ó¤é´Á¤§¥~ªº¤é´ÁµLªk¿ï¾Ü (¤]¥i«ö»İ­n´«¦¨¨ä¥L¤é´Á)
+        //      3.ä»¥ä¸‹ç‚ºå…©å€‹æ—¥æœŸä¹‹å¤–çš„æ—¥æœŸç„¡æ³•é¸æ“‡ (ä¹Ÿå¯æŒ‰éœ€è¦æ›æˆå…¶ä»–æ—¥æœŸ)
         //      var somedate1 = new Date('2017-06-15');
         //      var somedate2 = new Date('2017-06-25');
         //      $('#f_date1').datetimepicker({

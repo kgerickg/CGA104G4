@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.lucky.model.*"%>
-<%-- �����m�߱ĥ� EL ���g�k���� --%>
+<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
     LuckyService luckySvc = new LuckyService();
@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>�Ҧ��ֳU��� - listAllLucky.jsp</title>
+<title>所有福袋資料 - listAllLucky.jsp</title>
 
 <style>
   table#table-1 {
@@ -51,25 +51,25 @@
 </head>
 <body bgcolor='white'>
 
-<h4>�����m�߱ĥ� EL ���g�k����:</h4>
+<h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>�Ҧ��ֳU��� - listAllLucky.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">�^����</a></h4>
+		 <h3>所有福袋資料 - listAllLucky.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/front-lucky/select_page.jsp"><img src="<%=request.getContextPath()%>/front-lucky/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>�ֳU�s��</th>
-		<th>�Ӯa�s��</th>
-		<th>�ֳU���A</th>
-		<th>�ֳU�W��</th>
-		<th>�ֳU���e</th>
-		<th>�ֳU����</th>
-		<th>�W�[���</th>
-		<th>�ק�</th>
-		<th>�R��</th>
+		<th>福袋編號</th>
+		<th>商家編號</th>
+		<th>福袋狀態</th>
+		<th>福袋名稱</th>
+		<th>福袋內容</th>
+		<th>福袋價格</th>
+		<th>上架日期</th>
+		<th>修改</th>
+		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="luckyVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -84,14 +84,14 @@
 			<td>${luckyVO.lkTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="�ק�">
+			     <input type="submit" value="修改">
 			     <input type="hidden" name="luckyId"  value="${luckyVO.luckyId}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="�R��">
-			     <input type="hidden" name="luckyId"  value="${luckVO.luckyId}">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="luckyId"  value="${luckyVO.luckyId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.prodtype.model.ProdTypeVO;
+
 import com.store.model.StoreVO;
 
 import lombok.AllArgsConstructor;
@@ -49,7 +49,5 @@ public class ProdVO implements Serializable {
 	@OneToMany
 	@JoinColumn(name="STORE_ID",referencedColumnName = "STORE_ID")
 	private StoreVO storeVO;
-	@OneToMany
-	@JoinColumn(name="PROD_TYPE_ID",referencedColumnName = "PROD_TYPE_ID")
-	private ProdTypeVO prodTypeVO;
+
 }
