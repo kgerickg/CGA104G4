@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.lkorder.model.*"%>
 
-<% LkComplVO lkComplVO = (LkComplVO) request.getAttribute("lkComplVO"); %>
+<%
+LkComplVO lkComplVO = (LkComplVO) request.getAttribute("lkComplVO");
+%>
 
 <html>
 <head>
@@ -41,6 +43,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
+
+
 
 <style>
 a {
@@ -115,11 +119,10 @@ table tr td:nth-of-type(odd) {
 	color: #2F3237;
 	font-weight: 700;
 }
+
 .radio-container .input {
 	width: 5%;
 }
-
-
 </style>
 
 </head>
@@ -144,35 +147,53 @@ table tr td:nth-of-type(odd) {
 	</table>
 
 
-	<%-- <form:form method="POST" commandName="team" action="${pageContext.request.contextPath}/team/edit/${team.id}.html"> --%>
-
-	<form method="post" action=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do?action=updating  class="table">
+	<form method="post"
+		action=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do class="table">
 		<table>
 
 			<tr>
-				<td style="width: 200px">客訴編號:<font color=red><b>*</b></font></td>
+				<td style="width: 200px">客訴編號:</td>
 				<td>${lkComplVO.lkCcId}</td>
 
 			</tr>
 			<tr>
-				<td>福袋訂單編號:<font color=red></td>
+				<td>福袋訂單編號:</td>
 				<td>${lkComplVO.lkOrdId}</td>
 			</tr>
 			<tr>
 				<td>處理狀態:</td>
-				<td class="radio-container">
-				<input class="input" type="radio" name="lkCcStat" value="0"> 待處理
-				<input class="input"  type="radio" name="lkCcStat" value="1"> 處理中
-				<input class="input"  type="radio" name="lkCcStat" value="2"> 已完成
+				<td class="radio-container">	
+					<input class="input" type="radio" name="lkCcStat" value="0"
+					${(lkComplVO == null || lkComplVO.lkCcStat == 0)? 'checked':'' } />待處理 
+					<input class="input" type="radio" name="lkCcStat" value="1"
+					${(lkComplVO.lkRfdStat==1)? 'checked':'' } />處理中 
+					<input class="input" type="radio" name="lkCcStat" value="2"
+					${(lkComplVO.lkRfdStat==2)? 'checked':'' } />已完成	
+				<!-- 				<input class="input" type="radio" name="lkCcStat" value="0"  checked> 待處理 -->
+				<!-- 				<input class="input" type="radio" name="lkCcStat" value="1"> 處理中 -->
+				<!-- 				<input class="input" type="radio" name="lkCcStat" value="2"> 已完成 -->
+				
 				</td>
 			</tr>
 			<tr>
 				<td>退款狀態:</td>
+				<%-- 				<td><input type="TEXT" name="lkRfdStat" size="45" value="${lkComplVO.lkRfdStat}" /></td> --%>
+
+
 				<td class="radio-container">
-				<input class="input" type="radio" name="lkRfdStat" value="0"> 待處理
-				<input class="input" type="radio" name="lkRfdStat" value="1"> 處理中
-				<input class="input" type="radio" name="lkRfdStat" value="2"> 已完成
+					<!-- 				<input class="input" type="radio" name="lkRfdStat" value="0"  checked> 待處理 -->
+					<!-- 				<input class="input" type="radio" name="lkRfdStat" value="1"> 處理中 -->
+					<!-- 				<input class="input" type="radio" name="lkRfdStat" value="2"> 已完成radio 群組判斷 switch case	 -->
+
+					<input class="input" type="radio" name="lkRfdStat" value="0"
+					${(lkComplVO == null || lkComplVO.lkRfdStat == 0)? 'checked':'' } />待處理 
+					<input class="input" type="radio" name="lkRfdStat" value="1"
+					${(lkComplVO.lkRfdStat==1)? 'checked':'' } />處理中 
+					<input class="input" type="radio" name="lkRfdStat" value="2"
+					${(lkComplVO.lkRfdStat==2)? 'checked':'' } />已完成
+
 				</td>
+
 
 			</tr>
 			<tr>
@@ -182,15 +203,30 @@ table tr td:nth-of-type(odd) {
 
 
 		</table>
-		<br> <input type="hidden" name="action" value="updating"> 
-		<input type="submit" value="送出修改" class="btn-secondary">
+		<br> 
+			<input type="hidden" name="action" value="update">
+			<input type="hidden" name="lkCcId" value="${lkComplVO.lkCcId}">
+			<input type="hidden" name="lkOrdId" value="${lkComplVO.lkOrdId}">
+			<input type="hidden" name="lkCcStat" value="${lkComplVO.lkCcStat}">
+			<input type="hidden" name="lkCcCont" value="${lkComplVO.lkCcCont}">
+			<input type="hidden" name="lkRfdStat" value="${lkComplVO.lkRfdStat}">
+			<input type="submit" value="送出修改" class="btn-secondary">
+		
 	</form>
 
 
 
 
 
-
+	<!-- 	<div class="radio-container">	 -->
+	<!-- 	    <td><input type="radio" name="lkRfdStat" value="0" -->
+	<%-- 		${(lkComplVO == null || lkComplVO.lkRfdStat==0)? 'checked':'' } /> --%>
+	<!-- 	    待處理 <input type="radio" name="lkRfdStat" value="1" -->
+	<%-- 		${(lkComplVO.lkRfdStat==1)? 'checked':'' } />處理中 --%>
+	<!-- 		<input type="radio" name="lkRfdStat" value="2" -->
+	<%-- 		${(lkComplVO.lkRfdStat==2)? 'checked':'' } />已完成 --%>
+	<!-- 		</td> -->
+	<!-- 	</div>	 -->
 
 
 

@@ -18,8 +18,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.refill.model")
-@ComponentScan("com.member.model")
+@ComponentScan({"com.*.model","com.*.*.impl"})
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
@@ -45,7 +44,7 @@ public class AppConfig {
     @Bean
     public SessionFactory sessionFactory() throws IllegalArgumentException{
         return new LocalSessionFactoryBuilder(dataSource())
-                .scanPackages("com.refill.model","com.member.model")
+                .scanPackages("com.refill.model","com.member.model","com.admin.*")
                 .addProperties(getHibernateProperties())
                 .buildSessionFactory();
     }

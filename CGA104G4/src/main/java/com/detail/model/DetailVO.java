@@ -2,7 +2,9 @@ package com.detail.model;
 import com.prod.model.ProdService;
 import com.prod.model.ProdVO;
 
-public class DetailVO implements java.io.Serializable{
+public class DetailVO {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Integer prodId;
 	private Integer prodQty;
@@ -38,4 +40,8 @@ public class DetailVO implements java.io.Serializable{
 	    ProdVO prodVO = prodSvc.getOneProd(prodId);
 	    return prodVO;
     }
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

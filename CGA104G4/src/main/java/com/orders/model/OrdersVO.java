@@ -2,14 +2,14 @@ package com.orders.model;
 
 import java.sql.Date;
 
-import com.detail.model.DetailService;
-import com.detail.model.DetailVO;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
-public class OrdersVO implements java.io.Serializable{
+public class OrdersVO {
+	
+	private static final long serialVersionUID = 1L;
 	private Integer ordId;
 	private Integer memId;
 	private Integer storeId;
@@ -66,4 +66,8 @@ public class OrdersVO implements java.io.Serializable{
     	MemberVO memberVO = memberSvc.getOneMember(memId);
     	return memberVO;
     }
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.store.model.*"%>
 
@@ -8,7 +8,7 @@ StoreVO storeVO = (StoreVO) request.getAttribute("storeVO");
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>���a��Ʒs�W - addStore.jsp</title>
+<title>店家資料新增 - addStore.jsp</title>
 
 <style>
 table#table-1 {
@@ -54,21 +54,21 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>���a��Ʒs�W</h3>
+				<h3>店家資料新增</h3>
 			</td>
 			<td>
 				<h4>
-					<a href="select_page.jsp">�^����</a>
+					<a href="select_page.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
 	</table>
 
-	<h3>��Ʒs�W:</h3>
+	<h3>資料新增:</h3>
 
-	<%-- ���~���C --%>
+	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">�Эץ��H�U���~:</font>
+		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -79,83 +79,83 @@ th, td {
 	<FORM METHOD="post" ACTION="store.do" name="form1">
 		<table>
 			<tr>
-				<td>�|���b��:</td>
+				<td>會員帳號:</td>
 				<td><input type="TEXT" name="storeAcc" size="55"
-					placeholder="�п�J�b��"
+					placeholder="請輸入帳號"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreAcc()%>" /></td>
 			</tr>
 			<tr>
-				<td>�|���K�X:</td>
+				<td>會員密碼:</td>
 				<td><input type="password" name="storePwd" size="55"
-					placeholder="�ܤ֤@�ӼƦr,�@�Ӥp�g�^��r��,�@�Ӥj�g�^��r��,���� 6 ~ 16�r��"
+					placeholder="至少一個數字,一個小寫英文字母,一個大寫英文字母,長度 6 ~ 16字元"
 					value="<%=(storeVO == null) ? "" : storeVO.getStorePwd()%>" /></td>
 			</tr>
 			<tr>
-				<td>�|���W��:</td>
+				<td>會員名稱:</td>
 				<td><input type="TEXT" name="storeName" size="55"
-					placeholder="�п�J�|���W��"
+					placeholder="請輸入會員名稱"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreName()%>" /></td>
 			</tr>
 			<tr>
-				<td>�|���νs:</td>
+				<td>會員統編:</td>
 				<td><input type="TEXT" name="storeGui" size="55"
-					placeholder="�п�J�νs"
+					placeholder="請輸入統編"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreGui()%>" /></td>
 			</tr>
 			<tr>
-				<td>�t�d�H:</td>
+				<td>負責人:</td>
 				<td><input type="TEXT" name="storeRep" size="55"
-					placeholder="�п�J�t�d�H"
+					placeholder="請輸入負責人"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreRep()%>" /></td>
 			</tr>
 			<tr>
-				<td>���a�q��:</td>
+				<td>店家電話:</td>
 				<td><input type="TEXT" name="storeTel" size="55"
-					placeholder="�п�J�q��"
+					placeholder="請輸入電話"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreTel()%>" /></td>
 			</tr>
 			<tr>
-				<td>���a�ǯu:</td>
+				<td>店家傳真:</td>
 				<td><input type="TEXT" name="storeFax" size="55"
-					placeholder="�п�J�ǯu���X"
+					placeholder="請輸入傳真號碼"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreFax()%>" /></td>
 			</tr>
 			<tr>
-				<td>���a�a�}:</td>
+				<td>店家地址:</td>
 				<td><div id="twzipcode"></div>
-					<input type="TEXT" name="storeAd" size="10" placeholder="�п�J���a�a�}"
+					<input type="TEXT" name="storeAd" size="10" placeholder="請輸入店家地址"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreAd()%>" /></td>
 
 			</tr>
 			<tr>
-				<td>�p���H:</td>
+				<td>聯絡人:</td>
 				<td><input type="TEXT" name="storeCon" size="55"
-					placeholder="�п�J�p���H"
+					placeholder="請輸入聯絡人"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreCon()%>" /></td>
 			</tr>
 			<tr>
-				<td>�p���H�q��:</td>
+				<td>聯絡人電話:</td>
 				<td><input type="TEXT" name="storeConTel" size="55"
-					placeholder="�п�J�p���H�q��"
+					placeholder="請輸入聯絡人電話"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreConTel()%>" /></td>
 			</tr>
 			<tr>
-				<td>�p���H�a�}:</td>
+				<td>聯絡人地址:</td>
 				<td><input type="TEXT" name="storeConAd" size="55"
-					placeholder="�п�J�p���H�a�}"
+					placeholder="請輸入聯絡人地址"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreConAd()%>" /></td>
 			</tr>
 			<tr>
-				<td>���a�H�c:</td>
+				<td>店家信箱:</td>
 				<td><input type="TEXT" name="storeEmail" size="55"
-					placeholder="�п�J�H�c"
+					placeholder="請輸入信箱"
 					value="<%=(storeVO == null) ? "" : storeVO.getStoreEmail()%>" /></td>
 			</tr>
 
 		</table>
 		<br> <input type="hidden" name="storeId" value="1"> <input
 			type="hidden" name="action" value="insert"> <input
-			type="submit" value="�e�X�s�W">
+			type="submit" value="送出新增">
 	</FORM>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
