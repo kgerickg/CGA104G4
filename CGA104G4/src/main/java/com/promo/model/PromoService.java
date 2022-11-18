@@ -1,13 +1,14 @@
 package com.promo.model;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PromoService {
-	PromoDAO_interface dao = new PromoDAO();
+	@Autowired
+	PromoDAO_interface dao;
 
-	public List<PromoVO> getAll() {
 
-		return dao.getAll();
-	}
+
 
 }

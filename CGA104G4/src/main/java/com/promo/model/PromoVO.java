@@ -1,63 +1,34 @@
 package com.promo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name="PROMO")
 public class PromoVO implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="PROMO_ID")
 	private Integer promoId;
+	@Column(name="PROMO_NAME")
+	private String promoName;
+	@Column(name="PROMO_CONT")
 	private String promoCont;
-	private Date promoTimeS;
-	private Date promoTimeE;
+	@Column(name="PROMO_TIME_S")
+	private Timestamp promoTimeS;
+	@Column(name="PROMO_TIME_E")
+	private Timestamp promoTimeE;
+	@Column(name="PROMO_VAL")
 	private Integer promoVal;
-
-	public PromoVO() {
-		super();
-	}
-
-	public Integer getPromoId() {
-		return promoId;
-	}
-
-	public void setPromoId(Integer promoId) {
-		this.promoId = promoId;
-	}
-
-	public String getPromoCont() {
-		return promoCont;
-	}
-
-	public void setPromoCont(String promoCont) {
-		this.promoCont = promoCont;
-	}
-
-	public Date getPromoTimeS() {
-		return promoTimeS;
-	}
-
-	public void setPromoTimeS(Date promoTimeS) {
-		this.promoTimeS = promoTimeS;
-	}
-
-	public Date getPromoTimeE() {
-		return promoTimeE;
-	}
-
-	public void setPromoTimeE(Date promoTimeE) {
-		this.promoTimeE = promoTimeE;
-	}
-
-	public Integer getPromoVal() {
-		return promoVal;
-	}
-
-	public void setPromoVal(Integer promoVal) {
-		this.promoVal = promoVal;
-	}
-
-	@Override
-	public String toString() {
-		return "PromoVO [promoId=" + promoId + ", promoCont=" + promoCont + ", promoTimeS=" + promoTimeS
-				+ ", promoTimeE=" + promoTimeE + ", promoVal=" + promoVal + "]";
-	}
 
 }
