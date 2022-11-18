@@ -14,8 +14,9 @@ public interface LkComplDAO_interface extends BasicDAO_interface<LkComplVO> {
 	
 	public LkComplVO selectByLkCcId(Integer lkCcId);	// 查詢單筆，以查詢客訴編號(PK)找到
 	
-	public LkComplVO selectBymemId(Integer memId);	// 查詢單筆，以查詢客訴編號(PK)找到
-
 	public List<LkComplVO> selectAll();					// 查詢全部，因查詢為查詢多筆所以使用<LkComplVO>
+	
+	public LkComplVO selectBymemId(Integer memId);	// 查詢單筆，以查詢客訴編號(PK)找到
+	
 	
 }

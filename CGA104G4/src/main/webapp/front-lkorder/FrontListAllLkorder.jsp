@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -6,7 +7,8 @@
 
 <%
 LkOrderService lkOrderService = new LkOrderService();
-List<LkOrderSelectVO> list = lkOrderService.selectAll(2);	// 抓取會員ID
+Integer memId = (Integer) request.getAttribute("memId");		// 取得servlet的setAttribute
+List<LkOrderSelectVO> list = lkOrderService.selectAll(memId);	// 抓取會員ID
 pageContext.setAttribute("list", list);
 %>
 

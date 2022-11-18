@@ -81,12 +81,13 @@
 		<br>
 		<ul>
 
-			<li style="color: black; font-weight: bolder; font-size: 1.2em"><a
-				href=${pageContext.request.contextPath}/front-lkcompl/MemberListAllLkCompl.jsp>查詢所有客訴訂單</a></li>
+			<li style="color: black; font-weight: bolder; font-size: 1.2em">
+			<a href=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do?action=selectAll>查詢所有客訴訂單
+			</a>
+			</li>
 			<br>
 			<li>
-				<FORM METHOD="post"
-					ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
+				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
 					<b style="color: black">輸入客訴編號：</b> <input type="text"
 						name="lkOrderId"> <input type="submit" value="送出"
 						class="btn-secondary">

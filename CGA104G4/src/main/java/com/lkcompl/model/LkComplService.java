@@ -15,13 +15,11 @@ public class LkComplService {
 	}
 	
 	public LkComplVO selectByLkCcId(Integer lkCcId) {
-		System.out.println("~~~");
+		System.out.println("ccidservice");
 		return dao.selectByLkCcId(lkCcId);
 	}
 	
-	public LkComplVO selectBymemId(Integer memId) {
-		return dao.selectByLkCcId(memId);
-	}
+	
 	
 	public void insert(LkComplVO lkComplVO) {
 	dao.insert(lkComplVO);
@@ -35,9 +33,15 @@ public class LkComplService {
 	public void goUpdate(LkComplVO lkComplVO) {
 		System.out.println("go修改service");
 	dao.goUpdate(lkComplVO);
-	
-
 }
+	
+	
+	public LkComplVO selectBymemId(Integer memId) {
+		return dao.selectBymemId(memId);
+	}
+	
+	
+	
 	
 	
 //	public void insert(Integer lkCcId, Integer lkOrdId, Integer lkCcStat, String lkCcCont, Integer lkRfdStat) {
