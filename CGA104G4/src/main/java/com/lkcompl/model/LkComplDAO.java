@@ -25,9 +25,30 @@ public class LkComplDAO implements LkComplDAO_interface {
 	public void update(LkComplVO LkComplVO) {
 		try {
 			beginTransaction();
-			LkComplVO vo = getSession().load(LkComplVO.getClass(), LkComplVO.getLkCcCont());
+			LkComplVO vo = getSession().load(LkComplVO.class, LkComplVO.getLkCcId());
 			vo.setLkCcStat(LkComplVO.getLkCcStat());
 			vo.setLkRfdStat(LkComplVO.getLkRfdStat());
+			vo.setLkCcId(LkComplVO.getLkCcId());
+			vo.setLkOrdId(LkComplVO.getLkOrdId());
+			vo.setLkCcCont(LkComplVO.getLkCcCont());
+			commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			rollback();
+		}
+	}
+	
+	@Override
+	public void goUpdate(LkComplVO LkComplVO) {
+		try {
+			beginTransaction();
+			LkComplVO vo = getSession().load(LkComplVO.class, LkComplVO.getLkCcId());
+			vo.setLkCcStat(LkComplVO.getLkCcStat());
+			vo.setLkRfdStat(LkComplVO.getLkRfdStat());
+			vo.setLkCcId(LkComplVO.getLkCcId());
+			vo.setLkOrdId(LkComplVO.getLkOrdId());
+			vo.setLkCcCont(LkComplVO.getLkCcCont());
+			commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			rollback();
@@ -53,6 +74,8 @@ public class LkComplDAO implements LkComplDAO_interface {
 		LkComplVO lkComplVO;
         try {
             beginTransaction();
+            final String hql = "select * from LK_COMPL left join LK_ORDER on LK_COMPL.LK_ORD_ID  = LK_ORDER.LK_ORD_ID "
+            		+ "where LK_COMPL.LK_ORD_ID = ?";
             lkComplVO = getSession().get(LkComplVO.class, memId);
             commit();
             return lkComplVO;

@@ -275,42 +275,4 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 		}
 		return list;
 	}
-
-	public static void main(String[] args) {
-
-		DetailJDBCDAO dao = new DetailJDBCDAO();
-
-		// 新增
-		DetailVO detailVO1 = new DetailVO();
-		detailVO1.setProdQty(1);
-		detailVO1.setOrdId(1);
-		dao.insert(detailVO1);
-
-		// 修改
-		DetailVO detailVO2 = new DetailVO();
-		detailVO2.setProdId(1);
-		detailVO2.setProdQty(1);
-		detailVO2.setOrdId(1);
-		dao.update(detailVO2);
-
-		// 刪除
-		dao.delete(7014);
-
-		// 查詢
-		DetailVO detailVO3 = dao.findByPrimaryKey(1);
-		System.out.print(detailVO3.getProdId() + ",");
-		System.out.print(detailVO3.getProdQty() + ",");
-		System.out.print(detailVO3.getOrdId() + ",");
-		System.out.println("---------------------");
-
-		// 查詢
-		List<DetailVO> list = dao.getAll();
-		for (DetailVO aDetail : list) {
-			System.out.print(aDetail.getProdId() + ",");
-			System.out.print(aDetail.getProdQty() + ",");
-			System.out.print(aDetail.getOrdId() + ",\t");
-			System.out.print(aDetail.getProdVO()); // join ProdTypeVO
-			System.out.println();
-		}
-	}
 }

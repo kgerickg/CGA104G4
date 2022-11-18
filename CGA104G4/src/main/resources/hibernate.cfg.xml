@@ -40,12 +40,13 @@
         <!--提高執行時顯示SQL語句可讀性-->
         <property name="format_sql">true</property>
 
-
         <mapping class="com.member.model.MemberVO" />
 
         <mapping class="com.refill.model.RefillVO" />
 
         <mapping class="com.lkcompl.model.LkComplVO" />
+
+        <mapping class="com.promo.model.PromoVO" />
 
     </session-factory>
 </hibernate-configuration>

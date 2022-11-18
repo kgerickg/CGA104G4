@@ -160,10 +160,16 @@ thead th {
 
 
 				<td>
-					<a href=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do?action=update>
-					 	<input type="hidden" name="action" value="update">
+					 	<form method="post"  action=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do >
+					 		<input type="hidden" name="action" value="goUpdate">
+					 		<input type="hidden" name="lkCcId" value="${lkComplVO.lkCcId}">
+					 		<input type="hidden" name="lkOrdId" value="${lkComplVO.lkOrdId}">
+					 		<input type="hidden" name="lkCcStat" value="${lkComplVO.lkCcStat}">
+					 		<input type="hidden" name="lkCcCont" value="${lkComplVO.lkCcCont}">
+					 		<input type="hidden" name="lkRfdStat" value="${lkComplVO.lkRfdStat}">
 						<input type="submit" value="修改" class="btn-secondary"> 
-					</a>
+					 	</form>
+					 	
 				</td>
 				
 				

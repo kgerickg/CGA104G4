@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
-<title>­º­¶</title>
+<title>é¦–é </title>
 
 <style>
 table#table-1 {
@@ -29,18 +29,18 @@ h4 {
 </style>
 </head>
 <body bgcolor='white'>
-
+	<a href="http://localhost:8080/CGA104G4/index.html">123</a>
 	<table id="table-1">
 		<tr>
-			<td><h3>­º­¶</h3></td>
+			<td><h3>é¦–é </h3></td>
 		</tr>
 	</table>
 
-	<h3>©±®a·j´M:</h3>
+	<h3>åº—å®¶æœå°‹:</h3>
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -49,14 +49,14 @@ h4 {
 	</c:if>
 
 	<ul>
-		<li><a href='listAllStore.jsp'>©±®aÁ`ªí</a><br> <br></li>
+		<li><a href='listAllStore.jsp'>åº—å®¶ç¸½è¡¨</a><br> <br></li>
 
 
 		<li>
 			<FORM METHOD="post" ACTION="store.do">
-				<b>¿é¤J©±®a½s¸¹ :</b> <input type="text" name="storeId"
-					placeholder="½Ð¿é¤J©±®a½s¸¹"> <input type="hidden" name="action"
-					value="getOne_For_Display"> <input type="submit" value="°e¥X">
+				<b>è¼¸å…¥åº—å®¶ç·¨è™Ÿ :</b> <input type="text" name="storeId"
+					placeholder="è«‹è¼¸å…¥åº—å®¶ç·¨è™Ÿ"> <input type="hidden" name="action"
+					value="getOne_For_Display"> <input type="submit" value="é€å‡º">
 			</FORM>
 		</li>
 
@@ -65,33 +65,33 @@ h4 {
 
 		<li>
 			<FORM METHOD="post" ACTION="store.do">
-				<b>¿ï¾Ü©±®a½s¸¹:</b> <select size="1" name="storeId">
-					<option disabled selected>½Ð¿ï¾Ü©±®a½s¸¹</option>
+				<b>é¸æ“‡åº—å®¶ç·¨è™Ÿ:</b> <select size="1" name="storeId">
+					<option disabled selected>è«‹é¸æ“‡åº—å®¶ç·¨è™Ÿ</option>
 					<c:forEach var="storeVO" items="${storeSvc.all}">
 						<option value="${storeVO.storeId}">${storeVO.storeId}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="°e¥X">
+				<input type="submit" value="é€å‡º">
 			</FORM>
 		</li>
 
 		<li>
 			<FORM METHOD="post" ACTION="store.do">
-				<b>¿ï¾Ü©±®a¦WºÙ:</b> <select size="1" name="storeId">
-					<option disabled selected>½Ð¿ï¾Ü©±®a¦WºÙ</option>
+				<b>é¸æ“‡åº—å®¶åç¨±:</b> <select size="1" name="storeId">
+					<option disabled selected>è«‹é¸æ“‡åº—å®¶åç¨±</option>
 					<c:forEach var="storeVO" items="${storeSvc.all}">
 						<option value="${storeVO.storeId}">${storeVO.storeName}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="°e¥X">
+				<input type="submit" value="é€å‡º">
 			</FORM>
 		</li>
 		<li>
 			<FORM METHOD="post" ACTION="store.do">
-				<b>¿ï¾Ü©±®a¦a°Ï:</b>
+				<b>é¸æ“‡åº—å®¶åœ°å€:</b>
 				<div id="twzipcode"></div>
 			    <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="°e¥X">
+				<input type="submit" value="é€å‡º">
 			</FORM>
 		</li>
 		
@@ -99,10 +99,10 @@ h4 {
 
 
 
-	<h3>©±®aºÞ²z</h3>
+	<h3>åº—å®¶ç®¡ç†</h3>
 
 	<ul>
-		<li><a href='addStore.jsp'>·s¼W©±®a</a></li>
+		<li><a href='addStore.jsp'>æ–°å¢žåº—å®¶</a></li>
 	</ul>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-twzipcode@1.7.14/jquery.twzipcode.min.js"></script>

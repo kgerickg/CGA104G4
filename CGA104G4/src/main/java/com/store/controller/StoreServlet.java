@@ -4,11 +4,12 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
-
+@WebServlet(name = "StoreServlet", urlPatterns = {"/StoreServlet", "/store/store.do"})
 public class StoreServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);

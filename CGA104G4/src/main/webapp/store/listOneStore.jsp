@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.store.model.*"%>
 
 <%
@@ -7,7 +7,7 @@ StoreVO storeVO = (StoreVO) request.getAttribute("storeVO");
 
 <html>
 <head>
-<title>©±®a¸ê®Æ</title>
+<title>åº—å®¶è³‡æ–™</title>
 
 <style>
 table#table-1 {
@@ -54,9 +54,9 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>©±®a¸ê®Æ</h3>
+				<h3>åº—å®¶è³‡æ–™</h3>
 				<h4>
-					<a href="select_page.jsp">¦^­º­¶</a>
+					<a href="select_page.jsp">å›žé¦–é </a>
 				</h4>
 			</td>
 		</tr>
@@ -64,19 +64,19 @@ th, td {
 
 	<table>
 		<tr>
-			<th>·|­û½s¸¹</th>
-			<th>·|­û±b¸¹</th>
-			<th>·|­û±K½X</th>
-			<th>·|­û¦WºÙ</th>
-			<th>·|­û²Î½s</th>
-			<th>­t³d¤H</th>
-			<th>©±®a¹q¸Ü</th>
-			<th>©±®a¶Ç¯u</th>
-			<th>©±®a¦a§}</th>
-			<th>Ápµ¸¤H</th>
-			<th>Ápµ¸¤H¹q¸Ü</th>
-			<th>Ápµ¸¤H¦a§}</th>
-			<th>©±®a«H½c</th>
+			<th>æœƒå“¡ç·¨è™Ÿ</th>
+			<th>æœƒå“¡å¸³è™Ÿ</th>
+			<th>æœƒå“¡å¯†ç¢¼</th>
+			<th>æœƒå“¡åç¨±</th>
+			<th>æœƒå“¡çµ±ç·¨</th>
+			<th>è² è²¬äºº</th>
+			<th>åº—å®¶é›»è©±</th>
+			<th>åº—å®¶å‚³çœŸ</th>
+			<th>åº—å®¶åœ°å€</th>
+			<th>è¯çµ¡äºº</th>
+			<th>è¯çµ¡äººé›»è©±</th>
+			<th>è¯çµ¡äººåœ°å€</th>
+			<th>åº—å®¶ä¿¡ç®±</th>
 		</tr>
 		<tr>
 			<td>${storeVO.storeId}</td>
