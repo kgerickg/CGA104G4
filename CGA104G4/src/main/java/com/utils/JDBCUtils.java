@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class JDBCUtils {
 	private static String USER = "root";
-	private static String PASSWORD = "password";
+	private static final String PASSWORD = "password";
 	private static String URL = "jdbc:mysql://localhost:3306/FOOD?serverTimezone=Asia/Taipei";
 
 	public static Connection getConnection() {
