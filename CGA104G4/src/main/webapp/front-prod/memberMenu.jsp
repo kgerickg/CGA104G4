@@ -4,6 +4,7 @@
 <%@ page import="com.prod.model.*"%>
 
 <jsp:useBean id="prodSvc" scope="page" class="com.prod.model.ProdService" />
+<%-- <jsp:useBean id="listProdEmps_ByCompositeQuery" scope="request" type="java.util.List<ProdVO>" /> --%>
 
 <!DOCTYPE html>
 <html lang="en">

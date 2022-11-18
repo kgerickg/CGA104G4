@@ -2,6 +2,7 @@ package com.prod.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ProdService {
@@ -74,5 +75,9 @@ public class ProdService {
 	
 	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId) {
 		return dao.getProdsByProdTypeId(prodTypeId);
+	}
+	
+	public List<ProdVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 }
