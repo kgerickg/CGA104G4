@@ -1,11 +1,9 @@
 package com.prod.model;
 
-import java.sql.Date;
-
-import com.prodtype.model.ProdTypeService;
-import com.prodtype.model.ProdTypeVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
+
+import java.sql.Date;
 
 public class ProdVO {
 
@@ -92,12 +90,7 @@ public class ProdVO {
 	}
 
 //	 for join prodTypeName from prodTypeId
-    public ProdTypeVO getProdTypeVO() {
-	    ProdTypeService prodTypeSvc = new ProdTypeService();
-	    ProdTypeVO prodTypeVO = prodTypeSvc.getOneProdType(prodTypeId);
-	    return prodTypeVO;
-    }
-    
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

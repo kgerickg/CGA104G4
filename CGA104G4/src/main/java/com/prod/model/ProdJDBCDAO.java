@@ -1,11 +1,10 @@
 package com.prod.model;
 
-import java.util.*;
-
-import com.orders.model.OrdersVO;
-import com.prodtype.model.ProdTypeVO;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ProdJDBCDAO implements ProdDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
