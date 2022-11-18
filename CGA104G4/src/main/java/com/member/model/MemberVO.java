@@ -1,5 +1,6 @@
 package com.member.model;
 
+import com.lkcompl.model.LkComplVO;
 import com.refill.model.RefillVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,6 +49,10 @@ public class MemberVO implements Serializable {
 	@OneToMany
 	@JoinColumn(name="MEM_ID",referencedColumnName = "MEM_ID")
 	private List<RefillVO> refillVOs;
+	
+	@OneToMany
+	@JoinColumn(name="MEM_ID",referencedColumnName = "MEM_ID")
+	private List<LkComplVO> lkcomplVOs;
 
 
 }

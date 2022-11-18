@@ -13,7 +13,6 @@ pageContext.setAttribute("list", list);
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
 <title>查詢所有訂單</title>
 
 <meta charset="UTF-8">

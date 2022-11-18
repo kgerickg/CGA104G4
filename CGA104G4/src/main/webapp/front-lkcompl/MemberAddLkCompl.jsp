@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+String selectlkorderid = request.getParameter("selectlkorderid");
+%>
+
 <html>
 <head>
 <title>客訴頁面</title>
@@ -33,9 +37,8 @@
 <!-- 請將覆蓋用的css放置此註解下方 -->
 
 <style>
-
-#upper-table{
-	width:40%;
+#upper-table {
+	width: 40%;
 	text-align: center;
 	background-color: #F0F0F0;
 	margin: auto;
@@ -48,15 +51,15 @@
 #contain-table {
 	width: 40%;
 	height: 70%;
- 	padding: 50px 20px; 
+	padding: 50px 20px;
 	margin: auto auto 5% auto;
 	border-radius: 10px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	background: white;
 }
 
-ul li{
-margin-bottom: 20px;
+ul li {
+	margin-bottom: 20px;
 }
 
 .btn-secondary {
@@ -70,10 +73,8 @@ margin-bottom: 20px;
 .btn-secondary:hover {
 	color: #fff;
 	background-color: #5c636a;
-/* 	border: 1px solid #6c757d; */
+	/* 	border: 1px solid #6c757d; */
 }
-
-
 </style>
 
 </head>
@@ -81,12 +82,12 @@ margin-bottom: 20px;
 	<script src="../resources/js/membernav.js"></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
-<div style="padding:5vw"></div>
+	<div style="padding: 5vw"></div>
 
 	<div id="upper-table">
 		<tr>
 			<td>
-				<h3 style="font-size: 40px; font-weight: 700;color: black;">會員客訴</h3>
+				<h3 style="font-size: 40px; font-weight: 700; color: black;">會員客訴</h3>
 				<h4>
 					<a style="color: #6c757d"
 						href=${pageContext.request.contextPath}/front-lkcompl/MemberIndexLkCompl.jsp>回首頁</a>
@@ -97,22 +98,45 @@ margin-bottom: 20px;
 
 	<br>
 
-	<div  id="contain-table">
+	<div id="contain-table">
 
 		<ul>
 			<li>
 
-				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
-					<b style="color: black">輸入訂單編號：</b> <br><!-- 抓取會員編號中的訂單 -->
-					<input type="text" name="lkOrderId" style="border-radius: 8px ; border: .5px solid grey"> 
-				<br><br>
+
+
+
+				<form method="post" name="selection" action=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
+
+					<b style="color: black">請選擇福袋訂單</b>
+
+					<p>
+						<select name="mySelect" id="mySelect" lay-verify="" >
+							<option value="" selected>請選擇福袋訂單</option>
+							<c:forEach items="${List}" var="list">
+								<option value="${list.id}">${list.workName}</option>
+							</c:forEach>
+						</select>
+					</p>
+
+				</form> 
+				<!-- 				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do> -->
+				<!-- 					<b style="color: black">輸入訂單編號：</b> <br>抓取會員編號中的訂單 --> <!-- 					<input type="text" name="lkOrderId" style="border-radius: 8px ; border: .5px solid grey">  -->
+				<!-- 				</FORM>	 --> <br>
+			<br>
+				<FORM METHOD="post"
+					ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
 					<b style="color: black">輸入客訴內容：</b><br>
-					<textarea name="lkcompltext" rows="6" cols="40" required style="border-radius: 10px"></textarea>
-					<br><br>
-					<input type="submit" value="送出" class="btn-secondary">
+					<textarea name="lkcompltext" rows="6" cols="40" required
+						style="border-radius: 10px"></textarea>
+					<br>
+					<br> <input type="submit" value="送出" class="btn-secondary">
 					<input type="reset" value="清除" class="btn-secondary">
 
 				</FORM>
+
+
+
 			</li>
 		</ul>
 	</div>

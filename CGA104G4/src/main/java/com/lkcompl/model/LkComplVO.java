@@ -4,16 +4,18 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.member.model.MemberVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity					// 設定為實體類別
 @Getter
 @Setter					
-@AllArgsConstructor		// 使用後為類別生成一個"全參數"構造函數
 @NoArgsConstructor		// 使用後為類別生成一個"無參數"構造函數
-@Entity					// 設定為實體類別
+@AllArgsConstructor		// 使用後為類別生成一個"全參數"構造函數
 @Table(name="LK_COMPL")	// 設定映射資料表，name="資料表名稱"
 public class LkComplVO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,4 +32,8 @@ public class LkComplVO implements Serializable {
 	@Column(name="LK_RFD_STAT")
 	private Integer lkRfdStat;	// 退款狀態
 
+	@ManyToOne
+	@JoinColumn(name = "MEM_ID",insertable = false,updatable = false)
+	private MemberVO memberVO;
+	
 }

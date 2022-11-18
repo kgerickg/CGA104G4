@@ -46,7 +46,7 @@ public class LkComplStoreServlet extends HttpServlet {
 			insert(request, response);
 			break;
 		case "goUpdate":
-			System.out.println("123");
+			System.out.println("go~update");
 			goUpdate(request, response);
 			break;
 		case "update":
@@ -134,7 +134,7 @@ public class LkComplStoreServlet extends HttpServlet {
 		}
 		LkComplService lkcomplSvc = new LkComplService();
 		lkcomplSvc.update(lkComplVO);
-		String url = "/front-lkcompl/StoreUpdateLkCompl.jsp";	// 成功後會跳轉哪頁
+		String url = "/front-lkcompl/StoreListOneLkCompl.jsp";	// 成功後會跳轉哪頁
 		RequestDispatcher successView = request.getRequestDispatcher(url);
 		successView.forward(request, response);
 	}
@@ -149,15 +149,10 @@ public class LkComplStoreServlet extends HttpServlet {
 		request.setAttribute("lkComplVO", lkComplVO);
 		
 		Integer lkCcStat = Integer.parseInt(request.getParameter("lkCcStat"));
-		System.out.println(lkCcStat);
 		Integer lkRfdStat = Integer.parseInt(request.getParameter("lkRfdStat"));
-		System.out.println(lkRfdStat);
 		Integer lkCcId = Integer.parseInt(request.getParameter("lkCcId"));
-		System.out.println(lkCcId);
 		Integer lkOrdId = Integer.parseInt(request.getParameter("lkOrdId"));
-		System.out.println(lkOrdId);
 		String lkCcCont = request.getParameter("lkCcCont");
-		System.out.println(lkCcCont);
 
 		lkComplVO.setLkCcStat(lkCcStat);
 		lkComplVO.setLkRfdStat(lkRfdStat);

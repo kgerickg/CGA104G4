@@ -77,7 +77,7 @@
 </c:if>
   <br>  
 <ul>
-      <li style="color:black; font-weight:bolder; font-size: 1.2em"><a href=${pageContext.request.contextPath}/front-lkorder/FrontListAllLkorder.jsp>查詢所有訂單</a></li> 
+      <li style="color:black; font-weight:bolder; font-size: 1.2em"><a href=${pageContext.request.contextPath}/front-lkorder/lkorderfront.do?action=listAllMember>查詢所有訂單</a></li> 
       <br>
   <li>
     <FORM METHOD="post" ACTION=${pageContext.request.contextPath}/LkOrderFrontServlet >
