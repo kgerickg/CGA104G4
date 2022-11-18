@@ -1,7 +1,6 @@
 package com.refill.controller;
 
 
-import com.member.model.MemberVO;
 import com.utils.SpringUtil;
 import org.json.*;
 import com.refill.model.RefillService;
@@ -118,7 +117,7 @@ public class RefillServlet extends HttpServlet {
             MsgsJson.put("state", true);
             MsgsJson.put("refills", refillArray);
             out.write(MsgsJson.toString());
-            return;
+
         }
 
     }
@@ -177,7 +176,6 @@ public class RefillServlet extends HttpServlet {
         MsgsJson.put("refillerror", "查無此儲值編號");
         MsgsJson.put("state", false);
         out.write(MsgsJson.toString());
-        return;
 
 
     }
@@ -238,7 +236,7 @@ public class RefillServlet extends HttpServlet {
         MsgsJson.put("refillerror", "查無此會員編號或此會員尚無儲值紀錄");
         MsgsJson.put("state", false);
         out.write(MsgsJson.toString());
-        return;
+
 
 
     }

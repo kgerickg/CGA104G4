@@ -47,5 +47,7 @@
 
         <mapping class="com.lkcompl.model.LkComplVO" />
 
+        <mapping class="com.promo.model.PromoVO" />
+
     </session-factory>
 </hibernate-configuration>
