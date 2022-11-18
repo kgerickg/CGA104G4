@@ -1,11 +1,17 @@
 package com.prod.model;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import com.orders.model.OrdersVO;
-import com.prodtype.model.ProdTypeVO;
-
-import java.sql.*;
+import CompositeQuery.jdbcUtil_CompositeQuery_PROD;
 
 public class ProdJDBCDAO implements ProdDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -307,7 +313,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			while (rs.next()) {
 				prodVO = new ProdVO();
 				prodVO.setProdTypeId(rs.getInt("PROD_TYPE_ID"));
-				
+
 				set.add(prodVO); // Store the row in the vector
 			}
 
@@ -370,7 +376,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 				prodVO.setProdPrc(rs.getInt("PROD_PRC"));
 				prodVO.setProdStat(rs.getInt("PROD_STAT"));
 				prodVO.setProdTime(rs.getDate("PROD_TIME"));
-				
+
 				set.add(prodVO); // Store the row in the vector
 			}
 
@@ -405,4 +411,68 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 		}
 		return set;
 	}
+
+	@Override
+	public List<ProdVO> getAll(Map<String, String[]> map) {
+		List<ProdVO> list = new ArrayList<ProdVO>();
+		ProdVO prodVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			String finalSQL = "select * from PROD " + jdbcUtil_CompositeQuery_PROD.get_WhereCondition(map)
+					+ "order by PROD_ID";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = " + finalSQL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				prodVO = new ProdVO();
+				prodVO.setProdId(rs.getInt("PROD_ID"));
+				prodVO.setProdTypeId(rs.getInt("PROD_TYPE_ID"));
+				prodVO.setStoreId(rs.getInt("STORE_ID"));
+				prodVO.setProdName(rs.getString("PROD_NAME"));
+				prodVO.setProdCont(rs.getString("PROD_CONT"));
+				prodVO.setProdPrc(rs.getInt("PROD_PRC"));
+				prodVO.setProdStat(rs.getInt("PROD_STAT"));
+				prodVO.setProdTime(rs.getDate("PROD_TIME"));
+				list.add(prodVO); // Store the row in the List
+			}
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 }
