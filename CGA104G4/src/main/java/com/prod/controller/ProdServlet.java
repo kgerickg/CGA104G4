@@ -290,5 +290,26 @@ public class ProdServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
+
+		if ("listProds_ByCompositeQuery".equals(action)) { // 來自/front-prod/memberMenu.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.將輸入資料轉為Map **********************************/
+			// 採用Map<String,String[]> getParameterMap()的方法
+			// 注意:an immutable java.util.Map
+			Map<String, String[]> map = req.getParameterMap();
+
+			/*************************** 2.開始複合查詢 ***************************************/
+			ProdService prodSvc = new ProdService();
+			List<ProdVO> list = prodSvc.getAll(map);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("listProds_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+			RequestDispatcher successView = req.getRequestDispatcher("/front-prod/memberMenu.jsp"); // 成功轉交/front-prod/memberMenu.jsp
+			successView.forward(req, res);
+		}
 	}
 }

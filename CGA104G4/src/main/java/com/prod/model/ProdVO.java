@@ -1,5 +1,19 @@
 package com.prod.model;
 
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
@@ -16,6 +30,10 @@ public class ProdVO {
 	private String prodCont;
 	private Integer prodPrc;
 	private Date prodTime;
+	@OneToMany
+	@JoinColumn(name="STORE_ID",referencedColumnName = "STORE_ID")
+	private StoreVO storeVO;
+
 	private Integer prodStat;
 
 	public Integer getProdId() {

@@ -44,7 +44,7 @@ public class AppConfig {
     @Bean
     public SessionFactory sessionFactory() throws IllegalArgumentException{
         return new LocalSessionFactoryBuilder(dataSource())
-                .scanPackages("com.refill.model","com.member.model","com.admin.*")
+                .scanPackages("com.refill.model","com.member.model","com.promo.model","com.admin.*")
                 .addProperties(getHibernateProperties())
                 .buildSessionFactory();
     }

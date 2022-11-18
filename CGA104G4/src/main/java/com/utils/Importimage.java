@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 
 public class Importimage {
 	public static void main(String[] args) {
-		File imagedsc = new File("CGA104G4/src/main/java/com/utils/images");
+		File imagedsc = new File("src/main/java/com/utils/images");
 
 		String sql = "update MEMBER set MEM_PIC=(?) where MEM_ID=?";
 

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Servlet implementation class MemberServlet
  */
-@WebServlet(name="MemberServlet",urlPatterns = {"/MemberServlet", "/member/member.do"})
+@WebServlet(name = "MemberServlet", urlPatterns = {"/MemberServlet", "/member/member.do"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MemberServlet extends HttpServlet {
 
@@ -49,15 +49,15 @@ public class MemberServlet extends HttpServlet {
                 getAll(request, response);
                 break;
             case "updateAccState":
-                updateAccState(request,response);
+                updateAccState(request, response);
                 break;
         }
     }
 
     private void updateAccState(HttpServletRequest request, HttpServletResponse response) {
-       Integer accState = Integer.parseInt(request.getParameter("accState"));
-       Integer memId = Integer.parseInt(request.getParameter("memId"));
-       MemberService memSvc = new MemberService();
+        Integer accState = Integer.parseInt(request.getParameter("accState"));
+        Integer memId = Integer.parseInt(request.getParameter("memId"));
+        MemberService memSvc = new MemberService();
         MemberVO memberVO = new MemberVO();
         memberVO.setMemId(memId);
         memberVO.setAccStat(accState);
