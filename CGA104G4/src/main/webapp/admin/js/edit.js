@@ -20,12 +20,11 @@
 
     oAdmPwd.addEventListener('blur', checkOldPassword);
   }
-  const data = { oAdmPwd: oAdmPwd.value };
   function checkOldPassword() {
     fetch('checkPassword', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ admPwd: oAdmPwd.value })
     })
       .then(resp => resp.json()
       )

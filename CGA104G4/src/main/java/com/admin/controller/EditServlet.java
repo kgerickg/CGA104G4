@@ -14,6 +14,7 @@ import com.admin.entity.Admin;
 import com.admin.service.AdminService;
 
 import core.util.CommonUtil;
+import org.hibernate.internal.build.AllowSysOut;
 
 @WebServlet("/admin/edit")
 public class EditServlet extends HttpServlet {
@@ -27,9 +28,12 @@ public class EditServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		final HttpSession session = request.getSession();
-		final String admAcc = ((Admin) session.getAttribute("admin")).getAdmAcc();
-		Admin admin = json2Pojo(request, Admin.class);
-		admin.setAdmAcc(admAcc);
-		writePojo2Json(response, service.edit(admin));
+		final Admin admin = ((Admin) session.getAttribute("admin"));
+		final String admAcc = admin.getAdmAcc();
+		System.out.println(admAcc);
+		Admin reqAdmin = json2Pojo(request, Admin.class);
+		reqAdmin.setAdmId(admin.getAdmId());
+		reqAdmin.setAdmAcc(admAcc);
+		writePojo2Json(response, service.edit(reqAdmin));
 	}
 }
