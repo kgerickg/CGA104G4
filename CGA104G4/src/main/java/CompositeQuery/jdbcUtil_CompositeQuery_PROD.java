@@ -14,14 +14,15 @@ public class jdbcUtil_CompositeQuery_PROD {
 
 		String aCondition = null;
 
-		if ("PROD_ID".equals(columnName) || "STORE_ID".equals(columnName) || "PRO_DTYPE_ID".equals(columnName) || "PROD_PRC".equals(columnName) || "PROD_STAT".equals(columnName)) // 用於其他
+		if ("PROD_ID".equals(columnName) || "STORE_ID".equals(columnName) || "PRO_DTYPE_ID".equals(columnName)
+				|| "PROD_PRC".equals(columnName) || "PROD_STAT".equals(columnName)) // 用於其他
 			aCondition = columnName + "=" + value;
 		else if ("PROD_NAME".equals(columnName) || "PROD_CONT".equals(columnName)) // 用於varchar
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("PROD_TIME".equals(columnName))                          // 用於date
-			aCondition = columnName + "=" + "'"+ value +"'";                          //for 其它DB  的 date
+		else if ("PROD_TIME".equals(columnName)) // 用於date
+			aCondition = columnName + "=" + "'" + value + "'"; // for 其它DB 的 date
 //		    aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";  //for Oracle 的 date
-		
+
 		return aCondition + " ";
 	}
 
@@ -31,7 +32,7 @@ public class jdbcUtil_CompositeQuery_PROD {
 		int count = 0;
 		for (String key : keys) {
 			String value = map.get(key)[0];
-			if (value != null && value.trim().length() != 0	&& !"action".equals(key)) {
+			if (value != null && value.trim().length() != 0 && !"action".equals(key)) {
 				count++;
 				String aCondition = get_aCondition_For_myDB(key, value.trim());
 
@@ -43,7 +44,7 @@ public class jdbcUtil_CompositeQuery_PROD {
 				System.out.println("有送出查詢資料的欄位數count = " + count);
 			}
 		}
-		
+
 		return whereCondition.toString();
 	}
 }

@@ -16,7 +16,8 @@ public interface ProdDAO_interface {
 	public ProdVO findByPrimaryKey(Integer prodId);
 
 	public List<ProdVO> getAll();
-
+	
+	//查詢某類型的商品(一對多)(回傳 Set)
 	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId);
 
 	public Set<ProdVO> getProdTypeIdsByStoreId(Integer storeId);
