@@ -48,9 +48,7 @@ public class AdminDaoImpl implements AdminDao {
         if (admin.getAdmAccStat() != null) {
             adminorignal.setAdmAccStat(admin.getAdmAccStat());
         }
-        session.merge(adminorignal);
-
-        return 0;
+        return session.merge(adminorignal) != null ? 1 : 0;
     }
 
 

@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"com.*.model","com.*.*.impl"})
+@ComponentScan({"com.*.model","com.*.*.impl","com.cart.*"})
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
