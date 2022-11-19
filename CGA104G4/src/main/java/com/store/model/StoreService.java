@@ -19,20 +19,23 @@ public class StoreService {
 		storeVO.setStorePwd(storePwd);
 		storeVO.setStoreName(storeName);
 		storeVO.setStoreGui(storeGui);
-		storeVO.setStoreRep(storeRep);
 		storeVO.setStoreTel(storeTel);
-		storeVO.setStoreFax(storeFax);
-		storeVO.setStoreAd(storeAd);
-		storeVO.setStoreCon(storeCon);
-		storeVO.setStoreConTel(storeConTel);
-		storeVO.setStoreConAd(storeConAd);
-		storeVO.setStoreEmail(storeEmail);
 		dao.insert(storeVO);
 
 		return storeVO;
 
 	}
 
+	public void update(StoreVO storeVO){
+		try {
+			dao.beginTransaction();
+			dao.update(storeVO);
+			dao.commit();
+		} catch (Exception e) {
+			dao.rollback();
+			e.printStackTrace();
+		}
+	}
 	public StoreVO updateStore(Integer storeId, String storeAcc, String storePwd, String storeName, String storeGui,
 			String storeRep, String storeTel, String storeFax, String storeAd, String storeCon, String storeConTel,
 			String storeConAd, String storeEmail) {

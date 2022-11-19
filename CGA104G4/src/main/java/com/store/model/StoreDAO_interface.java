@@ -1,18 +1,9 @@
 package com.store.model;
 
+import com.basicDAO.BasicDAO_interface;
+
 import java.util.List;
 
-public interface StoreDAO_interface {
-
-    public void insert(StoreVO storeVO);
-
-    public void update(StoreVO storeVO);
-
-    public void delete(Integer storeId);
-
-    public StoreVO findByPrimaryKey(Integer storeId);
-
-    public List<StoreVO> getAll();
-
+public interface StoreDAO_interface extends BasicDAO_interface<StoreVO> {
 
 }
