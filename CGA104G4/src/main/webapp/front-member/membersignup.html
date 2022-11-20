@@ -21,6 +21,11 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
     <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
     <!-- 請將覆蓋用的css放置此註解下方 -->
+    <style>
+        .swal2-modal .swal2-title {
+            font-size: 1.2em;
+        }
+    </style>
 
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -161,6 +166,7 @@
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     //網頁開啟立即執行的方法
     getcityselector();
@@ -241,7 +247,7 @@
                 $("select#memDist").append("<option disabled selected>鄉鎮區</option>");
                 $("input[name='memAdr']").val("");
                 $("input[name='cfMemPwd']").val("");
-                await alert("新增成功");
+                showSuccessful();
                 window.location.href = "../front-index/index.html";
             } else {
                 throw response;
@@ -264,6 +270,16 @@
                 $("dataerror").html(`<p style='color:red;'>${response.dataError}</p>`);
             }
         }
+    }
+
+    function showSuccessful(){
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '註冊成功',
+            showConfirmButton: false,
+            timer: 2000
+        })
     }
 </script>
 </body>

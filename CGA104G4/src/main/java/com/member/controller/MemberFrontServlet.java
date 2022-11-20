@@ -162,7 +162,7 @@ public class MemberFrontServlet extends HttpServlet {
 
         if (memNewPwd == null || memNewPwd.trim().length() == 0) {
             MsgsJson.put("memNewPwderror", "新密碼請勿空白");
-        } else if (!memOldPwd.trim().matches(memPwdReg)) {
+        } else if (!memNewPwd.trim().matches(memPwdReg)) {
             MsgsJson.put("memNewPwderror", "新密碼格式異常");
         } else if (memNewPwd.equals(memOldPwd)) {
             MsgsJson.put("memNewPwderror", "新密碼請勿與舊密碼相同");
