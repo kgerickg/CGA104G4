@@ -1,6 +1,8 @@
 package com.promo.model;
 
+import com.refill.model.RefillVO;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceContext;
@@ -35,8 +37,9 @@ public class PromoDAO implements PromoDAO_interface {
 
 	@Override
 	public List<PromoVO> getAll() {
-
-		return null;
+		NativeQuery<PromoVO> nativeQuery = session.createNativeQuery("select * from Promo", PromoVO.class);
+		List<PromoVO> PromoVOs = nativeQuery.list();
+		return PromoVOs;
 	}
 
 }

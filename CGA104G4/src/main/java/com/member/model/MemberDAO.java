@@ -28,9 +28,8 @@ public class MemberDAO implements MemberDAO_interface {
         memberVOorignal.setMemAdr(memberVO.getMemAdr());
         if (memberVO.getMemPic() != null) {
             memberVOorignal.setMemPic(memberVO.getMemPic());
-            getSession().merge(memberVOorignal);
         }
-
+        getSession().merge(memberVOorignal);
     }
 
     @Override
