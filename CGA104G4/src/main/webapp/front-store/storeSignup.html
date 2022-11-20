@@ -2,31 +2,31 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <!-- 響應式頁面 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- 響應式頁面 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- GOOGLEFONT -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+    <!-- GOOGLEFONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
 
-  <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-  <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-  <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
-  <!-- 請將覆蓋用的css放置此註解下方 -->
+    <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+    <!-- 請將覆蓋用的css放置此註解下方 -->
 
-  <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
-  <!-- 頁籤顯示的title -->
-  <title>空白模板</title>
+    <!-- 頁籤顯示的title -->
+    <title>空白模板</title>
 
 
 </head>
@@ -37,108 +37,108 @@
 
 <!--下面可自由新增內容 -->
 <div class="wrapper">
-  <section class="pager-section text-center" style="padding-bottom: 30px; padding-top: 140px;">
-    <div class="container">
-      <div class="pager-head">
-        <h2 style="color: #ffa500; font-size: 2rem; font-weight: 400;">店家註冊</h2>
-      </div>
-      <!--pager-head end-->
-    </div>
-  </section>
-  <!--pager-section end-->
-
-  <section class="">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-7">
-          <div class="delitaste-form text-center">
-
-            <span id="dataError"></span>
-            <div>
-              <h4 class="text-left" style="font-size: 1rem;">帳號:(請輸入信箱)</h4>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <input type="email" name="storeAcc" placeholder="信箱*" class="form-control">
-                  </div>
-                </div>
-              </div>
-              <span id="storeAccError"></span>
-
-              <h4 class="text-left" style="font-size: 1rem;">密碼:(輸入8~20英文大小寫數字混合)</h4>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="password" name="storePwd" placeholder="密碼*" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="password" name="confirmPwd" placeholder="確認密碼*"
-                           class="form-control">
-                  </div>
-                </div>
-              </div>
-              <span id="storePwdError"></span>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" name="storeName" placeholder="姓名*" class="form-control">
-                  </div>
-                  <!--form-group end-->
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" name="storeTel" placeholder="店家電話號碼*"
-                           class="form-control">
-                  </div>
-                  <!--form-group end-->
-                </div>
-                <div style="display: flex; gap: 16rem">
-                  <span style="margin-left: 2rem" id="storeNameerror"></span>
-                  <span id="storeTelerror"></span>
-                </div>
-
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <select style="height: 55px;" class="form-control" name="storeCity"
-                            id="storeCity">
-                      <option disabled selected>縣市</option>
-                    </select>
-                  </div>
-                  <!--form-group end-->
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <select style="height: 55px;" class="form-control" name="storeDist"
-                            id="storeDist">
-                      <option disabled selected>鄉鎮區</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <input type="text" placeholder="路段" class="form-control" name="storeAdr">
-                  </div>
-                  <!--form-group end-->
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <button type="submit" class="btn-default w-100" style="outline: none;" id="signup">
-                    註冊
-                    <span></span></button>
-                </div>
-              </div>
+    <section class="pager-section text-center" style="padding-bottom: 30px; padding-top: 140px;">
+        <div class="container">
+            <div class="pager-head">
+                <h2 style="color: #ffa500; font-size: 2rem; font-weight: 400;">店家註冊</h2>
             </div>
-          </div>
+            <!--pager-head end-->
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    <!--pager-section end-->
+
+    <section class="">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="delitaste-form text-center">
+
+                        <span id="dataError"></span>
+                        <div>
+                            <h4 class="text-left" style="font-size: 1rem;">帳號:(請輸入信箱)</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="email" name="storeAcc" placeholder="信箱*" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="storeAccError"></span>
+
+                            <h4 class="text-left" style="font-size: 1rem;">密碼:(輸入8~20英文大小寫數字混合)</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="storePwd" placeholder="密碼*" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="confirmPwd" placeholder="確認密碼*"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="storePwdError"></span>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="storeName" placeholder="姓名*" class="form-control">
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="storeTel" placeholder="店家電話號碼*"
+                                               class="form-control">
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                                <div style="display: flex; gap: 16rem">
+                                    <span style="margin-left: 2rem" id="storeNameError"></span>
+                                    <span id="storeTelError"></span>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select style="height: 55px;" class="form-control" name="storeCity"
+                                                id="storeCity">
+                                            <option disabled selected>縣市</option>
+                                        </select>
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select style="height: 55px;" class="form-control" name="storeDist"
+                                                id="storeDist">
+                                            <option disabled selected>鄉鎮區</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="路段" class="form-control" name="storeAdr">
+                                    </div>
+                                    <!--form-group end-->
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn-default w-100" style="outline: none;" id="signup">
+                                        註冊
+                                        <span></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 
@@ -148,109 +148,110 @@
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
 <script>
-  //網頁開啟立即執行的方法
-  getcityselector();
+    //網頁開啟立即執行的方法
+    getcityselector();
 
-  //儲存縣市資料用
-  let locat;
+    //儲存縣市資料用
+    let locat;
 
-  //取得縣市資料
-  function getcityselector() {
-    fetch("../resources/js/taiwan_districts.json")
+    //取得縣市資料
+    function getcityselector() {
+        fetch("../resources/js/taiwan_districts.json")
             .then(response => response.json())
             .then(data => {
-              locat = data;
-              data.forEach(e => {
-                $("select#storeCity").append(`<option value="${e.name}">${e.name}</option>`);
-              })
+                locat = data;
+                data.forEach(e => {
+                    $("select#storeCity").append(`<option value="${e.name}">${e.name}</option>`);
+                })
             })
-  }
-
-  //縣市選擇後出現對應的市區
-  $('select#storeCity').change(function () {
-    locat.forEach(e => {
-      let storeDist;
-      if (e.name === $("select#storeCity").val()) {
-        storeDist = e.districts;
-        $("select#storeDist").empty();
-        $("select#storeDist").append("<option disabled selected>鄉鎮區</option>");
-        storeDist.forEach(e => {
-          $("select#storeDist").append(`<option  value="${e.name}">${e.name}</option>`);
-        })
-      }
-    })
-  })
-
-  $("button#signup").click(function (e) {
-    e.preventDefault();
-    insertData();
-  })
-
-  async function insertData() {
-    let formData = new FormData();
-    formData.append('action', 'signup');
-    formData.append('storeAcc', $("input[name='storeAcc']").val());
-    formData.append('storePwd', $("input[name='storePwd']").val());
-    formData.append('confirmPwd',$("input[name='confirmPwd']").val());
-    formData.append('storeName', $("input[name='storeName']").val());
-    formData.append('storeTel', $("input[name='storeTel']").val());
-    formData.append('storeCity', $("select[name='storeCity']").val());
-    formData.append('storeDist', $("select[name='storeDist']").val());
-    formData.append('storeAdr', $("input[name='storeAdr']").val());
-
-    console.log($("input[name='storePwd']").val());
-    console.log($("input[name='confirmPwd']").val());
-
-    let path = window.location.pathname;
-    let webCtx = path.substring(0, path.indexOf('/', 1));
-    let url = webCtx + "/store/storefront.do";
-
-    try {
-      let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
-      if (response.state) {
-        $("dataerror").html("");
-        $("#storeAccError").html("");
-        $("#storePwdError").html("");
-        $("#storeNameError").html("");
-        $("#storeTelError").html("");
-        $("input[name='storeAcc']").val("");
-        $("input[name='storePwd']").val("");
-        $("input[name='confirmPwd']").val("");
-        $("input[name='storeName']").val("");
-        $("input[name='storeTel']").val("");
-        $("select#storeCity").empty();
-        $("select#storeDist").append("<option disabled selected>縣市</option>")
-        locat.forEach(e => {
-          $("select#storeCity").append(`<option value="${e.name}">${e.name}</option>`);
-        });
-        $("select#storeDist").empty();
-        $("select#storeDist").append("<option disabled selected>鄉鎮區</option>");
-        $("input[name='storAdr']").val("");
-        $("input[name='confirmPwd']").val("");
-        await alert("新增成功");
-        window.location.href = "../front-index/index.html";
-      } else {
-        throw response;
-      }
-
-    } catch (response) {
-      if (response.storeAccError) {
-        $("#storeAccError").html(`<p style='color:red;'>${response.storeAccError}</p>`);
-      }
-      if (response.storePwdError) {
-        $("#storePwdError").html(`<p style='color:red;'>${response.storePwdError}</p>`);
-      }
-      if (response.storeNameError) {
-        $("#storeNameError").html(`<p style='color:red;'>${response.storeNameError}</p>`);
-      }
-      if (response.storeTelError) {
-        $("#storeTelError").html(`<p style='color:red;'>${response.storeTelError}</p>`);
-      }
-      if (response.dataError) {
-        $("dataError").html(`<p style='color:red;'>${response.dataError}</p>`);
-      }
     }
-  }
+
+    //縣市選擇後出現對應的市區
+    $('select#storeCity').change(function () {
+        locat.forEach(e => {
+            let storeDist;
+            if (e.name === $("select#storeCity").val()) {
+                storeDist = e.districts;
+                $("select#storeDist").empty();
+                $("select#storeDist").append("<option disabled selected>鄉鎮區</option>");
+                storeDist.forEach(e => {
+                    $("select#storeDist").append(`<option  value="${e.name}">${e.name}</option>`);
+                })
+            }
+        })
+    })
+
+    $("button#signup").click(function (e) {
+        e.preventDefault();
+        insertData();
+    })
+
+    async function insertData() {
+        let formData = new FormData();
+        formData.append('action', 'signup');
+        formData.append('storeAcc', $("input[name='storeAcc']").val());
+        formData.append('storePwd', $("input[name='storePwd']").val());
+        formData.append('confirmPwd', $("input[name='confirmPwd']").val());
+        formData.append('storeName', $("input[name='storeName']").val());
+        formData.append('storeTel', $("input[name='storeTel']").val());
+        formData.append('storeCity', $("select[name='storeCity']").val());
+        formData.append('storeDist', $("select[name='storeDist']").val());
+        formData.append('storeAdr', $("input[name='storeAdr']").val());
+
+        console.log($("input[name='storePwd']").val());
+        console.log($("input[name='confirmPwd']").val());
+
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/store/storeFront.do";
+
+        try {
+            let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
+            if (response.state) {
+                $("dataError").html("");
+                $("#storeAccError").html("");
+                $("#storePwdError").html("");
+                $("#storeNameError").html("");
+                $("#storeTelError").html("");
+                $("input[name='storeAcc']").val("");
+                $("input[name='storePwd']").val("");
+                $("input[name='confirmPwd']").val("");
+                $("input[name='storeName']").val("");
+                $("input[name='storeTel']").val("");
+                $("select#storeCity").empty();
+                $("select#storeDist").append("<option disabled selected>縣市</option>")
+                locat.forEach(e => {
+                    $("select#storeCity").append(`<option value="${e.name}">${e.name}</option>`);
+                });
+                $("select#storeDist").empty();
+                $("select#storeDist").append("<option disabled selected>鄉鎮區</option>");
+                $("input[name='storAdr']").val("");
+                $("input[name='confirmPwd']").val("");
+                await alert("新增成功");
+                window.location.href = "../front-index/index.html";
+            } else {
+                alert("失敗")
+                throw response;
+            }
+
+        } catch (response) {
+            if (response.storeAccError) {
+                $("#storeAccError").html(`<p style='color:red;'>${response.storeAccError}</p>`);
+            }
+            if (response.storePwdError) {
+                $("#storePwdError").html(`<p style='color:red;'>${response.storePwdError}</p>`);
+            }
+            if (response.storeNameError) {
+                $("#storeNameError").html(`<p style='color:red;'>${response.storeNameError}</p>`);
+            }
+            if (response.storeTelError) {
+                $("#storeTelError").html(`<p style='color:red;'>${response.storeTelError}</p>`);
+            }
+            if (response.dataError) {
+                $("dataError").html(`<p style='color:red;'>${response.dataError}</p>`);
+            }
+        }
+    }
 </script>
 </body>
 

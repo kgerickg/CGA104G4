@@ -66,7 +66,7 @@ header.innerHTML =
                         <ul class="uladjust">
                             <li><a href="${webCtx}/front-member/membersignup.html" title="">會員註冊</a></li>
                             <li><a href="${webCtx}/front-member/memberlogin.html" title="">會員登入</a></li>
-                            <li><a href="" title="">商家註冊</a></li>
+                            <li><a href="${webCtx}/front-store/storeSignup.html" title="">商家註冊</a></li>
                             <li><a href="${webCtx}/front-member/storelogin.html" title="">商家登入</a></li>
                         </ul>
                     </li>
@@ -103,7 +103,7 @@ div.innerHTML =
             <ul>
                 <li><a href="${webCtx}/front-member/membersignup.html">會員註冊</a></li>
                 <li><a href="${webCtx}/front-member/memberlogin.html">會員登入</a></li>
-                <li><a href="" title="">商家註冊</a></li>
+                <li><a href="${webCtx}/front-store/storeSignup.html" title="">商家註冊</a></li>
                 <li><a href="${webCtx}/front-member/storelogin.html" title="">商家登入</a></li>
             </ul>
         </li>
