@@ -364,7 +364,7 @@ public class StoreFrontServlet extends HttpServlet {
         }
 
         if (storeVO.getAccStat() == 0) {
-            msgsJson.put("memError", "帳號已被停權，若有疑慮請聯絡客服人員");
+            msgsJson.put("storeError", "帳號已被停權，若有疑慮請聯絡客服人員");
             msgsJson.put("state", false);
             out.write(msgsJson.toString());
             return;
