@@ -45,7 +45,7 @@
 </head>
 
 <body>
-	<script src="../resources/js/membernav.js"></script>
+	<script src="../resources/js/storenav.js"></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
 	<div class="page-loading">
@@ -165,7 +165,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -183,7 +183,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -202,7 +202,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -221,7 +221,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -240,7 +240,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -259,7 +259,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -278,7 +278,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>
@@ -297,7 +297,7 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											class="btn-default gradient-bg half-radius height-2">修改
 											<span></span>
 										</a>
 									</div>

@@ -1,5 +1,6 @@
 package com.prod.model;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -14,6 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+=======
+import com.prodtype.model.ProdTypeService;
+import com.prodtype.model.ProdTypeVO;
+>>>>>>> refs/heads/sylvia
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
@@ -107,8 +112,13 @@ public class ProdVO {
 		return storeVO;
 	}
 
-//	 for join prodTypeName from prodTypeId
-
+	// for join prodTypeName from prodTypeId
+	public ProdTypeVO getProdTypeVO() {
+		ProdTypeService prodTypeSvc = new ProdTypeService();
+		ProdTypeVO prodTypeVO = prodTypeSvc.getOneProdType(prodTypeId);
+		return prodTypeVO;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

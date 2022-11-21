@@ -21,7 +21,7 @@ header.innerHTML =
                     <li><a href="" >一般商品管理+</a>
                         <ul>
                             <li><a href="" >商品變更</a></li>
-                            <li><a href="" >訂單管理</a></li>
+                            <li><a href="${webCtx}/front-orders/storeListAllOrders.jsp" >訂單管理</a></li>
                         </ul>
                     </li>
                     <li><a href="" >福袋商品管理+</a>
