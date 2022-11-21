@@ -1,5 +1,7 @@
 package com.prod.model;
 
+import com.prodtype.model.ProdTypeService;
+import com.prodtype.model.ProdTypeVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 
@@ -89,8 +91,13 @@ public class ProdVO {
 		return storeVO;
 	}
 
-//	 for join prodTypeName from prodTypeId
-
+	// for join prodTypeName from prodTypeId
+	public ProdTypeVO getProdTypeVO() {
+		ProdTypeService prodTypeSvc = new ProdTypeService();
+		ProdTypeVO prodTypeVO = prodTypeSvc.getOneProdType(prodTypeId);
+		return prodTypeVO;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

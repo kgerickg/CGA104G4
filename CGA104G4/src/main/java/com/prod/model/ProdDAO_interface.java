@@ -1,8 +1,7 @@
 package com.prod.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 
 public interface ProdDAO_interface {
 	public void insert(ProdVO prodVO);
