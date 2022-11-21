@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>後台</title>
+    <title>優惠活動管理頁面</title>
     <meta charset="utf-8"/>
 
 
@@ -253,8 +253,8 @@
     </div>
 </div>
 <!-- 複製到這裡↑↑↑ -->
-<div class="formBlock flex-block hidden">
-    <button class="close-form">&times;</button>
+<div class="formBlock flex-block hidden" id="formBlock">
+    <button class="close-form" id="close-form">&times;</button>
     <div class="formTitle">新增儲值優惠活動</div>
     <div class="flex-block">
         <div>
@@ -288,11 +288,48 @@
         <button class="formBtn">新增</button>
         <button class="formBtn">取消</button>
     </div>
-
 </div>
 
 
 <div class="overlay hidden"></div>
+
+<div class="formBlock flex-block hidden" id="UpdateForm">
+    <button class="close-form" id="close-update">&times;</button>
+    <div class="formTitle">修改優惠活動</div>
+    <div class="flex-block">
+        <div>
+            <label for="promoName">活動名稱:</label>
+            <br>
+            <input type="text" id="promoUpdateName">
+        </div>
+        <div>
+            <label for="promoVal">活動折扣:</label>
+            <br>
+            <input type="range" id="promoUpdateVal" min="0" max="100" step="1">
+            <span id="promoUpdateValSpan"></span>
+        </div>
+        <div>
+            <label for="promoStartTime">開始時間:</label>
+            <br>
+            <input type="text" id="promoUpdateStartTime">
+        </div>
+        <div>
+            <label for="promoFinishTime">結束時間:</label>
+            <br>
+            <input type="text" id="promoUpdateFinishTime">
+        </div>
+        <div>
+            <label for="promoCont">活動內容:</label>
+            <br>
+            <textarea id="promoUpdateCont" rows="5" cols="50" maxlength="250" style="resize: none"></textarea>
+        </div>
+    </div>
+    <div style="align-self: center;margin-top: 2rem">
+        <button class="formBtn">儲存</button>
+        <button class="formBtn">取消</button>
+    </div>
+</div>
+
 
 
 <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
@@ -311,9 +348,11 @@
 
 <!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
 <script>
-    const formBlock = document.querySelector('.formBlock');
+    const formBlock = document.querySelector('#formBlock');
+    const UpdateForm = document.querySelector('#UpdateForm');
     const overlay = document.querySelector('.overlay');
-    const btnCloseForm = document.querySelector('.close-form');
+    const btnCloseForm = document.querySelector('#close-form');
+    const updateCloseForm = document.querySelector('#close-update');
     const promoIncrease = document.querySelector('.promoIncrease');
     const promoVal = document.querySelector('#promoVal');
     const promoValSpan = document.querySelector('#promoValSpan');
@@ -327,22 +366,27 @@
 
     promoIncrease.addEventListener('click', openFormBlock);
     btnCloseForm.addEventListener('click', closeForm);
+    updateCloseForm.addEventListener('click', closeUpdateForm);
     overlay.addEventListener('click', closeForm);
 
     promoValSpan.innerHTML = (promoVal.value / 10).toFixed(1) + "折";
     jQuery.datetimepicker.setLocale('zh-TW');
 
-    //按下ESC 新增活動表單關閉;
+
+    //按下ESC 新增與更新活動表單關閉;
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && !formBlock.classList.contains('hidden')) {
             closeForm();
+            closeUpdateForm();
         }
     });
+
 
     //移動折扣RANGE-BAR動態顯示數值
     promoVal.addEventListener('mousemove', function () {
         promoValSpan.innerHTML = (promoVal.value / 10).toFixed(1) + "折";
     })
+
 
     //顯示新增活動表單
     function openFormBlock() {
@@ -350,12 +394,17 @@
         overlay.classList.remove('hidden');
 
     };
+    //關閉修改表單
+    function closeUpdateForm() {
+        overlay.classList.add('hidden');
+        UpdateForm.classList.add('hidden')
+    }
 
-    //顯示關閉活動表單
+
+    //關閉新增活動表單
     function closeForm() {
         formBlock.classList.add('hidden');
         overlay.classList.add('hidden');
-
     };
 
     //取得資料庫中活動List
@@ -394,7 +443,6 @@
     //依活動狀態搜索 進行過濾並顯示結果
     selectByPromoState.addEventListener('click',function(){
         let option = +promoStateSelecter.value;
-        console.log(option);
         let promoList = getPromoList();
         if(option === 0){
             const result = promoList.filter(promo=>promo.promState==='已結束')
@@ -420,15 +468,17 @@
 
     })
 
-    function copyPromo(row) {
-        console.log(row)
+    function copyPromo(promoId) {
+
     }
 
-    function deletePromo(row) {
-        console.log(row)
+    async function deletePromo(promoId) {
+
     }
-    function editPromo(row) {
-        console.log(row)
+    function editPromo(promoId) {
+        overlay.classList.remove('hidden');
+        UpdateForm.classList.remove('hidden');
+
     }
 
 
