@@ -115,9 +115,9 @@ public class StoreFrontServlet extends HttpServlet {
     }
 
     private void getStoreInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         StoreService storeService = new StoreService();
         Writer out = response.getWriter();
+        System.out.println(request.getSession(false));
         Integer storeId = (Integer) request.getSession().getAttribute("storeId");
         StoreVO storeVO = storeService.findByStoreId(storeId);
         JSONObject storeJson = new JSONObject(storeVO);
@@ -371,7 +371,7 @@ public class StoreFrontServlet extends HttpServlet {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("storId", storeVO.getStoreId());
+        session.setAttribute("storeId", storeVO.getStoreId());
         session.setAttribute("storeName", storeVO.getStoreName());
 
         if (storeVO.getStorePic() != null) {

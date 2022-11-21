@@ -33,7 +33,7 @@
 </head>
 
 <body>
-<script src="../resources/js/membernav.js"></script>
+<script src="../resources/js/storenav.js"></script>
 <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 <!--下面可自由新增內容 -->
 <div class="wrapper">
@@ -87,8 +87,8 @@
                         </div>
 
                         <div class="btm-tx text-left" style="margin-bottom: 3rem;">
-                            <span>尚未註冊? <a href="storeSignup.html">進行註冊</a></span>
-                            <a href="storeForgetPwd.html">忘記密碼? </a>
+                            <span>尚未註冊? <a href="../front-store/storeSignup.html">進行註冊</a></span>
+                            <a href="../front-store/storeForgetPwd.html">忘記密碼? </a>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,6 @@
         $("#storeAccError").remove();
         $("#storePwdError").remove();
         if (!storeAcc) {
-            console.log("456");
             let p = document.createElement("p");
             p.setAttribute("id", "storeAccError")
             p.style.color = "red";
@@ -119,7 +118,6 @@
             $("#emaildiv").append(p);
         }
         if (!password) {
-            console.log(password);
             let p = document.createElement("p");
             p.setAttribute("id", "storePwdError")
             p.style.color = "red";
@@ -127,7 +125,6 @@
             $("#passworddiv").append(p);
         }
         if (storeAcc && password) {
-            console.log("123");
             sendData(storeAcc, password);
         }
     })
@@ -153,20 +150,23 @@
 
         if (!response.state) {
             if (response.storeAccError) {
+                alert("storeAccError");
                 let p = document.createElement("p");
-                p.setAttribute("id", "storePwdError")
+                p.setAttribute("id", "storeAccError")
                 p.style.color = "red";
                 p.textContent = response.storeAccError;
                 $("#emaildiv").append(p);
             }
             if (response.storePwdError) {
+                alert("storePwdError");
                 let p = document.createElement("p");
-                p.setAttribute("id", "PwdError")
+                p.setAttribute("id", "storePwdError")
                 p.style.color = "red";
                 p.textContent = response.storePwdError;
                 $("#passworddiv").append(p);
             }
             if (response.storeError) {
+                alert(response.storeError);
                 let p = document.createElement("p");
                 p.setAttribute("id", "storeError")
                 p.style.color = "red";
@@ -178,7 +178,7 @@
         if (response.location) {
             window.location.href = `${response.location}`;
         } else {
-            window.location.href = "../front-index/index.html";
+            window.location.href = "../front-index/storeIndex.html";
         }
 
     }

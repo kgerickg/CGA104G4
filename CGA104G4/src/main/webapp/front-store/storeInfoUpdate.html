@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- 響應式頁面 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- GOOGLEFONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+  <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
+  <link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+  <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+  <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+  <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
+  <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+  <!-- 請將覆蓋用的css放置此註解下方 -->
+
+
+  <!-- 頁籤顯示的title -->
+  <title>個人資料修改</title>
+
+
+</head>
+
+<body>
+<script src="../resources/js/storenav.js"></script>
+<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
+<!--下面可自由新增內容 -->
+
+<div class="wrapper">
+  <section class="pager-section text-center" style="padding-bottom: 30px; padding-top: 140px;">
+    <div class="container">
+      <div class="pager-head">
+        <h2 style="color: #ffa500; font-size: 2rem; font-weight: 400;">合作店家基本資料</h2>
+      </div>
+      <!--pager-head end-->
+    </div>
+  </section>
+  <!--pager-section end-->
+
+  <section class="">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <div class="delitaste-form text-center">
+            <div>
+              <h4 class="text-left" style="font-size: 1rem;">帳號:</h4>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="email" name="storeAcc" id="storeAcc" placeholder="信箱*"
+                           class="form-control" readonly>
+                  </div>
+                </div>
+              </div>
+              <h4 class="text-left" style="font-size: 1rem;">基本資料:</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" name="storeName" id="storeName" placeholder="商店名稱*"
+                           class="form-control" readonly>
+                  </div>
+                  <!--form-group end-->
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" name="storeTel" id="storeTel" placeholder="電話號碼*"
+                           class="form-control" readonly>
+                  </div>
+                  <!--form-group end-->
+                </div>
+              </div>
+              <span style="display: flex; justify-content:space-around">
+                                    <span  style="color: red"
+                                           id="storeNameError"></span>
+                                    <span  id="storeTelError" style="color: red"></span>
+                            </span>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select style="height: 55px;" class="form-control" name="storeCity"
+                            id="storeCity" disabled>
+                      <option disabled selected>縣市</option>
+                    </select>
+                  </div>
+                  <!--form-group end-->
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select style="height: 55px;" class="form-control" name="storeDist"
+                            id="storeDist" disabled>
+                      <option disabled selected>鄉鎮區</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" placeholder="路段" class="form-control" name="storeAdr"
+                           id="storeAdr" readonly>
+                  </div>
+                  <!--form-group end-->
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div>
+                  <h4 class="text-left" style="font-size: 1rem; margin-left: 8px;margin-right: 9rem">
+                    商店圖片
+                  </h4>
+                </div>
+                <div class="form-group" style="position: relative">
+                                        <span id="imgbtnspan" style="position: absolute;display:none; left: 10%">
+                                        <label class="btn btn-info">
+                                            <input type="file" style="display:none;" id="imgInput"></iuput>
+                                          <i class="fa fa-photo"></i> 上傳圖片
+                                        </label>
+                                        </span>
+                  <img src="" id="personalImage" width="200px" height="auto"
+                       style="background: #F5F5F5">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <button type="button" class="btn-default w-100" style="outline: none;"
+                            id="update">
+                      修改
+                      <span></span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="display:none;" id="checkRow">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <button type="button" class="btn-default w-100" style="outline: none;"
+                            id="confirm">
+                      確認<span></span></button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <button type="button" class="btn-default w-100" style="outline: none;"
+                            id="cancel">
+                      取消<span></span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- 下面是這個版需要的js可添加各自需要的js檔-->
+<script src="../resources/js/bootstrap.min.js"></script>
+<script src="../resources/js/slick.js"></script>
+<script src="../resources/js/scripts.js"></script>
+<script src="../resources/js/isotope.js"></script>
+</body>
+<script>
+
+  let locat = getLocation();
+
+  async function getLocation() {
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/resources/js/taiwan_districts.json";
+    locat = await fetch(url).then(res => res.json());
+    return locat;
+  }
+
+  let storedata = new FormData();
+  (async function storeInfoUpdate() {
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/storeFront.do?action=getStoreInfo";
+
+    let response = await fetch(url, {method: 'get'}).then(e => e.json());
+    if (response.storeAcc) {
+      $("#storeAcc").val(response.storeAcc);
+    }
+    if (response.storeName) {
+      $("#storeName").val(response.storeName);
+      storedata.append("storeName", response.storeName);
+    }
+    if (response.storeTel) {
+      $("#storeTel").val(response.storeTel);
+      storedata.append("storeTel", response.storeTel);
+    }
+
+    if (response.storeAdr) {
+      $("#storeAdr").val(response.storeAdr);
+      storedata.append("storeAdr", response.storeAdr);
+    }
+
+    showCity();
+
+    if (response.storeCity) {
+      $("#storeCity").val(response.storeCity);
+      storedata.append("storeCity", response.storeCity);
+    }
+
+    showDist();
+
+    if (response.storeDist) {
+      $("#storeDist").val(response.storeDist);
+      storedata.append("storeDist", response.storeDist);
+    }
+
+    showOriginalImg()
+  })();
+
+  $("#imgInput").change(function () {
+    if (this.files.length > 0) {
+      let reader = new FileReader();
+      reader.readAsDataURL(this.files[0]);
+      reader.addEventListener("load", function () {
+        $("#personalImage").attr("src", reader.result);
+      })
+    } else {
+      $("#imgInput").val("");
+      showOriginalImg();
+    }
+  })
+
+  $("#update").click(function () {
+    $("#storeName").prop("readonly", false);
+    $("#storeTel").prop("readonly", false);
+    $("#storeAdr").prop("readonly", false);
+    $("#storeCity").prop("disabled", false);
+    $("#storeDist").prop("disabled", false);
+
+    $("#storeCity").change(showDist);
+
+    $("#update").toggle();
+    $("#checkRow").toggle();
+    $("#imgbtnspan").toggle();
+  });
+
+  $("#cancel").click(function () {
+    $("#storeNameError").html("");
+    $("#storeTel").html("");
+    $("#storeName").val(storedata.get("storeName"));
+    $("#storeTel").val(storedata.get("storeTel"));
+    $("#storeAdr").val(storedata.get("storeAdr"));
+
+    if (storedata.get("storeCity")) {
+      $("#storeCity").val(storedata.get("storeCity"));
+    } else {
+      showCity();
+    }
+
+    if (storedata.get("storeDist")) {
+      showDist();
+      $("#storeDist").val(storedata.get("storeDist"));
+    } else {
+      showDist();
+    }
+
+    $("#imgInput").val("");
+
+    showOriginalImg()
+
+    setReadonly();
+
+  })
+
+  $("#confirm").click(function () {
+    $("#storeNameError").html("");
+    $("#storeTelError").html("");
+    let formData = new FormData();
+    formData.append("storeName", $("#storeName").val());
+    formData.append("storeTel", $("#storeTel").val());
+    formData.append("storeAdr", $("#storeAdr").val());
+    formData.append("storeCity", $("#storeCity").val());
+    formData.append("storeDist", $("#storeDist").val());
+
+
+    if ($("#imgInput").val()) {
+      let storePic = document.querySelector("#imgInput").files[0];
+      formData.append("storePic", storePic);
+    }
+
+    formData.append("action", "updateData")
+
+    updateData(formData);
+
+  })
+
+  async function updateData(formData) {
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/storeFront.do";
+    let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
+    if (!response.state) {
+      if (response.storeNameError) {
+        $("#storeNameError").html(response.storeNameError);
+      }
+      if (response.storeTelError) {
+        $("#storeTelError").html(response.storeTelError);
+      }
+      return;
+    }
+    await sessionStorage.removeItem("storedata");
+    window.location.reload();
+
+
+
+  }
+
+
+  function showCity() {
+    $("#storeCity").empty();
+    $("#storeCity").append("<option disabled selected>縣市</option>");
+    locat.forEach(e => {
+      $("#storeCity").append(`<option value="${e.name}">${e.name}</option>`);
+    });
+  }
+
+  function showDist() {
+    $("#storeDist").empty();
+    $("#storeDist").append("<option disabled selected>鄉鎮區</option>");
+    locat.forEach(e => {
+      let storeDist;
+      if (e.name === $("#storeCity").val()) {
+        storeDist = e.districts;
+        storeDist.forEach(e => {
+          $("#storeDist").append(`<option  value="${e.name}">${e.name}</option>`);
+        })
+      }
+    })
+  }
+
+  function setReadonly() {
+    $("#storeName").prop("readonly", true);
+    $("#storeTel").prop("readonly", true);
+    $("#storeAdr").prop("readonly", true);
+    $("#storeCity").prop("disabled", true);
+    $("#storeDist").prop("disabled", true);
+
+    $("#update").toggle();
+    $("#checkRow").toggle();
+    $("#imgbtnspan").toggle();
+
+  }
+
+  function showOriginalImg() {
+    let storedata = JSON.parse(sessionStorage.getItem("storedata"));
+    if (storedata.storePic) {
+      $("#personalImage").attr("src", "data:image/png;base64," + storedata.storePic);
+    } else {
+      $("#personalImage").attr("src", "../resources/images/personal.jpg");
+    }
+
+  }
+
+
+</script>
+
+</html>

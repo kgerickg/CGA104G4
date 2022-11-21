@@ -2,10 +2,8 @@ package com.store.model;
 
 import com.utils.MailService;
 import com.utils.RandomPassword;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
 public class StoreService {
 
     private StoreDAO_interface dao;
