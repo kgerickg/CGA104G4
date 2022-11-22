@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-String selectlkorderid = request.getParameter("selectlkorderid");
-%>
+<%-- <% LkComplVO lkComplVO = (LkComplVO) request.getAttribute("lkComplVO"); %> --%>
 
 <html>
 <head>
@@ -106,34 +104,45 @@ ul li {
 
 
 
-				<form method="post" name="selection" action=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
+<!-- 				<form method="post" name="selection" action=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do> -->
 
+<!-- 					<b style="color: black">請選擇福袋訂單</b> -->
+
+<!-- 					<p> -->
+<!-- 						<select name="mySelect" id="mySelect" > -->
+<!-- 							<option value="" selected>請選擇福袋訂單</option> -->
+<%-- 							<c:forEach items="${List}" var="list"> --%>
+<%-- 								<option value="${list.id}">${list.workName}</option> --%>
+<%-- 							</c:forEach> --%>
+<!-- 						</select> -->
+<!-- 					</p> -->
+
+<!-- 				</form>  -->
+					<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
+					
 					<b style="color: black">請選擇福袋訂單</b>
 
 					<p>
-						<select name="mySelect" id="mySelect" lay-verify="" >
+						<select name="mySelect" id="mySelect" >
 							<option value="" selected>請選擇福袋訂單</option>
-							<c:forEach items="${List}" var="list">
-								<option value="${list.id}">${list.workName}</option>
-							</c:forEach>
 						</select>
 					</p>
-
-				</form> 
-				<!-- 				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do> -->
-				<!-- 					<b style="color: black">輸入訂單編號：</b> <br>抓取會員編號中的訂單 --> <!-- 					<input type="text" name="lkOrderId" style="border-radius: 8px ; border: .5px solid grey">  -->
-				<!-- 				</FORM>	 --> <br>
-			<br>
-				<FORM METHOD="post"
-					ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
-					<b style="color: black">輸入客訴內容：</b><br>
-					<textarea name="lkcompltext" rows="6" cols="40" required
-						style="border-radius: 10px"></textarea>
+					
+<!-- 					<b style="color: black">輸入訂單編號：</b> <br>					 -->
+<!-- 						<input type="text" name="lkOrdId" style="border-radius: 8px ; border: .5px solid grey">  -->
 					<br>
-					<br> <input type="submit" value="送出" class="btn-secondary">
+					<b style="color: black">輸入客訴內容：</b><br>
+						<textarea name="lkCcCont" rows="6" cols="40"　style="border-radius: 10px required"></textarea>
+					<br>
+					<br> 
+					<input type="hidden" name="action" value="insert">
+					<input type="submit" value="送出" class="btn-secondary">
 					<input type="reset" value="清除" class="btn-secondary">
+					
+					
+					
 
-				</FORM>
+					</FORM>
 
 
 
@@ -141,10 +150,27 @@ ul li {
 		</ul>
 	</div>
 
+	
+
 	<!-- 下面是這個版需要的js可添加各自需要的js檔-->
 	<script src="../resources/js/bootstrap.min.js"></script>
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	
+	
+	<script> 
+		const mySelect = document.querySelector('#mySelect');
+		fetch('../member-lkcompl/lkcompl.do?action=selectOrderidByMemberid')
+			.then(resp => resp.json())
+			.then(list => {
+				for (let item of list){
+					mySelect.innerHTML += `<option value="\${item.lkOrderId}">\${item.lkOrderId}</option>`;
+				}
+			});
+	
+	
+	
+	</script>
 </body>
 </html>

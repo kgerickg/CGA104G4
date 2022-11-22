@@ -2,9 +2,12 @@ package com.lkcompl.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
-
-import com.member.model.MemberVO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,15 +28,15 @@ public class LkComplVO implements Serializable {
 	private Integer lkCcId;		// 客訴編號PK
 	@Column(name="LK_ORD_ID")
 	private Integer lkOrdId;	// 福袋訂單編號
-	@Column(name="LK_CC_STAT")
+	@Column(name="LK_CC_STAT", insertable = false)
 	private Integer lkCcStat;	// 處理狀態
 	@Column(name="LK_CC_CONT")
 	private String lkCcCont;	// 客訴內容
-	@Column(name="LK_RFD_STAT")
+	@Column(name="LK_RFD_STAT", insertable = false)
 	private Integer lkRfdStat;	// 退款狀態
 
-	@ManyToOne
-	@JoinColumn(name = "MEM_ID",insertable = false,updatable = false)
-	private MemberVO memberVO;
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name = "MEM_ID",insertable = false,updatable = false)
+//	private MemberVO memberVO;
 	
 }
