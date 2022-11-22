@@ -97,7 +97,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>NameServlet</servlet-name>
-		<servlet-class>idv.david.websocketchat.controller.NameServlet</servlet-class>
+		<servlet-class>com.meseg.controller.NameServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>NameServlet</servlet-name>
