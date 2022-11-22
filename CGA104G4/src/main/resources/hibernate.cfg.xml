@@ -42,6 +42,8 @@
 
         <mapping class="com.member.model.MemberVO" />
 
+        <mapping class="com.store.model.StoreVO" />
+
         <mapping class="com.refill.model.RefillVO" />
 
         <mapping class="com.lkcompl.model.LkComplVO" />

@@ -33,6 +33,7 @@ private static final long serialVersionUID = 1L;
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		Admin admin = json2Pojo(request, Admin.class);
 		if (admin == null) {
 			admin = new Admin();

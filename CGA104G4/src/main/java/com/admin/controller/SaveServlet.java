@@ -27,9 +27,8 @@ public class SaveServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		final Admin admin = json2Pojo(request, Admin.class);
-		System.out.println("123");
-		System.out.println(admin.getAdmAcc());
 		final Core core = new Core();
 		if (admin == null) {
 			core.setMessage("無會員資訊");

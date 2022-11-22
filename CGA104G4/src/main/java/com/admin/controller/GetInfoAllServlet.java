@@ -24,6 +24,7 @@ public class GetInfoAllServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		writePojo2Json(response, service.findAll());
 	}
 }

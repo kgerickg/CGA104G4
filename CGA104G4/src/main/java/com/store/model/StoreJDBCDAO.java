@@ -1,393 +1,178 @@
 package com.store.model;
 
+import com.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StoreJDBCDAO implements StoreDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/food?serverTimezone=Asia/Taipei";
-	String userid = "root";
-	String passwd = "password";
+    String driver = "com.mysql.cj.jdbc.Driver";
+    String url = "jdbc:mysql://localhost:3306/food?serverTimezone=Asia/Taipei";
+    String userid = "root";
+    String passwd = "password";
 
-	private static final String INSERT_STMT = "insert into `STORE`"
-			+ "	(`STORE_ACC`,`STORE_PWD`,`STORE_NAME`,`STORE_GUI`,`STORE_REP`,`STORE_TEL`,`STORE_FAX`,`STORE_AD`,`STORE_CON`,`STORE_CON_TEL`,`STORE_CON_AD`,"
-			+ "	`STORE_EMAIL`)" + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "select `STORE_ID`,`STORE_ACC`,`STORE_PWD`,`ACC_STAT`,`STORE_NAME`,`STORE_GUI`,`STORE_REP`,`STORE_TEL`,`STORE_FAX`,`STORE_AD`,`STORE_CON`,`STORE_CON_TEL`,`STORE_CON_AD`,`STORE_EMAIL`"
-			+ "from `STORE` order by `STORE_ID`";
-	private static final String GET_ONE_STMT = "select `STORE_ID`,`STORE_ACC`,`STORE_PWD`,`ACC_STAT`,`STORE_NAME`,`STORE_GUI`,`STORE_REP`,`STORE_TEL`,`STORE_FAX`,`STORE_AD`,`STORE_CON`,`STORE_CON_TEL`,`STORE_CON_AD`,`STORE_EMAIL`"
-			+ "from `STORE` where `STORE_ID` = ?";
-	private static final String DELETE = "delete from `STORE` where `STORE_ID` = ?";
-	private static final String UPDATE = "update `STORE` set `STORE_ACC`=?, `STORE_PWD`=?, `STORE_NAME`=?, `STORE_GUI`=? ,`STORE_REP`=? ,`STORE_TEL`=? ,`STORE_FAX`=?, `STORE_AD`=?, `STORE_CON`=?, `STORE_CON_TEL`=?, `STORE_CON_AD`=?,"
-			+ " `STORE_EMAIL`=? where `STORE_ID` = ? ";
+    private static final String INSERT_SQL = "insert into STORE(STORE_ACC, STORE_PWD, ACC_STAT, STORE_NAME, STORE_TEL, STORE_CITY, STORE_DIST, STORE_ADR, STORE_PIC)values(?,?,?,?,?,?,?,?,?)";
 
-	@Override
-	public void insert(StoreVO storeVO) {
+    private static final String GETSTOREID_SQL = "select STORE_ID from MEMBER";
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
+    private static final String FINDBYPK_SQL = "select * from STORE where STORE_ID = ?";
 
-		try {
+    private static final String GETALL_SQL = "select * from STORE";
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+    private static final String DELETE_SQL = "delete from STORE where STORE_ID = ?";
 
-			pstmt.setString(1, storeVO.getStoreAcc());
-			pstmt.setString(2, storeVO.getStorePwd());
-			pstmt.setString(3, storeVO.getStoreName());
-			pstmt.setString(4, storeVO.getStoreGui());
-			pstmt.setString(5, storeVO.getStoreRep());
-			pstmt.setString(6, storeVO.getStoreTel());
-			pstmt.setString(7, storeVO.getStoreFax());
-			pstmt.setString(8, storeVO.getStoreAd());
-			pstmt.setString(9, storeVO.getStoreCon());
-			pstmt.setString(10, storeVO.getStoreConTel());
-			pstmt.setString(11, storeVO.getStoreConAd());
-			pstmt.setString(12, storeVO.getStoreEmail());
-			Statement stmt=	con.createStatement();
-			stmt.executeUpdate("set auto_increment_offset=1;");
-			stmt.executeUpdate("alter table `STORE` auto_increment = 1;");
-			pstmt.executeUpdate();
+    private static final String UPDATE_SQL = "update STORE set STORE_ACC=?,STORE_PWD=?,ACC_STAT=?,STORE_NAME=?,STORE_TEL=?,STORE_CITY=?,STORE_DIST=?,STORE_ADR=? where MEM_ID =?";
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+    @Override
+    public void insert(StoreVO storeVO) {
+        try (Connection conn = JDBCUtils.getConnection(); PreparedStatement ps = conn.prepareStatement(INSERT_SQL)) {
 
-	}
+            ps.setString(1, storeVO.getStoreAcc());
+            ps.setString(2, storeVO.getStorePwd());
+            ps.setInt(3, storeVO.getAccStat());
+            ps.setString(4, storeVO.getStoreName());
+            ps.setString(5, storeVO.getStoreTel());
+            ps.setString(6, storeVO.getStoreCity());
+            ps.setString(7, storeVO.getStoreDist());
+            ps.setString(8, storeVO.getStoreAdr());
+            ps.setBytes(9, storeVO.getStorePic());
 
-	@Override
-	public void update(StoreVO storeVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE);
+            ps.executeUpdate();
 
-			pstmt.setString(1, storeVO.getStoreAcc());
-			pstmt.setString(2, storeVO.getStorePwd());
-			pstmt.setString(3, storeVO.getStoreName());
-			pstmt.setString(4, storeVO.getStoreGui());
-			pstmt.setString(5, storeVO.getStoreRep());
-			pstmt.setString(6, storeVO.getStoreTel());
-			pstmt.setString(7, storeVO.getStoreFax());
-			pstmt.setString(8, storeVO.getStoreAd());
-			pstmt.setString(9, storeVO.getStoreCon());
-			pstmt.setString(10, storeVO.getStoreConTel());
-			pstmt.setString(11, storeVO.getStoreConAd());
-			pstmt.setString(12, storeVO.getStoreEmail());
-			pstmt.setInt(13, storeVO.getStoreId());
-			Statement stmt=	con.createStatement();
-			stmt.executeUpdate("set auto_increment_offset=1;");
-			stmt.executeUpdate("alter table `STORE` auto_increment = 1;");
-			pstmt.executeUpdate();
+        } catch (SQLException e) {
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
+            e.printStackTrace();
+        }
 
-	@Override
-	public void delete(Integer storeId) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
+    }
 
-		try {
+    @Override
+    public void update(StoreVO storeVO) {
+        try (Connection conn = JDBCUtils.getConnection(); PreparedStatement ps = conn.prepareStatement(UPDATE_SQL);) {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
+            ps.setString(1, storeVO.getStoreAcc());
+            ps.setString(2, storeVO.getStorePwd());
+            ps.setInt(3, storeVO.getAccStat());
+            ps.setString(4, storeVO.getStoreName());
+            ps.setString(5, storeVO.getStoreTel());
+            ps.setString(6, storeVO.getStoreCity());
+            ps.setString(7, storeVO.getStoreDist());
+            ps.setString(8, storeVO.getStoreAdr());
+            ps.setInt(10, storeVO.getStoreId());
 
-			pstmt.setInt(1, storeId);
-			Statement stmt=	con.createStatement();
-			stmt.executeUpdate("alter table `STORE` auto_increment = 1;");
-			pstmt.executeUpdate();
+            ps.executeUpdate();
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	}
+    @Override
+    public void delete(Integer storeId) {
+        try (Connection conn = JDBCUtils.getConnection(); PreparedStatement ps = conn.prepareStatement(DELETE_SQL);) {
+            ps.setInt(1, storeId);
 
-	@Override
-	public StoreVO findByPrimaryKey(Integer storeId) {
+            ps.executeUpdate();
 
-		StoreVO storeVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		try {
+    @Override
+    public StoreVO findByPrimaryKey(Integer storeId) {
+        StoreVO storeVO = new StoreVO();
+        try (Connection conn = JDBCUtils.getConnection(); PreparedStatement ps = conn.prepareStatement(FINDBYPK_SQL);) {
+            ps.setInt(1, storeId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                storeVO.setStoreId(rs.getInt(1));
+                storeVO.setStoreAcc(rs.getString(2));
+                storeVO.setStorePwd(rs.getString(3));
+                storeVO.setAccStat(rs.getInt(4));
+                storeVO.setStoreName(rs.getString(5));
+                storeVO.setStoreTel(rs.getString(6));
+                storeVO.setStoreCity(rs.getString(7));
+                storeVO.setStoreDist(rs.getString(8));
+                storeVO.setStoreAdr(rs.getString(9));
+                storeVO.setStoreRegTime(rs.getDate(10));
+                storeVO.setStorePic(rs.getBytes(11));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return storeVO;
+    }
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+    @Override
+    public List<StoreVO> getAll() {
+        List<StoreVO> stores = new ArrayList<StoreVO>();
+        try (Connection conn = JDBCUtils.getConnection(); PreparedStatement ps = conn.prepareStatement(GETALL_SQL);) {
 
-			pstmt.setInt(1, storeId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                StoreVO storeVO = new StoreVO();
+                storeVO.setStoreId(rs.getInt(1));
+                storeVO.setStoreAcc(rs.getString(2));
+                storeVO.setStorePwd(rs.getString(3));
+                storeVO.setAccStat(rs.getInt(4));
+                storeVO.setStoreName(rs.getString(5));
+                storeVO.setStoreTel(rs.getString(6));
+                storeVO.setStoreCity(rs.getString(7));
+                storeVO.setStoreDist(rs.getString(8));
+                storeVO.setStoreAdr(rs.getString(9));
+                storeVO.setStoreRegTime(rs.getDate(10));
+                storeVO.setStorePic(rs.getBytes(11));
+                stores.add(storeVO);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				storeVO = new StoreVO();
-				storeVO.setStoreId(rs.getInt("STORE_ID"));
-				storeVO.setStoreAcc(rs.getString("STORE_ACC"));
-				storeVO.setStorePwd(rs.getString("STORE_PWD"));
-				storeVO.setAccStat(rs.getInt("ACC_STAT"));
-				storeVO.setStoreName(rs.getString("STORE_NAME"));
-				storeVO.setStoreGui(rs.getString("STORE_GUI"));
-				storeVO.setStoreRep(rs.getString("STORE_REP"));
-				storeVO.setStoreTel(rs.getString("STORE_TEL"));
-				storeVO.setStoreFax(rs.getString("STORE_FAX"));
-				storeVO.setStoreAd(rs.getString("STORE_AD"));
-				storeVO.setStoreCon(rs.getString("STORE_CON"));
-				storeVO.setStoreConTel(rs.getString("STORE_CON_TEL"));
-				storeVO.setStoreConAd(rs.getString("STORE_CON_AD"));
-				storeVO.setStoreEmail(rs.getString("STORE_EMAIL"));
-			}
+        return stores;
+    }
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return storeVO;
-	}
+    @Override
+    public List<Integer> getStoreId() {
+        return null;
+    }
 
-	@Override
-	public List<StoreVO> getAll() {
-		List<StoreVO> list = new ArrayList<StoreVO>();
-		StoreVO storeVO = null;
+    @Override
+    public StoreVO findByStoreId(Integer storeId) {
+        return null;
+    }
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+    @Override
+    public List<StoreVO> selectStoreAcc(String storeAcc) {
+        return null;
+    }
 
-		try {
+    @Override
+    public void updatePwd(StoreVO storeVO) {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
+    }
 
-			while (rs.next()) {
-				// empVO 也稱為 Domain objects
-				storeVO = new StoreVO();
-				storeVO.setStoreId(rs.getInt("STORE_ID"));
-				storeVO.setStoreAcc(rs.getString("STORE_ACC"));
-				storeVO.setStorePwd(rs.getString("STORE_PWD"));
-				storeVO.setAccStat(rs.getInt("ACC_STAT"));
-				storeVO.setStoreName(rs.getString("STORE_NAME"));
-				storeVO.setStoreGui(rs.getString("STORE_GUI"));
-				storeVO.setStoreRep(rs.getString("STORE_REP"));
-				storeVO.setStoreTel(rs.getString("STORE_TEL"));
-				storeVO.setStoreFax(rs.getString("STORE_FAX"));
-				storeVO.setStoreAd(rs.getString("STORE_AD"));
-				storeVO.setStoreCon(rs.getString("STORE_CON"));
-				storeVO.setStoreConTel(rs.getString("STORE_CON_TEL"));
-				storeVO.setStoreConAd(rs.getString("STORE_CON_AD"));
-				storeVO.setStoreEmail(rs.getString("STORE_EMAIL"));
-				list.add(storeVO); // Store the row in the list
-			}
+    @Override
+    public Integer selectByStoreAcc(String storeAcc) {
+        return null;
+    }
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
-	}
+    @Override
+    public Integer insertWithReturn(StoreVO storeVO) {
+        return null;
+    }
 
-	public static void main(String[] args) {
+    @Override
+    public StoreVO login(String storeAcc, String storePwd) {
+        return null;
+    }
 
-		StoreJDBCDAO dao = new StoreJDBCDAO();
+    @Override
+    public void updateAccStat(StoreVO storeVO) {
 
-		//新增
-		StoreVO storeVO1 = new StoreVO();
-		storeVO1.setStoreAcc("kgerickg2");
-		storeVO1.setStorePwd("password");
-		storeVO1.setStoreName("eric");
-		storeVO1.setStoreGui("87897463");
-		storeVO1.setStoreRep("王曉明");
-		storeVO1.setStoreTel("037289934");
-		storeVO1.setStoreFax("037289956");
-		storeVO1.setStoreAd("桃園市中壢區中山東路二段37號");
-		storeVO1.setStoreCon("王大明");
-		storeVO1.setStoreConTel("0372896543");
-		storeVO1.setStoreConAd("桃園市中壢區中山東路二段35號");
-		storeVO1.setStoreEmail("a1234567@gmail.com");
-		dao.insert(storeVO1);
-
-	// 修改
-//		StoreVO storeVO2 = new StoreVO();
-//		storeVO2.setStoreId(10);
-//		storeVO2.setStoreAcc("kgerickg3");
-//		storeVO2.setStorePwd("password2");
-//		storeVO2.setStoreName("eric2");
-//		storeVO2.setStoreGui("87897463");
-//		storeVO2.setStoreRep("王曉明");
-//		storeVO2.setStoreTel("037289934");
-//		storeVO2.setStoreFax("037289956");
-//		storeVO2.setStoreAd("桃園市中壢區中山東路二段37號");
-//		storeVO2.setStoreCon("王大明");
-//		storeVO2.setStoreConTel("0372896543");
-//		storeVO2.setStoreConAd("桃園市中壢區中山東路二段35號");
-//		storeVO2.setStoreEmail("a1234567@gmail.com");
-//		dao.update(storeVO2);
-//
-	// 刪除
-//		dao.delete(11);
-//
-//		//查詢
-//		StoreVO storeVO3 = dao.findByPrimaryKey(1);
-//		System.out.print(storeVO3.getStoreAcc() + ",");
-//		System.out.print(storeVO3.getStorePwd() + ",");
-//		System.out.print(storeVO3.getAccStat() + ",");
-//		System.out.print(storeVO3.getStoreName() + ",");
-//		System.out.print(storeVO3.getStoreGui() + ",");
-//		System.out.print(storeVO3.getStoreRep() + ",");
-//		System.out.print(storeVO3.getStoreTel() + ",");
-//		System.out.print(storeVO3.getStoreFax() + ",");
-//		System.out.print(storeVO3.getStoreAd() + ",");
-//		System.out.print(storeVO3.getStoreCon() + ",");
-//		System.out.print(storeVO3.getStoreConTel() + ",");
-//		System.out.print(storeVO3.getStoreConAd());
-//		System.out.print(storeVO3.getStoreTel() + ",");
-//		System.out.println(storeVO3.getStoreTel() + ",");
-//		System.out.println("---------------------");
-
-//	 查詢
-//		List<StoreVO> list = dao.getAll();
-//		for (StoreVO aStore : list) {
-//			System.out.print(aStore.getStoreAcc() + ",");
-//			System.out.print(aStore.getStorePwd() + ",");
-//			System.out.print(aStore.getAccStat() + ",");
-//			System.out.print(aStore.getStoreName() + ",");
-//			System.out.print(aStore.getStoreGui() + ",");
-//			System.out.print(aStore.getStoreRep() + ",");
-//			System.out.print(aStore.getStoreTel() + ",");
-//			System.out.print(aStore.getStoreFax() + ",");
-//			System.out.print(aStore.getStoreAd() + ",");
-//			System.out.print(aStore.getStoreCon() + ",");
-//			System.out.print(aStore.getStoreConTel() + ",");
-//			System.out.print(aStore.getStoreConAd() + ",");
-//			System.out.println(aStore.getStoreTel());
-//			System.out.println("---------------------");
-//		}
-	}
-
+    }
 }
