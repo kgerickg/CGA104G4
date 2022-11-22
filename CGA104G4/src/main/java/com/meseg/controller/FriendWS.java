@@ -1,25 +1,19 @@
 package com.meseg.controller;
 
+import com.google.gson.Gson;
+import com.meseg.jedis.JedisHandleMessage;
+import com.meseg.model.ChatMessage;
+import com.meseg.model.State;
+
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import javax.websocket.CloseReason;
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
-
-import com.google.gson.Gson;
-import com.meseg.jedis.JedisHandleMessage;
-import com.meseg.model.ChatMessage;
-import com.meseg.model.State;
 
 @ServerEndpoint("/FriendWS/{userName}")
 public class FriendWS {
