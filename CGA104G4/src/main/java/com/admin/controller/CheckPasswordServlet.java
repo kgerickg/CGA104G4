@@ -23,6 +23,7 @@ public class CheckPasswordServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setCharacterEncoding("UTF-8");
 		final String admPwd = GSON.fromJson(request.getReader(), Admin.class).getAdmPwd();
 
 		final Admin admin = (Admin) request.getSession().getAttribute("admin");

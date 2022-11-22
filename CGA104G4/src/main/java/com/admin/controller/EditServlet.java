@@ -27,6 +27,7 @@ public class EditServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		final HttpSession session = request.getSession();
 		final Admin admin = ((Admin) session.getAttribute("admin"));
 		final String admAcc = admin.getAdmAcc();

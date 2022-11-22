@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		Admin admin = json2Pojo(request, Admin.class);
 		if (admin == null) {
 			admin = new Admin();

@@ -6,6 +6,10 @@
 	const confirmPassword = document.querySelector('#confirmPassword');
 	const admName = document.querySelector('#admName');
 	const inputs = document.querySelectorAll('input');
+	const path = window.location.pathname;
+	const webCtx = path.substring(0, path.indexOf('/', 1));
+	const url = webCtx + "/admin/register";
+
 	btn1.addEventListener('click', () => {
 		const accLength = admAcc.value.length;
 		if (accLength < 5 || accLength > 50) {
@@ -32,7 +36,7 @@
 		}
 
 		msg.textContent = '';
-		fetch('register', {
+		fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

@@ -3,7 +3,11 @@ function onSaveClick(admId) {
     const admPwd = document.querySelector(`#admPwd${admId}`).textContent;
     const admName = document.querySelector(`#admName${admId}`).textContent;
     const admAccStat = +document.querySelector(`#admAccStat${admId}`).value;
-    fetch('save', {
+    const path = window.location.pathname;
+    const webCtx = path.substring(0, path.indexOf('/', 1));
+    const url = webCtx + "/admin/save";
+
+    fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

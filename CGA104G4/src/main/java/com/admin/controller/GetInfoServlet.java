@@ -15,6 +15,7 @@ public class GetInfoServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		Admin admin = (Admin) request.getSession().getAttribute("admin");
 		if (admin == null) {
 			admin = new Admin();
