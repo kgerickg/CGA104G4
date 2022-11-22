@@ -284,6 +284,28 @@ public class ProdServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
+		// 來自front-prod/memberMenu.jsp的請求
+		if ("listProds_ByStoreIdAndProdTypeId".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer storeId = Integer.valueOf(req.getParameter("storeId"));
+			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId"));
+			/*************************** 2.開始查詢資料 ****************************************/
+			ProdService prodSvc = new ProdService();
+			Set<ProdVO> set = prodSvc.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("listProds_ByStoreIdAndProdTypeId", set); // 資料庫取出的list物件,存入request
+
+			String url = "/front-prod/memberMenu.jsp"; // 成功轉交 /front-prod/memberMenu.jsp
+
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+
 		if ("listProds_ByCompositeQuery".equals(action)) { // 來自/front-prod/memberMenu.jsp的複合查詢請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

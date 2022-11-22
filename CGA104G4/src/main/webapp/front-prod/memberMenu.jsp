@@ -137,14 +137,8 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(2)}">
-									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>
-<%-- 									<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/prod/prod.do" style=""> --%>
-<!-- 										<input type="submit" value="查看菜單" style="border-style: none; background-color: transparent; color: #5D6978;"> -->
-<!-- 										<input type="hidden" name="prodTypeId" value="7"> -->
-<!-- 										<input type="hidden" name="storeId" value="2"> -->
-<!-- 										<input type="hidden" name="action" value="listProds_ByCompositeQuery"> -->
-<!-- 									</FORM> -->
+								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(4)}">
+									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
 								</c:forEach>
 							</ul>
 						</div>
@@ -153,7 +147,7 @@
 					<div class="row">
 						<div class="masonary">
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(1)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -172,7 +166,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(2)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 2)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -190,7 +184,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(3)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 3)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -209,7 +203,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(4)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 4)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -228,7 +222,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(5)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 5)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -247,7 +241,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(6)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 6)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -266,7 +260,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(7)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 7)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -285,7 +279,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(8)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 8)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -453,9 +447,9 @@
 	</div>
 	<!--wrapper end-->
 	<%
-	if (request.getAttribute("listProds_ByCompositeQuery") != null) {
+	if (request.getAttribute("listProds_ByStoreIdAndProdTyId") != null) {
 	%>
-	<jsp:useBean id="listProds_ByCompositeQuery" scope="request"
+	<jsp:useBean id="listProds_ByStoreIdAndProdTyId" scope="request"
 		type="java.util.Set<ProdVO>" />
 	<%
 	}

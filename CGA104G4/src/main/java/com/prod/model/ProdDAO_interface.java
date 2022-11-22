@@ -18,6 +18,8 @@ public interface ProdDAO_interface {
 	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId);
 
 	public Set<ProdVO> getProdTypeIdsByStoreId(Integer storeId);
+
+	public Set<ProdVO> getProdsByStoreIdAndProdTypeId(Integer storeId, Integer prodTypeId);
 	
 	//萬用複合查詢(傳入參數型態Map)(回傳 List)
     public List<ProdVO> getAll(Map<String, String[]> map); 

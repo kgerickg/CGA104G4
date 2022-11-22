@@ -77,6 +77,10 @@ public class ProdService {
 		return dao.getProdsByProdTypeId(prodTypeId);
 	}
 	
+	public Set<ProdVO> getProdsByStoreIdAndProdTypeId(Integer storeId, Integer prodTypeId) {
+		return dao.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
+	}
+	
 	public List<ProdVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}

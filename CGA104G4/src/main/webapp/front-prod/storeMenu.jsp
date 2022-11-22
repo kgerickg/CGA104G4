@@ -138,13 +138,7 @@
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
 								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(2)}">
-									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>
-<%-- 									<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/prod/prod.do" style=""> --%>
-<!-- 										<input type="submit" value="查看菜單" style="border-style: none; background-color: transparent; color: #5D6978;"> -->
-<!-- 										<input type="hidden" name="prodTypeId" value="7"> -->
-<!-- 										<input type="hidden" name="storeId" value="2"> -->
-<!-- 										<input type="hidden" name="action" value="listProds_ByCompositeQuery"> -->
-<!-- 									</FORM> -->
+									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>							
 								</c:forEach>
 							</ul>
 						</div>
@@ -453,9 +447,9 @@
 	</div>
 	<!--wrapper end-->
 	<%
-	if (request.getAttribute("listProds_ByCompositeQuery") != null) {
+	if (request.getAttribute("listProds_ByStoreIdAndProdTypeId") != null) {
 	%>
-	<jsp:useBean id="listProds_ByCompositeQuery" scope="request"
+	<jsp:useBean id="listProds_ByStoreIdAndProdTypeId"" scope="request"
 		type="java.util.Set<ProdVO>" />
 	<%
 	}
