@@ -88,27 +88,21 @@
 			<br>
 			<li>
 				<FORM METHOD="post" ACTION=${pageContext.request.contextPath}/member-lkcompl/lkcompl.do>
-					<b style="color: black">輸入客訴編號：</b> <input type="text"
-						name="lkOrderId"> <input type="submit" value="送出"
-						class="btn-secondary">
+					<b style="color: black">輸入客訴編號：</b> 
+					<input type="text" name="lkccId"> 
+					<input type="hidden" name="action" value="selectBymemId"> 
+					<input type="submit" value="送出" class="btn-secondary">
 				</FORM>
 			</li>
 
 			<br>
 			<hr>
 
-			<li style="color: black; font-weight: bolder; font-size: 1.2em"><a
-				href=${pageContext.request.contextPath}/front-lkcompl/MemberAddLkCompl.jsp>會員客訴</a>
+			<li style="color: black; font-weight: bolder; font-size: 1.2em">
+			<a href=${pageContext.request.contextPath}/front-lkcompl/MemberAddLkCompl.jsp>會員客訴</a>
 			</li>
 
-			<%--   <jsp:useBean id="lkorderSvc " scope="page" class="com.lkcompl.model.LkComplService" /> --%>
-
-
-
-
 		</ul>
-
-
 
 	</div>
 

@@ -78,7 +78,7 @@ table tr td:nth-of-type(odd) {
 }
 
 .table tr td input {
-	display: block;
+/* 	display: block; */
 	background: white;
 	border: 3px solid #35544E;
 	border-left: 1;
@@ -117,6 +117,10 @@ table tr td:nth-of-type(odd) {
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	color: #2F3237;
 	font-weight: 700;
+}
+
+.radio-container .input {
+	width: 5%;
 }
 </style>
 
@@ -187,9 +191,22 @@ table tr td:nth-of-type(odd) {
 					value="<%=lkorderVO.getLkOrdAmt()%>" /></td>
 			</tr>
 			<tr>
-				<td>訂單狀態:</td>
-				<td><input type="TEXT" name="lkOrdStat" size="45"
-					value="<%=lkorderVO.getLkOrdStat()%>" /></td>
+<!-- 				<td>訂單狀態:</td> -->
+<!-- 				<td><input type="TEXT" name="lkOrdStat" size="45" -->
+<%-- 					value="<%=lkorderVO.getLkOrdStat()%>" /></td> --%>
+								<td>訂單狀態:</td>
+				<td class="radio-container">	
+					<input class="input" type="radio" name="lkOrdStat" value="0"
+					${(lkComplVO == null || lkComplVO.lkOrdStat == 0)? 'checked':'' } />待取貨　 
+					<input class="input" type="radio" name="lkOrdStat" value="1"
+					${(lkComplVO.lkOrdStat==1)? 'checked':'' } />已取貨 <br>
+					<input class="input" type="radio" name="lkOrdStat" value="2"
+					${(lkComplVO.lkOrdStat==2)? 'checked':'' } />完成　	
+					<input class="input" type="radio" name="lkOrdStat" value="3"
+					${(lkComplVO.lkOrdStat==3)? 'checked':'' } />客訴處理中	
+				</td>
+					
+					
 			</tr>
 			<tr>
 				<td>訂單成立日期:</td>

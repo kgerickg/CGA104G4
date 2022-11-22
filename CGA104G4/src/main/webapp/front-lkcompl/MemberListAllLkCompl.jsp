@@ -63,7 +63,7 @@ table th, td {
 }
 
 #upper-table td {
-	width: 60vw;
+	width: 39vw;
 	text-align: center;
 	background-color: #F0F0F0;
 }
