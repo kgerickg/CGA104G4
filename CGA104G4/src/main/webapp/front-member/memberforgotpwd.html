@@ -24,7 +24,11 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
     <!-- 請將覆蓋用的css放置此註解下方 -->
-
+    <style>
+        .swal2-modal .swal2-title {
+            font-size: 1.2em;
+        }
+    </style>
 
     <!-- 頁籤顯示的title -->
     <title>忘記密碼</title>
@@ -78,6 +82,7 @@
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>
@@ -104,10 +109,19 @@
             }
 
             $("#memEmail").html("");
-            alert("已寄送新密碼至信箱，請盡速登入完成密碼更改作業");
-            window.location.href = "./memberlogin.html";
-
+            showSuccessful();
         })
+
+    function showSuccessful(){
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '已寄送新密碼至信箱，請盡速登入完成密碼更改作業',
+            showConfirmButton: true,
+            confirmButtonText:'確認'
+
+        }).then(()=>window.location.href = "./memberlogin.html");
+    }
 
 
 </script>

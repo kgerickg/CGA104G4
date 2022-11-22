@@ -33,8 +33,8 @@
 						<td id="admName${admin.admId}" contenteditable="true">${admin.admName}</td>
 						<td>
 							<select id="admAccStat${admin.admId}">
-								<option value="0">停權</option>
-								<option value="1" <c:if test="${admin.admAccStat == 1}">selected</c:if>>正常</option>
+								<option value="0" ${admin.admAccStat =='0'? 'selected' : '' }>停權</option>
+								<option value="1" ${admin.admAccStat =='1'? 'selected' : '' }>正常</option>
 							</select>
 						</td>
 						<td>

@@ -23,19 +23,14 @@ public class CheckPasswordServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		BufferedReader br = request.getReader();
-		System.out.println(br.readLine());
-		final String admPwd = GSON.fromJson(br, Admin.class).getAdmPwd();
-		System.out.println(admPwd);
-		System.out.println(Admin.class);
-		
-		final Admin admin = (Admin) request.getSession().getAttribute("adminId");
-		System.out.println(admin);
+		response.setCharacterEncoding("UTF-8");
+		final String admPwd = GSON.fromJson(request.getReader(), Admin.class).getAdmPwd();
+
+		final Admin admin = (Admin) request.getSession().getAttribute("admin");
 		final Core core = new Core();
 		if (admin == null) {
 			core.setMessage("無會員資訊");
 			core.setSuccessful(false);
-			System.out.println("123");
 		} else {
 			final String currentPassword = admin.getAdmPwd();
 			if (Objects.equals(admPwd, currentPassword)) {

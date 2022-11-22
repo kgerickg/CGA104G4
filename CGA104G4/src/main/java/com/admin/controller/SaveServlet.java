@@ -27,6 +27,7 @@ public class SaveServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
 		final Admin admin = json2Pojo(request, Admin.class);
 		final Core core = new Core();
 		if (admin == null) {

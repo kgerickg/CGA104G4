@@ -84,7 +84,7 @@ public class AdminServiceImpl implements AdminService {
 		admin.setAdmStat(oAdmin.getAdmStat());
 		final int resultCount = dao.update(admin);
 		admin.setSuccessful(resultCount > 0);
-		admin.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		admin.setMessage(resultCount > 0 ? "更新成功" : "更新失敗");
 		return admin;
 	}
 

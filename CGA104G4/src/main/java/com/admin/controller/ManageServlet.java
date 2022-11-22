@@ -30,8 +30,9 @@ public class ManageServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		List<Admin> adminList = service.findAll();
 		request.setAttribute("adminList", adminList);
-		request.getRequestDispatcher("/admin/manage.jsp").forward(request, response);
+		request.getRequestDispatcher("/back-admin/manage.jsp").forward(request, response);
 	}
 }

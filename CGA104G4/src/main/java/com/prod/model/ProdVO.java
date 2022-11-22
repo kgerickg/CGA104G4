@@ -1,9 +1,14 @@
 package com.prod.model;
 
+import java.sql.Date;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import com.prodtype.model.ProdTypeService;
+import com.prodtype.model.ProdTypeVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
-
-import java.sql.Date;
 
 public class ProdVO {
 
@@ -16,6 +21,10 @@ public class ProdVO {
 	private String prodCont;
 	private Integer prodPrc;
 	private Date prodTime;
+	@OneToMany
+	@JoinColumn(name="STORE_ID",referencedColumnName = "STORE_ID")
+	private StoreVO storeVO;
+
 	private Integer prodStat;
 
 	public Integer getProdId() {
@@ -89,8 +98,13 @@ public class ProdVO {
 		return storeVO;
 	}
 
-//	 for join prodTypeName from prodTypeId
-
+	// for join prodTypeName from prodTypeId
+	public ProdTypeVO getProdTypeVO() {
+		ProdTypeService prodTypeSvc = new ProdTypeService();
+		ProdTypeVO prodTypeVO = prodTypeSvc.getOneProdType(prodTypeId);
+		return prodTypeVO;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -109,7 +109,7 @@ public class RefillServlet extends HttpServlet {
                 reFillJson.put("memName", refillVO.getMemberVO().getMemName());
                 reFillJson.put("RefillToken", refillVO.getRefillToken());
                 reFillJson.put("RefillAmt", refillVO.getRefillAmt());
-                SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+                SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 String refillTime = ft.format(refillVO.getRefillTime());
                 reFillJson.put("refillTime", refillTime);
                 refillArray.put(reFillJson);

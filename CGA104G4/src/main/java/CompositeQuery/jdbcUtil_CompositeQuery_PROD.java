@@ -14,7 +14,7 @@ public class jdbcUtil_CompositeQuery_PROD {
 
 		String aCondition = null;
 
-		if ("PROD_ID".equals(columnName) || "STORE_ID".equals(columnName) || "PRO_DTYPE_ID".equals(columnName)
+		if ("PROD_ID".equals(columnName) || "STORE_ID".equals(columnName) || "PROD_TYPE_ID".equals(columnName)
 				|| "PROD_PRC".equals(columnName) || "PROD_STAT".equals(columnName)) // 用於其他
 			aCondition = columnName + "=" + value;
 		else if ("PROD_NAME".equals(columnName) || "PROD_CONT".equals(columnName)) // 用於varchar

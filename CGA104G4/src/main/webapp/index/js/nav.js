@@ -3,20 +3,20 @@
 	nav.classList.add('navbar', 'navbar-expand', 'navbar-dark', 'bg-dark');
 	nav.innerHTML = `
     <div class="container-fluid">
-		<a class="navbar-brand" href="${getContextPath()}/admin/index.html">會員系統</a>
+		<a class="navbar-brand" href="${getContextPath()}/back-admin/index.html">會員系統</a>
 		<div class="collapse navbar-collapse" id="navbarScroll">
 			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 				<li id="register" class="nav-item">
-					<a href="${getContextPath()}/admin/register.html" class="nav-link active" aria-current="page">註冊</a>
+					<a href="${getContextPath()}/back-admin/register.html" class="nav-link active" aria-current="page">註冊</a>
 				</li>
 				<li id="edit" class="nav-item">
-					<a href="${getContextPath()}/admin/edit.html" class="nav-link active" aria-current="page">編輯會員資訊</a>
+					<a href="${getContextPath()}/back-admin/edit.html" class="nav-link active" aria-current="page">編輯會員資訊</a>
 				</li>
                 <li id="manage" class="nav-item">
 					<a href="${getContextPath()}/admin/manage" class="nav-link active" aria-current="page">會員管理</a>
 				</li>
 				<li id="login" class="nav-item">
-					<a href="${getContextPath()}/admin/login.html" class="nav-link active" aria-current="page">登入</a>
+					<a href="${getContextPath()}/back-admin/login.html" class="nav-link active" aria-current="page">登入</a>
 				</li>
 				<li id="logout" class="nav-item">
 					<a href="#" class="nav-link active" aria-current="page">登出</a>
@@ -54,7 +54,7 @@
 	logout.addEventListener('click', () => {
 		sessionStorage.removeItem('admName');
 		fetch('logout');
-		location = `../admin/index.html`;
+		location = `../back-admin/index.html`;
 	});
 
 	function getContextPath() {

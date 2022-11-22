@@ -1,18 +1,11 @@
 package com.prod.controller;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
 import java.sql.Date;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 import com.prod.model.ProdService;
 import com.prod.model.ProdVO;
@@ -284,6 +277,28 @@ public class ProdServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listProds_ByProdTypeId", set); // 資料庫取出的list物件,存入request
+
+			String url = "/front-prod/memberMenu.jsp"; // 成功轉交 /front-prod/memberMenu.jsp
+
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+
+		// 來自front-prod/memberMenu.jsp的請求
+		if ("listProds_ByStoreIdAndProdTypeId".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer storeId = Integer.valueOf(req.getParameter("storeId"));
+			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId"));
+			/*************************** 2.開始查詢資料 ****************************************/
+			ProdService prodSvc = new ProdService();
+			Set<ProdVO> set = prodSvc.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("listProds_ByStoreIdAndProdTypeId", set); // 資料庫取出的list物件,存入request
 
 			String url = "/front-prod/memberMenu.jsp"; // 成功轉交 /front-prod/memberMenu.jsp
 
