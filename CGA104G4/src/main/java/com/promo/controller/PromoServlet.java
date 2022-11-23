@@ -34,8 +34,17 @@ public class PromoServlet extends HttpServlet {
 			case "getAll":
 				getAll(request,response);
 				break;
+			case "delete":
+				deletePromo(request,response);
+				break;
 		}
 
+	}
+
+	private void deletePromo(HttpServletRequest request, HttpServletResponse response) {
+		PromoService promoService = SpringUtil.getBean(getServletContext(),PromoService.class);
+		Integer promoId = Integer.parseInt(request.getParameter("promoId"));
+		promoService.delete(promoId);
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {

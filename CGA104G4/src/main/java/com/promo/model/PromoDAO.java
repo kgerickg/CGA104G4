@@ -26,7 +26,9 @@ public class PromoDAO implements PromoDAO_interface {
 
 	@Override
 	public void delete(Integer promoId) {
-
+		PromoVO promoVO = new PromoVO();
+		promoVO.setPromoId(promoId);
+		session.remove(promoVO);
 	}
 
 	@Override

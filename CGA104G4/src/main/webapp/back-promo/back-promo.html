@@ -105,6 +105,15 @@
             margin-left: 2rem;
             font-size: 1.6rem;
         }
+        #promoUpdateVal {
+            width: 80%;
+            display: inline-block;
+        }
+
+        #promoUpdateValSpan {
+            margin-left: 2rem;
+            font-size: 1.6rem;
+        }
 
         .formBtn {
             background-color: black;
@@ -118,7 +127,8 @@
             display: flex;
             justify-content: space-around;
         }
-        .btn{
+
+        .btn {
             outline: none !important;
         }
 
@@ -228,7 +238,7 @@
                 <button class="promoIncrease" id="showAllPromo">顯示全部優惠活動</button>
                 <div>
                     <input class="promoIncrease" placeholder="依活動名稱查詢" id="inputByPromoName">
-                    <button class="promoIncrease"id="selectByPromoName">查詢</button>
+                    <button class="promoIncrease" id="selectByPromoName">查詢</button>
                 </div>
                 <div>
                     <select class="promoIncrease" id="promoStateSelecter">
@@ -244,8 +254,6 @@
             <div id="tablediv" style="width: 100%">
                 <table id="table_id" class="row-border hover" style="width: 100%;margin:0 1rem"></table>
             </div>
-
-
 
 
             <!-- ******內容寫在這邊 ↑↑↑****** -->
@@ -286,7 +294,7 @@
     </div>
     <div style="align-self: center;margin-top: 2rem">
         <button class="formBtn">新增</button>
-        <button class="formBtn">取消</button>
+        <button class="formBtn" id="increaseCancelbtn">取消</button>
     </div>
 </div>
 
@@ -326,10 +334,9 @@
     </div>
     <div style="align-self: center;margin-top: 2rem">
         <button class="formBtn">儲存</button>
-        <button class="formBtn">取消</button>
+        <button class="formBtn" id="updateCancelbtn">取消</button>
     </div>
 </div>
-
 
 
 <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
@@ -360,7 +367,14 @@
     const promoStateSelecter = document.querySelector('#promoStateSelecter');
     const selectByPromoState = document.querySelector('#selectByPromoState');
     const selectByPromoName = document.querySelector('#selectByPromoName');
-    const inputByPromoName =document.querySelector('#inputByPromoName')
+    const inputByPromoName = document.querySelector('#inputByPromoName')
+    const updateCancelbtn = document.querySelector('#updateCancelbtn');
+    const increaseCancelbtn = document.querySelector('#increaseCancelbtn');
+    const promoUpdateName = document.querySelector('#promoUpdateName');
+    const promoUpdateVal = document.querySelector('#promoUpdateVal');
+    const promoUpdateValSpan =document.querySelector('#promoUpdateValSpan');
+    const promoUpdateCont =document.querySelector('#promoUpdateCont');
+
     //取得PROMOLIST
     let getPromoList = getPromoListFn();
 
@@ -368,6 +382,9 @@
     btnCloseForm.addEventListener('click', closeForm);
     updateCloseForm.addEventListener('click', closeUpdateForm);
     overlay.addEventListener('click', closeForm);
+    overlay.addEventListener('click',  closeUpdateForm);
+    updateCancelbtn.addEventListener('click', closeUpdateForm);
+    increaseCancelbtn.addEventListener('click', closeForm);
 
     promoValSpan.innerHTML = (promoVal.value / 10).toFixed(1) + "折";
     jQuery.datetimepicker.setLocale('zh-TW');
@@ -387,6 +404,10 @@
         promoValSpan.innerHTML = (promoVal.value / 10).toFixed(1) + "折";
     })
 
+    promoUpdateVal.addEventListener('mousemove', function () {
+        promoUpdateValSpan.innerHTML = (promoUpdateVal.value / 10).toFixed(1) + "折";
+    })
+
 
     //顯示新增活動表單
     function openFormBlock() {
@@ -394,12 +415,12 @@
         overlay.classList.remove('hidden');
 
     };
+
     //關閉修改表單
     function closeUpdateForm() {
         overlay.classList.add('hidden');
         UpdateForm.classList.add('hidden')
     }
-
 
     //關閉新增活動表單
     function closeForm() {
@@ -408,10 +429,10 @@
     };
 
     //取得資料庫中活動List
-    showAllPromo.addEventListener('click',function (){
-            let promoList = getPromoList();
-            showPromoList(promoList);
-    })
+    showAllPromo.addEventListener('click', function() {
+        let promoList = getPromoList();
+        showPromoList(promoList);
+    });
 
     //開始時間INPUT綁定JQUERY DATETIMEPICKER
     $('#promoStartTime').datetimepicker({
@@ -440,29 +461,53 @@
         }
     });
 
+    $('#promoUpdateStartTime').datetimepicker({
+        format: 'Y/m/d H:i',
+        formatTime: 'H:i',
+        formatDate: 'Y/m/d',
+        defaultTime: "00:00",
+        onShow: function () {
+            this.setOptions({
+                maxDate: $('#promoUpdateFinishTime').val() ? $('#promoUpdateFinishTime').val() : false
+            })
+        }
+    });
+    $('#promoUpdateFinishTime').datetimepicker({
+        format: 'Y/m/d H:i',
+        formatTime: 'H:i',
+        formatDate: 'Y/m/d',
+        defaultTime: "00:00",
+        onShow: function () {
+            this.setOptions({
+                minDate: $('#promoUpdateStartTime').val() ? $('#promoUpdateStartTime').val() : false
+            })
+        }
+    });
+
+
     //依活動狀態搜索 進行過濾並顯示結果
-    selectByPromoState.addEventListener('click',function(){
+    selectByPromoState.addEventListener('click', function () {
         let option = +promoStateSelecter.value;
         let promoList = getPromoList();
-        if(option === 0){
-            const result = promoList.filter(promo=>promo.promState==='已結束')
+        if (option === 0) {
+            const result = promoList.filter(promo => promo.promState === '已結束')
             showPromoList(result);
-        }else if (option===1){
-            const result = promoList.filter(promo=>promo.promState==='進行中')
+        } else if (option === 1) {
+            const result = promoList.filter(promo => promo.promState === '進行中')
             showPromoList(result);
-        }else if(option===2){
-            const result = promoList.filter(promo=>promo.promState==='尚未開始')
+        } else if (option === 2) {
+            const result = promoList.filter(promo => promo.promState === '尚未開始')
             showPromoList(result);
         }
     })
 
     //依活動名稱搜索
-    selectByPromoName.addEventListener('click',function (){
+    selectByPromoName.addEventListener('click', function () {
         let compareWord = inputByPromoName.value.trim();
-        if(compareWord.length !==0){
+        if (compareWord.length !== 0) {
             let Reg = new RegExp(compareWord)
             let promoList = getPromoList();
-            const result = promoList.filter(promo=>Reg.test(promo.promoName));
+            const result = promoList.filter(promo => Reg.test(promo.promoName));
             showPromoList(result);
         }
 
@@ -473,12 +518,30 @@
     }
 
     async function deletePromo(promoId) {
-
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/promo/promo.do?action=delete&promoId=" + promoId;
+        await fetch(url, {method: 'get'})
+            .then(response => {
+                if (response.ok) {
+                    let promoList = getPromoList();
+                    let result = promoList.filter(promo=>promo.promoId !== promoId)
+                    showPromoList(result);
+                }})
+        getPromoList = getPromoListFn();
     }
+
     function editPromo(promoId) {
         overlay.classList.remove('hidden');
         UpdateForm.classList.remove('hidden');
-
+        let promoList = getPromoList();
+        let [result] = promoList.filter(promo=>promo.promoId === promoId);
+        promoUpdateName.value = result.promoName;
+        promoUpdateVal.value = (parseFloat(result.promoVal)*10);
+        promoUpdateValSpan.innerHTML = `${result.promoVal}折`
+        $('#promoUpdateStartTime').datetimepicker('setOptions', {value: new Date(result.promoTimeS)});
+        $('#promoUpdateFinishTime').datetimepicker('setOptions', {value: new Date(result.promoTimeE)});
+        promoUpdateCont.value = result.promoCont;
     }
 
 
@@ -503,7 +566,8 @@
                 {data: 'promoTimeE', title: "結束時間"},
                 {data: 'promoVal', title: "優惠折扣(折)"},
                 {data: 'promState', title: "活動狀態"},
-                { data: null ,title: "操作",
+                {
+                    data: null, title: "操作",
                     render: function (data, type, row) {
                         if (row.promState === "已結束") {
                             return `<button type="button" class="btn btn-info btn-sm" onclick="copyPromo(${row.promoId})">複製</button> ` +
@@ -515,13 +579,13 @@
                     }
                 },
             ],
-            "columnDefs":[
+            "columnDefs": [
                 {
                     targets: [2],
                     width: "20%",
                 },
                 {
-                    targets: [3,4,7],
+                    targets: [3, 4, 7],
                     width: "15%",
                 },
 
@@ -536,12 +600,14 @@
 
     //將伺服器回傳的PROMOLIST進行解構
     function getPromoListFn() {
-        let promoList= new Array();
+        let promoList = new Array();
         let promoPromise = getPromoPromise();
-        promoPromise.then(e => promoList=[...e]);
+        promoPromise.then(e => promoList = [...e]);
+
         function ReturnPromoList() {
             return promoList;
         }
+
         return ReturnPromoList;
     }
 
@@ -570,7 +636,7 @@
             } else {
                 promo.promState = "已結束"
             }
-            promo.promoVal = (promo.promoVal/10).toFixed(1)
+            promo.promoVal = (promo.promoVal / 10).toFixed(1)
         })
         return promoList;
     };
