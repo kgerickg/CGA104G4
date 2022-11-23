@@ -1,25 +1,26 @@
 //package com.cart.controller;
 //
-//import com.admin.entity.Admin;
-//import core.pojo.Core;
+//import com.cart.pojo.Cart;
+//import com.cart.service.CartService;
 //
 //import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpServlet;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 //import java.io.IOException;
-//import java.util.Objects;
 //
-//import static core.util.CommonUtil.writePojo2Json;
 //import static core.util.Constants.GSON;
 //
-//@WebServlet("/admin/checkPassword")
+//@WebServlet("/cart/cartServlet")
 //public class CartServlet extends HttpServlet {
 //	private static final long serialVersionUID = 1L;
 //
 //	@Override
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//		final String admPwd = GSON.fromJson(request.getReader(), Admin.class).getAdmPwd();
+//		CartService cartService = null;
+//		final String cart = GSON.fromJson(request.getReader(), Cart.class).getUserId();
+//
+//		cartService.put(cart);
 //
 //		final Admin admin = (Admin) request.getSession().getAttribute("admin");
 //		final Core core = new Core();
