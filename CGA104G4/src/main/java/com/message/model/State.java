@@ -1,4 +1,4 @@
-package com.meseg.model;
+package com.message.model;
 
 import java.util.Set;
 

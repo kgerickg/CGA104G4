@@ -1,4 +1,4 @@
-package com.meseg.controller;
+package com.message.controller;
 
 import java.io.IOException;
 import java.util.Collections;

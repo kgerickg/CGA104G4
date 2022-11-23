@@ -22,16 +22,16 @@
 	</div>
 </body>
 <script>
-	var MyPoint = "/FriendWS/${userName}";
-	var host = window.location.host;
-	var path = window.location.pathname;
-	var webCtx = path.substring(0, path.indexOf('/', 1));
-	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+	let MyPoint = "/FriendWS/${userName}";
+	let host = window.location.host;
+	let path = window.location.pathname;
+	let webCtx = path.substring(0, path.indexOf('/', 1));
+	let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
 
-	var statusOutput = document.getElementById("statusOutput");
-	var messagesArea = document.getElementById("messagesArea");
-	var self = '${userName}';
-	var webSocket;
+	let statusOutput = document.getElementById("statusOutput");
+	let messagesArea = document.getElementById("messagesArea");
+	let self = '${userName}';
+	let webSocket;
 
 	function connect() {
 		// create a websocket
@@ -45,20 +45,20 @@
 		};
 
 		webSocket.onmessage = function(event) {
-			var jsonObj = JSON.parse(event.data);
+			let jsonObj = JSON.parse(event.data);
 			if ("open" === jsonObj.type) {
 				refreshFriendList(jsonObj);
 			} else if ("history" === jsonObj.type) {
 				messagesArea.innerHTML = '';
-				var ul = document.createElement('ul');
+				let ul = document.createElement('ul');
 				ul.id = "area";
 				messagesArea.appendChild(ul);
 				// 這行的jsonObj.message是從redis撈出跟好友的歷史訊息，再parse成JSON格式處理
-				var messages = JSON.parse(jsonObj.message);
-				for (var i = 0; i < messages.length; i++) {
-					var historyData = JSON.parse(messages[i]);
-					var showMsg = historyData.message;
-					var li = document.createElement('li');
+				let messages = JSON.parse(jsonObj.message);
+				for (let i = 0; i < messages.length; i++) {
+					let historyData = JSON.parse(messages[i]);
+					let showMsg = historyData.message;
+					let li = document.createElement('li');
 					// 根據發送者是自己還是對方來給予不同的class名, 以達到訊息左右區分
 					historyData.sender === self ? li.className += 'me' : li.className += 'friend';
 					li.innerHTML = showMsg;
@@ -66,7 +66,7 @@
 				}
 				messagesArea.scrollTop = messagesArea.scrollHeight;
 			} else if ("chat" === jsonObj.type) {
-				var li = document.createElement('li');
+				let li = document.createElement('li');
 				jsonObj.sender === self ? li.className += 'me' : li.className += 'friend';
 				li.innerHTML = jsonObj.message;
 				console.log(li);
@@ -84,9 +84,9 @@
 	}
 	
 	function sendMessage() {
-		var inputMessage = document.getElementById("message");
-		var friend = statusOutput.textContent;
-		var message = inputMessage.value.trim();
+		let inputMessage = document.getElementById("message");
+		let friend = statusOutput.textContent;
+		let message = inputMessage.value.trim();
 
 		if (message === "") {
 			alert("Input a message");
@@ -94,7 +94,7 @@
 		} else if (friend === "") {
 			alert("Choose a friend");
 		} else {
-			var jsonObj = {
+			let jsonObj = {
 				"type" : "chat",
 				"sender" : self,
 				"receiver" : friend,
@@ -108,10 +108,10 @@
 	
 	// 有好友上線或離線就更新列表
 	function refreshFriendList(jsonObj) {
-		var friends = jsonObj.users;
-		var row = document.getElementById("row");
+		let friends = jsonObj.users;
+		let row = document.getElementById("row");
 		row.innerHTML = '';
-		for (var i = 0; i < friends.length; i++) {
+		for (let i = 0; i < friends.length; i++) {
 			if (friends[i] === self) { continue; }
 			row.innerHTML +='<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>' + friends[i] + '</h2></div>';
 		}
@@ -119,11 +119,11 @@
 	}
 	// 註冊列表點擊事件並抓取好友名字以取得歷史訊息
 	function addListener() {
-		var container = document.getElementById("row");
+		let container = document.getElementById("row");
 		container.addEventListener("click", function(e) {
-			var friend = e.srcElement.textContent;
+			let friend = e.srcElement.textContent;
 			updateFriendName(friend);
-			var jsonObj = {
+			let jsonObj = {
 					"type" : "history",
 					"sender" : self,
 					"receiver" : friend,
