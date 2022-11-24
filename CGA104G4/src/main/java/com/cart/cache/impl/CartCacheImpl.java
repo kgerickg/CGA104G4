@@ -33,7 +33,7 @@ public class CartCacheImpl implements CartCache {
         Item item = new Item();
         item.setProdId(2);
         item.setProdQty(9);
-        cart.getCartList().add(item);
+        cart.getCartMap().put(item.getProdId(), item);
         dao.put(cart);
 
         Cart test = dao.get("1");
