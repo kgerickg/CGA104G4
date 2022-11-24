@@ -151,7 +151,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -170,7 +170,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg2.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title=""></a>${prodVO.prodName}</h3>
@@ -188,7 +188,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg3.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -207,7 +207,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg4.jpg" alt="" class="w-100">
+											<img src="ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -226,7 +226,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg5.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -245,7 +245,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg6.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -264,7 +264,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -283,7 +283,7 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../resources/images/PROD_ID_${prodVO.prodId}.jpg" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>

@@ -14,7 +14,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 	private static final String GET_ALL_STMT = "select PROD_ID, STORE_ID, PROD_TYPE_ID, PROD_STAT, PROD_NAME, PROD_CONT, PROD_PRC, PROD_TIME from PROD order by PROD_ID";
 	private static final String GET_ONE_STMT = "select PROD_ID, STORE_ID, PROD_TYPE_ID, PROD_STAT, PROD_NAME, PROD_CONT, PROD_PRC, PROD_TIME from PROD where PROD_ID = ?";
 	private static final String DELETE = "delete from PROD where PROD_ID = ?";
-	private static final String UPDATE = "update PROD set STORE_ID = ?, PROD_TYPE_ID = ?, PROD_STAT = ?, PROD_NAME = ?, PROD_CONT = ?, PROD_PRC = ?, PROD_TIME = ? from PROD where PROD_ID = ?";
+	private static final String UPDATE = "update PROD set STORE_ID = ?, PROD_TYPE_ID = ?, PROD_STAT = ?, PROD_NAME = ?, PROD_CONT = ?, PROD_PRC = ?, PROD_TIME = ? where PROD_ID = ?";
 	private static final String GET_ProdTypeIds_ByStoreId_STMT = "select PROD_TYPE_ID from PROD where STORE_ID = ? order by PROD_TYPE_ID";
 	private static final String GET_Prods_ByProdTypeId_STMT = "select * from PROD where PROD_TYPE_ID = ? order by PROD_ID";
 	private static final String GET_Prods_ByStoreIdAndProdTypeId_STMT = "select * from PROD where STORE_ID = ? and PROD_TYPE_ID = ? order by PROD_ID";

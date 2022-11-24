@@ -8,7 +8,7 @@
 <style type="text/css">
 
 </style>
-<title>最大私人聊天室</title>
+<title>聊聊（一對一）</title>
 </head>
 <body onload="connect();" onunload="disconnect();">
 	<h3 id="statusOutput" class="statusOutput"></h3>

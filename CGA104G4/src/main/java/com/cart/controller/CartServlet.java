@@ -13,7 +13,7 @@ import java.util.Objects;
 import static core.util.CommonUtil.writePojo2Json;
 import static core.util.Constants.GSON;
 
-@WebServlet("/admin/checkPassword")
+//@WebServlet("/admin/checkPassword")
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

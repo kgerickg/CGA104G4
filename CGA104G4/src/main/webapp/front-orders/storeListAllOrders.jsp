@@ -79,7 +79,7 @@
           <div class="oct-table-head">
            <ul>
              <li class="date">${ordersVO.ordTime}</li>
-             <li class="delivery">${ordersVO.memberVO.memberName}（會員編號：${ordersVO.memberVO.memberId}）</li>
+             <li class="delivery">${ordersVO.memberVO.memName}（會員編號：${ordersVO.memberVO.memId}）</li>
              <li class="amount">$${ordersVO.ordAmt}</li>
              <li class="status">
               <c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>
@@ -91,8 +91,8 @@
              </li>
              
            </ul>
-           <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="">
-			    <input type="submit" value="訂單明細"> 
+            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="">
+			    <input type="submit" value="查看訂單明細" style="border-style:none; background-color:transparent; color:#5D6978;"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="listDetails_ByOrdId_A"></FORM>
             <a href="#" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
