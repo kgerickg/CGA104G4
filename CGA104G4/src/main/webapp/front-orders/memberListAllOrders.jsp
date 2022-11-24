@@ -80,8 +80,8 @@
           <div class="oct-table-head">
            <ul>
              <li class="date">${ordersVO.ordTime}</li>
-             <li class="delivery">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}）
-             </li>
+<%--              <li class="delivery">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}） --%>
+<!--              </li> -->
              <li class="amount">$${ordersVO.ordAmt}</li>
              <li class="status">
               <c:if test="${ordersVO.ordStat==0}">正在等待商家接單</c:if>

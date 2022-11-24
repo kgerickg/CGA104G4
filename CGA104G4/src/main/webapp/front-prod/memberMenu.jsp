@@ -158,8 +158,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -176,8 +176,8 @@
 											<a href="#" title=""></a>${prodVO.prodName}</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -195,8 +195,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -214,8 +214,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -233,8 +233,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -252,8 +252,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -271,8 +271,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -290,8 +290,8 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -459,6 +459,17 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script>
+	let acart =  document.querySelectorAll(".cart");
+	
+	acart.forEach(e=>{
+		e.addEventListener("click",function(e){
+			e.preventDefault();
+			alert(this.id);
+		})
+	})
+	
+	</script>
 
 </body>
 </html>
