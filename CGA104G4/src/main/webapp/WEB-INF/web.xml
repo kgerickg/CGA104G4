@@ -103,5 +103,13 @@
 		<servlet-name>NameServlet</servlet-name>
 		<url-pattern>/chat.do</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShowImageFromDB</servlet-name>
+		<servlet-class>com.photo.io.ShowImageFromDB</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowImageFromDB</servlet-name>
+		<url-pattern>/ShowImageFromDB</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

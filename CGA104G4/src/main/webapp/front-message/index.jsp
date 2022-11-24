@@ -45,11 +45,11 @@ html, body {
 	margin: 20px 200px 0 -50px;
 }
 </style>
-<title>Join Us</title>
+<title>聊聊（一對一 - 輸入使用者名稱）</title>
 </head>
 <body>
 	<div id="outPopUp">
-		<h1 align="center">tibame最大的私聊上線囉～</h1>
+		<h1 align="center">聊聊（一對一 - 輸入使用者名稱）</h1>
 		<form id="myForm" action="<%=request.getContextPath() %>/chat.do" method="POST">
 			<input id="userName" name="userName" class="text-field" type="text" placeholder="Input user name" /> 
 			<input type="submit" id="send" class="button" value="送出" onclick="sendName();" />
@@ -57,11 +57,11 @@ html, body {
 	</div>
 </body>
 <script>
-	var inputUserName = document.getElementById("userName");
+	let inputUserName = document.getElementById("userName");
 	inputUserName.focus();
 	
 	function sendName() {
-		var userName = inputUserName.value.trim();
+		let userName = inputUserName.value.trim();
 		if (userName === "") {
 			alert("Input a user name");
 			inputUserName.focus();
