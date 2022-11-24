@@ -21,14 +21,14 @@
 </body>
 
 <script>
-	var MyPoint = "/TogetherWS/james";
-	var host = window.location.host;
-	var path = window.location.pathname;
-	var webCtx = path.substring(0, path.indexOf('/', 1));
-	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+	let MyPoint = "/TogetherWS/james";
+	let host = window.location.host;
+	let path = window.location.pathname;
+	let webCtx = path.substring(0, path.indexOf('/', 1));
+	let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
 
-	var statusOutput = document.getElementById("statusOutput");
-	var webSocket;
+	let statusOutput = document.getElementById("statusOutput");
+	let webSocket;
 
 	function connect() {
 		// create a websocket
@@ -42,9 +42,9 @@
 		};
 
 		webSocket.onmessage = function(event) {
-			var messagesArea = document.getElementById("messagesArea");
-			var jsonObj = JSON.parse(event.data);
-			var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
+			let messagesArea = document.getElementById("messagesArea");
+			let jsonObj = JSON.parse(event.data);
+			let message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
 			messagesArea.value = messagesArea.value + message;
 			messagesArea.scrollTop = messagesArea.scrollHeight;
 		};
@@ -54,25 +54,25 @@
 		};
 	}
 
-	var inputUserName = document.getElementById("userName");
+	let inputUserName = document.getElementById("userName");
 	inputUserName.focus();
 
 	function sendMessage() {
-		var userName = inputUserName.value.trim();
+		let userName = inputUserName.value.trim();
 		if (userName === "") {
 			alert("Input a user name");
 			inputUserName.focus();
 			return;
 		}
 
-		var inputMessage = document.getElementById("message");
-		var message = inputMessage.value.trim();
+		let inputMessage = document.getElementById("message");
+		let message = inputMessage.value.trim();
 
 		if (message === "") {
 			alert("Input a message");
 			inputMessage.focus();
 		} else {
-			var jsonObj = {
+			let jsonObj = {
 				"userName" : userName,
 				"message" : message
 			};
