@@ -137,7 +137,6 @@ thead th {
 			</tr>
 		</thead>
 		<c:forEach var="LkComplVO" items="${lkcomplVOlist}">
-			<!-- 還沒寫前台controller所以沒有lkcomplVOlist這東西-->
 
 			<tr>
 				<td>${LkComplVO.lkCcId}</td>
@@ -166,10 +165,15 @@ thead th {
 				</c:if>
 
 				<td>
-				<a
-					href=${pageContext.request.contextPath}/front-lkcompl/StoreUpdateLkCompl.jsp>
-						<input type="submit" value="修改" class="btn-secondary">
-				</a>
+				<form method="post" action=${pageContext.request.contextPath}/store-lkcompl/lkcompl.do>
+					<input type="hidden" name="action" value="goUpdate">
+					<input type="hidden" name="lkCcId" value="${LkComplVO.lkCcId}">
+					<input type="hidden" name="lkOrdId" value="${LkComplVO.lkOrdId}">
+					<input type="hidden" name="lkCcStat" value="${LkComplVO.lkCcStat}">
+					<input type="hidden" name="lkCcCont" value="${LkComplVO.lkCcCont}">
+					<input type="hidden" name="lkRfdStat" value="${LkComplVO.lkRfdStat}">
+					<input type="submit" value="修改" class="btn-secondary">
+				</form>
 				</td>
 
 

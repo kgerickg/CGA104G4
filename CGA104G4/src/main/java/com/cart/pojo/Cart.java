@@ -27,5 +27,6 @@ public class Cart implements Serializable {
         cart.getCartList().add(item2);
         String test = new GsonBuilder().create().toJson(cart);
         System.out.println(test);
+        System.out.println(cart);
     }
 }

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Chat Room</title>
+<title>聊聊</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="../resources/css/styles.css" type="text/css" />
 </head>
 
 <body onload="connect();" onunload="disconnect();">
-	<h1>Chat Room</h1>
+	<h1>聊聊</h1>
 	<h3 id="statusOutput" class="statusOutput"></h3>
 	<textarea id="messagesArea" class="panel message-area" readonly></textarea>
 	<div class="panel input-area">
@@ -35,7 +35,7 @@
 		webSocket = new WebSocket(endPointURL);
 
 		webSocket.onopen = function(event) {
-			updateStatus("WebSocket Connected");
+			updateStatus("聊聊");
 			document.getElementById('sendMessage').disabled = false;
 			document.getElementById('connect').disabled = true;
 			document.getElementById('disconnect').disabled = false;

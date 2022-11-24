@@ -1,4 +1,4 @@
-package com.meseg.controller;
+package com.message.controller;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class NameServlet extends HttpServlet {
 		
 		req.setAttribute("userName", userName);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/chat.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/front-message/chat.jsp");
 		dispatcher.forward(req, res);
 	}
 }

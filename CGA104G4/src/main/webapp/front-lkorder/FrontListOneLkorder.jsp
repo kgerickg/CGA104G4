@@ -19,13 +19,13 @@
         rel="stylesheet">
 
     <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="CGA104G4/resources/css/nav.css">
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/all.min.css>
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/animate.min.css>
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/slick.css>
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/slick-theme.css>
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/flaticon.css>
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/style.css>
+    <link rel="stylesheet" type="text/css" href=${pageContext.request.contextPath}/resources/css/nav.css>
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
@@ -55,6 +55,7 @@ table  tr:nth-of-type(even) {
 }
 table th,td {
     padding: 5px 5px;
+    color:black;
 }
 
 #table-1 td{
@@ -83,7 +84,8 @@ thead th{
   <script src=${pageContext.request.contextPath}/resources/js/membernav.js></script>
     <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
     <!--下面可自由新增內容 -->
-
+	
+	<div style="padding: 4%"></div>
     
 	<table id="table-1">
 		<tr>
@@ -137,9 +139,9 @@ thead th{
 	</table>
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
-    <script src="CGA104G4/resources/js/bootstrap.min.js"></script>
-    <script src="CGA104G4/resources/js/slick.js"></script>
-    <script src="CGA104G4/resources/js/scripts.js"></script>
-    <script src="CGA104G4/resources/js/isotope.js"></script>
+    <script src=${pageContext.request.contextPath}/resources/js/bootstrap.min.js></script>
+    <script src=${pageContext.request.contextPath}/resources/js/slick.js></script>
+    <script src=${pageContext.request.contextPath}/resources/js/scripts.js></script>
+    <script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
 </body>
 </html>

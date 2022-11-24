@@ -1,9 +1,9 @@
-package com.meseg.controller;
+package com.message.controller;
 
 import com.google.gson.Gson;
-import com.meseg.jedis.JedisHandleMessage;
-import com.meseg.model.ChatMessage;
-import com.meseg.model.State;
+import com.message.jedis.JedisHandleMessage;
+import com.message.model.ChatMessage;
+import com.message.model.State;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -43,13 +43,16 @@ public class FriendWS {
 	@OnMessage
 	public void onMessage(Session userSession, String message) {
 		ChatMessage chatMessage = gson.fromJson(message, ChatMessage.class);
-		String sender = chatMessage.getSender();
-		String receiver = chatMessage.getReceiver();
+		String msgId = chatMessage.getMsgId();
+		String memId = chatMessage.getMemId();
+		String storeId = chatMessage.getStoreId();
+		String msgDir = chatMessage.getMsgDir();
+		String msgTime = chatMessage.getMsgTime();
 		
 		if ("history".equals(chatMessage.getType())) {
-			List<String> historyData = JedisHandleMessage.getHistoryMsg(sender, receiver);
+			List<String> historyData = JedisHandleMessage.getHistoryMsg(memId, storeId);
 			String historyMsg = gson.toJson(historyData);
-			ChatMessage cmHistory = new ChatMessage("history", sender, receiver, historyMsg);
+			ChatMessage cmHistory = new ChatMessage(msgId, "history", memId, storeId, msgDir, historyMsg, msgTime);
 			if (userSession != null && userSession.isOpen()) {
 				userSession.getAsyncRemote().sendText(gson.toJson(cmHistory));
 				System.out.println("history = " + gson.toJson(cmHistory));
@@ -58,11 +61,11 @@ public class FriendWS {
 		}
 		
 		
-		Session receiverSession = sessionsMap.get(receiver);
-		if (receiverSession != null && receiverSession.isOpen()) {
-			receiverSession.getAsyncRemote().sendText(message);
+		Session storeSession = sessionsMap.get(storeId);
+		if (storeSession != null && storeSession.isOpen()) {
+			storeSession.getAsyncRemote().sendText(message);
 			userSession.getAsyncRemote().sendText(message);
-			JedisHandleMessage.saveChatMessage(sender, receiver, message);
+			JedisHandleMessage.saveChatMessage(memId, storeId, message);
 		}
 		System.out.println("Message received: " + message);
 	}

@@ -10,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
 
 import com.lkorder.model.LkOrderService;
 import com.lkorder.model.LkOrderVO;
@@ -78,22 +81,24 @@ public class LkOrderFrontServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		if ("listAllMember".equals(action)) { // 來自【listAllEmp.jsp】的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
+		if ("listAllMember".equals(action)) { // 來自【listAllMember.jsp】的請求
+			System.out.println("HI");
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
-			Integer MemId = Integer.valueOf(req.getParameter("memId"));
-			/*************************** 2.開始查詢資料 ****************************************/
-			LkOrderService lkorderSvc = new LkOrderService();
-			LkOrderVO lkorderVO = lkorderSvc.lkordermemidVO(MemId);
+//			Integer MemId = Integer.valueOf(req.getParameter("memId"));
 			
+			HttpSession session = req.getSession();
+			Integer memId = (Integer) session.getAttribute("memId");	// 取得session的會員ID
+			req.setAttribute("memId", memId);							// 要setAttribute讓jsp去取得(getAttribute)
+			/*************************** 2.開始查詢資料 ****************************************/
+//			LkOrderService lkorderSvc = new LkOrderService();
+//			LkOrderVO lkorderVO = lkorderSvc.lkordermemidVO(memId);
+//			
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("lkordermemidVO", lkorderVO); // 資料庫取出的empVO物件,存入req
+//			req.setAttribute("lkordermemidVO", lkorderVO); // 資料庫取出的empVO物件,存入req
 			String url = "/front-lkorder/FrontListAllLkorder.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);

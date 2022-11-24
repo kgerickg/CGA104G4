@@ -2,6 +2,8 @@ package com.lkcompl.model;
 
 import java.util.List;
 
+import com.lkorder.model.LkOrderVO;
+
 public class LkComplService {
 	
 	private LkComplDAO_interface dao;
@@ -15,13 +17,10 @@ public class LkComplService {
 	}
 	
 	public LkComplVO selectByLkCcId(Integer lkCcId) {
-		System.out.println("~~~");
 		return dao.selectByLkCcId(lkCcId);
 	}
 	
-	public LkComplVO selectBymemId(Integer memId) {
-		return dao.selectByLkCcId(memId);
-	}
+	
 	
 	public void insert(LkComplVO lkComplVO) {
 	dao.insert(lkComplVO);
@@ -35,9 +34,23 @@ public class LkComplService {
 	public void goUpdate(LkComplVO lkComplVO) {
 		System.out.println("go修改service");
 	dao.goUpdate(lkComplVO);
-	
-
 }
+	
+	
+	public LkComplVO selectBymemId(Integer memId, Integer lkccId) {
+		return dao.selectBymemId(memId, lkccId);
+	}
+	
+	public List<LkComplVO> selectBymemId(Integer memId) {
+		return dao.selectBymemId(memId);
+	}
+	
+	public List<LkOrderVO> selectOrderidBymemId(Integer memId) {
+		return dao.selectOrderidBymemId(memId);
+	}
+	
+	
+	
 	
 	
 //	public void insert(Integer lkCcId, Integer lkOrdId, Integer lkCcStat, String lkCcCont, Integer lkRfdStat) {

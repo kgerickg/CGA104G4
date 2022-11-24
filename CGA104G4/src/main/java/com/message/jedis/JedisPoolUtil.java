@@ -1,4 +1,4 @@
-package com.meseg.jedis;
+package com.message.jedis;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -14,8 +14,8 @@ public class JedisPoolUtil {
 			synchronized (JedisPoolUtil.class) {
 				if (pool == null) {
 					JedisPoolConfig config = new JedisPoolConfig();
-					config.setMaxTotal(8);
-					config.setMaxIdle(8);
+					config.setMaxTotal(32);
+					config.setMaxIdle(32);
 					config.setMaxWaitMillis(10000);
 					pool = new JedisPool(config, "localhost", 6379);
 				}

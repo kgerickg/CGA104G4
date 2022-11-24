@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.query.NativeQuery;
 
+import com.lkorder.model.LkOrderVO;
+
 public class LkComplDAO implements LkComplDAO_interface {
 
 
@@ -14,7 +16,7 @@ public class LkComplDAO implements LkComplDAO_interface {
 		 try {
 	            beginTransaction();
 	            getSession().persist(lkComplVO);
-
+	            commit();
 	        } catch (Exception e) {
 	            rollback();
 	            e.printStackTrace();
@@ -22,15 +24,15 @@ public class LkComplDAO implements LkComplDAO_interface {
 	}
 
 	@Override
-	public void update(LkComplVO LkComplVO) {
+	public void update(LkComplVO lkComplVO) {
 		try {
 			beginTransaction();
-			LkComplVO vo = getSession().load(LkComplVO.class, LkComplVO.getLkCcId());
-			vo.setLkCcStat(LkComplVO.getLkCcStat());
-			vo.setLkRfdStat(LkComplVO.getLkRfdStat());
-			vo.setLkCcId(LkComplVO.getLkCcId());
-			vo.setLkOrdId(LkComplVO.getLkOrdId());
-			vo.setLkCcCont(LkComplVO.getLkCcCont());
+			LkComplVO vo = getSession().load(LkComplVO.class, lkComplVO.getLkCcId());
+			vo.setLkCcStat(lkComplVO.getLkCcStat());
+			vo.setLkRfdStat(lkComplVO.getLkRfdStat());
+			vo.setLkCcId(lkComplVO.getLkCcId());
+			vo.setLkOrdId(lkComplVO.getLkOrdId());
+			vo.setLkCcCont(lkComplVO.getLkCcCont());
 			commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,15 +41,15 @@ public class LkComplDAO implements LkComplDAO_interface {
 	}
 	
 	@Override
-	public void goUpdate(LkComplVO LkComplVO) {
+	public void goUpdate(LkComplVO lkComplVO) {
 		try {
 			beginTransaction();
-			LkComplVO vo = getSession().load(LkComplVO.class, LkComplVO.getLkCcId());
-			vo.setLkCcStat(LkComplVO.getLkCcStat());
-			vo.setLkRfdStat(LkComplVO.getLkRfdStat());
-			vo.setLkCcId(LkComplVO.getLkCcId());
-			vo.setLkOrdId(LkComplVO.getLkOrdId());
-			vo.setLkCcCont(LkComplVO.getLkCcCont());
+			LkComplVO vo = getSession().load(LkComplVO.class, lkComplVO.getLkCcId());
+			vo.setLkCcStat(lkComplVO.getLkCcStat());
+			vo.setLkRfdStat(lkComplVO.getLkRfdStat());
+			vo.setLkCcId(lkComplVO.getLkCcId());
+			vo.setLkOrdId(lkComplVO.getLkOrdId());
+			vo.setLkCcCont(lkComplVO.getLkCcCont());
 			commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,15 +72,35 @@ public class LkComplDAO implements LkComplDAO_interface {
 	}
 	
 	@Override
-	public LkComplVO selectBymemId(Integer memId) {
+	public LkComplVO selectBymemId(Integer memId, Integer lkccId) {
 		LkComplVO lkComplVO;
         try {
             beginTransaction();
             final String hql = "select * from LK_COMPL left join LK_ORDER on LK_COMPL.LK_ORD_ID  = LK_ORDER.LK_ORD_ID "
-            		+ "where LK_COMPL.LK_ORD_ID = ?";
-            lkComplVO = getSession().get(LkComplVO.class, memId);
+            		+ "where LK_ORDER.MEM_ID = :memid and LK_CC_ID = :ccid";
+            lkComplVO = getSession().createNativeQuery(hql, LkComplVO.class)
+            		.setParameter("memid", memId)
+            		.setParameter("ccid", lkccId)
+            		.uniqueResult();
             commit();
             return lkComplVO;
+        } catch (Exception e) {
+            rollback();
+            return null;
+        }
+	}
+	
+	@Override
+	public List<LkComplVO> selectBymemId(Integer memId) {
+        try {
+            beginTransaction();
+            final String hql = "select * from LK_COMPL left join LK_ORDER on LK_COMPL.LK_ORD_ID  = LK_ORDER.LK_ORD_ID "
+            		+ "where LK_ORDER.MEM_ID = :memid";
+            List<LkComplVO> list = getSession().createNativeQuery(hql, LkComplVO.class)
+            		.setParameter("memid", memId)
+            		.list();
+            commit();
+            return list;
         } catch (Exception e) {
             rollback();
             return null;
@@ -94,6 +116,24 @@ public class LkComplDAO implements LkComplDAO_interface {
 	            lkComplVOs = nativeQuery.list();
 	            commit();
 	            return lkComplVOs;
+	        } catch (Exception e) {
+	            rollback();
+	            e.printStackTrace();
+	            return null;
+	        }
+	}
+	
+	@Override
+	public List<LkOrderVO> selectOrderidBymemId(Integer memId) {
+		 try {
+	            beginTransaction();
+	            final String hql = "select * from LK_ORDER "
+	            		+ "where MEM_ID = :memid";
+	            List<LkOrderVO> list = getSession().createNativeQuery(hql, LkOrderVO.class)
+	            		.setParameter("memid", memId)
+	            		.list();
+	            commit();
+	            return list;
 	        } catch (Exception e) {
 	            rollback();
 	            e.printStackTrace();
@@ -122,6 +162,8 @@ public class LkComplDAO implements LkComplDAO_interface {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 	
 
 }

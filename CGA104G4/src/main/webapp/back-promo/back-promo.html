@@ -106,6 +106,16 @@
             font-size: 1.6rem;
         }
 
+        #promoUpdateVal {
+            width: 80%;
+            display: inline-block;
+        }
+
+        #promoUpdateValSpan {
+            margin-left: 2rem;
+            font-size: 1.6rem;
+        }
+
         .formBtn {
             background-color: black;
             color: white;
@@ -118,7 +128,8 @@
             display: flex;
             justify-content: space-around;
         }
-        .btn{
+
+        .btn {
             outline: none !important;
         }
 
@@ -228,7 +239,7 @@
                 <button class="promoIncrease" id="showAllPromo">顯示全部優惠活動</button>
                 <div>
                     <input class="promoIncrease" placeholder="依活動名稱查詢" id="inputByPromoName">
-                    <button class="promoIncrease"id="selectByPromoName">查詢</button>
+                    <button class="promoIncrease" id="selectByPromoName">查詢</button>
                 </div>
                 <div>
                     <select class="promoIncrease" id="promoStateSelecter">
@@ -244,8 +255,6 @@
             <div id="tablediv" style="width: 100%">
                 <table id="table_id" class="row-border hover" style="width: 100%;margin:0 1rem"></table>
             </div>
-
-
 
 
             <!-- ******內容寫在這邊 ↑↑↑****** -->
@@ -286,7 +295,7 @@
     </div>
     <div style="align-self: center;margin-top: 2rem">
         <button class="formBtn">新增</button>
-        <button class="formBtn">取消</button>
+        <button class="formBtn" id="increaseCancelbtn">取消</button>
     </div>
 </div>
 
@@ -298,7 +307,7 @@
     <div class="formTitle">修改優惠活動</div>
     <div class="flex-block">
         <div>
-            <label for="promoName">活動名稱:</label>
+            <label for="promoName">活動名稱:</label><span id="promoUpdateNameError" style="color: red"></span>
             <br>
             <input type="text" id="promoUpdateName">
         </div>
@@ -309,27 +318,26 @@
             <span id="promoUpdateValSpan"></span>
         </div>
         <div>
-            <label for="promoStartTime">開始時間:</label>
+            <label for="promoStartTime">開始時間:</label><span id="promoUpdateStartTimeError" style="color: red"></span>
             <br>
             <input type="text" id="promoUpdateStartTime">
         </div>
         <div>
-            <label for="promoFinishTime">結束時間:</label>
+            <label for="promoFinishTime">結束時間:</label><span id="promoUpdateFinishTimeError" style="color: red"></span>
             <br>
             <input type="text" id="promoUpdateFinishTime">
         </div>
         <div>
-            <label for="promoCont">活動內容:</label>
+            <label for="promoCont">活動內容:</label><span id="promoUpdateContError" style="color: red"></span>
             <br>
             <textarea id="promoUpdateCont" rows="5" cols="50" maxlength="250" style="resize: none"></textarea>
         </div>
     </div>
     <div style="align-self: center;margin-top: 2rem">
-        <button class="formBtn">儲存</button>
-        <button class="formBtn">取消</button>
+        <button class="formBtn" id="updateSavebtn">儲存</button>
+        <button class="formBtn" id="updateCancelbtn">取消</button>
     </div>
 </div>
-
 
 
 <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
@@ -360,7 +368,20 @@
     const promoStateSelecter = document.querySelector('#promoStateSelecter');
     const selectByPromoState = document.querySelector('#selectByPromoState');
     const selectByPromoName = document.querySelector('#selectByPromoName');
-    const inputByPromoName =document.querySelector('#inputByPromoName')
+    const inputByPromoName = document.querySelector('#inputByPromoName')
+    const updateCancelbtn = document.querySelector('#updateCancelbtn');
+    const increaseCancelbtn = document.querySelector('#increaseCancelbtn');
+    const promoUpdateName = document.querySelector('#promoUpdateName');
+    const promoUpdateVal = document.querySelector('#promoUpdateVal');
+    const promoUpdateValSpan = document.querySelector('#promoUpdateValSpan');
+    const promoUpdateCont = document.querySelector('#promoUpdateCont');
+    const updateSavebtn = document.querySelector('#updateSavebtn');
+    const promoUpdateNameError = document.querySelector("#promoUpdateNameError");
+    const promoUpdateStartTimeError = document.querySelector("#promoUpdateStartTimeError");
+    const promoUpdateFinishTimeError = document.querySelector("#promoUpdateFinishTimeError");
+    const promoUpdateContError = document.querySelector("#promoUpdateContError");
+
+
     //取得PROMOLIST
     let getPromoList = getPromoListFn();
 
@@ -368,6 +389,9 @@
     btnCloseForm.addEventListener('click', closeForm);
     updateCloseForm.addEventListener('click', closeUpdateForm);
     overlay.addEventListener('click', closeForm);
+    overlay.addEventListener('click', closeUpdateForm);
+    updateCancelbtn.addEventListener('click', closeUpdateForm);
+    increaseCancelbtn.addEventListener('click', closeForm);
 
     promoValSpan.innerHTML = (promoVal.value / 10).toFixed(1) + "折";
     jQuery.datetimepicker.setLocale('zh-TW');
@@ -387,6 +411,10 @@
         promoValSpan.innerHTML = (promoVal.value / 10).toFixed(1) + "折";
     })
 
+    promoUpdateVal.addEventListener('mousemove', function () {
+        promoUpdateValSpan.innerHTML = (promoUpdateVal.value / 10).toFixed(1) + "折";
+    })
+
 
     //顯示新增活動表單
     function openFormBlock() {
@@ -394,12 +422,13 @@
         overlay.classList.remove('hidden');
 
     };
+
     //關閉修改表單
     function closeUpdateForm() {
         overlay.classList.add('hidden');
         UpdateForm.classList.add('hidden')
+        clearUpdateError();
     }
-
 
     //關閉新增活動表單
     function closeForm() {
@@ -407,11 +436,11 @@
         overlay.classList.add('hidden');
     };
 
-    //取得資料庫中活動List
-    showAllPromo.addEventListener('click',function (){
-            let promoList = getPromoList();
-            showPromoList(promoList);
-    })
+    //取得資料庫中所有活動
+    showAllPromo.addEventListener('click', function () {
+        let promoList = getPromoList();
+        showPromoList(promoList);
+    });
 
     //開始時間INPUT綁定JQUERY DATETIMEPICKER
     $('#promoStartTime').datetimepicker({
@@ -439,48 +468,155 @@
             })
         }
     });
+    //修改表單開始時間綁定JQUERY DATETIMEPICKER
+    $('#promoUpdateStartTime').datetimepicker({
+        format: 'Y/m/d H:i',
+        formatTime: 'H:i',
+        formatDate: 'Y/m/d',
+        defaultTime: "00:00",
+        onShow: function () {
+            this.setOptions({
+                maxDate: $('#promoUpdateFinishTime').val() ? $('#promoUpdateFinishTime').val() : false
+            })
+        }
+    });
+    //修改表單開始時間綁定JQUERY DATETIMEPICKER
+    $('#promoUpdateFinishTime').datetimepicker({
+        format: 'Y/m/d H:i',
+        formatTime: 'H:i',
+        formatDate: 'Y/m/d',
+        defaultTime: "00:00",
+        onShow: function () {
+            this.setOptions({
+                minDate: $('#promoUpdateStartTime').val() ? $('#promoUpdateStartTime').val() : false
+            })
+        }
+    });
+
 
     //依活動狀態搜索 進行過濾並顯示結果
-    selectByPromoState.addEventListener('click',function(){
+    selectByPromoState.addEventListener('click', function () {
         let option = +promoStateSelecter.value;
         let promoList = getPromoList();
-        if(option === 0){
-            const result = promoList.filter(promo=>promo.promState==='已結束')
+        if (option === 0) {
+            const result = promoList.filter(promo => promo.promState === '已結束')
             showPromoList(result);
-        }else if (option===1){
-            const result = promoList.filter(promo=>promo.promState==='進行中')
+        } else if (option === 1) {
+            const result = promoList.filter(promo => promo.promState === '進行中')
             showPromoList(result);
-        }else if(option===2){
-            const result = promoList.filter(promo=>promo.promState==='尚未開始')
+        } else if (option === 2) {
+            const result = promoList.filter(promo => promo.promState === '尚未開始')
             showPromoList(result);
         }
     })
 
     //依活動名稱搜索
-    selectByPromoName.addEventListener('click',function (){
+    selectByPromoName.addEventListener('click', function () {
         let compareWord = inputByPromoName.value.trim();
-        if(compareWord.length !==0){
+        if (compareWord.length !== 0) {
             let Reg = new RegExp(compareWord)
             let promoList = getPromoList();
-            const result = promoList.filter(promo=>Reg.test(promo.promoName));
+            const result = promoList.filter(promo => Reg.test(promo.promoName));
             showPromoList(result);
         }
-
     })
 
     function copyPromo(promoId) {
 
     }
 
+    //刪除活動
     async function deletePromo(promoId) {
-
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/promo/promo.do?action=delete&promoId=" + promoId;
+        await fetch(url, {method: 'get'})
+            .then(response => {
+                if (response.ok) {
+                    let promoList = getPromoList();
+                    let result = promoList.filter(promo => promo.promoId !== promoId)
+                    showPromoList(result);
+                }
+            });
+        getPromoList = getPromoListFn();
     }
+    //儲存被編輯的活動ID
+    let UpdatePromoId;
+    //編輯活動
     function editPromo(promoId) {
+        UpdatePromoId = promoId;
         overlay.classList.remove('hidden');
         UpdateForm.classList.remove('hidden');
-
+        let promoList = getPromoList();
+        let [result] = promoList.filter(promo => promo.promoId === promoId);
+        promoUpdateName.value = result.promoName;
+        promoUpdateVal.value = (parseFloat(result.promoVal) * 10);
+        promoUpdateValSpan.innerHTML = `${result.promoVal}折`
+        $('#promoUpdateStartTime').datetimepicker('setOptions', {value: new Date(result.promoTimeS)});
+        $('#promoUpdateFinishTime').datetimepicker('setOptions', {value: new Date(result.promoTimeE)});
+        promoUpdateCont.value = result.promoCont;
     }
+    //更新按鈕綁定進行更新
+    updateSavebtn.addEventListener('click', async function () {
+        clearUpdateError();
+        let promoId = UpdatePromoId;
+        let promoName = promoUpdateName.value;
+        let promoVal = promoUpdateVal.value;
+        let options = {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: false
+        };
+        let timeFormater = new Intl.DateTimeFormat("ja-JP", options);
+        let promoTimeSTemp = $('#promoUpdateStartTime').datetimepicker('getValue');
+        let promoTimeETemp = $('#promoUpdateFinishTime').datetimepicker('getValue');
+        let promoTimeS = timeFormater.format(promoTimeSTemp);
+        let promoTimeE = timeFormater.format(promoTimeETemp);
+        let promoCont = promoUpdateCont.value;
 
+        let formData = new FormData();
+        formData.append("promoId", promoId);
+        formData.append("promoName", promoName);
+        formData.append("promoVal", promoVal);
+        formData.append("promoTimeS", promoTimeS);
+        formData.append("promoTimeE", promoTimeE);
+        formData.append("promoCont", promoCont);
+        formData.append("action", "update");
+
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/promo/promo.do"
+        let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json())
+        if (!response.state) {
+            if(response.promoNameError){
+                promoUpdateNameError.innerHTML = response.promoNameError;
+            }
+            if(response.promoTimeSError){
+                promoUpdateStartTimeError.innerHTML = response.promoTimeSError;
+            }
+
+            if(response.promoTimeEError){
+                promoUpdateFinishTimeError.innerHTML = response.promoTimeEError;
+            }
+
+            if(response.promoContError){
+                promoUpdateContError.innerHTML = response.promoContError;
+            }
+            return
+        }
+        let NewList = await getPromoPromise();
+        showPromoList(NewList);
+        closeUpdateForm();
+        getPromoList = getPromoListFn();
+
+    })
+    //消除更新表單錯誤資訊
+    function clearUpdateError(){
+        promoUpdateNameError.innerHTML = "";
+        promoUpdateStartTimeError.innerHTML = "";
+        promoUpdateFinishTimeError.innerHTML = "";
+        promoUpdateContError.innerHTML = "";
+    }
 
 
     //DATATABLES 用來顯示PROMOLIST
@@ -503,7 +639,8 @@
                 {data: 'promoTimeE', title: "結束時間"},
                 {data: 'promoVal', title: "優惠折扣(折)"},
                 {data: 'promState', title: "活動狀態"},
-                { data: null ,title: "操作",
+                {
+                    data: null, title: "操作",
                     render: function (data, type, row) {
                         if (row.promState === "已結束") {
                             return `<button type="button" class="btn btn-info btn-sm" onclick="copyPromo(${row.promoId})">複製</button> ` +
@@ -515,13 +652,13 @@
                     }
                 },
             ],
-            "columnDefs":[
+            "columnDefs": [
                 {
                     targets: [2],
                     width: "20%",
                 },
                 {
-                    targets: [3,4,7],
+                    targets: [3, 4, 7],
                     width: "15%",
                 },
 
@@ -536,12 +673,14 @@
 
     //將伺服器回傳的PROMOLIST進行解構
     function getPromoListFn() {
-        let promoList= new Array();
+        let promoList = new Array();
         let promoPromise = getPromoPromise();
-        promoPromise.then(e => promoList=[...e]);
+        promoPromise.then(e => promoList = [...e]);
+
         function ReturnPromoList() {
             return promoList;
         }
+
         return ReturnPromoList;
     }
 
@@ -570,7 +709,7 @@
             } else {
                 promo.promState = "已結束"
             }
-            promo.promoVal = (promo.promoVal/10).toFixed(1)
+            promo.promoVal = (promo.promoVal / 10).toFixed(1)
         })
         return promoList;
     };

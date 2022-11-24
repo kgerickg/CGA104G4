@@ -47,6 +47,8 @@
         <mapping class="com.refill.model.RefillVO" />
 
         <mapping class="com.lkcompl.model.LkComplVO" />
+        
+        <mapping class="com.lkorder.model.LkOrderVO" />
 
         <mapping class="com.promo.model.PromoVO" />
 
