@@ -461,11 +461,15 @@
 	<script src="../resources/js/isotope.js"></script>
 	<script>
 	let acart =  document.querySelectorAll(".cart");
-	
+	let path = window.location.pathname;
+	let webCtx = path.substring(0, path.indexOf('/', 1));
+	let url = webCtx + "/cart/cartServlet";
 	acart.forEach(e=>{
 		e.addEventListener("click",function(e){
 			e.preventDefault();
+			prodId = this.id;
 			alert(this.id);
+			fetch(url, {method: 'post', body: prodId});
 		})
 	})
 	

@@ -2,6 +2,7 @@
 //
 //import com.cart.pojo.Cart;
 //import com.cart.service.CartService;
+//import com.cart.service.impl.CartServiceImpl;
 //
 //import javax.servlet.annotation.WebServlet;
 //import javax.servlet.http.HttpServlet;
@@ -13,29 +14,15 @@
 //
 //@WebServlet("/cart/cartServlet")
 //public class CartServlet extends HttpServlet {
-//	private static final long serialVersionUID = 1L;
-//
 //	@Override
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //		CartService cartService = null;
-//		final String cart = GSON.fromJson(request.getReader(), Cart.class).getUserId();
+//        final Cart userId = (Cart) request.getSession().getAttribute("memId");
+//        final Cart prodId = (Cart) request.getAttribute("prodId");
+//        Cart cart = new Cart();
+//		cart.setUserId((String) request.getSession().getAttribute("memId"));
 //
-//		cartService.put(cart);
+//		CartServiceImpl cartSvc = new CartServiceImpl();
 //
-//		final Admin admin = (Admin) request.getSession().getAttribute("admin");
-//		final Core core = new Core();
-//		if (admin == null) {
-//			core.setMessage("無會員資訊");
-//			core.setSuccessful(false);
-//		} else {
-//			final String currentPassword = admin.getAdmPwd();
-//			if (Objects.equals(admPwd, currentPassword)) {
-//				core.setSuccessful(true);
-//			} else {
-//				core.setMessage("舊密碼錯誤");
-//				core.setSuccessful(false);
-//			}
-//		}
-//		writePojo2Json(response, core);
 //	}
 //}
