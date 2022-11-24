@@ -77,6 +77,8 @@
                   <div class="form-group">
                     <input type="text" name="storeTel" id="storeTel" placeholder="電話號碼*"
                            class="form-control" readonly>
+                    <input type="text" name="storeGui" id="storeGui" placeholder="統編*"
+                           class="form-control" readonly>
                   </div>
                   <!--form-group end-->
                 </div>
@@ -202,6 +204,10 @@
       $("#storeTel").val(response.storeTel);
       storedata.append("storeTel", response.storeTel);
     }
+    if (response.storeGui) {
+      $("#storeGui").val(response.storeGui);
+      storedata.append("storeGui", response.storeGui);
+    }
 
     if (response.storeAdr) {
       $("#storeAdr").val(response.storeAdr);
@@ -241,6 +247,7 @@
   $("#update").click(function () {
     $("#storeName").prop("readonly", false);
     $("#storeTel").prop("readonly", false);
+    $("#storeGui").prop("readonly", false);
     $("#storeAdr").prop("readonly", false);
     $("#storeCity").prop("disabled", false);
     $("#storeDist").prop("disabled", false);
@@ -254,9 +261,10 @@
 
   $("#cancel").click(function () {
     $("#storeNameError").html("");
-    $("#storeTel").html("");
+    $("#storeTelError").html("");
     $("#storeName").val(storedata.get("storeName"));
     $("#storeTel").val(storedata.get("storeTel"));
+    $("#storeGui").val(storedata.get("storeGui"));
     $("#storeAdr").val(storedata.get("storeAdr"));
 
     if (storedata.get("storeCity")) {
@@ -286,6 +294,7 @@
     let formData = new FormData();
     formData.append("storeName", $("#storeName").val());
     formData.append("storeTel", $("#storeTel").val());
+    formData.append("storeGui", $("#storeGui").val());
     formData.append("storeAdr", $("#storeAdr").val());
     formData.append("storeCity", $("#storeCity").val());
     formData.append("storeDist", $("#storeDist").val());
