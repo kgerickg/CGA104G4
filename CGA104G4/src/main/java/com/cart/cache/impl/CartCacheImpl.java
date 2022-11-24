@@ -15,12 +15,16 @@ public class CartCacheImpl implements CartCache {
 
     @Override
     public void put(Cart cart) {
+
         jedis.set(cart.getUserId(), gson.toJson(cart));
+
     }
 
     @Override
     public Cart get(String userId) {
+
         return gson.fromJson(jedis.get(userId), Cart.class);
+
     }
 
     public static void main(String[] args) {
