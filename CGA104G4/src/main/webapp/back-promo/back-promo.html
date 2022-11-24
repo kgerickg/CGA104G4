@@ -198,7 +198,7 @@
                             <a href="#">客訴處理</a>
                         </li>
                         <li>
-                            <a href="#">優惠活動管理</a>
+                            <a href="../back-promo/back-promo.html">優惠活動管理</a>
                         </li>
                         <li>
                             <a href="../back-refill/backrefill.html">會員儲值紀錄查詢</a>
@@ -267,7 +267,7 @@
     <div class="formTitle">新增儲值優惠活動</div>
     <div class="flex-block">
         <div>
-            <label for="promoName">活動名稱:</label>
+            <label for="promoName">活動名稱:</label><span id="promoNameError" style="color: red"></span>
             <br>
             <input type="text" id="promoName">
         </div>
@@ -278,23 +278,23 @@
             <span id="promoValSpan"></span>
         </div>
         <div>
-            <label for="promoStartTime">開始時間:</label>
+            <label for="promoStartTime">開始時間:</label><span id="promoStartTimeError" style="color: red"></span>
             <br>
             <input type="text" id="promoStartTime">
         </div>
         <div>
-            <label for="promoFinishTime">結束時間:</label>
+            <label for="promoFinishTime">結束時間:</label><span id="promoFinishTimeError" style="color: red"></span>
             <br>
             <input type="text" id="promoFinishTime">
         </div>
         <div>
-            <label for="promoCont">活動內容:</label>
+            <label for="promoCont">活動內容:</label><span id="promoContError" style="color: red"></span>
             <br>
             <textarea id="promoCont" rows="5" cols="50" maxlength="250" style="resize: none"></textarea>
         </div>
     </div>
     <div style="align-self: center;margin-top: 2rem">
-        <button class="formBtn">新增</button>
+        <button class="formBtn" id="increasebtn">新增</button>
         <button class="formBtn" id="increaseCancelbtn">取消</button>
     </div>
 </div>
@@ -362,8 +362,15 @@
     const btnCloseForm = document.querySelector('#close-form');
     const updateCloseForm = document.querySelector('#close-update');
     const promoIncrease = document.querySelector('.promoIncrease');
+    const promoName = document.querySelector('#promoName');
     const promoVal = document.querySelector('#promoVal');
     const promoValSpan = document.querySelector('#promoValSpan');
+    const promoCont = document.querySelector('#promoCont');
+    const promoNameError = document.querySelector("#promoNameError");
+    const promoStartTimeError = document.querySelector("#promoStartTimeError");
+    const promoFinishTimeError = document.querySelector("#promoFinishTimeError");
+    const promoContError = document.querySelector("#promoContError");
+    const increasebtn =document.querySelector('#increasebtn');
     const showAllPromo = document.querySelector('#showAllPromo');
     const promoStateSelecter = document.querySelector('#promoStateSelecter');
     const selectByPromoState = document.querySelector('#selectByPromoState');
@@ -380,6 +387,7 @@
     const promoUpdateStartTimeError = document.querySelector("#promoUpdateStartTimeError");
     const promoUpdateFinishTimeError = document.querySelector("#promoUpdateFinishTimeError");
     const promoUpdateContError = document.querySelector("#promoUpdateContError");
+
 
 
     //取得PROMOLIST
@@ -420,6 +428,7 @@
     function openFormBlock() {
         formBlock.classList.remove('hidden');
         overlay.classList.remove('hidden');
+        promoValSpan.innerHTML = `5.0折`
 
     };
 
@@ -434,6 +443,13 @@
     function closeForm() {
         formBlock.classList.add('hidden');
         overlay.classList.add('hidden');
+        promoName.value = "";
+        promoVal.value="";
+        promoCont.value = "";
+        clearIncreaseError();
+        $('#promoUpdateStartTime').datetimepicker('setOptions', {value: false});
+        $('#promoUpdateFinishTime').datetimepicker('setOptions', {value: false});
+
     };
 
     //取得資料庫中所有活動
@@ -442,13 +458,65 @@
         showPromoList(promoList);
     });
 
+    increasebtn.addEventListener('click',async function(){
+        clearIncreaseError();
+        let newPromoName =  promoName.value;
+        let newPromoVal= promoVal.value;
+        let newPromoCont = promoCont.value;
+        let options = {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: false
+        };
+        let timeFormater = new Intl.DateTimeFormat("ja-JP", options);
+        let promoTimeSTemp = $('#promoStartTime').datetimepicker('getValue');
+        let promoTimeETemp = $('#promoFinishTime').datetimepicker('getValue');
+        let NewPromoTimeS = timeFormater.format(promoTimeSTemp);
+        let NewPromoTimeE = timeFormater.format(promoTimeETemp);
+
+        let formData = new FormData();
+        formData.append("promoName", newPromoName);
+        formData.append("promoVal", newPromoVal);
+        formData.append("promoTimeS", NewPromoTimeS);
+        formData.append("promoTimeE", NewPromoTimeE);
+        formData.append("promoCont", newPromoCont);
+        formData.append("action", "insert");
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/promo/promo.do";
+        let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
+        if (!response.state) {
+            if(response.promoNameError){
+                promoNameError.innerHTML = response.promoNameError;
+
+            }
+            if(response.promoTimeSError){
+                promoStartTimeError.innerHTML = response.promoTimeSError;
+            }
+
+            if(response.promoTimeEError){
+                promoFinishTimeError.innerHTML = response.promoTimeEError;
+            }
+
+            if(response.promoContError){
+                promoContError.innerHTML = response.promoContError;
+            }
+            return
+        }
+        let NewList = await getPromoPromise();
+        showPromoList(NewList);
+        closeForm();
+        getPromoList = getPromoListFn();
+
+    })
+
     //開始時間INPUT綁定JQUERY DATETIMEPICKER
     $('#promoStartTime').datetimepicker({
         format: 'Y/m/d H:i',
         formatTime: 'H:i',
         formatDate: 'Y/m/d',
         defaultTime: "00:00",
-        minDate: '+1970/01/02',
+        minDate:'+1970/01/02',
         onShow: function () {
             this.setOptions({
                 maxDate: $('#promoFinishTime').val() ? $('#promoFinishTime').val() : false
@@ -464,7 +532,7 @@
         defaultTime: "00:00",
         onShow: function () {
             this.setOptions({
-                minDate: $('#promoStartTime').val() ? $('#promoStartTime').val() : '+1970/01/02'
+                minDate: $('#promoStartTime').val() ? $('#promoStartTime').val() : false
             })
         }
     });
@@ -522,6 +590,14 @@
     })
 
     function copyPromo(promoId) {
+        openFormBlock();
+        let promoList = getPromoList();
+        const [result] = promoList.filter(promo => promo.promoId === promoId);
+        promoName.value = result.promoName;
+        promoVal.value = (parseFloat(result.promoVal) * 10);
+        promoCont.value = result.promoCont;
+        promoValSpan.innerHTML = `${result.promoVal}折`
+
 
     }
 
@@ -616,6 +692,13 @@
         promoUpdateStartTimeError.innerHTML = "";
         promoUpdateFinishTimeError.innerHTML = "";
         promoUpdateContError.innerHTML = "";
+    }
+
+    function clearIncreaseError(){
+        promoNameError.innerHTML = "";
+        promoStartTimeError.innerHTML = "";
+        promoFinishTimeError.innerHTML = "";
+        promoContError.innerHTML = "";
     }
 
 

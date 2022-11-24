@@ -58,4 +58,14 @@ public class PromoService {
 		promoVO.setPromoCont(promoCont);
 		dao.update(promoVO);
 	}
+	@Transactional
+	public void insert(String promoName, Integer promoVal, Timestamp promoTimeS, Timestamp promoTimeE, String promoCont) {
+		PromoVO promoVO = new PromoVO();
+		promoVO.setPromoName(promoName);
+		promoVO.setPromoVal(promoVal);
+		promoVO.setPromoTimeS(promoTimeS);
+		promoVO.setPromoTimeE(promoTimeE);
+		promoVO.setPromoCont(promoCont);
+		dao.insert(promoVO);
+	}
 }

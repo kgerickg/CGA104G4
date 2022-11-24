@@ -47,7 +47,82 @@ public class PromoServlet extends HttpServlet {
 			case "update":
 				update(request,response);
 				break;
+			case "insert":
+				insert(request,response);
+				break;
 		}
+
+	}
+
+	private void insert(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PromoService promoService = SpringUtil.getBean(getServletContext(),PromoService.class);
+		Writer out = response.getWriter();
+		String promoName = request.getParameter("promoName");
+		Integer promoVal = Integer.parseInt(request.getParameter("promoVal"));
+		String promoTimSstr =  request.getParameter("promoTimeS");
+		String promoTimEstr =  request.getParameter("promoTimeE");
+		SimpleDateFormat  df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String promoCont = request.getParameter("promoCont");
+		JSONObject MsgsJson = new JSONObject();
+
+		if (promoName == null || promoName.trim().length() == 0) {
+			MsgsJson.put("promoNameError", "名稱請勿空白");
+		}
+
+		Timestamp promoTimeS=null;
+		if(promoTimSstr == null || promoTimSstr.trim().length() == 0){
+			MsgsJson.put("promoTimeSError", "開始時間請勿空白");
+		}else {
+			try {
+				promoTimeS = new Timestamp(df.parse(promoTimSstr).getTime());
+				Timestamp promoOriginalTime = new Timestamp(df.parse("1970/1/1 08:00:00").getTime());
+				if(promoTimeS.getTime()==promoOriginalTime.getTime()){
+					MsgsJson.put("promoTimeSError", "開始時間請勿空白");
+				}
+			}catch (ParseException e){
+				e.printStackTrace();
+				MsgsJson.put("promoTimeSError", "開始時間格式異常");
+			}
+		}
+
+		Timestamp promoTimeE=null;
+		if(promoTimEstr == null || promoTimEstr.trim().length() == 0){
+			MsgsJson.put("promoTimeEError", "結束時間請勿空白");
+		}else {
+			try {
+				promoTimeE = new Timestamp(df.parse(promoTimEstr).getTime());
+				Timestamp promoOriginalTime = new Timestamp(df.parse("1970/1/1 08:00:00").getTime());
+				if(promoTimeE.getTime()==promoOriginalTime.getTime()){
+					MsgsJson.put("promoTimeEError", "結束時間請勿空白");
+				}
+			}catch (ParseException e){
+				e.printStackTrace();
+				MsgsJson.put("promoTimeEError", "結束時間格式異常");
+			}
+		}
+
+		if(promoCont == null ||promoCont.trim().length() == 0){
+			MsgsJson.put("promoContError", "活動內容請勿空白");
+		}
+
+		if(promoTimeS!=null&promoTimeE!=null){
+			boolean[] result = promoService.checkTime(promoTimeS,promoTimeE);
+			if(!result[0]){
+				MsgsJson.put("promoTimeSError", "開始時間與其它活動時間重複");
+			}
+			if(!result[1]){
+				MsgsJson.put("promoTimeEError", "結束時間與其它活動時間重複");
+			}
+		}
+		if (!MsgsJson.isEmpty()) {
+			MsgsJson.put("state", false);
+			out.write(MsgsJson.toString());
+			return;
+		}
+
+		promoService.insert(promoName,promoVal,promoTimeS,promoTimeE,promoCont);
+		MsgsJson.put("state", true);
+		out.write(MsgsJson.toString());
 
 	}
 
@@ -73,6 +148,10 @@ public class PromoServlet extends HttpServlet {
 		}else {
 			try {
 				promoTimeS = new Timestamp(df.parse(promoTimSstr).getTime());
+				Timestamp promoOriginalTime = new Timestamp(df.parse("1970/1/1 08:00:00").getTime());
+				if(promoTimeS.getTime()==promoOriginalTime.getTime()){
+					MsgsJson.put("promoTimeSError", "開始時間請勿空白");
+				}
 			}catch (ParseException e){
 				e.printStackTrace();
 				MsgsJson.put("promoTimeSError", "開始時間格式異常");
@@ -85,6 +164,10 @@ public class PromoServlet extends HttpServlet {
 		}else {
 			try {
 				promoTimeE = new Timestamp(df.parse(promoTimEstr).getTime());
+				Timestamp promoOriginalTime = new Timestamp(df.parse("1970/1/1 08:00:00").getTime());
+				if(promoTimeE.getTime()==promoOriginalTime.getTime()){
+					MsgsJson.put("promoTimeEError", "結束時間請勿空白");
+				}
 			}catch (ParseException e){
 				e.printStackTrace();
 				MsgsJson.put("promoTimeEError", "結束時間格式異常");

@@ -18,7 +18,7 @@ public class PromoDAO implements PromoDAO_interface {
 
 	@Override
 	public void insert(PromoVO promoVO) {
-
+		session.persist(promoVO);
 	}
 
 	@Override
