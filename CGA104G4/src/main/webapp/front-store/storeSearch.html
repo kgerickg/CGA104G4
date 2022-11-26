@@ -202,12 +202,12 @@
 
 
     }
-
+ 
     //動態生成表格
-    function listStore(stores) {
+    async function listStore(stores) {
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/front-prod/memberMenu.jsp";
+        let url = webCtx + "/prod/prod.do?action=listProdTypeIds_ByStoreId&storeId=" + this.storeId;
         //移除原本存在的表格
 
         $("#listTable").empty();

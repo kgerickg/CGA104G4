@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.detail.model.*"%>
 
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
+<jsp:useBean id="detailSvc" scope="page" class="com.detail.model.DetailService" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,24 +90,22 @@
 			  <c:if test="${ordersVO.ordStat==3}">訂單已完成</c:if>
 			  <c:if test="${ordersVO.ordStat==4}">訂單已取消</c:if>
 			  <c:if test="${ordersVO.ordStat==5}">客訴處理中</c:if>
-             </li>
-             
+             </li>   
            </ul>
-          <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="">
-			    <input type="submit" value="查看訂單明細" style="border-style:none; background-color:transparent; color:#5D6978;"> 
-			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="listDetails_ByOrdId_B"></FORM>
-            <a href="#" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
+           <ul class="tab-title">
+             <li>
+              <a href="javascript:;" data-tablink="${ordersVO.ordId}" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
+		     </li>
+		   </ul>
 		  </div><!--oct-table-head end-->
-         
           
 		  <div class="oct-table-body">
 		   <ul>
-      	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
-		    <li>
+		    <li id="${ordersVO.ordId}" class="tab-inner">
+      	<c:forEach var="detailVO" items="${detailSvc.getDetailsByOrdId(ordId)}" >
 		     <h4>${detailVO.prodVO.prodName}&nbsp;&nbsp;$${detailVO.prodVO.prodPrc}&nbsp;&nbsp;&nbsp;<span>x${detailVO.prodQty}</span></h4>
-		    </li>
 		     </c:forEach>	  
+		    </li>
 		   </ul>
 		  </div><!--oct-table-body end-->	
 		  
@@ -141,14 +139,32 @@
   </div>
  </section>
 </div><!--wrapper end-->
-<%if (request.getAttribute("listDetails_ByOrdId")!=null){%>
-       <jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" />
-<%} %>
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
+<script>
+$(document).ready(function () {
+	  tabCutover();
+	});
 
+	function tabCutover() {
+	  $(".tab-title li.active").each(function () {
+	  //抓出li.active的data-tablink的內容
+	  let tablink = $("this").find("a").data("tablink");
+	  
+	  //其他兄弟們(叫做.tab-inner)都隱藏
+	  $('#'+ tablink).show().siblings(".tab-inner").hide();
+	  
+	  //當tab標題li被點到時，
+	  $(".tab-title li").click(function () {
+	      //抓出當下被點到的data-tablink的內容，而其他兄弟們(叫做.tab-inner)都隱藏
+	    $('#'+$(this).find("a").data("tablink")).show().siblings(".tab-inner").hide();
+	    //抓出當下被點到的li要加上active(藍色)，其他li則要刪除active(藍色)
+// 	    $(this).addClass("active").siblings(".active").removeClass("active");
+	  });
+	}
+</script>
 </body>
 </html>

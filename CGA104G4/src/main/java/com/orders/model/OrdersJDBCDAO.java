@@ -10,8 +10,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.detail.model.DetailVO;
-
 public class OrdersJDBCDAO implements OrdersDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/FOOD?serverTimezone=Asia/Taipei";
@@ -23,7 +21,6 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	private static final String GET_ALL_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS";
 	private static final String GET_ONE_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where ORD_ID = ?";
 	
-	private static final String GET_Details_ByOrdId_STMT = "select PROD_ID, PROD_QTY, ORD_ID from DETAIL where ORD_ID = ? order by PROD_ID";
 	private static final String GET_Orders_ByMemId_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where MEM_ID = ? order by ORD_ID";
 	private static final String GET_Orders_ByStoreId_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where STORE_ID = ? order by ORD_ID";
 	
@@ -246,64 +243,7 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 		return list;
 	}
 
-	@Override
-	public Set<DetailVO> getDetailsByOrdId(Integer ordId) {
-		Set<DetailVO> set = new LinkedHashSet<DetailVO>();
-		DetailVO detailVO = null;
 	
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_Details_ByOrdId_STMT);
-			pstmt.setInt(1, ordId);
-			rs = pstmt.executeQuery();
-	
-			while (rs.next()) {
-				detailVO = new DetailVO();
-				detailVO.setProdId(rs.getInt("PROD_ID"));
-				detailVO.setProdQty(rs.getInt("PROD_QTY"));
-				detailVO.setOrdId(rs.getInt("ORD_ID"));
-				set.add(detailVO); // Store the row in the vector
-			}
-	
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return set;
-	}
 	
 	@Override
 	public Set<OrdersVO> getOrdersByMemId(Integer memId) {

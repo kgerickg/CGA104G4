@@ -1,4 +1,6 @@
 package com.detail.model;
+import com.orders.model.OrdersService;
+import com.orders.model.OrdersVO;
 import com.prod.model.ProdService;
 import com.prod.model.ProdVO;
 
@@ -39,6 +41,12 @@ public class DetailVO {
 	    ProdService prodSvc = new ProdService();
 	    ProdVO prodVO = prodSvc.getOneProd(prodId);
 	    return prodVO;
+    }
+    
+    public OrdersVO getOrdersVO() {
+    	OrdersService ordersSvc = new OrdersService();
+    	OrdersVO ordersVO = ordersSvc.getOneOrder(ordId);
+    	return ordersVO;
     }
 
 	public static long getSerialversionuid() {

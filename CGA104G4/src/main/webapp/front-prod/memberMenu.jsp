@@ -129,7 +129,7 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(4)}">
+								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(storeId)}">
 									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
 								</c:forEach>
 							</ul>
@@ -139,7 +139,7 @@
 					<div class="row">
 						<div class="masonary">
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 1)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -158,7 +158,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 2)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 2)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -176,7 +176,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 3)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 3)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -195,7 +195,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 4)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 4)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -214,7 +214,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 5)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 5)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -233,7 +233,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 6)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 6)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -252,7 +252,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 7)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 7)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -271,7 +271,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 8)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 8)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">

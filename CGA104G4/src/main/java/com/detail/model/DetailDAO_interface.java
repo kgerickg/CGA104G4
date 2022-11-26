@@ -8,4 +8,5 @@ public interface DetailDAO_interface {
           public void delete(Integer prodId);
           public DetailVO findByPrimaryKey(Integer prodId);
           public List<DetailVO> getAll();
+          public Set<DetailVO> getDetailsByOrdId(Integer ordId);
 }
