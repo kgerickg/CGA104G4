@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
     <!-- 請將覆蓋用的css放置此註解下方 -->
     <style>
         table {
@@ -32,28 +31,33 @@
             width: 100%;
             display: inline;
         }
+
         th {
             border: solid 1px #5ceffe;
             padding: 16px 8px;
         }
+
         td {
             border: solid 1px #5ceffe;
             text-align: center;
             padding: 8px;
             color: #757575;
         }
-        table td a{
+
+        table td a {
             background-color: #25b327;
             color: white;
-            padding:5px 20px;
+            padding: 5px 20px;
             border-radius: 30px;
             font-weight: bold;
             text-decoration: none;
         }
+
         .popular {
             position: relative;
         }
-        .no1{
+
+        .no1 {
             position: absolute;
             top: -10px;
             background: #bdcc28;
@@ -63,42 +67,49 @@
             line-height: 1;
             padding: 5px;
         }
+
         .basic {
             background-color: #0ceffe;
         }
+
         .standard {
             background-color: #039be5;
             border: 1px solid #039be5;
             color: white;
         }
+
         .premium {
             border: 1px solid #2e3a4d;
             background-color: #2e3a4d;
             color: white;
         }
+
         .price {
             font-size: 20px;
             font-weight: 800;
         }
+
         .price td {
             color: black;
         }
+
         .main {
             width: 80%;
-            margin: 20px auto;}
+            margin: 20px auto;
+        }
     </style>
 
     <!-- 頁籤顯示的title -->
-    <title>空白模板</title>
+    <title>搜尋合作店家</title>
 
 
 </head>
 
 <body>
-
+<script src="../resources/js/membernav.js"></script>
 <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 <!--下面可自由新增內容 -->
-
+<div style="height: 90px"></div>
 <div id="page-wrapper">
     <div id="wrapper-container">
         <!-- ******內容寫在這邊 ↓↓↓****** -->
@@ -205,9 +216,6 @@
 
     //動態生成表格
     function listStore(stores) {
-        let path = window.location.pathname;
-        let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/front-prod/memberMenu.jsp";
         //移除原本存在的表格
 
         $("#listTable").empty();
@@ -216,7 +224,7 @@
         let table = document.createElement("table");
         //生成表頭
 
-        table.innerHTML += "<thead><tr>"
+        table.innerHTML += "<thead><tr><th>編號</th>"
             + "<th>名稱</th><th>電話</th><th>縣市</th><th>區域</th><th>路段</th>"
             + "<th>照片</th><th>前往店家</th></tr></thead>";
         //生成表格內容
@@ -227,6 +235,7 @@
             //修改會員狀態顯示結果不顯示數字而是文字
 
             let tr = document.createElement("tr");
+            tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeId}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeName}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeTel}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeCity ? stores[i].storeCity : ""}</td>`);
@@ -237,13 +246,14 @@
             } else {
                 tr.insertAdjacentHTML("beforeend", `<td></td>`);
             }
-            tr.insertAdjacentHTML("beforeend", `<td><a href= url >前往店家</a></td>`);
+            tr.insertAdjacentHTML("beforeend", `<td><a href="../front-prod/memberMenu.jsp?action=listProdTypeIds_ByStoreId&storeId=${stores[i].storeId}">前往店家</a></td>`);
             tbody.append(tr);
 
         }
         table.append(tbody);
         table.setAttribute("class", "tableclass");
-        $("#listTable").append(table);}
+        $("#listTable").append(table);
+    }
 
 </script>
 
@@ -253,6 +263,7 @@
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
+
 </body>
 
 </html>
