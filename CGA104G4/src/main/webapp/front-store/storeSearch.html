@@ -33,12 +33,12 @@
         }
 
         th {
-            border: solid 1px #5ceffe;
+            border: solid 1px #d08b40;
             padding: 16px 8px;
         }
 
         td {
-            border: solid 1px #5ceffe;
+            border: solid 1px #ce893d;
             text-align: center;
             padding: 8px;
             color: #757575;
@@ -135,36 +135,36 @@
 
 <script>
 
-    // //儲存會員編號用陣列
-    // let storeNameArray = [];
-    //
-    // //頁面載入取得會員編號選單
-    // (async function getStoreName() {
-    //     let path = window.location.pathname;
-    //     let webCtx = path.substring(0, path.indexOf('/', 1));
-    //     let url = webCtx + "/member/member.do?action=getMemId";
-    //     let response = await fetch(url, {method: 'get'});
-    //     memIdArray = await response.json();
-    //     $("#memIdSelecter").empty();
-    //     memIdArray.forEach(memId => {
-    //         $("#memIdSelecter").append(`<option  value="${memId}">${memId}</option>`)
-    //     })
-    // })();
-    //
-    // //綁定選單會員編號查詢按鈕點擊事件
-    // $("#memIdSelecterButton").click(selectById);
-    //
-    // //透過選單查詢會員資料
-    // async function selectById() {
-    //     let memId = $("#memIdSelecter").val();
-    //     let path = window.location.pathname;
-    //     let webCtx = path.substring(0, path.indexOf('/', 1));
-    //     let url = webCtx + "/member/member.do?action=selectById&memId=" + memId;
-    //     let response = await fetch(url, {method: 'get'});
-    //     let members = await response.json();
-    //     listMember(members);
-    // }
-    //
+    //儲存合作店家名稱陣列
+    let storeNameArray = [];
+
+    //頁面載入取得合作店家名稱選單
+    (async function getStoreName() {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/store/storeFront.do?action=getStoreName";
+        let response = await fetch(url, {method: 'get'});
+        storeNameArray = await response.json();
+        $("#storeNameSelector").empty();
+        storeNameArray.forEach(storeName => {
+            $("#storeNameSelector").append(`<option  value="${storeName}">${storeName}</option>`)
+        })
+    })();
+
+    //綁定合作店家名稱選單查詢按鈕點擊事件
+    $("#storeNameSelectorButton").click(selectByName);
+
+    //透過選單查詢會員資料
+    async function selectByName() {
+        let storeName = $("#storeNameSelector").val();
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/store/storeFront.do?action=selectByName&storeName=" + storeName;
+        let response = await fetch(url, {method: 'get'});
+        let stores = await response.json();
+        listStore(stores);
+    }
+
     // //綁定輸入會員編號查詢按鈕事件
     // $("#selectByInputbutton").click(checkInputMemberNumber);
     //
@@ -197,7 +197,7 @@
     // }
 
 
-    //綁定顯示所有會員資料按鈕事件
+    // 綁定顯示所有會員資料按鈕事件
 
     $("#getAll").click(getAll)
 
@@ -211,12 +211,11 @@
         let stores = await response.json();
         listStore(stores);
 
-
     }
+
     //動態生成表格
     function listStore(stores) {
         //移除原本存在的表格
-
         $("#listTable").empty();
         //生成表格
 
@@ -241,7 +240,7 @@
             tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeDist ? stores[i].storeDist : ""}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeAdr ? stores[i].storeAdr : ""}</td>`);
             if (stores[i].storePic) {
-                tr.insertAdjacentHTML("beforeend", `<td><img width="250" height="300" class="storePic" src=data:image/jpeg;base64,${stores[i].storePic}></td>`);
+                tr.insertAdjacentHTML("beforeend", `<td><img width="150" height="200" class="storePic" src=data:image/jpeg;base64,${stores[i].storePic}></td>`);
             } else {
                 tr.insertAdjacentHTML("beforeend", `<td></td>`);
             }

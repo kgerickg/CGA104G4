@@ -58,6 +58,22 @@ public class StoreDAO implements StoreDAO_interface {
     }
 
     @Override
+    public StoreVO findByStoreName(String storeName) {
+        NativeQuery<StoreVO> query =
+                getSession().createNativeQuery("select * from STORE where STORE_NAME = :storeName", StoreVO.class);
+        query.setParameter("storeName", storeName);
+        StoreVO storeVO = query.uniqueResult();
+        return storeVO;
+    }
+
+    @Override
+    public List<String> getStoreName() {
+        Query<String> query = getSession().createQuery("SELECT storeName FROM StoreVO", String.class);
+        List<String> list = query.list();
+        return list;
+    }
+
+    @Override
     public List<StoreVO> selectStoreAcc(String storeAcc) {
         StringBuilder sb = new StringBuilder();
 

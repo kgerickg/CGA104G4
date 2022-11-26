@@ -10,6 +10,8 @@ public interface StoreDAO_interface extends BasicDAO_interface<StoreVO> {
     List<Integer> getStoreId();
 
     public StoreVO findByStoreId(Integer storeId);
+    public StoreVO findByStoreName(String storeName);
+    public List<String> getStoreName();
 
     List<StoreVO> selectStoreAcc(String storeAcc);
 

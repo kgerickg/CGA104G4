@@ -147,6 +147,16 @@ public class StoreJDBCDAO implements StoreDAO_interface {
     }
 
     @Override
+    public StoreVO findByStoreName(String storeName) {
+        return null;
+    }
+
+    @Override
+    public List<String> getStoreName() {
+        return null;
+    }
+
+    @Override
     public List<StoreVO> selectStoreAcc(String storeAcc) {
         return null;
     }

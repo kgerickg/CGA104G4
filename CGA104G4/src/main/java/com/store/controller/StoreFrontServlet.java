@@ -41,6 +41,8 @@ public class StoreFrontServlet extends HttpServlet {
             case "getStoreInfo" -> getStoreInfo(request, response);
             case "updateData" -> updateData(request, response);
             case "getAll" -> getAll(request, response);
+            case "selectByName" -> selectByName(request, response);
+            case "getStoreName" -> getStoreName(request, response);
         }
     }
 
@@ -148,6 +150,39 @@ public class StoreFrontServlet extends HttpServlet {
         StoreVO storeVO = storeService.findByStoreId(storeId);
         JSONObject storeJson = new JSONObject(storeVO);
         out.write(storeJson.toString());
+    }
+
+    private void getStoreName(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Writer out = response.getWriter();
+        StoreService storeSvc = new StoreService();
+        List<String> storeNameList = storeSvc.getStoreName();
+        JSONArray storeNameJosnArray = new JSONArray();
+        for (String storeName : storeNameList) {
+            storeNameJosnArray.put(storeName);
+        }
+        out.write(storeNameJosnArray.toString());
+
+    }
+
+    private void selectByName(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String storeName = request.getParameter("storeName");
+        StoreService storeService = new StoreService();
+        StoreVO storeVO = storeService.findByStoreName(storeName);
+        Writer out = response.getWriter();
+        JSONObject storeJSONObject = new JSONObject();
+        JSONArray storeJSONArray = new JSONArray();
+        Base64.Encoder encoder = Base64.getEncoder();
+        storeJSONObject.put("storeId", storeVO.getStoreId());
+        storeJSONObject.put("storeName", storeVO.getStoreName());
+        storeJSONObject.put("storeTel", storeVO.getStoreTel());
+        storeJSONObject.put("storeCity", storeVO.getStoreCity());
+        storeJSONObject.put("storeDist", storeVO.getStoreDist());
+        storeJSONObject.put("storeAdr", storeVO.getStoreAdr());
+        if (storeVO.getStorePic() != null) {
+            storeJSONObject.put("storePic", encoder.encodeToString(storeVO.getStorePic()));
+        }
+        storeJSONArray.put(storeJSONObject);
+        out.write(storeJSONArray.toString());
     }
 
     private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

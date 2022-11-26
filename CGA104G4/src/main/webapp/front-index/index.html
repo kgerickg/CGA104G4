@@ -205,6 +205,8 @@
     <script src="../resources/js/isotope.js"></script>
 
     <script>
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
         $("#searchfoodbutton").click(function () {
             $("#searchfood").show();
             $("#locationShop").hide();
@@ -214,6 +216,7 @@
             $("#locationShop").show();
             $("#searchfood").hide();
             $("#lucky").hide();
+            window.location.assign(webCtx + "/front-store/storeSearch.html")
         })
         $("#luckybutton").click(function () {
             $("#lucky").show();

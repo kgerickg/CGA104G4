@@ -104,6 +104,32 @@ public class StoreService {
         }
 
     }
+    public List<String> getStoreName() {
+
+        try {
+            dao.beginTransaction();
+            List<String> list = dao.getStoreName();
+            dao.commit();
+            return list;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    public StoreVO findByStoreName(String storeName) {
+        try {
+            dao.beginTransaction();
+            StoreVO storeVO = dao.findByStoreName(storeName);
+            dao.commit();
+            return storeVO;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
+
+    }
 
     public void deleteStore(Integer storeId) {
         dao.delete(storeId);
