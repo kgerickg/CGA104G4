@@ -53,6 +53,7 @@ public class RefillService {
         }else {
             itemName = "吉食響樂點數:"+refillToken +"點";
             amount = refillToken;
+
         }
 
 
