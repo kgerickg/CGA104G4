@@ -17,20 +17,15 @@
 <!-- GOOGLEFONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-<link rel="stylesheet" type="text/css"
-	href="../resources/css/all.min.css">
-<link rel="stylesheet" type="text/css"
-	href="../resources/css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-<link rel="stylesheet" type="text/css"
-	href="../resources/css/slick-theme.css">
-<link rel="stylesheet" type="text/css"
-	href="../resources/css/flaticon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
 <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
@@ -82,9 +77,6 @@
 			</ul>
 		</div>
 		<!--responsive-mobile-menu end-->
-
-
-
 		<section class="sec-block">
 			<div class="container">
 				<div class="restaurant-details">
@@ -137,7 +129,7 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(4)}">
+								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(storeId)}">
 									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
 								</c:forEach>
 							</ul>
@@ -147,151 +139,151 @@
 					<div class="row">
 						<div class="masonary">
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 1)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 2)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 2)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg2.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title=""></a>${prodVO.prodName}</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 3)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 3)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg3.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 4)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 4)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg4.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 5)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 5)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg5.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 6)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 6)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg6.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 7)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 7)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 8)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 8)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">加入購物車
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
 										</a>
 									</div>
@@ -459,6 +451,22 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script>
+	let acart =  document.querySelectorAll(".cart");
+	acart.forEach(e=>{
+		e.addEventListener("click",function(e){
+
+			prodId = this.id;
+			let path = window.location.pathname;
+			let webCtx = path.substring(0, path.indexOf('/', 1));
+			let url = webCtx + "/cart/add?prodId=" + prodId;
+			e.preventDefault();
+			alert(this.id);
+			fetch(url, {method: 'get'});
+		})
+	})
+	
+	</script>
 
 </body>
 </html>

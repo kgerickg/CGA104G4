@@ -2,18 +2,24 @@ package com.detail.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.detail.model.DetailService;
 import com.detail.model.DetailVO;
 
 public class DetailServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -145,7 +151,6 @@ public class DetailServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				Integer prodId = Integer.valueOf(req.getParameter("prodId").trim());
 				
 				Integer prodQty = null;
 				try {
@@ -192,5 +197,38 @@ public class DetailServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
+		
+		// 來自front-orders/storeListAllOrders.jsp的請求
+				if ("listDetails_ByOrdId_A".equals(action)
+				// 來自front-orders/memberListAllOrders.jsp的請求
+				 || "listDetails_ByOrdId_B".equals(action)
+				// 來自back-orders/listAllOrders.jsp的請求
+				 || "listDetails_ByOrdId_C".equals(action)) {
+
+					List<String> errorMsgs = new LinkedList<String>();
+					req.setAttribute("errorMsgs", errorMsgs);
+
+					/*************************** 1.接收請求參數 ****************************************/
+					HttpSession session = req.getSession();
+					Integer ordId = (Integer) session.getAttribute("ordId");
+
+					/*************************** 2.開始查詢資料 ****************************************/
+					DetailService detailSvc = new DetailService();
+					Set<DetailVO> set = detailSvc.getDetailsByOrdId(ordId);
+
+					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+					req.setAttribute("listDetails_ByOrdId", set);	// 資料庫取出的list物件,存入request
+
+					String url = null;
+					if ("listDetails_ByOrdId_A".equals(action))
+						url = "/front-orders/storeListAllOrders.jsp";	// 成功轉交 front-orders/storeListAllOrders.jsp
+					else if ("listDetails_ByOrdId_B".equals(action))
+						url = "/front-orders/memberListAllOrders.jsp";	// 成功轉交 front-orders/memberListAllOrders.jsp
+					else if ("listDetails_ByOrdId_C".equals(action))
+						url = "/back-orders/listAllOrders.jsp";	// 成功轉交 back-orders/listAllOrders.jsp
+
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
+				}
 	}
 }

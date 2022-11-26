@@ -19,6 +19,8 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 		"delete from DETAIL where PROD_ID = ?";
 	private static final String UPDATE = 
 		"update DETAIL set PROD_QTY=?, ORD_ID=? where PROD_ID = ?";
+	private static final String GET_Details_ByOrdId_STMT = 
+		"select PROD_ID, PROD_QTY, ORD_ID from DETAIL where ORD_ID = ? order by PROD_ID";
 
 	@Override
 	public void insert(DetailVO detailVO) {
@@ -274,5 +276,64 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public Set<DetailVO> getDetailsByOrdId(Integer ordId) {
+		Set<DetailVO> set = new LinkedHashSet<DetailVO>();
+		DetailVO detailVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_Details_ByOrdId_STMT);
+			pstmt.setInt(1, ordId);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				detailVO = new DetailVO();
+				detailVO.setProdId(rs.getInt("PROD_ID"));
+				detailVO.setProdQty(rs.getInt("PROD_QTY"));
+				detailVO.setOrdId(rs.getInt("ORD_ID"));
+				set.add(detailVO); // Store the row in the vector
+			}
+	
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}
 }

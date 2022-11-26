@@ -242,7 +242,7 @@ public class ProdServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		// 來自front-prod/memberMenu.jsp的請求
+		// 來自front-store/storeSearch.html的請求
 		if ("listProdTypeIds_ByStoreId".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -255,7 +255,7 @@ public class ProdServlet extends HttpServlet {
 			Set<ProdVO> set = prodSvc.getProdTypeIdsByStoreId(storeId);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("listProdTypeIds_ByStoreId", set); // 資料庫取出的list物件,存入request
+			req.setAttribute("listProdTypeIds_ByStoreId", set); // 資料庫取出的set物件,存入request
 
 			String url = "/front-prod/memberMenu.jsp"; // 成功轉交 /front-prod/memberMenu.jsp
 

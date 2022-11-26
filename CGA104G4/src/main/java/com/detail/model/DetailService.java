@@ -1,6 +1,7 @@
 package com.detail.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class DetailService {
 
@@ -54,5 +55,9 @@ public class DetailService {
 
 	public List<DetailVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public Set<DetailVO> getDetailsByOrdId(Integer ordId) {
+		return dao.getDetailsByOrdId(ordId);
 	}
 }

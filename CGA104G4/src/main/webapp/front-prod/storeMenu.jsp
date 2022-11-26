@@ -137,7 +137,7 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(2)}">
+								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(4)}">
 									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>							
 								</c:forEach>
 							</ul>
@@ -147,151 +147,151 @@
 					<div class="row">
 						<div class="masonary">
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(1)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(2)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 2)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg2.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title=""></a>${prodVO.prodName}</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(3)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 3)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg3.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(4)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 4)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg4.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(5)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 5)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg5.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(6)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 6)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg6.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(7)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 7)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+											<a href="../front-prod/storeProdUpdate.jsp" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="#" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByProdTypeId(8)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(4, 8)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../resources/images/blg1.jpg" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
-											href="cart.html" title=""
-											class="btn-default gradient-bg half-radius height-2">修改
+											href="../front-prod/storeProdUpdate.jsp" id="${prodVO.prodId}"
+											class="btn-default gradient-bg half-radius height-2 update">商品變更
 											<span></span>
 										</a>
 									</div>
@@ -449,7 +449,7 @@
 	<%
 	if (request.getAttribute("listProds_ByStoreIdAndProdTypeId") != null) {
 	%>
-	<jsp:useBean id="listProds_ByStoreIdAndProdTypeId"" scope="request"
+	<jsp:useBean id="listProds_ByStoreIdAndProdTypeId" scope="request"
 		type="java.util.Set<ProdVO>" />
 	<%
 	}

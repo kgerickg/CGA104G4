@@ -1,8 +1,11 @@
 package com.store.controller;
 
 
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.Base64;
+import java.util.List;
 
 @WebServlet(name = "StoreFrontServlet", urlPatterns = {"/StoreFrontServlet", "/store/storeFront.do"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -36,7 +40,29 @@ public class StoreFrontServlet extends HttpServlet {
             case "updatePassword" -> updatePassword(request, response);
             case "getStoreInfo" -> getStoreInfo(request, response);
             case "updateData" -> updateData(request, response);
+            case "getAll" -> getAll(request, response);
         }
+    }
+
+    private void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        StoreService storeSvc = new StoreService();
+        List<StoreVO> stores = storeSvc.getAll();
+        Writer out = response.getWriter();
+        JSONArray storeJSONArray = new JSONArray();
+        Base64.Encoder encoder = Base64.getEncoder();
+        for (StoreVO storeVO : stores) {
+            JSONObject storeJsonObject = new JSONObject();
+            storeJsonObject.put("storeName", storeVO.getStoreName());
+            storeJsonObject.put("storeTel", storeVO.getStoreTel());
+            storeJsonObject.put("storeCity", storeVO.getStoreCity());
+            storeJsonObject.put("storeDist", storeVO.getStoreDist());
+            storeJsonObject.put("storeAdr", storeVO.getStoreAdr());
+            if (storeVO.getStorePic() != null) {
+                storeJsonObject.put("storePic", encoder.encodeToString(storeVO.getStorePic()));
+            }
+            storeJSONArray.put(storeJsonObject);
+        }
+        out.write(storeJSONArray.toString());
     }
 
     private void updateData(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -117,7 +143,6 @@ public class StoreFrontServlet extends HttpServlet {
     private void getStoreInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         StoreService storeService = new StoreService();
         Writer out = response.getWriter();
-        System.out.println(request.getSession(false));
         Integer storeId = (Integer) request.getSession().getAttribute("storeId");
         StoreVO storeVO = storeService.findByStoreId(storeId);
         JSONObject storeJson = new JSONObject(storeVO);

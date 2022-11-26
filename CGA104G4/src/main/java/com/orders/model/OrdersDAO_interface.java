@@ -9,7 +9,6 @@ public interface OrdersDAO_interface {
           public void updateOrdStat(OrdersVO OrdersVO);
           public OrdersVO findByPrimaryKey(Integer ordId);
           public List<OrdersVO> getAll();
-          public Set<DetailVO> getDetailsByOrdId(Integer ordId);
           public Set<OrdersVO> getOrdersByMemId(Integer memId);
           public Set<OrdersVO> getOrdersByStoreId(Integer storeId);
 }

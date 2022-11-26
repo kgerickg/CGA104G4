@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.photo.model.PhotoService;
+import com.photo.model.PhotoVO;
 import com.prodtype.model.ProdTypeService;
 import com.prodtype.model.ProdTypeVO;
 import com.store.model.StoreService;
@@ -91,18 +93,22 @@ public class ProdVO {
 		this.prodPrc = prodPrc;
 	}
 
-	// for join storeName, from storeId
 	public StoreVO getStoreVO() {
 		StoreService storeSvc = new StoreService();
 		StoreVO storeVO = storeSvc.getOneStore(storeId);
 		return storeVO;
 	}
 
-	// for join prodTypeName from prodTypeId
 	public ProdTypeVO getProdTypeVO() {
 		ProdTypeService prodTypeSvc = new ProdTypeService();
 		ProdTypeVO prodTypeVO = prodTypeSvc.getOneProdType(prodTypeId);
 		return prodTypeVO;
+	}
+	
+	public PhotoVO getPhotoVO() {
+		PhotoService photoSvc = new PhotoService();
+		PhotoVO photoVO = photoSvc.getOnePhoto(prodId);
+		return photoVO;
 	}
 	
 	public static long getSerialversionuid() {

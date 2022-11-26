@@ -1,5 +1,6 @@
 package com.store.model;
 
+import com.member.model.MemberVO;
 import com.utils.MailService;
 import com.utils.RandomPassword;
 
@@ -109,11 +110,28 @@ public class StoreService {
     }
 
     public StoreVO getOneStore(Integer storeId) {
-        return dao.findByPrimaryKey(storeId);
+        try {
+            dao.beginTransaction();
+            StoreVO storeVO = dao.findByStoreId(storeId);
+            dao.commit();
+            return storeVO;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
     }
 
     public List<StoreVO> getAll() {
-        return dao.getAll();
+        List<StoreVO> stores;
+        try {
+            dao.beginTransaction();
+            stores = dao.getAll();
+            dao.commit();
+            return stores;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
     }
 
     public boolean forgetPwd(String storeAcc) {
