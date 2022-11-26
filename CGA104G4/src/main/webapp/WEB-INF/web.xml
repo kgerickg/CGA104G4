@@ -54,6 +54,7 @@
 		<filter-name>memberLoginFilter</filter-name>
 		<url-pattern>/front-member/memberinfoupdate.html</url-pattern>
 		<url-pattern>/front-member/memberupatepassword.html</url-pattern>
+		<url-pattern>/front-refill/refill.html</url-pattern>
 		<!-- <servlet-name></servlet-name> -->
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

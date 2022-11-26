@@ -33,7 +33,6 @@ header.innerHTML =
                             <li><a href="${webCtx}/front-member/memberinfoupdate.html" class="">個人基本資料</a></li>
                             <li><a href="${webCtx}/front-member/memberupatepassword.html" >更改密碼</a></li>
                             <li><a href="${webCtx}/front-refill/refill.html">錢包專區</a></li>
-                            <li><a href="" >個人訊息</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -84,7 +83,7 @@ div.innerHTML =
     `<ul>
         <li><a href="">吉食專區</a></li>
         <li><a href="">最新消息</a></li>
-        <li><a href="">關於我們</a></li>
+        <li><a href="${webCtx}/front-index/About.html">關於我們</a></li>
         <li><a href="">Q&A</a></li>
         <li><a href="">消費資訊+</a>
             <ul>
@@ -100,7 +99,6 @@ div.innerHTML =
                 <li><a href="${webCtx}/front-member/memberinfoupdate.html" class="mem-info">個人基本資料</a></li>
                 <li><a href="${webCtx}/front-member/memberupatepassword.html" >更改密碼</a></li>
                 <li><a href="${webCtx}/front-refill/refill.html" >錢包專區</a></li>
-                <li><a href="" >個人訊息</a></li>
             </ul>
         </li>
         <li id="log-il-response"><a href="">登入|註冊</a>

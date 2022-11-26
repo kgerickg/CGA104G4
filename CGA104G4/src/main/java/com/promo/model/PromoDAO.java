@@ -55,9 +55,17 @@ public class PromoDAO implements PromoDAO_interface {
 
 	@Override
 	public Integer checkTime(Timestamp promoTime) {
-		Query<Integer> query = session.createQuery("SELECT promoId FROM PromoVO WHERE :time BETWEEN promoTimeS AND promoTimeE");
+		Query<Integer> query = session.createQuery("SELECT promoId FROM PromoVO WHERE :time BETWEEN promoTimeS AND promoTimeE",Integer.class);
 		query.setParameter("time",promoTime);
 		Integer promoId = query.uniqueResult();
 		return promoId;
+	}
+
+	@Override
+	public PromoVO isInPromo(Timestamp today) {
+		Query<PromoVO> query = session.createQuery("FROM PromoVO WHERE :time BETWEEN promoTimeS AND promoTimeE",PromoVO.class);
+		query.setParameter("time",today);
+		PromoVO promoVO = query.uniqueResult();
+		return promoVO;
 	}
 }

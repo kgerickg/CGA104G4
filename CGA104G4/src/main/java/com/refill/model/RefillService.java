@@ -3,6 +3,9 @@ package com.refill.model;
 
 import com.member.model.MemberDAO_interface;
 import com.member.model.MemberVO;
+import com.promo.model.PromoDAO;
+import com.promo.model.PromoDAO_interface;
+import com.promo.model.PromoVO;
 import com.utils.RandomPassword;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +26,8 @@ public class RefillService {
         private RefillDAO_interface refillDao;
         @Autowired
         private MemberDAO_interface memDao;
+        @Autowired
+        private PromoDAO_interface promoDAO;
 
     @Transactional
     public Integer getToken(Integer memId) {
@@ -37,19 +43,30 @@ public class RefillService {
 
     public String buyToken(Integer refillToken, String url,Integer memId) {
         Date date = new Date();
+        Timestamp today = new Timestamp(date.getTime());
+        PromoVO promoVO = promoDAO.isInPromo(today);
+        String itemName;
+        Integer amount;
+        if(promoVO != null){
+            itemName = "吉食響樂點數:"+refillToken +"點("+promoVO.getPromoName()+")";
+            amount = (Integer) (refillToken*promoVO.getPromoVal()/100);
+        }else {
+            itemName = "吉食響樂點數:"+refillToken +"點";
+            amount = refillToken;
+        }
+
+
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String dateString = dateFormat.format(date);
-        String itemName = "吉食響樂點數:"+refillToken +"點";
         String rdp = new RandomPassword().genRandomPassword();
         String indexUrl = url+"/front-index/index.html";
         String getDataUrl = url +"/RefillResultServlet";
         String customField1 = ""+memId+","+refillToken;
-
         AllInOne allInOne = new AllInOne("");
         AioCheckOutALL aco = new AioCheckOutALL();
         aco.setMerchantTradeNo(rdp+"G4FOOD");
         aco.setMerchantTradeDate(dateString);
-        aco.setTotalAmount(refillToken.toString());
+        aco.setTotalAmount(amount.toString());
         aco.setTradeDesc("test");
         aco.setItemName(itemName);
         aco.setReturnURL(indexUrl);

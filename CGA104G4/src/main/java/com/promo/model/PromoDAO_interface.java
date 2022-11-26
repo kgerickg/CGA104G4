@@ -9,4 +9,5 @@ public interface PromoDAO_interface extends BasicDAO_interface<PromoVO> {
     public Integer checkTime(Timestamp promoTime);
 
 
+    PromoVO isInPromo(Timestamp today);
 }
