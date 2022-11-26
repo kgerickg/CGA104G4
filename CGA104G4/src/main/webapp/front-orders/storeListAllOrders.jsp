@@ -4,7 +4,7 @@
 <%@ page import="com.detail.model.*"%>
 
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
-
+<jsp:useBean id="detailSvc" scope="page" class="com.detail.model.DetailService" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,17 +91,14 @@
              </li>
              
            </ul>
-            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="">
-			    <input type="submit" value="查看訂單明細" style="border-style:none; background-color:transparent; color:#5D6978;"> 
-			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
-			    <input type="hidden" name="action" value="listDetails_ByOrdId_A"></FORM>
+      
             <a href="#" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
 		  </div><!--oct-table-head end-->
          
           
 		  <div class="oct-table-body">
 		   <ul>
-      	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
+      	<c:forEach var="detailVO" items="${detailSvc.getDetailsByOrdId(1)}" >
 		    <li>
 		     <h4>${detailVO.prodVO.prodName}&nbsp;&nbsp;$${detailVO.prodVO.prodPrc}&nbsp;&nbsp;&nbsp;<span>x${detailVO.prodQty}</span></h4>
 		    </li>
@@ -139,9 +136,6 @@
   </div>
  </section>
 </div><!--wrapper end-->
-<%if (request.getAttribute("listDetails_ByOrdId")!=null){%>
-       <jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" />
-<%} %>
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../resources/js/slick.js"></script>

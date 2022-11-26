@@ -253,7 +253,9 @@ public class ProdServlet extends HttpServlet {
 			/*************************** 2.開始查詢資料 ****************************************/
 			ProdService prodSvc = new ProdService();
 			Set<ProdVO> set = prodSvc.getProdTypeIdsByStoreId(storeId);
-
+			HttpSession session = req.getSession();
+		    session.setAttribute("storeId", storeId);
+		     
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listProdTypeIds_ByStoreId", set); // 資料庫取出的set物件,存入request
 
@@ -291,7 +293,8 @@ public class ProdServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
-			Integer storeId = Integer.valueOf(req.getParameter("storeId"));
+			HttpSession session = req.getSession();
+			Integer storeId = (Integer) session.getAttribute("storeId");
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId"));
 			/*************************** 2.開始查詢資料 ****************************************/
 			ProdService prodSvc = new ProdService();
