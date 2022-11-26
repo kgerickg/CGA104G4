@@ -444,14 +444,7 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
-	<script>
-	
-	
-
-	$(function(){ 
-	alert(${param.storeId}); 
-	});
-	
+	<script>	
 	
 	let acart =  document.querySelectorAll(".cart");
 	acart.forEach(e=>{
