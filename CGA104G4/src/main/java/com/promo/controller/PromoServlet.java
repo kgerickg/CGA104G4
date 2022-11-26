@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -50,8 +51,26 @@ public class PromoServlet extends HttpServlet {
 			case "insert":
 				insert(request,response);
 				break;
+			case "isInPromo":
+				isInPromo(request,response);
+				break;
+
 		}
 
+	}
+
+	private void isInPromo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		PromoService promoService = SpringUtil.getBean(getServletContext(),PromoService.class);
+		Writer out = response.getWriter();
+		JSONObject MsgsJson = new JSONObject();
+		Timestamp today = new Timestamp(new Date().getTime());
+		PromoVO promoVO = promoService.isInPromo(today);
+		if(promoVO !=null){
+			String promoCont = promoVO.getPromoCont();
+			MsgsJson.put("promoCont", promoCont);
+			out.write(MsgsJson.toString());
+		}
 	}
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws IOException {

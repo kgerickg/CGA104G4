@@ -115,8 +115,15 @@ divwrapper.append(header);
 divwrapper.append(div);
 body.insertAdjacentElement("afterbegin", divwrapper);
 
-//頁面載入時判斷是否有登入與是否登入過期。
+divwrapper.insertAdjacentHTML("afterend",
+    "<div style='position: absolute;top: 12%;z-index: 1000;color: green;font-size: 1.5rem; width: 100%;height: 2rem;overflow: hidden'>" +
+        "<div style='position: relative;' >" +
+            "<div id='promoDiv' style='position: absolute;right: 0%;'>" +
+    "</div></div></div>");
+
+//頁面載入時載入廣告判斷是否有登入與是否登入過期。
 (async function logincheck() {
+    await showPromo();
     let memDataJson = sessionStorage.getItem("memData");
     if (!memDataJson) {
         await loginCheckWithServer();
@@ -169,7 +176,7 @@ function loginNavChange() {
     //改變response-navbar
     document.querySelector("#log-il-response").innerHTML = "";
     document.querySelector("#log-il-response").innerHTML = `<a href="" class="logout">登出</a>`;
-//綁定登出連結觸發事件(resposne與一般NAR綁定同事件)
+    //綁定登出連結觸發事件(resposne與一般NAR綁定同事件)
     document.querySelectorAll("a.logout").forEach(e => e.addEventListener("click", function (e) {
         e.preventDefault();
         logout();
@@ -192,6 +199,35 @@ async function logout() {
         })
 
 }
+
+let promoDiv = document.querySelector("#promoDiv");
+
+async function showPromo(){
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/promo/promo.do?action=isInPromo";
+    let response = await fetch(url, {method: 'get'}).then(res => res.json())
+    if(response.promoCont){
+        promoDiv.textContent = response.promoCont;
+        window.setTimeout(animate,200);
+    }
+}
+
+
+let pos = 0;
+function animate(){
+    if(pos>=100){
+        pos = 0;
+    }else {
+        pos+=3;
+    }
+    promoDiv.style.right = pos +"%";
+    window.setTimeout(animate,200);
+}
+
+
+
+
 
 
 

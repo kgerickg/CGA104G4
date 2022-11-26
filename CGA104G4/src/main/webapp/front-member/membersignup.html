@@ -57,21 +57,6 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="delitaste-form text-center">
-                        <!-- <div class="lg-text">
-                                <h3>Sign Up With</h3>
-                                <ul class="social">
-                                    <li><a class="facebook" href="#" title=""><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li><a class="linkedin" href="#" title=""><i class="fab fa-linkedin"></i></a>
-                                    </li>
-                                    <li><a class="twitter" href="#" title=""><i class="fab fa-twitter"></i></a></li>
-                                    <li><a class="google" href="#" title=""><i class="fab fa-google"></i></a></li>
-                                </ul>
-                            </div>
-                            lg-text end
-                            <div class="or">
-                                <span>or</span>
-                            </div> -->
                         <span id="dataerror"></span>
                         <div>
                             <h4 class="text-left" style="font-size: 1rem;">帳號:(請輸入信箱)</h4>
@@ -207,6 +192,7 @@
     })
 
     async function insertData() {
+        clearErrorMsg();
         let formData = new FormData();
         formData.append('action', 'signup');
         formData.append('memEmail', $("input[name='memEmail']").val());
@@ -218,8 +204,6 @@
         formData.append('memDist', $("select[name='memDist']").val());
         formData.append('memAdr', $("input[name='memAdr']").val());
 
-        console.log($("input[name='memPwd']").val());
-        console.log($("input[name='cfMemPwd']").val());
 
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
@@ -228,11 +212,6 @@
         try {
             let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
             if (response.state) {
-                $("dataerror").html("");
-                $("#memEmailerror").html("");
-                $("#memPwderror").html("");
-                $("#memNameerror").html("");
-                $("#memMobileerror").html("");
                 $("input[name='memEmail']").val("");
                 $("input[name='memPwd']").val("");
                 $("input[name='cfMemPwd']").val("");
@@ -247,8 +226,7 @@
                 $("select#memDist").append("<option disabled selected>鄉鎮區</option>");
                 $("input[name='memAdr']").val("");
                 $("input[name='cfMemPwd']").val("");
-                showSuccessful();
-                window.location.href = "../front-index/index.html";
+               showSuccessful();
             } else {
                 throw response;
             }
@@ -267,19 +245,33 @@
                 $("#memMobileerror").html(`<p style='color:red;'>${response.memMobileerror}</p>`);
             }
             if (response.dataError) {
-                $("dataerror").html(`<p style='color:red;'>${response.dataError}</p>`);
+                $("#dataerror").html(`<p style='color:red;'>${response.dataError}</p>`);
             }
         }
     }
 
     function showSuccessful(){
-        Swal.fire({
+      Swal.fire({
             position: 'top',
             icon: 'success',
             title: '註冊成功',
             showConfirmButton: false,
-            timer: 2000
+            timer:2000
         })
+          .then(()=>{
+              setTimeout(null,2000);
+              window.location.href = "../front-index/index.html";
+          }
+        )
+    }
+
+
+    function clearErrorMsg(){
+            $("#memEmailerror").html("");;
+            $("#memPwderror").html("");;
+            $("#memNameerror").html("");;
+            $("#memMobileerror").html("");;
+            $("#dataerror").html("");
     }
 </script>
 </body>
