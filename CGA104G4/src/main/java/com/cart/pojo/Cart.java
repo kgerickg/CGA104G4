@@ -4,15 +4,12 @@ import com.google.gson.GsonBuilder;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Data
 public class Cart implements Serializable {
     private  String userId;
-    private final HashMap<Integer, Item> cartMap = new HashMap();
+    private final HashMap<Integer, Item> itemMap = new HashMap();
     private Integer totalPrc;
 
     public static void main(String[] args) {
@@ -26,8 +23,8 @@ public class Cart implements Serializable {
         item2.setProdId(2);
         item2.setProdQty(7);
 
-        cart.getCartMap().put(item.getProdId(), item);
-        cart.getCartMap().put(item.getProdId(), item2);
+        cart.getItemMap().put(item.getProdId(), item);
+        cart.getItemMap().put(item.getProdId(), item2);
         String test = new GsonBuilder().create().toJson(cart);
         System.out.println(test);
         System.out.println(cart);

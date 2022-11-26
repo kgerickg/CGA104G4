@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
+
 @Service
 public class CartCacheImpl implements CartCache {
 
@@ -27,13 +28,19 @@ public class CartCacheImpl implements CartCache {
 
     }
 
+    @Override
+    public void clear(String userId) {
+
+        jedis.del(userId);
+    }
+
     public static void main(String[] args) {
         CartCacheImpl dao = new CartCacheImpl();
         Cart cart = new Cart();
         Item item = new Item();
         item.setProdId(2);
         item.setProdQty(9);
-        cart.getCartMap().put(item.getProdId(), item);
+        cart.getItemMap().put(item.getProdId(), item);
         dao.put(cart);
 
         Cart test = dao.get("1");

@@ -467,7 +467,7 @@
 			prodId = this.id;
 			let path = window.location.pathname;
 			let webCtx = path.substring(0, path.indexOf('/', 1));
-			let url = webCtx + "/cart/cartServlet?prodId=" + prodId;
+			let url = webCtx + "/cart/add?prodId=" + prodId;
 			e.preventDefault();
 			alert(this.id);
 			fetch(url, {method: 'get'});
