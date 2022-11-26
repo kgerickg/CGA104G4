@@ -68,4 +68,8 @@ public class PromoService {
 		promoVO.setPromoCont(promoCont);
 		dao.insert(promoVO);
 	}
+
+    public PromoVO isInPromo(Timestamp today) {
+		return dao.isInPromo(today);
+    }
 }
