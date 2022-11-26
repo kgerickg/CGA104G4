@@ -1,10 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.prod.model.*"%>
 
-<jsp:useBean id="prodSvc" scope="page"
-	class="com.prod.model.ProdService" />
+<jsp:useBean id="listProdTypeIds_ByStoreId" scope="request" type="java.util.Set<ProdVO>" />
+
+<jsp:useBean id="prodSvc" scope="page" class="com.prod.model.ProdService" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,8 +129,8 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${prodSvc.getProdTypeIdsByStoreId(storeId)}">
-									<li><a data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
+								<c:forEach var="prodVO"	items="${listProdTypeIds_ByStoreId}">
+									<li><a href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId&storeId=${param.storeId}" data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
 								</c:forEach>
 							</ul>
 						</div>
@@ -438,20 +438,21 @@
 
 	</div>
 	<!--wrapper end-->
-	<%
-	if (request.getAttribute("listProds_ByStoreIdAndProdTyId") != null) {
-	%>
-	<jsp:useBean id="listProds_ByStoreIdAndProdTyId" scope="request"
-		type="java.util.Set<ProdVO>" />
-	<%
-	}
-	%>
+	
 	<!-- 下面是這個版需要的js可添加各自需要的js檔-->
 	<script src="../resources/js/bootstrap.min.js"></script>
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
 	<script>
+	
+	
+
+	$(function(){ 
+	alert(${param.storeId}); 
+	});
+	
+	
 	let acart =  document.querySelectorAll(".cart");
 	acart.forEach(e=>{
 		e.addEventListener("click",function(e){
@@ -468,5 +469,8 @@
 	
 	</script>
 
+<%if (request.getAttribute("listProds_ByStoreIdAndProdTypeId")!=null){%>
+       <jsp:useBean id="listProds_ByStoreIdAndProdTypeId" scope="request" type="java.util.Set<ProdVO>" />
+<%} %>
 </body>
 </html>

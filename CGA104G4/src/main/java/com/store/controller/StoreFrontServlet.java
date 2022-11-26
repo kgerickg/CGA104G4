@@ -52,6 +52,7 @@ public class StoreFrontServlet extends HttpServlet {
         Base64.Encoder encoder = Base64.getEncoder();
         for (StoreVO storeVO : stores) {
             JSONObject storeJsonObject = new JSONObject();
+            storeJsonObject.put("storeId", storeVO.getStoreId());
             storeJsonObject.put("storeName", storeVO.getStoreName());
             storeJsonObject.put("storeTel", storeVO.getStoreTel());
             storeJsonObject.put("storeCity", storeVO.getStoreCity());
