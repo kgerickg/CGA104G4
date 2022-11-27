@@ -80,13 +80,7 @@ public class OrdersServlet extends HttpServlet {
 			Integer storeId = (Integer) session1.getAttribute("storeId");
 			/*************************** 2.開始查詢資料 ****************************************/
 			OrdersService ordersSvc = new OrdersService();
-			Set<OrdersVO> set = ordersSvc.getOrdersByStoreId(storeId);
-			
-			OrdersVO ordersVO =new OrdersVO();
-			HttpSession session2 = req.getSession();
-	        session2.setAttribute("ordId", ordersVO.getOrdId());
-	 
-					
+			Set<OrdersVO> set = ordersSvc.getOrdersByStoreId(storeId);				
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listOrders_ByStoreId", set);    // 資料庫取出的list物件,存入request
 					
@@ -108,11 +102,6 @@ public class OrdersServlet extends HttpServlet {
 			/*************************** 2.開始查詢資料 ****************************************/
 			OrdersService ordersSvc = new OrdersService();
 			Set<OrdersVO> set = ordersSvc.getOrdersByMemId(memId);
-			
-			OrdersVO ordersVO =new OrdersVO();
-			HttpSession session2 = req.getSession();
-	        session2.setAttribute("ordId", ordersVO.getOrdId());
-			
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listOrders_ByMemdId", set);    // 資料庫取出的list物件,存入request
 			

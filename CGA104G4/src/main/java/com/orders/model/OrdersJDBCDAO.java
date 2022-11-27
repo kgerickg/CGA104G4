@@ -21,8 +21,8 @@ public class OrdersJDBCDAO implements OrdersDAO_interface {
 	private static final String GET_ALL_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS";
 	private static final String GET_ONE_STMT = "select ORD_ID, MEM_ID, STORE_ID, ORD_AMT, ORD_STAT, ORD_TIME from ORDERS where ORD_ID = ?";
 	
-	private static final String GET_Orders_ByMemId_STMT = "select * from ORDERS where MEM_ID=? order by ORD_ID";
-	private static final String GET_Orders_ByStoreId_STMT = "select * from ORDERS where STORE_ID=? order by ORD_ID";
+	private static final String GET_Orders_ByMemId_STMT = "select * from ORDERS where MEM_ID=? order by ORD_ID desc";
+	private static final String GET_Orders_ByStoreId_STMT = "select * from ORDERS where STORE_ID=? order by ORD_ID desc";
 	
 	private static final String UPDATE_OrdStat = "update ORDERS set ORD_STAT=? where ORD_ID = ?";
 
