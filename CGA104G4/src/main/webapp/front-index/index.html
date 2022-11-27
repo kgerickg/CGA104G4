@@ -114,7 +114,7 @@
                     <button type="submit" class="btn-default">搜索食物<span></span></button>
                 </form>
 
-                <form style="display: none" id="locationShop">
+                <form style="display: none" id="locationShop" action="/CGA104G4/front-store/storeSearch.html">
                     <input type="text" name="location" class="half-radius" placeholder="搜索">
                     <button type="submit" class="btn-default">找尋附近的店家<span></span></button>
                 </form>
@@ -205,8 +205,6 @@
     <script src="../resources/js/isotope.js"></script>
 
     <script>
-        let path = window.location.pathname;
-        let webCtx = path.substring(0, path.indexOf('/', 1));
         $("#searchfoodbutton").click(function () {
             $("#searchfood").show();
             $("#locationShop").hide();
@@ -216,7 +214,6 @@
             $("#locationShop").show();
             $("#searchfood").hide();
             $("#lucky").hide();
-            window.location.assign(webCtx + "/front-store/storeSearch.html")
         })
         $("#luckybutton").click(function () {
             $("#lucky").show();
