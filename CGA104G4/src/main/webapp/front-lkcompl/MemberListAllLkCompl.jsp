@@ -63,9 +63,10 @@ table th, td {
 }
 
 #upper-table td {
-	width: 39vw;
+	width: 36vw;
 	text-align: center;
 	background-color: #F0F0F0;
+	border-radius:10px;
 }
 
 .btn-secondary {
@@ -105,11 +106,11 @@ thead th {
 	<script src="../resources/js/membernav.js"></script>
 	<!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 	<!--下面可自由新增內容 -->
-	<div style="padding: 3vw;"></div>
-	>
+	<div style="padding: 5vw;"></div>
+	
 
 
-	<table id="upper-table">
+	<table id="upper-table" style="border-radius: 10px;">
 		<tr>
 			<td>
 				<h1>查詢所有客訴訂單</h1>

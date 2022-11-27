@@ -7,6 +7,8 @@ LkOrderSelectVO lkorderVO = (LkOrderSelectVO) request.getAttribute("lkorderVO");
 %>
 
 
+
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -65,7 +67,7 @@ a {
 	border-radius: 5px;
 }
 
-table tr td:nth-of-type(odd) {
+.table tr td:nth-of-type(odd) {
 	display: block;
 	padding-left: 20px;
 	background: #35544E;
@@ -197,31 +199,31 @@ table tr td:nth-of-type(odd) {
 								<td>訂單狀態:</td>
 				<td class="radio-container">	
 					<input class="input" type="radio" name="lkOrdStat" value="0"
-					${(lkComplVO == null || lkComplVO.lkOrdStat == 0)? 'checked':'' } />待取貨　 
+					${(lkorderVO.lkOrdStat==0)? 'checked':'' } />待取貨　 
 					<input class="input" type="radio" name="lkOrdStat" value="1"
-					${(lkComplVO.lkOrdStat==1)? 'checked':'' } />已取貨 <br>
+					${(lkorderVO.lkOrdStat==1)? 'checked':'' } />已取貨 <br>
 					<input class="input" type="radio" name="lkOrdStat" value="2"
-					${(lkComplVO.lkOrdStat==2)? 'checked':'' } />完成　	
+					${(lkorderVO.lkOrdStat==2)? 'checked':'' } />完成　	
 					<input class="input" type="radio" name="lkOrdStat" value="3"
-					${(lkComplVO.lkOrdStat==3)? 'checked':'' } />客訴處理中	
+					${(lkorderVO.lkOrdStat==3)? 'checked':'' } />客訴處理中	
 				</td>
 					
 					
 			</tr>
 			<tr>
 				<td>訂單成立日期:</td>
-				<td><input type="TEXT" name="lkOrdTimeS" size="45"
+				<td><input type="TEXT" name="lkOrdTimeS" size="45"  class="f_date1"
 					value="<%=lkorderVO.getLkOrdTimeS()%>" /></td>
 				<%-- 		<td><%=lkorderVO.getLkOrdTimeS()%></td> --%>
 			</tr>
 			<tr>
 				<td>取貨日期:</td>
-				<td><input name="lkOrdTaketime" id="lkOrdTaketime" type="text"
+				<td><input name="lkOrdTaketime" id="lkOrdTaketime" type="text"  class="f_date2"
 					value="<%=lkorderVO.getLkOrdTaketime()%>"></td>
 			</tr>
 			<tr>
 				<td>訂單完成日期:</td>
-				<td><input name="lkOrdTimeE" id="lkOrdTimeE" type="text"
+				<td><input name="lkOrdTimeE" id="lkOrdTimeE" type="text"  class="f_date3"
 					value="<%=lkorderVO.getLkOrdTimeE()%>"></td>
 			</tr>
 
@@ -251,9 +253,47 @@ table tr td:nth-of-type(odd) {
 	<script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
 
 
+
+	 <script src="https://cdn.bootcdn.net/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+
+
+	<script>
+        $.datetimepicker.setLocale('zh');
+        $('.f_date1').datetimepicker({
+           theme: '',              //theme: 'dark',
+ 	       timepicker:false,       //timepicker:true,
+ 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+ 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+ 		   value: '<%=lkorderVO.getLkOrdTimeS()%>', // value:   new Date(),
+           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+        });
+    </script>
+    <script>
+        $.datetimepicker.setLocale('zh');
+        $('.f_date2').datetimepicker({
+           theme: '',              //theme: 'dark',
+ 	       timepicker:false,       //timepicker:true,
+ 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+ 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+ 		   value: '<%=lkorderVO.getLkOrdTaketime()%>', // value:   new Date(),
+           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+        });
+    </script>
+    <script>
+        $.datetimepicker.setLocale('zh');
+        $('.f_date3').datetimepicker({
+           theme: '',              //theme: 'dark',
+ 	       timepicker:false,       //timepicker:true,
+ 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+ 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+ 		   value: '<%=lkorderVO.getLkOrdTimeE()%>', // value:   new Date(),
+           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+        });
+    </script>
 </body>
 
-
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" />
 
 
 
