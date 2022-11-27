@@ -37,6 +37,24 @@
             align-items: center;
 
         }
+        .css-button-sharp--black {
+            min-width: 40px;
+            height: 30px;
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            outline: none;
+            border: 2px solid #212529;
+            background: #212529;
+        }
+        .css-button-sharp--black:hover {
+            background: #fff;
+            color: #212529
+        }
     </style>
 
 </head>
@@ -142,24 +160,24 @@
             <!-- ******內容寫在這邊 ↓↓↓****** -->
             <section id="selectBar">
                 <div id="memberIdSelector">
-                    <div>依會員編號:</div>
+                    <div style="font-size: 1.6rem;font-weight: 600">依會員編號:</div>
                     <input type="text" size="9" id="memberIdtext">
-                    <button id="memberIdbutton">搜索</button>
+                    <button id="memberIdbutton" class="css-button-sharp--black">搜索</button>
                 </div>
 
                 <div id="refillIdSelector">
-                    <div>依儲值編號:</div>
+                    <div style="font-size: 1.6rem;font-weight: 600">依儲值編號:</div>
                     <input type="text" size="9" id="refillIdtext">
-                    <button id="refillIdbutton">搜索</button>
+                    <button id="refillIdbutton" class="css-button-sharp--black">搜索</button>
                 </div>
 
                 <div id="nameSelector">
-                    <div>依會員帳號:</div>
+                    <div style="font-size: 1.6rem;font-weight: 600">依會員帳號:</div>
                     <input type="text" size="16" id="nameInput">
                 </div>
 
                 <div id="ShowAll">
-                    <button id="selectAll">查詢全部儲值紀錄</button>
+                    <button id="selectAll" class="css-button-sharp--black" >查詢全部儲值紀錄</button>
                 </div>
             </section>
             <section id="errorSection" style="display: flex;justify-content: center;margin-top: 1.5rem">
