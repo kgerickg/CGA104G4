@@ -117,8 +117,8 @@ body.insertAdjacentElement("afterbegin", divwrapper);
 
 divwrapper.insertAdjacentHTML("afterend",
     "<div style='position: absolute;top: 12%;z-index: 1000;color: green;font-size: 1.5rem; width: 100%;height: 2rem;overflow: hidden'>" +
-        "<div style='position: relative;' >" +
-            "<div id='promoDiv' style='position: absolute;right: 0%;'>" +
+    "<div style='position: relative;' >" +
+    "<div id='promoDiv' style='position: absolute;right: 0%;'>" +
     "</div></div></div>");
 
 //頁面載入時載入廣告判斷是否有登入與是否登入過期。
@@ -132,7 +132,7 @@ divwrapper.insertAdjacentHTML("afterend",
 
     let memData = JSON.parse(memDataJson);
     let Now = new Date().getTime();
-    if((Now-memData.LoginTime)>=(60*30*1000)){
+    if ((Now - memData.LoginTime) >= (60 * 30 * 1000)) {
         await loginCheckWithServer();
         return;
     }
@@ -142,7 +142,7 @@ divwrapper.insertAdjacentHTML("afterend",
 })();
 
 
-async function loginCheckWithServer(){
+async function loginCheckWithServer() {
     let path = window.location.pathname;
     let webCtx = path.substring(0, path.indexOf('/', 1));
     let url = webCtx + "/member/memberfront.do?action=loginCheck";
@@ -165,12 +165,12 @@ function loginNavChange() {
     document.querySelector("#logul").innerHTML = "";
     document.querySelector("#logul").innerHTML = `<li><a href="" title="" class="logout">登出</a></li>`;
     let memData = JSON.parse(sessionStorage.getItem("memData"));
-    if(memData.memPic){
-        document.querySelector("#personImage").setAttribute("src","data:image/png;base64,"+memData.memPic);
-    }else {
-		let path = window.location.pathname;
-   		let webCtx = path.substring(0, path.indexOf('/', 1));
-        document.querySelector("#personImage").setAttribute("src",`${webCtx}/resources/images/personal.jpg`);
+    if (memData.memPic) {
+        document.querySelector("#personImage").setAttribute("src", "data:image/png;base64," + memData.memPic);
+    } else {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        document.querySelector("#personImage").setAttribute("src", `${webCtx}/resources/images/personal.jpg`);
     }
 
     //改變response-navbar
@@ -194,7 +194,7 @@ async function logout() {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
                 window.location.reload();
-                window.location.href = webCtx+"/front-index/index.html";
+                window.location.href = webCtx + "/front-index/index.html";
             }
         })
 
@@ -202,27 +202,28 @@ async function logout() {
 
 let promoDiv = document.querySelector("#promoDiv");
 
-async function showPromo(){
+async function showPromo() {
     let path = window.location.pathname;
     let webCtx = path.substring(0, path.indexOf('/', 1));
     let url = webCtx + "/promo/promo.do?action=isInPromo";
-    let response = await fetch(url, {method: 'get'}).then(res => res.json())
-    if(response.promoCont){
+    let response = await fetch(url, {method: 'get'}).then(res => res.json());
+    if (response.promoCont) {
         promoDiv.textContent = response.promoCont;
-        window.setTimeout(animate,200);
+        window.setTimeout(animate, 200);
     }
 }
 
 
 let pos = 0;
-function animate(){
-    if(pos>=100){
+
+function animate() {
+    if (pos >= 100) {
         pos = 0;
-    }else {
-        pos+=3;
+    } else {
+        pos += 3;
     }
-    promoDiv.style.right = pos +"%";
-    window.setTimeout(animate,200);
+    promoDiv.style.right = pos + "%";
+    window.setTimeout(animate, 200);
 }
 
 
