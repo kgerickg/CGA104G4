@@ -72,6 +72,11 @@ table th,td {
 	width:60vw;
 	text-align: center;
 	background-color: #F0F0F0;
+	border-radius: 10px;
+}
+
+#table-1 {
+border-radius: 10px;
 }
 
 .btn-secondary {

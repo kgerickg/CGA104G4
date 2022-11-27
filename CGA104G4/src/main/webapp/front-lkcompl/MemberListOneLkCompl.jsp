@@ -68,6 +68,7 @@ table th, td {
 	width: 36vw;
 	text-align: center;
 	background-color: #F0F0F0;
+	border-radius: 10px;
 }
 
 a {
@@ -93,7 +94,7 @@ thead th {
 	<!--下面可自由新增內容 -->
 	<div style="padding:4%"></div>
 
-	<table id="upper-table">
+	<table id="upper-table" style="border-radius: 10px;">
 		<tr>
 			<td>
 				<h3 style="font-size: 40px; font-weight: 700;color:#2F3237">客訴訂單資料</h3>

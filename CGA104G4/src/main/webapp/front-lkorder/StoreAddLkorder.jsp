@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.lkorder.model.*"%>
@@ -6,6 +8,13 @@
 LkOrderVO lkOrderVO = (LkOrderVO) request.getAttribute("lkOrderVO");
 %>
 <%-- --<%= lkOrderVO==null %>--${lkOrderVO.lkOrderId}-- --%>
+
+<%
+Date d = new Date();
+SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+String now = df.format(d);
+%>
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -33,7 +42,7 @@ LkOrderVO lkOrderVO = (LkOrderVO) request.getAttribute("lkOrderVO");
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
     <!-- 請將覆蓋用的css放置此註解下方 -->
-
+	
 <style>
 .btn-secondary {
 	color: #fff;
@@ -49,15 +58,15 @@ LkOrderVO lkOrderVO = (LkOrderVO) request.getAttribute("lkOrderVO");
 	border-radius: 5px;
 }
 
-table tr td:nth-of-type(odd) {
+.table tr td:nth-of-type(odd) {
 	display: block;
 	padding-left: 20px;
 	background: #35544E;
 	color: white;
 	font-size: 14px;
 	line-height: 35px;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
+ 	border-top-left-radius: 10px; 
+	border-bottom-left-radius: 10px; 
 	margin-bottom: 10px;
 }
 
@@ -115,6 +124,10 @@ table tr td:nth-of-type(odd) {
 .radio-container .input {
 	width: 5%;
 }
+
+
+
+
 </style>
 
 </head>
@@ -203,16 +216,16 @@ table tr td:nth-of-type(odd) {
 							</tr>
 							<tr>
 								<td>訂單成立日期:</td>
-								<td><input name="lkOrdTimeS" id="lkOrdTimeS" type="text"></td>
+								<td><input name="lkOrdTimeS" id="lkOrdTimeS" type="text" class="f_date1"></td>
 							</tr>
 							<tr>
 								<td>取貨日期:</td>
 								<td><input name="lkOrdTaketime" id="lkOrdTaketime"
-									type="text"></td>
+									type="text" class="f_date1"></td>
 							</tr>
 							<tr>
 								<td>訂單完成日期:</td>
-								<td><input name="lkOrdTimeE" id="lkOrdTimeE" type="text"></td>
+								<td><input name="lkOrdTimeE" id="lkOrdTimeE" type="text" class="f_date1"></td>
 							</tr>
 
 							<jsp:useBean id="lkorderSvc " scope="page"
@@ -240,9 +253,37 @@ table tr td:nth-of-type(odd) {
     <script src="../resources/js/scripts.js"></script>
     <script src="../resources/js/isotope.js"></script>
     
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+    <script>
+    $.datetimepicker.setLocale('zh');
+    $('.f_date1').datetimepicker({
+       theme: '',              //theme: 'dark',
+       timepicker:false,       //timepicker:true,
+       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+<%-- 	   value: '<%=now%>', // value:   new Date(), --%>
+       //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+       //startDate:	            '2017/07/10',  // 起始日
+       //minDate:               '-1970-01-01', // 去除今日(不含)之前
+       //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+    });
+    </script>
+    
 </body>
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" />
+<style>
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 151px;   /* height:  151px; */
+  }
 
+  
 
+</style>
 
 
 </html>
