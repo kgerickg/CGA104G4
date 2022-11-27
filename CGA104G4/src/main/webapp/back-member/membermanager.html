@@ -23,8 +23,7 @@
         div.flexdiv {
             display: flex;
             justify-content: space-around;
-            gap: 30px;
-            width: 70%;
+            width: 90%;
             margin-bottom: 2rem;
         }
         img.memPic{
@@ -73,7 +72,60 @@
             color: black;
             opacity: 1;
         }
-
+        .css-button-sharp--black {
+            min-width: 40px;
+            height: 30px;
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            outline: none;
+            border: 2px solid #212529;
+            background: #212529;
+        }
+        .css-button-sharp--black:hover {
+            background: #fff;
+            color: #212529
+        }
+        .css-button-sharp--sky {
+            min-width: 40px;
+            height: 30px;
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            outline: none;
+            border: 2px solid #4433ff;
+            background: #4433ff;
+        }
+        .css-button-sharp--sky:hover {
+            background: #fff;
+            color: #4433ff
+        }
+        .css-button-sharp--red {
+            min-width:40px;
+            height: 30px;
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            outline: none;
+            border: 2px solid #d90429;
+            background: #d90429;
+        }
+        .css-button-sharp--red:hover {
+            background: #fff;
+            color: #d90429
+        }
     </style>
 </head>
 
@@ -176,17 +228,17 @@
             <!-- ******內容寫在這邊 ↓↓↓****** -->
             <div class="flexdiv">
                 <div>
-                    <span>選擇會員編號:</span>
-                    <select id="memIdSelecter" name="memId"></select>
-                    <button id="memIdSelecterButton">搜索</button>
+                    <span style="font-size: 1.6rem;font-weight: 600;">選擇會員編號:</span>
+                    <select style="font-size: 1.6rem" id="memIdSelecter" name="memId"></select>
+                    <button id="memIdSelecterButton" class="css-button-sharp--black">搜索</button>
                 </div>
                 <div>
-                    <span>輸入會員編號:</span>
-                    <input type="text" id="selectByInputinput" name="memId">
-                    <button id="selectByInputbutton">搜索</button>
+                    <span style="font-size: 1.6rem;font-weight: 600;">輸入會員編號:</span>
+                    <input style="font-size: 1.6rem" type="text" id="selectByInputinput" name="memId">
+                    <button id="selectByInputbutton" class="css-button-sharp--black">搜索</button>
                 </div>
                 <div>
-                    <button id="getAll">顯示所有會員</button>
+                    <button id="getAll" class="css-button-sharp--black">顯示所有會員</button>
                 </div>
             </div>
             <div id="listTable" style="margin-left: 0.5rem;margin-right: 0.5rem"></div>
@@ -320,9 +372,9 @@
             }else {
                 tr.insertAdjacentHTML("beforeend", `<td><select disabled id="select${members[i].memId}"><option selected value="0">正常</option><option selected value="1">停權</option></select></td>`);
             }
-            let buttonhtml = "<td><button id='accStateModify' name='aSTMbutton"+members[i].memId+"' value='"+members[i].memId+ "'>修改帳號狀態</button>" +
-                             "<button style='display: none;margin-right: 0.5rem' id='cfbutton"+members[i].memId+"'value='"+members[i].memId+ "'>確認</button>"+
-                             "<button style='display: none' id='clbutton"+members[i].memId+"'value='"+members[i].memId+ "'>取消</button></td>"
+            let buttonhtml = "<td><button class='css-button-sharp--black' id='accStateModify' name='aSTMbutton"+members[i].memId+"' value='"+members[i].memId+ "'>修改帳號狀態</button>" +
+                             "<button class='css-button-sharp--sky' style='display: none;margin-right: 0.5rem' id='cfbutton"+members[i].memId+"'value='"+members[i].memId+ "'>確認</button>"+
+                             "<button class='css-button-sharp--red' style='display: none' id='clbutton"+members[i].memId+"'value='"+members[i].memId+ "'>取消</button></td>"
 
             tr.insertAdjacentHTML("beforeend", buttonhtml);
 
