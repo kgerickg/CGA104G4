@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.detail.model.DetailService;
 import com.detail.model.DetailVO;
@@ -209,8 +208,7 @@ public class DetailServlet extends HttpServlet {
 					req.setAttribute("errorMsgs", errorMsgs);
 
 					/*************************** 1.接收請求參數 ****************************************/
-					HttpSession session = req.getSession();
-					Integer ordId = (Integer) session.getAttribute("ordId");
+					Integer ordId = Integer.valueOf(req.getParameter("ordId"));
 
 					/*************************** 2.開始查詢資料 ****************************************/
 					DetailService detailSvc = new DetailService();

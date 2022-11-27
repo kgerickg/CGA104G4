@@ -3,7 +3,6 @@
 <%@ page import="com.prod.model.*"%>
 
 <jsp:useBean id="listProdTypeIds_ByStoreId" scope="request" type="java.util.Set<ProdVO>" />
-
 <jsp:useBean id="prodSvc" scope="page" class="com.prod.model.ProdService" />
 
 <!DOCTYPE html>
@@ -453,7 +452,7 @@
 			prodId = this.id;
 			let path = window.location.pathname;
 			let webCtx = path.substring(0, path.indexOf('/', 1));
-			let url = webCtx + "/cart/add?prodId=" + prodId;
+			let url = webCtx + "/cart/add?prodId=" + prodId + "&storeId=${param.storeId}";
 			e.preventDefault();
 			alert(this.id);
 			fetch(url, {method: 'get'});

@@ -69,6 +69,10 @@ table th, td {
 	width: 40vw;
 	text-align: center;
 	background-color: #F0F0F0;
+	border-radius: 10px;
+}
+#upper-table {
+	border-radius: 10px;
 }
 
 .btn-secondary {

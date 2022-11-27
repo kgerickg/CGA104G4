@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
 <%@ page import="com.detail.model.*"%>
 
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
@@ -92,13 +91,13 @@
              
            </ul>
       
-            <a href="#" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
+            <a href="../detail/detail.do?action=listDetails_ByOrdId_A&ordId=${ordersVO.ordId}" title="" class="tog-down"><i class="fa fa-angle-down"></i></a>
 		  </div><!--oct-table-head end-->
          
           
 		  <div class="oct-table-body">
 		   <ul>
-      	<c:forEach var="detailVO" items="${detailSvc.getDetailsByOrdId(1)}" >
+      	<c:forEach var="detailVO" items="${listDetails_ByOrdId}" >
 		    <li>
 		     <h4>${detailVO.prodVO.prodName}&nbsp;&nbsp;$${detailVO.prodVO.prodPrc}&nbsp;&nbsp;&nbsp;<span>x${detailVO.prodQty}</span></h4>
 		    </li>
@@ -141,6 +140,8 @@
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
-
+<%if (request.getAttribute("listDetails_ByOrdId_A")!=null){%>
+       <jsp:useBean id="listDetails_ByOrdId" scope="request" type="java.util.Set<DetailVO>" />
+<%} %>
 </body>
 </html>
