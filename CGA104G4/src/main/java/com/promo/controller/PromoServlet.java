@@ -66,11 +66,11 @@ public class PromoServlet extends HttpServlet {
 		JSONObject MsgsJson = new JSONObject();
 		Timestamp today = new Timestamp(new Date().getTime());
 		PromoVO promoVO = promoService.isInPromo(today);
-		if(promoVO !=null){
+		if(promoVO !=null) {
 			String promoCont = promoVO.getPromoCont();
 			MsgsJson.put("promoCont", promoCont);
-			out.write(MsgsJson.toString());
 		}
+		out.write(MsgsJson.toString());
 	}
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws IOException {
