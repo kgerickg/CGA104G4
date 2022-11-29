@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.prod.model.*"%>
 
-<jsp:useBean id="listProdTypeIds_ByStoreId" scope="request" type="java.util.Set<ProdVO>" />
+<jsp:useBean id="listProdTypeIds_ByStoreId_M" scope="request" type="java.util.Set<ProdVO>" />
 <jsp:useBean id="prodSvc" scope="page" class="com.prod.model.ProdService" />
 
 <!DOCTYPE html>
@@ -46,76 +46,8 @@
 		<img src="../resources/images/loader.gif" alt="">
 	</div>
 	<!--page-loading end-->
-
 	<div class="wrapper">
-
-
-
-		<div class="responsive-mobile-menu">
-			<ul>
-				<li><a class="active" href="index.html" title="">Home</a></li>
-				<li><a href="about.html" title="">About Us</a></li>
-				<li><a href="#" title="">Pages</a>
-					<ul>
-						<li><a href="restaurants.html" title="">Restaurants</a></li>
-						<li><a href="" title="">Restaurant detail</a></li>
-						<li><a href="cart.html" title="">Cart</a></li>
-						<li><a href="checkout.html" title="">Checkout</a></li>
-						<li><a href="profile.html" title="">My profile</a></li>
-						<li><a href="faqs.html" title="">FAQs</a></li>
-						<li><a href="testimonials.html" title="">Testimonials</a></li>
-						<li><a href="404.html" title="">404</a></li>
-					</ul></li>
-				<li><a href="#" title="">Blog</a>
-					<ul>
-						<li><a href="blog1.html" title="">Blog 1</a></li>
-						<li><a href="blog2.html" title="">Blog 2</a></li>
-						<li><a href="blog-single.html" title="">Blog Single</a></li>
-					</ul></li>
-				<li><a href="contact.html" title="">Contact Us</a></li>
-			</ul>
-		</div>
-		<!--responsive-mobile-menu end-->
-		<section class="sec-block">
-			<div class="container">
-				<div class="restaurant-details">
-					<div class="food-thumbail-large">
-						<img src="../resources/images/food-large.jpg" alt="" class="w-100">
-						<div class="pl-logo">
-							<img src="../resources/images/logo5.png" alt="">
-						</div>
-					</div>
-					<div class="food-info">
-						<ul class="meta">
-							<li><img src="../resources/images/calendar.svg" alt="">
-								<span>Monday - Sunday</span></li>
-							<li><img src="../resources/images/clock.svg" alt=""> <span>9:00am
-									- 11:00pm</span></li>
-							<li><span>3 Reviews</span>
-								<ul class="rating">
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-								</ul></li>
-						</ul>
-						<h4>Exercitation pariatur ipsum magna occaecat quis eiusmod
-							magna. Non nulla commodo laborum magna id.</h4>
-						<p>Consequat excepteur eu veniam sunt duis ut do pariatur
-							voluptate ex fugiat. Sit exercitation occaecat exercitation
-							officia enim exercitation sunt. Exercitation pariatur ipsum magna
-							occaecat quis eiusmod magna. Non nulla commodo laborum magna id.
-							Deserunt irure amet adipisicing adipisicing veniam nostrud Lorem
-							anim non voluptate culpa sit. Et veniam dolor reprehenderit non.
-							Ut laboris pariatur tempor pariatur pariatur ad enim veniam duis.
-							Exercitation sint eiusmod amet reprehenderit ipsum</p>
-					</div>
-				</div>
-				<!--restaurant-details end-->
-			</div>
-		</section>
-
+		<section class="sec-block"></section>
 		<section class="sec-block p-0">
 			<div class="container">
 				<div class="section-title text-center">
@@ -128,8 +60,8 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${listProdTypeIds_ByStoreId}">
-									<li><a href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId&storeId=${param.storeId}" data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
+								<c:forEach var="prodVO"	items="${listProdTypeIds_ByStoreId_M}">
+									<li><a href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId_M&storeId=${param.storeId}" data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
 								</c:forEach>
 							</ul>
 						</div>
@@ -297,116 +229,6 @@
 			</div>
 		</section>
 
-		<section class="sec-block">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8">
-						<div class="feedback-section">
-							<h2>Feedbacks (3)</h2>
-							<div class="testimonials-list">
-								<div class="test-monial">
-									<div class="testi_head">
-										<ul>
-											<li><img src="../resources/images/meta.jpg" alt="">
-												<span>Carlos Bolitti</span></li>
-											<li>May 18, 2020</li>
-											<li>
-												<ul class="rating">
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p>Very cool team. They work quickly and smoothly. They
-										delivered food on time, the dishes were still hot and the
-										drinks were cold. Good service I will recommend it to
-										everyone.</p>
-								</div>
-								<!--test-monial end-->
-								<div class="test-monial">
-									<div class="testi_head">
-										<ul>
-											<li><img src="../resources/images/meta.jpg" alt="">
-												<span>Lili Martin</span></li>
-											<li>May 14, 2020</li>
-											<li>
-												<ul class="rating">
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p>I ordered food from two different restaurants at the
-										same time which are far from each other but the guys did very
-										well and delivered the food on time hot and fresh. Everything
-										was as tasty and beautiful as in the restaurant. Food has not
-										lost its beautiful appearance.</p>
-								</div>
-								<!--test-monial end-->
-								<div class="test-monial">
-									<div class="testi_head">
-										<ul>
-											<li><img src="../resources/images/meta.jpg" alt="">
-												<span>Manuel Bonturini</span></li>
-											<li>May 13, 2020</li>
-											<li>
-												<ul class="rating">
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p>Very cool team. They work quickly and smoothly. They
-										delivered food on time, the dishes were still hot and the
-										drinks were cold. Good service I will recommend it to
-										everyone.</p>
-								</div>
-								<!--test-monial end-->
-							</div>
-						</div>
-						<!--feedback section end-->
-					</div>
-					<div class="col-lg-4">
-						<div class="sidebar">
-							<div class="widget widget-review">
-								<h3 class="widget-title">Leave a review</h3>
-								<form>
-									<input type="text" name="name" placeholder="Name*"
-										class="half-radius"> <input type="email" name="email"
-										placeholder="Email*" class="half-radius">
-									<textarea name="review" placeholder="Write a review"></textarea>
-									<ul class="rating d-block">
-										<li><i class="far fa-star"></i></li>
-										<li><i class="far fa-star"></i></li>
-										<li><i class="far fa-star"></i></li>
-										<li><i class="far fa-star"></i></li>
-										<li><i class="far fa-star"></i></li>
-									</ul>
-									<button type="submit" class="btn-default half-radius">
-										Submit <span></span>
-									</button>
-								</form>
-							</div>
-							<!--widget-review end-->
-						</div>
-						<!--sidebar end-->
-					</div>
-				</div>
-			</div>
-		</section>
-
 		<footer>
 			<div class="top-footer">
 				<div class="fixed-bg bg3"></div>
@@ -461,8 +283,8 @@
 	
 	</script>
 
-<%if (request.getAttribute("listProds_ByStoreIdAndProdTypeId")!=null){%>
-       <jsp:useBean id="listProds_ByStoreIdAndProdTypeId" scope="request" type="java.util.Set<ProdVO>" />
+<%if (request.getAttribute("listProds_ByStoreIdAndProdTypeId_M")!=null){%>
+       <jsp:useBean id="listProds_ByStoreIdAndProdTypeId_M" scope="request" type="java.util.Set<ProdVO>" />
 <%} %>
 </body>
 </html>

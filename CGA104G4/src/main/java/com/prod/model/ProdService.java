@@ -35,26 +35,19 @@ public class ProdService {
 		dao.insert(ProdVO);
 	}
 	
-	public ProdVO updateProd(Integer prodId, Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc, Date prodTime, Integer prodStat) {
+	public ProdVO updateProd(Integer prodId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc, Integer prodStat) {
 
-		ProdVO ProdVO = new ProdVO();
+		ProdVO prodVO = new ProdVO();
 
-		ProdVO.setProdId(prodId);
-		ProdVO.setProdTypeId(prodTypeId);
-		ProdVO.setStoreId(storeId);
-		ProdVO.setProdName(prodName);
-		ProdVO.setProdCont(prodCont);
-		ProdVO.setProdStat(prodPrc);
-		ProdVO.setProdStat(prodStat);
-		ProdVO.setProdTime(prodTime);
-		dao.update(ProdVO);
-
+		prodVO.setProdId(prodId);
+		prodVO.setProdTypeId(prodTypeId);
+		prodVO.setProdName(prodName);
+		prodVO.setProdCont(prodCont);
+		prodVO.setProdPrc(prodPrc);
+		prodVO.setProdStat(prodStat);
+		dao.update(prodVO);
+		
 		return dao.findByPrimaryKey(prodId);
-	}
-	
-	//預留給 Struts 2 用的
-	public void updateProd(ProdVO ProdVO) {
-		dao.update(ProdVO);
 	}
 
 	public void deleteProd(Integer prodId) {
@@ -69,6 +62,10 @@ public class ProdService {
 		return dao.getAll();
 	}
 	
+	public List<ProdVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
+	
 	public Set<ProdVO> getProdTypeIdsByStoreId(Integer storeId) {
 		return dao.getProdTypeIdsByStoreId(storeId);
 	}
@@ -81,7 +78,4 @@ public class ProdService {
 		return dao.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
 	}
 	
-	public List<ProdVO> getAll(Map<String, String[]> map) {
-		return dao.getAll(map);
-	}
 }

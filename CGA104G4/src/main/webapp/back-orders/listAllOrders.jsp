@@ -4,6 +4,7 @@
 <%@ page import="com.detail.model.*"%>
 
 <jsp:useBean id="ordersSvc" scope="page" class="com.orders.model.OrdersService" />
+<jsp:useBean id="detailSvc" scope="request" class="com.detail.model.DetailService" />
 
 <html>
 <head><title>訂單管理</title>
@@ -226,7 +227,7 @@ td:last-child{
 			  </FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/detail/detail.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="點我查詢" style="border-style:none; background-color:transparent; color:blue;"> 
 			    <input type="hidden" name="ordId" value="${ordersVO.ordId}">
 			    <input type="hidden" name="action" value="listDetails_ByOrdId_C"></FORM>
