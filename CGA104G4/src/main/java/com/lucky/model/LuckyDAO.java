@@ -9,8 +9,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class LuckyDAO implements LuckyDAOinterface {
-
-
 	private static DataSource ds = null;
 	static {
 		try {
@@ -22,7 +20,7 @@ public class LuckyDAO implements LuckyDAOinterface {
 	}
 
 	private static final String INSERT_STMT = "INSERT INTO LUCKY (STORE_ID,LK_STAT,LK_NAME,LK_CONT,LK_PRC,LK_TIME) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT LK_ID,STORE_ID,LK_STAT,LK_NAME,LK_CONT,LK_PRC,LK_TIME FROM LUCKY order by LK_ID";
+	private static final String GET_ALL_STMT = "SELECT LK_ID, l.STORE_ID, LK_STAT, LK_NAME, LK_CONT, LK_PRC, LK_TIME, STORE_NAME FROM LUCKY l join STORE s on l.STORE_ID = s.STORE_ID order by LK_ID";
 	private static final String GET_ONE_STMT = "SELECT LK_ID,STORE_ID,LK_STAT,LK_NAME,LK_CONT,LK_PRC,LK_TIME FROM LUCKY where LK_ID = ?";
 	private static final String DELETE = "DELETE FROM LUCKY where LK_ID = ?";
 	private static final String UPDATE = "UPDATE LUCKY set STORE_ID=?, LK_STAT=?, LK_NAME=?, LK_CONT=?, LK_PRC=?, LK_TIME=? where LK_ID = ?";
@@ -228,6 +226,7 @@ public class LuckyDAO implements LuckyDAOinterface {
 				luckyVO.setLkCont(rs.getString("LK_CONT"));
 				luckyVO.setLkPrc(rs.getInt("LK_PRC"));
 				luckyVO.setLkTime(rs.getDate("LK_TIME"));
+				luckyVO.setStoreName(rs.getString("STORE_NAME"));
 				list.add(luckyVO);
 			}
 			return list;
@@ -248,6 +247,34 @@ public class LuckyDAO implements LuckyDAOinterface {
 				if (rs.next()) {
 					return rs.getBytes(1);
 				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<LuckyVO> findByStoreId(Integer storeId) {
+		try (
+			Connection con = ds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from LUCKY where STORE_ID = ?");
+		) {
+			pstmt.setInt(1, storeId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				List<LuckyVO> list = new ArrayList<>();
+				while (rs.next()) {
+					LuckyVO luckyVO = new LuckyVO();
+					luckyVO.setLuckyId(rs.getInt("LK_ID"));
+					luckyVO.setStoreId(rs.getInt("STORE_ID"));
+					luckyVO.setLkStat(rs.getInt("LK_STAT"));
+					luckyVO.setLkName(rs.getString("LK_NAME"));
+					luckyVO.setLkCont(rs.getString("LK_CONT"));
+					luckyVO.setLkPrc(rs.getInt("LK_PRC"));
+					luckyVO.setLkTime(rs.getDate("LK_TIME"));
+					list.add(luckyVO);
+				}
+				return list;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
