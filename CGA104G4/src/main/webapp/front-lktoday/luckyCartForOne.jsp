@@ -4,6 +4,9 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.lucky.model.*"%>
 
+<%
+  LuckyVO luckyVO = (LuckyVO) request.getAttribute("luckyVO"); 
+%>
 
 <!DOCTYPE html>
 <html>
@@ -92,27 +95,7 @@ thead th{
   font-weight: 100;
   padding:10px; 
 }
-
-<!--福袋用-->
-h1{text-align:center;}
-.badge-notify{
-    background:red;
-    position:relative;
-    top: -20px;
-    right: 10px;
-  }
-  .my-cart-icon-affix {
-    position: fixed;
-    z-index: 999;
-  }
-  
 </style>
-
-<script>
-  if (document.location.search.match(/type=embed/gi)) {    //只能預約一次
-    window.parent.postMessage("resize", "*");
-  }
-</script>
 
 </head>
 
@@ -120,14 +103,8 @@ h1{text-align:center;}
 <script src=${pageContext.request.contextPath}/resources/js/membernav.js></script>
 <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 <!--下面可自由新增內容 -->
-<div style="padding:3%"></div>
-  <div class="page-header">
-    <h1>吉食專區
-      <div style="float: right; cursor: pointer;">
-        <span class="glyphicon glyphicon-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
-      </div>
-    </h1>
-  </div>
+
+<div style="padding: 4%"></div>
     
 <table id="table-1">
 
@@ -169,49 +146,26 @@ h1{text-align:center;}
   </li>
   
 </ul>
-
-</table>
-
-<table>
+  
 <div class="row">
 
-<c:forEach var="lucky" items="${list}">
-
 	<div class="col-sm-6 col-md-3 text-center">
 <%-- 	      
 	<img src="<%=request.getContextPath()%>/lucky/lucky.do?action=getImg&luckyId=${lucky.luckyId}" width="150px" height="150px">
 --%>
 		<br>
-		<img src="<%=request.getContextPath()%>/front-lucky/images/4.png" width="150px" height="150px">	      
+		<img src="<%=request.getContextPath()%>/front-lucky/images/4.png" width="150px" height="150px">
 		<br>
-		${lucky.lkName}<strong>$${lucky.lkPrc}</strong>
+		<%=luckyVO.getLkName()%><strong>$<%=luckyVO.getLkPrc()%></strong>
 		<br>
-		<button class="btn btn-danger my-cart-btn" data-id="${lucky.luckyId}" data-name="${lucky.lkName}" data-summary="${lucky.lkCont}" data-price="${lucky.lkPrc}" data-quantity="1" data-image="<%=request.getContextPath()%>/front-lucky/images/4.png">我要預約</button>
-		${lucky.lkCont}
-		<br>
-		<br>
-	</div>
-</c:forEach>
-	
-<c:forEach var="lucky" items="${listForST}">
-
-	<div class="col-sm-6 col-md-3 text-center">
-<%-- 	      
-	<img src="<%=request.getContextPath()%>/lucky/lucky.do?action=getImg&luckyId=${lucky.luckyId}" width="150px" height="150px">
---%>
-		<br>
-		<img src="<%=request.getContextPath()%>/front-lucky/images/4.png" width="150px" height="150px">	      
-		<br>
-		${lucky.lkName}<strong>$${lucky.lkPrc}</strong>
-		<br>
-		<button class="btn btn-danger my-cart-btn" data-id="${lucky.luckyId}" data-name="${lucky.lkName}" data-summary="${lucky.lkCont}" data-price="${lucky.lkPrc}" data-quantity="1" data-image="<%=request.getContextPath()%>/front-lucky/images/4.png">我要預約</button>
-		${lucky.lkCont}
+		<button class="btn btn-danger my-cart-btn" data-id=<%=luckyVO.getLuckyId()%> data-name=<%=luckyVO.getLkName()%> data-summary=<%=luckyVO.getLkCont()%> data-price=<%=luckyVO.getLkPrc()%> data-quantity="1" data-image="<%=request.getContextPath()%>/front-lucky/images/4.png">我要預約</button>
+		<%=luckyVO.getLkCont()%>
 		<br>
 		<br>
 	</div>
-</c:forEach>
     
 </div>
+
 </table>
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
@@ -228,76 +182,56 @@ h1{text-align:center;}
 
 <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-5e03f34e38152f20eb79c96b0b89c2d99c5085e9ae9386dc71e2f0b3c30bf513.js"></script>
 
-
 <script id="rendered-js" >
 $(function () {
-	  let goToCartIcon = function ($addTocartBtn) {
-	    let $cartIcon = $(".my-cart-icon");
-	    let $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({ "position": "fixed", "z-index": "999" });
-	    $addTocartBtn.prepend($image);
-	    let position = $cartIcon.position();
-	    $image.animate({
-	      top: position.top,
-	      left: position.left },
-	    500, "linear", function () {
-	      $image.remove();
-	    });
-	    $addTocartBtn.get(0).disabled = true;
-	  };
 
-	  $('.my-cart-btn').myCart({
-	    currencySymbol: '$',
-	    classCartIcon: 'my-cart-icon',
-	    classCartBadge: 'my-cart-badge',
-	    classProductQuantity: 'my-product-quantity',
-	    classProductRemove: 'my-product-remove',
-	    classCheckoutCart: 'my-cart-checkout',
-	    affixCartIcon: true,
-	    showCheckoutModal: true,
-	    numberOfDecimals: 2,
-	    clickOnAddToCart: function ($addTocart) {
-	      goToCartIcon($addTocart);
-	    },
-	    afterAddOnCart: function (products, totalPrice, totalQuantity) {
-	      console.log("afterAddOnCart", products, totalPrice, totalQuantity);
-	    },
-	    clickOnCartIcon: function ($cartIcon, products, totalPrice, totalQuantity) {
-	      console.log("cart icon clicked", $cartIcon, products, totalPrice, totalQuantity);
-	    },
-	    checkoutCart: function (products, totalPrice, totalQuantity) {
-	      let checkoutString = "Total Price: " + totalPrice + "\nTotal Quantity: " + totalQuantity;
-	      checkoutString += "\n\n id \t name \t summary \t price \t quantity \t image path";
-	      $.each(products, function () {
-	        checkoutString += "\n " + this.id + " \t " + this.name + " \t " + this.summary + " \t " + this.price + " \t " + this.quantity + " \t " + this.image;
-	      });
-	      const luckys = products.map(product => {
-	    	  return {
-	    		  luckyId: product.id,
-	    		  lkQty: +product.quantity
-	    	  };
-	      });
-	      fetch('todayAdd', {
-	    	  method: 'POST',
-	    	  headers: {
-	    		  'Content-Type': 'application/json'
-	    	  },
-	    	  body: JSON.stringify(luckys)
-	      })
-	      	.then(resp => resp.json())
-	      	.then(({successful}) => alert(successful ? '成功' : '失敗'));
-	    },
-  
-	    getDiscountPrice: function (products, totalPrice, totalQuantity) {
-	      console.log("calculating discount", products, totalPrice, totalQuantity);
-	      return totalPrice * 1;
-	    } }); 
-	  
-	  $("#addNewProduct").click(function (event) {
-	    let currentElementNo = $(".row").children().length + 1;
-	    $(".row").append('<div class="col-md-3 text-center"><img src="images/img_empty.png" width="150px" height="150px"><br>product ' + currentElementNo + ' - <strong>$' + currentElementNo + '</strong><br><button class="btn btn-danger my-cart-btn" data-id="' + currentElementNo + '" data-name="product ' + currentElementNo + '" data-summary="summary ' + currentElementNo + '" data-price="' + currentElementNo + '" data-quantity="1" data-image="images/img_empty.png">Add to Cart</button><a href="#" class="btn btn-info">Details</a></div>');
-	  });
-	  
-	});
+  let goToCartIcon = function ($addTocartBtn) {
+    let $cartIcon = $(".my-cart-icon");
+    let $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({ "position": "fixed", "z-index": "999" });
+    $addTocartBtn.prepend($image);
+    let position = $cartIcon.position();
+    $image.animate({
+      top: position.top,
+      left: position.left },
+    500, "linear", function () {
+      $image.remove();
+    });
+  };
+
+  $('.my-cart-btn').myCart({
+    currencySymbol: '$',
+    classCartIcon: 'my-cart-icon',
+    classCartBadge: 'my-cart-badge',
+    classProductQuantity: 'my-product-quantity',
+    classProductRemove: 'my-product-remove',
+    classCheckoutCart: 'my-cart-checkout',
+    affixCartIcon: true,
+    showCheckoutModal: true,
+    numberOfDecimals: 2,
+    clickOnAddToCart: function ($addTocart) {
+      goToCartIcon($addTocart);
+    },
+    afterAddOnCart: function (products, totalPrice, totalQuantity) {
+      console.log("afterAddOnCart", products, totalPrice, totalQuantity);
+    },
+    clickOnCartIcon: function ($cartIcon, products, totalPrice, totalQuantity) {
+      console.log("cart icon clicked", $cartIcon, products, totalPrice, totalQuantity);
+    },
+    checkoutCart: function (products, totalPrice, totalQuantity) {
+      let checkoutString = "Total Price: " + totalPrice + "\nTotal Quantity: " + totalQuantity;
+      checkoutString += "\n\n id \t name \t summary \t price \t quantity \t image path";
+      $.each(products, function () {
+        checkoutString += "\n " + this.id + " \t " + this.name + " \t " + this.summary + " \t " + this.price + " \t " + this.quantity + " \t " + this.image;
+      });
+      alert(checkoutString);
+      console.log("checking out", products, totalPrice, totalQuantity);
+    },
+    getDiscountPrice: function (products, totalPrice, totalQuantity) {
+      console.log("calculating discount", products, totalPrice, totalQuantity);
+      return totalPrice * 1;
+    } });
+
+});
 //# sourceURL=pen.js
 </script>
 
