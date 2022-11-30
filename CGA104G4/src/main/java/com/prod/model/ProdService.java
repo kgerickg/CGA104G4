@@ -35,16 +35,18 @@ public class ProdService {
 		dao.insert(ProdVO);
 	}
 	
-	public ProdVO updateProd(Integer prodId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc, Integer prodStat) {
+	public ProdVO updateProd(Integer prodId, Integer prodTypeId, Integer storeId, String prodName, String prodCont, Integer prodPrc, Integer prodStat, Date prodTime) {
 
 		ProdVO prodVO = new ProdVO();
 
 		prodVO.setProdId(prodId);
 		prodVO.setProdTypeId(prodTypeId);
+		prodVO.setStoreId(storeId);
 		prodVO.setProdName(prodName);
 		prodVO.setProdCont(prodCont);
 		prodVO.setProdPrc(prodPrc);
 		prodVO.setProdStat(prodStat);
+		prodVO.setProdTime(prodTime);
 		dao.update(prodVO);
 		
 		return dao.findByPrimaryKey(prodId);
