@@ -49,13 +49,7 @@ header.innerHTML =
                     </a>
                 </li>
                 <li>
-                    <a href="#" title="" class="">
-                        <img alt="" src="${webCtx}/resources/images/bell.svg" style="width:2rem">
-                    </a>
-                    <span class="cart-item-num">0</span>
-                </li>
-                <li>
-                    <a href="#" title="" class="">
+                    <a href="${webCtx}/front-cart/cart.html" title="" class="">
                         <img alt="" src="${webCtx}/resources/images/shopping-cart.svg" style="width:2rem">
                     </a>
                      <span class="cart-item-num">0</span>

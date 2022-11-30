@@ -25,8 +25,6 @@ public class StoreVO implements Serializable {
     private Integer accStat;
     @Column(name = "STORE_NAME")
     private String storeName;
-    @Column(name = "STORE_GUI",insertable = false)
-    private String storeGui;
     @Column(name = "STORE_TEL")
     private String storeTel;
     @Column(name = "STORE_CITY")

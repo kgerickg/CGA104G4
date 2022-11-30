@@ -150,7 +150,7 @@
 
         if (!response.state) {
             if (response.storeAccError) {
-                alert("storeAccError");
+                alert(response.storeAccError);
                 let p = document.createElement("p");
                 p.setAttribute("id", "storeAccError")
                 p.style.color = "red";
@@ -158,7 +158,7 @@
                 $("#emaildiv").append(p);
             }
             if (response.storePwdError) {
-                alert("storePwdError");
+                alert(response.storePwdError);
                 let p = document.createElement("p");
                 p.setAttribute("id", "storePwdError")
                 p.style.color = "red";

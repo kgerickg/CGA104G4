@@ -147,6 +147,7 @@
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
 <script src="../resources/js/isotope.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     //網頁開啟立即執行的方法
     getcityselector();
@@ -227,10 +228,10 @@
                 $("select#storeDist").append("<option disabled selected>鄉鎮區</option>");
                 $("input[name='storAdr']").val("");
                 $("input[name='confirmPwd']").val("");
-                await alert("新增成功");
+                await swal("註冊成功", "恭喜註冊成功!", "success");
                 window.location.href = "../front-index/index.html";
             } else {
-                alert("失敗")
+                swal("註冊失敗", "請檢查輸入資訊", "error")
                 throw response;
             }
 

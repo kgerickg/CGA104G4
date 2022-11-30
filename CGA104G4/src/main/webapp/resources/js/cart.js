@@ -5,6 +5,17 @@
     let url = webCtx + "/cart/front";
     let response = await fetch(url, {method: 'get'});
     let carts = await response.json();
+    for(let storeId in carts.storeMap){
+        for(let prodId in carts.storeMap[storeId]){
+            console.log(carts.storeMap[storeId][prodId]);
+
+        }
+    }
+    carts.storeMap
+    console.log(carts);
+    console.log(carts.storeMap[0]);
+    console.log(carts.storeMap["1"]["1"]);
+    console.log(carts.storeMap["1"]["1"].prodId);
     let storeMap = JSON.stringify(carts.storeMap);
     listCarts(carts);
 })();
@@ -27,6 +38,20 @@ function listCarts(carts) {
     let tbody = document.createElement("tbody");
 
     //循環依人數生成表格數量
+    for(let storeId in carts.storeMap){
+        for(let prodId in carts.storeMap[storeId]){
+            console.log(carts.storeMap[storeId][prodId]);
+
+            let tr = document.createElement("tr");
+            tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].storeName}</td>`);
+            tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodName}</td>`);
+            tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodPrc}</td>`);
+            tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodQty}</td>`);
+            tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodTotalPrc}</td>`);
+
+            tbody.append(tr);
+        }
+    }
     for (let i = 0; i < carts.length; i++) {
 
 

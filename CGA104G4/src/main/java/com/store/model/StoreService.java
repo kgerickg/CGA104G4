@@ -31,7 +31,6 @@ public class StoreService {
         storeVO.setStoreAcc(storeAcc);
         storeVO.setStorePwd(storePwd);
         storeVO.setStoreName(storeName);
-        storeVO.setStoreGui(storeGui);
         storeVO.setStoreTel(storeTel);
         dao.insert(storeVO);
 
@@ -83,7 +82,6 @@ public class StoreService {
         storeVO.setStoreAcc(storeAcc);
         storeVO.setStorePwd(storePwd);
         storeVO.setStoreName(storeName);
-        storeVO.setStoreGui(storeGui);
         storeVO.setStoreTel(storeTel);
         dao.update(storeVO);
 
