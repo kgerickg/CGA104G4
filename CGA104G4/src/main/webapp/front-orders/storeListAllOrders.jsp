@@ -113,31 +113,10 @@
 		  
        </div><!--order-tables-sec end-->
       </div>     
-      <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
-       <div class="order-tables-sec">
-        <div class="ord-tablez">
-        </div><!--ord-tablez end-->
-       </div><!--order-tables-sec end-->
-      </div>
-     </div>
-    </div><!--profile-section end-->
-   </div>             
-   
-   </div>
-  </div>
+     
  </section>
  <footer>
-			<div class="top-footer">
-				<div class="fixed-bg bg3"></div>
-
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-3 col-md-6"></div>
-						<div class="col-lg-6 col-md-6"></div>
-						<div class="col-lg-3 col-md-6"></div>
-					</div>
-				</div>
-			</div>
+			
 			<div class="bottom-footer">
 				<div class="container">
 					<div class="row align-items-center">
