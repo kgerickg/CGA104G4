@@ -12,7 +12,7 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 	private static final String INSERT_STMT = 
 		"INSERT INTO LUCKY (STORE_ID,LK_STAT,LK_NAME,LK_CONT,LK_PRC,LK_TIME) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT LK_ID,STORE_ID,LK_STAT,LK_NAME,LK_CONT,LK_PRC,LK_TIME FROM LUCKY order by LK_ID";
+		"SELECT LK_ID, l.STORE_ID, LK_STAT, LK_NAME, LK_CONT, LK_PRC, LK_TIME, STORE_NAME FROM LUCKY l join STORE s on l.STORE_ID = s.STORE_ID order by LK_ID";
 	private static final String GET_ONE_STMT = 
 		"SELECT LK_ID,STORE_ID,LK_STAT,LK_NAME,LK_CONT,LK_PRC,LK_TIME FROM LUCKY where LK_ID = ?";
 	private static final String DELETE = 
@@ -250,6 +250,7 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 				luckyVO.setLkCont(rs.getString("LK_CONT"));
 				luckyVO.setLkPrc(rs.getInt("LK_PRC"));
 				luckyVO.setLkTime(rs.getDate("LK_TIME"));
+				luckyVO.setStoreName(rs.getString("STORE_NAME"));
 				list.add(luckyVO); // Store the row in the list
 			}
 
@@ -343,6 +344,12 @@ public class LuckyJDBCDAO implements LuckyDAOinterface {
 
 	@Override
 	public byte[] getImgById(Integer luckyId) {
+		return null;
+	}
+
+	@Override
+	public List<LuckyVO> findByStoreId(Integer storeId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

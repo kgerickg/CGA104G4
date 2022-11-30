@@ -63,6 +63,11 @@ public class LuckyService {
 		return dao.getAll();
 	}
 	
+	public List<LuckyVO> getAll2(Integer storeId) {
+		
+		return dao.findByStoreId(storeId);
+	}
+	
 	public byte[] getImgById(Integer luckyId) {
 		return dao.getImgById(luckyId);
 	}

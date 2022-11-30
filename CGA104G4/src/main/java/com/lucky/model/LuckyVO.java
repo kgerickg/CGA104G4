@@ -12,6 +12,7 @@ public class LuckyVO implements java.io.Serializable {
 	private Integer lkPrc;
 	private Date lkTime;
 	private byte[] lkImg;
+	private String storeName;
 
 	public Integer getLuckyId() {
 		return luckyId;
@@ -75,5 +76,13 @@ public class LuckyVO implements java.io.Serializable {
 
 	public void setLkImg(byte[] lkImg) {
 		this.lkImg = lkImg;
+	}
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
 }

@@ -1,17 +1,26 @@
 package com.lucky.controller;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.lucky.model.*;
+import org.hibernate.dialect.identity.JDataStoreIdentityColumnSupport;
 
-@WebServlet(name = "LuckyServlet", urlPatterns = {"/LuckyServlet", "/lucky/lucky.do"})
+import com.lucky.model.LuckyDAO;
+import com.lucky.model.LuckyService;
+import com.lucky.model.LuckyVO;
 
+@WebServlet({"/LuckyServlet", "/lucky/lucky.do"})
 public class LuckyServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -23,16 +32,19 @@ public class LuckyServlet extends HttpServlet {
 		LuckyDAO dao = new LuckyDAO();
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+		if ("getAllForStore".equals(action)) {    //店家找自家的福袋
+//			Integer storeId = (Integer) req.getSession().getAttribute("storeId");
+			Integer storeId = 2;  //先寫死，測試用，正式用↑上面那行↑***********************************************************************************************這裡要改！
+			req.setAttribute("list", dao.findByStoreId(storeId));
+			req.getRequestDispatcher("/front-lucky/listAllLucky.jsp").forward(req, res);			
+			return;
+		}
 
 		if ("getAll".equals(action)) {
-			/***************************開始查詢資料****************************************/
-			
 			List<LuckyVO> list = dao.getAll();
-
-			/***************************查詢完成,準備轉交(Send the Success view)*************/
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list);
-			// Send the Success view
 			String url = "/front-lucky/listAllLucky2_getFromSession.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
@@ -43,7 +55,14 @@ public class LuckyServlet extends HttpServlet {
 			req.setAttribute("list", dao.getAll());
 			req.getRequestDispatcher("/front-lucky/luckyCart.jsp").forward(req, res);
 			return;
-		}		
+		}
+		
+		if ("getAllByStore".equals(action)) {    //依店家找福袋
+			Integer storeId = Integer.parseInt(req.getParameter("storeId"));
+			req.setAttribute("listForST", dao.findByStoreId(storeId));
+			req.getRequestDispatcher("/front-lucky/luckyCart.jsp").forward(req, res);			
+			return;
+		}
 
 		if ("getOneForMember".equals(action)) {
 			Integer luckyId = Integer.parseInt(req.getParameter("luckyId"));
@@ -212,12 +231,14 @@ public class LuckyServlet extends HttpServlet {
         if ("insert".equals(action)) {  
 			
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+//			HttpSession session = req.getSession();
+//			Integer storeId = (Integer) session.getAttribute("storeId");
 			
+			String storeName = "香香麵包";
+			req.setAttribute("storeName", storeName);
 			String lkName = req.getParameter("lkName");
 			String lkNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,30}$";
 			if (lkName == null || lkName.trim().length() == 0) {
@@ -312,7 +333,10 @@ public class LuckyServlet extends HttpServlet {
 		if ("getImg".equals(action)) {
 			LuckyService LuckySvc = new LuckyService();
 			Integer luckyId = Integer.parseInt(req.getParameter("luckyId"));
-			res.getOutputStream().write(LuckySvc.getImgById(luckyId));
+			byte[] img = LuckySvc.getImgById(luckyId);
+			if (img != null && img.length != 0) {
+				res.getOutputStream().write(img);
+			}
 		}
 	}
 }

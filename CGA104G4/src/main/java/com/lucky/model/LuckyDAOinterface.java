@@ -15,5 +15,9 @@ public interface LuckyDAOinterface {
 	public List<LuckyVO> getAll();
 	
 	public byte[] getImgById(Integer luckyId);
+	
+	public List<LuckyVO> findByStoreId(Integer storeId);
+	
+
 
 }
