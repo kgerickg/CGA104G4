@@ -45,7 +45,7 @@
         }
 
         table td a {
-            background-color: #25b327;
+            background-color: #256cb3;
             color: white;
             padding: 5px 20px;
             border-radius: 30px;
@@ -120,9 +120,9 @@
                 <button id="storeNameSelectorButton">搜索</button>
             </div>
             <div>
-                <span>輸入合作店家名稱:</span>
-                <input type="text" id="selectByInput" name="storeName">
-                <button id="selectByInputButton">搜索</button>
+                <span>選擇合作店家地區:</span>
+                <select id="storeCitySelector" name="storeCity"></select>
+                <button id="storeCitySelectorButton">搜索</button>
             </div>
             <div>
                 <button id="getAll">顯示所有合作店家</button>
@@ -132,6 +132,7 @@
         <!-- ******內容寫在這邊 ↑↑↑****** -->
     </div>
 </div>
+</body>
 
 <script>
 
@@ -151,10 +152,24 @@
         })
     })();
 
+    let storeCityArray = [];
+
+    (async function getStoreCity() {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/store/storeFront.do?action=getStoreCity";
+        let response = await fetch(url, {method: 'get'});
+        storeCityArray = await response.json();
+        $("#storeCitySelector").empty();
+        storeCityArray.forEach(storeCity => {
+            $("#storeCitySelector").append(`<option  value="${storeCity}">${storeCity}</option>`)
+        })
+    })();
+
     //綁定合作店家名稱選單查詢按鈕點擊事件
     $("#storeNameSelectorButton").click(selectByName);
 
-    //透過選單查詢會員資料
+    //透過選單查詢合作店家資料
     async function selectByName() {
         let storeName = $("#storeNameSelector").val();
         let path = window.location.pathname;
@@ -165,39 +180,20 @@
         listStore(stores);
     }
 
-    // //綁定輸入會員編號查詢按鈕事件
-    // $("#selectByInputbutton").click(checkInputMemberNumber);
-    //
-    // //確認輸入編號是否正確
-    // function checkInputMemberNumber() {
-    //     let memId = $("#selectByInputinput").val();
-    //     let evdience = false;
-    //     for (let i = 0; i < memIdArray.length; i++) {
-    //         if (memId == +memIdArray[i]) {
-    //             evdience = true;
-    //             break;
-    //         }
-    //     }
-    //     if (!evdience) {
-    //         alert("輸入的會員編號有誤");
-    //         return;
-    //     }
-    //
-    //     getMemberDataByInput(memId);
-    // };
-    //
-    // async function getMemberDataByInput(memId) {
-    //     let path = window.location.pathname;
-    //     let webCtx = path.substring(0, path.indexOf('/', 1));
-    //     let url = webCtx + "/member/member.do?action=selectById&memId=" + memId;
-    //
-    //     let response = await fetch(url, {method: 'get'});
-    //     let members = await response.json();
-    //     listMember(members);
-    // }
+    //綁定合作店家名稱選單查詢按鈕點擊事件
+    $("#storeCitySelectorButton").click(selectByCity);
 
+    async function selectByCity() {
+        let storeCity = $("#storeCitySelector").val();
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/store/storeFront.do?action=selectByCity&storeCity=" + storeCity;
+        let response = await fetch(url, {method: 'get'});
+        let stores = await response.json();
+        listStore(stores);
+    }
 
-    // 綁定顯示所有會員資料按鈕事件
+    // 綁定顯示所有合作店家資料按鈕事件
 
     $("#getAll").click(getAll)
 

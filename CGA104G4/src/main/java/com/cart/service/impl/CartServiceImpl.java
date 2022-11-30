@@ -20,16 +20,15 @@ public class CartServiceImpl implements CartService {
     private final ProdDAO_interface prodDao = new ProdJDBCDAO();
 
     @Override
-    public void put(Cart cart) {
-        AtomicInteger totalPrice = new AtomicInteger();
-        cart.getItemMap().forEach((prodId, item) -> {
+    public void put(Integer storeId, Cart cart) {
+        AtomicInteger storeTotalPrc = new AtomicInteger();
+        cart.getStoreMap().get(storeId).forEach((prodId, item) -> {
             ProdVO product = prodDao.findByPrimaryKey(prodId);
+            item.setStoreId(storeId);
             item.setProdName(product.getProdName());
             item.setProdPrc(product.getProdPrc());
             item.setProdTotalPrc(product.getProdPrc() * item.getProdQty());
-            totalPrice.addAndGet(item.getProdTotalPrc());
         });
-        cart.setTotalPrc(totalPrice.get());
         cache.put(cart);
     }
 
@@ -38,56 +37,62 @@ public class CartServiceImpl implements CartService {
         Cart cart = cache.get(userId);
         return cart;
     }
+    @Override
+    public String getCart(String userId) {
+        String cartJson = cache.getCart(userId);
+        return cartJson;
+    }
 
     @Override
     public void clear(String userId) {
         cache.clear(userId);
     }
 
+
     @Override
-    public void reduceQty(String userId, Integer prodId) {
+    public void reduceQty(String userId, Integer storeId, Integer prodId) {
         Cart cart = get(userId);
-        Item item = cart.getItemMap().get(prodId);
+        Item item = cart.getStoreMap().get(storeId).get(prodId);
         Integer itemQty = item.getProdQty()-1;
         if(itemQty == 0){
-            cart.getItemMap().remove(item.getProdId());
+            cart.getStoreMap().get(storeId).remove(item.getProdId());
         }else {
             item.setProdQty(itemQty);
         }
 
-        put(cart);
+        put(storeId, cart);
     }
 
     @Override
-    public void addQty(String userId, Integer prodId) {
+    public void addQty(String userId, Integer storeId, Integer prodId) {
         Cart cart = get(userId);
-        Item item = cart.getItemMap().get(prodId);
+        Item item = cart.getStoreMap().get(storeId).get(prodId);
         item.setProdQty(item.getProdQty() + 1);
-        put(cart);
+        put(storeId, cart);
     }
 
 
-    public static void main(String[] args) {
-        CartServiceImpl service = new CartServiceImpl();
-        service.clear("1");
-        Cart cart = new Cart();
-        cart.setUserId("1");
-        Item item = new Item();
-        item.setProdId(1);
-        item.setProdQty(9);
-
-        Item item2 = new Item();
-        item2.setProdId(2);
-        item2.setProdQty(1);
-
-        cart.getItemMap().put(1, item);
-        cart.getItemMap().put(2, item2);
-        service.put(cart);
-        service.addQty("1",1);
-        service.reduceQty("1",2);
-
-        Cart test = service.get("1");
-        System.out.print(test);
-    }
+//    public static void main(String[] args) {
+//        CartServiceImpl service = new CartServiceImpl();
+//        service.clear("1");
+//        Cart cart = new Cart();
+//        cart.setUserId("1");
+//        Item item = new Item();
+//        item.setProdId(1);
+//        item.setProdQty(9);
+//
+//        Item item2 = new Item();
+//        item2.setProdId(2);
+//        item2.setProdQty(1);
+//
+//        cart.getItemMap().put(1, item);
+//        cart.getItemMap().put(2, item2);
+//        service.put(cart);
+//        service.addQty("1",1);
+//        service.reduceQty("1",2);
+//
+//        Cart test = service.get("1");
+//        System.out.print(test);
+//    }
 
 }

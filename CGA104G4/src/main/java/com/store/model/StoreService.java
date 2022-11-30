@@ -1,6 +1,5 @@
 package com.store.model;
 
-import com.member.model.MemberVO;
 import com.utils.MailService;
 import com.utils.RandomPassword;
 
@@ -11,6 +10,18 @@ public class StoreService {
 
     public StoreService() {
         this.dao = new StoreDAO();
+    }
+
+    public void updateAccStat(StoreVO storeVO) {
+        try {
+            dao.beginTransaction();
+            dao.updateAccStat(storeVO);
+            dao.commit();
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+        }
+
     }
 
     public StoreVO addStore(String storeAcc, String storePwd, String storeName, String storeGui,
@@ -118,12 +129,65 @@ public class StoreService {
         }
 
     }
+    public List<Integer> getStoreId() {
+
+        try {
+            dao.beginTransaction();
+            List<Integer> list = dao.getStoreId();
+            dao.commit();
+            return list;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    public List<String> getStoreCity() {
+
+        try {
+            dao.beginTransaction();
+            List<String> list = dao.getStoreCity();
+            dao.commit();
+            return list;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public String getStoreNameById(Integer storeId){
+        try {
+            dao.beginTransaction();
+            String storeName = dao.getOneStoreNameById(storeId);
+            dao.commit();
+            return storeName;
+        } catch (Exception e) {
+            dao.rollback();
+            e.printStackTrace();
+            return null;
+        }
+    }
     public StoreVO findByStoreName(String storeName) {
         try {
             dao.beginTransaction();
             StoreVO storeVO = dao.findByStoreName(storeName);
             dao.commit();
             return storeVO;
+        } catch (Exception e) {
+            dao.rollback();
+            return null;
+        }
+
+    }
+    public List<StoreVO> findByStoreCity(String storeCity) {
+        try {
+            dao.beginTransaction();
+            List<StoreVO> stores = dao.findByStoreCity(storeCity);
+            dao.commit();
+            return stores;
         } catch (Exception e) {
             dao.rollback();
             return null;
@@ -191,9 +255,9 @@ public class StoreService {
 
         try {
             dao.beginTransaction();
-            Integer memId = dao.selectByStoreAcc(storeAcc);
+            Integer storeId = dao.selectByStoreAcc(storeAcc);
             dao.commit();
-            return memId;
+            return storeId;
         } catch (Exception e) {
             dao.rollback();
             e.printStackTrace();
