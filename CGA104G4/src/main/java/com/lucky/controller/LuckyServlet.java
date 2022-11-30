@@ -235,9 +235,8 @@ public class LuckyServlet extends HttpServlet {
 
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 //			HttpSession session = req.getSession();
-//			Integer storeId = (Integer) session.getAttribute("storeId");
-			
-			String storeName = "香香麵包";
+//			Integer storeId = (Integer) session.getAttribute("storeId");			
+			String storeName = "香香麵包";     /***********先寫死測試用，正式時用上面↑************/
 			req.setAttribute("storeName", storeName);
 			String lkName = req.getParameter("lkName");
 			String lkNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,30}$";

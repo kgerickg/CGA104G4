@@ -4,9 +4,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.lucky.model.*"%>
 
-<%
-  LuckyVO luckyVO = (LuckyVO) request.getAttribute("luckyVO"); 
-%>
 
 <!DOCTYPE html>
 <html>
@@ -118,51 +115,47 @@ thead th{
   </li>
    
   <jsp:useBean id="luckySvc" scope="page" class="com.lucky.model.LuckyService" />
-  
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" >
-       <b>選擇福袋名稱:</b>
-       <select size="1" name="luckyId">
-         <c:forEach var="luckyVO" items="${luckySvc.all}" > 
-          <option value="${luckyVO.luckyId}">${luckyVO.lkName}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOneForMember">
-       <input type="submit" value="送出">
-     </FORM>
-  </li>
-  
-  <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" >
-       <b>選擇商店名稱:</b>
-       <select size="1" name="storeId">
-         <c:forEach var="luckyVO" items="${luckySvc.all}" > 
-          <option value="${luckyVO.storeId}">${luckyVO.storeName}</option>
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getAllByStore">
-       <input type="submit" value="送出">
-     </FORM>
-  </li>
+
   
 </ul>
   
 <div class="row">
+
+<c:forEach var="lucky" items="${list}">
 
 	<div class="col-sm-6 col-md-3 text-center">
 <%-- 	      
 	<img src="<%=request.getContextPath()%>/lucky/lucky.do?action=getImg&luckyId=${lucky.luckyId}" width="150px" height="150px">
 --%>
 		<br>
-		<img src="<%=request.getContextPath()%>/front-lucky/images/4.png" width="150px" height="150px">
+		<img src="<%=request.getContextPath()%>/front-lucky/images/4.png" width="150px" height="150px">	      
 		<br>
-		<%=luckyVO.getLkName()%><strong>$<%=luckyVO.getLkPrc()%></strong>
+		${lucky.lkName}<strong>$${lucky.lkPrc}</strong>
 		<br>
-		<button class="btn btn-danger my-cart-btn" data-id=<%=luckyVO.getLuckyId()%> data-name=<%=luckyVO.getLkName()%> data-summary=<%=luckyVO.getLkCont()%> data-price=<%=luckyVO.getLkPrc()%> data-quantity="1" data-image="<%=request.getContextPath()%>/front-lucky/images/4.png">我要預約</button>
-		<%=luckyVO.getLkCont()%>
+		<button class="btn btn-danger my-cart-btn" data-id="${lucky.luckyId}" data-name="${lucky.lkName}" data-summary="${lucky.lkCont}" data-price="${lucky.lkPrc}" data-quantity="1" data-image="<%=request.getContextPath()%>/front-lucky/images/4.png">我要預約</button>
+		${lucky.lkCont}
 		<br>
 		<br>
 	</div>
+</c:forEach>
+	
+<c:forEach var="lucky" items="${listForST}">
+
+	<div class="col-sm-6 col-md-3 text-center">
+<%-- 	      
+	<img src="<%=request.getContextPath()%>/lucky/lucky.do?action=getImg&luckyId=${lucky.luckyId}" width="150px" height="150px">
+--%>
+		<br>
+		<img src="<%=request.getContextPath()%>/front-lucky/images/4.png" width="150px" height="150px">	      
+		<br>
+		${lucky.lkName}<strong>$${lucky.lkPrc}</strong>
+		<br>
+		<button class="btn btn-danger my-cart-btn" data-id="${lucky.luckyId}" data-name="${lucky.lkName}" data-summary="${lucky.lkCont}" data-price="${lucky.lkPrc}" data-quantity="1" data-image="<%=request.getContextPath()%>/front-lucky/images/4.png">我要預約</button>
+		${lucky.lkCont}
+		<br>
+		<br>
+	</div>
+</c:forEach>
     
 </div>
 
