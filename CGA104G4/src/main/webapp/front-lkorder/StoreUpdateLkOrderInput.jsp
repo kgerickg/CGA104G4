@@ -113,8 +113,7 @@ a {
 	text-align: center;
 	background-color: #F0F0F0;
 	margin: 2% auto;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	border-radius: 10px;
 	padding: 15px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 	color: #2F3237;
