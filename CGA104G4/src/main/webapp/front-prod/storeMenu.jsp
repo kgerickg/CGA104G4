@@ -1,11 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.prod.model.*"%>
-
+<%@ page import="com.store.model.*"%>
 <jsp:useBean id="listProdTypeIds_ByStoreId_S" scope="request"
 	type="java.util.Set<ProdVO>" />
 <jsp:useBean id="prodSvc" scope="page"
 	class="com.prod.model.ProdService" />
+<jsp:useBean id="storeSvc" scope="page"
+	class="com.store.model.StoreService" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,8 +60,7 @@
 		<section class="sec-block p-0">
 			<div class="container">
 				<div class="section-title text-center">
-					<span>Amazing taste </span>
-					<h2 class="text-capitalize">Menu</h2>
+						<h2 class="text-capitalize">${storeSvc.findByStoreId(storeId).storeName}</h2>
 				</div>
 				<!--sec-title end-->
 				<div class="popular-dishes style2 text-center">
@@ -289,6 +290,6 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
-	
+
 </body>
 </html>

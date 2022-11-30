@@ -1,7 +1,5 @@
 package com.photo.model;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,13 +15,13 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 	String passwd = "password";
 
 	private static final String INSERT_STMT = "insert into PHOTO (PROD_ID, PHOTO_STAT, PHOTO_PIC) values (?, ?, ?)";
-	private static final String GET_ALL_STMT = "select PROD_ID, PHOTO_STAT from PHOTO order by PHOTO_ID";
-	private static final String GET_ONE_STMT = "select PROD_ID, PHOTO_STAT from PHOTO where PHOTO_ID = ?";
+	private static final String GET_ALL_STMT = "select PHOTO_ID, PROD_ID, PHOTO_STAT from PHOTO order by PHOTO_ID";
+	private static final String GET_ONE_STMT = "select PHOTO_ID, PROD_ID, PHOTO_STAT, PHOTO_PIC from PHOTO where PHOTO_ID = ?";
 	private static final String DELETE = "delete from PHOTO where PHOTO_ID = ?";
 	private static final String UPDATE = "update PHOTO set PROD_ID = ?, PHOTO_STAT = ?, PHOTO_PIC = ? where PHOTO_ID = ?";
 
 	@Override
-	public void insert(PhotoVO PhotoVO) throws IOException {
+	public void insert(PhotoVO photoVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -33,18 +31,21 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, PhotoVO.getProdId());
-			pstmt.setInt(2, PhotoVO.getPhotoStat());
-			byte[] pic = getPictureByteArray("C:/CGA104G4_Workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/CGA104G4/resources/images/PROD_ID_1.jpg");
-			pstmt.setBytes(3, pic);
+			pstmt.setInt(1, photoVO.getProdId());
+			pstmt.setInt(2, photoVO.getPhotoStat());
+			pstmt.setBytes(3, photoVO.getPhotoPic());
+			
 			pstmt.executeUpdate();
 
+			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} catch (IOException ie) {
-			throw new IOException("資料傳輸錯誤" + ie.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -64,16 +65,8 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 
 	}
 
-	public static byte[] getPictureByteArray(String path) throws IOException {
-		FileInputStream fis = new FileInputStream(path);
-		byte[] buffer = new byte[fis.available()];
-		fis.read(buffer);
-		fis.close();
-		return buffer;
-	}
-
 	@Override
-	public void update(PhotoVO PhotoVO) {
+	public void update(PhotoVO photoVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -84,17 +77,21 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, PhotoVO.getProdId());
-			pstmt.setInt(2, PhotoVO.getPhotoStat());
-
+			pstmt.setInt(1, photoVO.getProdId());
+			pstmt.setInt(2, photoVO.getPhotoStat());
+			pstmt.setBytes(3, photoVO.getPhotoPic());
+			pstmt.setInt(4, photoVO.getPhotoId());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -133,10 +130,12 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -160,7 +159,7 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 	@Override
 	public PhotoVO findByPrimaryKey(Integer photoId) {
 
-		PhotoVO PhotoVO = null;
+		PhotoVO photoVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -177,9 +176,11 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 
 			while (rs.next()) {
 				// ProdTypeVO 也稱為 Domain objects
-				PhotoVO = new PhotoVO();
-				PhotoVO.setProdId(rs.getInt("PROD_ID"));
-				PhotoVO.setProdId(rs.getInt("PHOTO_STAT"));
+				photoVO = new PhotoVO();
+				photoVO.setPhotoId(rs.getInt("PHOTO_ID"));
+				photoVO.setProdId(rs.getInt("PROD_ID"));
+				photoVO.setPhotoStat(rs.getInt("PHOTO_STAT"));
+				photoVO.setPhotoPic(rs.getBytes("PHOTO_PIC"));
 			}
 
 			// Handle any driver errors
@@ -212,13 +213,13 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 				}
 			}
 		}
-		return PhotoVO;
+		return photoVO;
 	}
 
 	@Override
 	public List<PhotoVO> getAll() {
 		List<PhotoVO> list = new ArrayList<PhotoVO>();
-		PhotoVO PhotoVO = null;
+		PhotoVO photoVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -233,19 +234,22 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 
 			while (rs.next()) {
 				// ProdTypeVO 也稱為 Domain objects
-				PhotoVO = new PhotoVO();
-				PhotoVO.setProdId(rs.getInt("PROD_ID"));
-				PhotoVO.setProdId(rs.getInt("PHOTO_STAT"));
+				photoVO = new PhotoVO();
+				photoVO.setPhotoId(rs.getInt("PHOTO_ID"));
+				photoVO.setProdId(rs.getInt("PROD_ID"));
+				photoVO.setPhotoStat(rs.getInt("PHOTO_STAT"));
 				
-				list.add(PhotoVO); // Store the row in the list
+				list.add(photoVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
