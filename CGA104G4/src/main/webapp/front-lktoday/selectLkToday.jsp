@@ -1,23 +1,30 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%@ page import="com.today.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.lktoday.model.*"%>
 
 <%
-	//Integer storeId = (Integer) session.getAttribute("storeId");
-	Integer storeId = 2;   //å…ˆå¯«æ­»ï¼Œæ¸¬è©¦ç”¨ï¼Œæ­£å¼ç”¨â†‘ä¸Šé¢é‚£è¡Œâ†‘************************************************************é€™è£¡è¦æ”¹ï¼
-	LuckyService service = new LuckyService();
-	List<LuckyVO> luckyVOList = service.getAll2(storeId);
+// 	Integer storeId = (Integer) session.getAttribute("storeId");
+	Integer storeId = 3;
+	LkTodayService service = new LkTodayService();
+	List<TodayLuckyVO> lktodayVOList = service.findByStore(storeId, new java.sql.Date(System.currentTimeMillis()));
+	List<TodayLuckyVO> selectList = lktodayVOList.stream().map(vo -> {
+		TodayLuckyVO selectVo = new TodayLuckyVO();
+		selectVo.setLkId(vo.getLkId());
+		selectVo.setLkName(vo.getLkName());
+		return selectVo;
+	}).distinct().toList();
 %>
 
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<title>ç¦è¢‹ç®¡ç†</title>
+<title>ºÖ³U¹w¬ù¬d¸ß</title>
 
-<!-- éŸ¿æ‡‰å¼é é¢ -->
+<meta charset="UTF-8">
+<!-- ÅTÀ³¦¡­¶­± -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 
 <!-- GOOGLEFONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +33,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<!-- ä¸‹é¢æ˜¯é€™å€‹æ¨¡æ¿éœ€è¦çš„cssè«‹å‹¿æ”¹å‹• è‹¥æœ‰æ’ç‰ˆéœ€è¦è«‹ç›´æ¥å¯«æ–°çš„cssè“‹éå»å°±å¯ä»¥äº† -->
+<!-- ¤U­±¬O³o­Ó¼ÒªO»İ­nªºcss½Ğ¤Å§ï°Ê ­Y¦³±Æª©»İ­n½Ğª½±µ¼g·sªºcss»\¹L¥h´N¥i¥H¤F -->
 <link rel="stylesheet" type="text/css"
 	href=${pageContext.request.contextPath}/resources/css/all.min.css>
 <link rel="stylesheet" type="text/css"
@@ -41,51 +48,39 @@
 	href=${pageContext.request.contextPath}/resources/css/style.css>
 <link rel="stylesheet" type="text/css"
 	href=${pageContext.request.contextPath}/resources/css/nav.css>
-<!-- å·²ç¶“é è¼‰å…¥jqueryäº†æœ‰éœ€è¦jqueryå¯ä»¥ç›´æ¥ä½¿ç”¨ -->
+<!-- ¤w¸g¹w¸ü¤Jjquery¤F¦³»İ­njquery¥i¥Hª½±µ¨Ï¥Î -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
-<!-- è«‹å°‡è¦†è“‹ç”¨çš„cssæ”¾ç½®æ­¤è¨»è§£ä¸‹æ–¹ -->
+<!-- ½Ğ±NÂĞ»\¥Îªºcss©ñ¸m¦¹µù¸Ñ¤U¤è -->
+
 <style>
-table#table-1 {
-	width: 450px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-	border: 3px ridge Gray;
-	height: 80px;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-
-a {
-	color: #5c636a;
-	text-decoration: none;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-.table-order {
-	width: 40%;
-	height: 70%;
-	margin: auto;
-	padding: 5% 20px;
-	border-radius: 10px;
+table {
+	border-collapse: collapse;
+	margin: 25px auto;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
-	background: white;
+	text-align: center;
+	border-radius: 10px;
 }
 
-.table-order ul li {
+table  tr:nth-of-type(even) {
+	background-color: #f3f3f3;
 	color: black;
+	border-bottom: 1px solid #dddddd;
+}
+
+table th, td {
+	padding: 5px 5px;
+	color: black;
+}
+
+#table-1 td {
+	width: 60vw;
+	text-align: center;
+	background-color: #F0F0F0;
+	border-radius: 10px;
 }
 
 .btn-secondary {
@@ -101,84 +96,55 @@ a {
 	border: 1px solid #6c757d;
 	border-radius: 10%;
 }
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+thead th {
+	color: #D5DDE5;;
+	background: #1b1e24;
+	border-bottom: 4px solid #9ea7af;
+	border-right: 1px solid #343a45;
+	font-size: 1rem;
+	font-weight: 100;
+	padding: 10px;
+}
 </style>
 
 </head>
 
 <body>
-<script src=${pageContext.request.contextPath}/resources/js/storenav.js></script>
-<!-- ä¸Šé¢æ˜¯NAVè¼‰å…¥ è«‹ä¸€å®šè¦æ”¾åœ¨BODYé–‹å§‹çš„ä½ç½® -->
-<!--ä¸‹é¢å¯è‡ªç”±æ–°å¢å…§å®¹ -->
+
+<script src="../resources/js/storenav.js"></script>
+<!-- ¤W­±¬ONAV¸ü¤J ½Ğ¤@©w­n©ñ¦bBODY¶}©lªº¦ì¸m -->
+<!--¤U­±¥i¦Û¥Ñ·s¼W¤º®e -->
 
 <div style="padding-bottom: 10%"></div>
 
-<div class="table-order">
+<table id="table-1">
+<tr><td>
+<h1 style="font-weight: 700">ºÖ³U¹w¬ù¬d¸ß</h1>
+<li style="font-weight: bolder; font-size: 1.2em;">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lktoday/getlktoday.do" >
+	<b>¿ï¾ÜºÖ³U¡G</b>
+	<select size="1" name="luckyId">
+		<c:forEach var="vo" items="<%=selectList%>" >
+			<option value="${vo.lkId}">${vo.lkName}</option>
+		</c:forEach>   
+	</select>
+	<input type="hidden" name="action" value="findAllForStore">
+	<input type="submit" value="°e¥X">
+</FORM>
+</li>
+</td></tr>
+</table>
+				<!-- ¤U­±¬O³o­Óª©»İ­nªºjs¥i²K¥[¦U¦Û»İ­nªºjsÀÉ-->
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/slick.js"></script>
+    <script src="../resources/js/scripts.js"></script>
+    <script src="../resources/js/isotope.js"></script>
 
-<%-- éŒ¯èª¤è¡¨åˆ— --%>
-<c:if test="${not empty errorMsgs}">
-
-	<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
-	
-	<ul>
-	<c:forEach var="message" items="${errorMsgs}">
-	<li style="color: red">${message}</li>
-	</c:forEach>
-	</ul>
-	
-</c:if>
-
-<ul>
-
-  <li style="font-weight: bolder; font-size: 1.2em;">
-	<a style="text-decoration: none" href='<%=request.getContextPath()%>/lucky/lucky.do?action=getAllForStore'>æŸ¥è©¢æ‰€æœ‰ç¦è¢‹</a>
-  </li>
-  <br>
-	
-  <li style="font-weight: bolder; font-size: 1.2em;">
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" >
-       <b>é¸æ“‡ç¦è¢‹ç·¨è™Ÿ:</b>
-       <select size="1" name="luckyId">
-         <c:forEach var="luckyVO" items="<%=luckyVOList%>" >
-          <option value="${luckyVO.luckyId}">${luckyVO.luckyId}</option>
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="é€å‡º">
-    </FORM>
-  </li>
-  <br>
-  
-  <li style="font-weight: bolder; font-size: 1.2em;">
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" >
-       <b>é¸æ“‡ç¦è¢‹åç¨±:</b>
-       <select size="1" name="luckyId">
-         <c:forEach var="luckyVO" items="<%=luckyVOList%>" > 
-          <option value="${luckyVO.luckyId}">${luckyVO.lkName}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="é€å‡º">
-     </FORM>
-  </li>
-  <br>  
-
-	<jsp:useBean id="luckySvc" scope="page" class="com.lucky.model.LuckyService" />
-		
-  <li style="font-weight: bolder; font-size: 1.2em">
-	<a style="text-decoration: none" href='addLucky.jsp'>æ–°å¢ç¦è¢‹</a>
-  </li>
-  <br>
-
-</ul>
-
-<hr>
-
-</div>
-
-	<!-- ä¸‹é¢æ˜¯é€™å€‹ç‰ˆéœ€è¦çš„jså¯æ·»åŠ å„è‡ªéœ€è¦çš„jsæª”-->
-	<script src=${pageContext.request.contextPath}/resources/js/bootstrap.min.js></script>
-	<script src=${pageContext.request.contextPath}/resources/js/slick.js></script>
-	<script src=${pageContext.request.contextPath}/resources/js/scripts.js></script>
-	<script src=${pageContext.request.contextPath}/resources/js/isotope.js></script>
 </body>
 </html>

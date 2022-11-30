@@ -15,7 +15,7 @@ header.innerHTML =
             </div>
             <nav>
                 <ul>
-                    <li><a href="${webCtx}/front-lucky/luckyCart.jsp" >吉食專區</a></li>
+                    <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember" >吉食專區</a></li>
                     <li><a href="" >最新消息</a></li>
                     <li><a href="${webCtx}/front-index/About.html" >關於我們</a></li>
                     <li><a href="" >Q&A</a></li>
@@ -45,7 +45,8 @@ header.innerHTML =
             <ul class="oth-lnks ml-auto">
                 <li>
                     <a href="#" title="" class="">
-                        <img alt="" src="" id="personImage" style="width:2.5rem;border-radius: 100%;margin-right: 0px">
+                        <img alt="" src="" id="personImage" style="width:2.5rem;border-radius: 100%;margin-right: 0px;
+                         display:none">
                     </a>
                 </li>
                 <li>
@@ -75,7 +76,7 @@ let div = document.createElement("div");
 div.setAttribute("class", "responsive-mobile-menu");
 div.innerHTML =
     `<ul>
-        <li><a href="${webCtx}/front-lucky/luckyCart.jsp">吉食專區</a></li>
+        <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember">吉食專區</a></li>
         <li><a href="">最新消息</a></li>
         <li><a href="${webCtx}/front-index/About.html">關於我們</a></li>
         <li><a href="">Q&A</a></li>
@@ -155,16 +156,19 @@ async function loginCheckWithServer() {
 
 //登入改變NAV顯示結果
 function loginNavChange() {
+    console.log("hihi");
     //改變一般navbar
     document.querySelector("#logul").innerHTML = "";
     document.querySelector("#logul").innerHTML = `<li><a href="" title="" class="logout">登出</a></li>`;
     let memData = JSON.parse(sessionStorage.getItem("memData"));
     if (memData.memPic) {
         document.querySelector("#personImage").setAttribute("src", "data:image/png;base64," + memData.memPic);
+        document.querySelector("#personImage").style.display = "inline-block";
     } else {
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
         document.querySelector("#personImage").setAttribute("src", `${webCtx}/resources/images/personal.jpg`);
+        document.querySelector("#personImage").style.display = "inline-block";
     }
 
     //改變response-navbar
