@@ -6,10 +6,10 @@ public class LkTodayVO implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer lkTodayId;
 	private Integer memId;
-	private Integer storeId;
 	private Integer luckyId;
 	private Date lkTodayTime;
 	private Integer lkQty;
+	private Integer storeId;
 	private Integer lkPrc;
 
 	public Integer getLkTodayId() {
@@ -26,14 +26,6 @@ public class LkTodayVO implements java.io.Serializable {
 
 	public void setMemId(Integer memId) {
 		this.memId = memId;
-	}
-
-	public Integer getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
 	}
 
 	public Integer getLuckyId() {
@@ -60,8 +52,16 @@ public class LkTodayVO implements java.io.Serializable {
 		this.lkQty = lkQty;
 	}
 	
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
 	public Integer getLkPrc() {
-		return lkQty;
+		return lkPrc;
 	}
 
 	public void setLkPrc(Integer lkPrc) {

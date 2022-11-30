@@ -15,7 +15,7 @@ header.innerHTML =
             </div>
             <nav>
                 <ul>
-                    <li><a href="${webCtx}/front-lucky/luckyCart.jsp" >吉食專區</a></li>
+                    <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember" >吉食專區</a></li>
                     <li><a href="" >最新消息</a></li>
                     <li><a href="${webCtx}/front-index/About.html" >關於我們</a></li>
                     <li><a href="" >Q&A</a></li>
@@ -81,7 +81,7 @@ let div = document.createElement("div");
 div.setAttribute("class", "responsive-mobile-menu");
 div.innerHTML =
     `<ul>
-        <li><a href="${webCtx}/front-lucky/luckyCart.jsp">吉食專區</a></li>
+        <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember">吉食專區</a></li>
         <li><a href="">最新消息</a></li>
         <li><a href="${webCtx}/front-index/About.html">關於我們</a></li>
         <li><a href="">Q&A</a></li>

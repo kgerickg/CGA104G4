@@ -1,13 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.lucky.model.*"%>
+<%@ page import="com.lktoday.model.*"%>
 
+<%
+// 	Integer storeId = (Integer) session.getAttribute("storeId");
+//	Integer storeId = 3;
+//	LkTodayService service = new LkTodayService();
+//	List<TodayLuckyVO> lktodayVOList = service.findByStore(storeId, new java.sql.Date(System.currentTimeMillis()));
+//	List<TodayLuckyVO> selectList = lktodayVOList.stream().map(vo -> {
+//		TodayLuckyVO selectVo = new TodayLuckyVO();
+//		selectVo.setLkId(vo.getLkId());
+//		selectVo.setLkName(vo.getLkName());
+//		return selectVo;
+//	}).distinct().toList();
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>查詢所有福袋</title>
+<title>福袋預約資料</title>
 
 <meta charset="UTF-8">
 <!-- 響應式頁面 -->
@@ -113,8 +125,8 @@ thead th {
 
 <table id="table-1">
 	<tr><td>
-		 <h1 style="font-weight: 700">所有福袋資料</h1>
-		 <h4><a style="text-decoration: none; color: #5c636a" href="<%=request.getContextPath()%>/front-lucky/select_page.jsp">回首頁</a></h4>
+		 <h1 style="font-weight: 700">福袋預約資料</h1>
+		 <h4><a style="text-decoration: none; color: #5c636a" href="<%=request.getContextPath()%>/front-lktoday/selectLkToday.jsp">回上頁</a></h4>
 	</td></tr>
 </table>
 
@@ -122,42 +134,36 @@ thead th {
 	<thead>
 	<tr>
 		<th>福袋編號</th>
-		<th>商家編號</th>
-		<th>福袋狀態</th>
 		<th>福袋名稱</th>
-		<th>福袋內容</th>
+		<th>今日福袋編號</th>
+		<th>會員編號</th>
+		<th>商家編號</th>
 		<th>福袋價格</th>
-		<th>上架日期</th>
-		<th>修改</th>
-		<th>刪除</th>
+		<th>勾選</th>
 	</tr>
 	</thead>
 
-	<c:forEach var="luckyVO" items="${list}">
+	<c:forEach var="vo" items="${list}">
 		<tr>
-			<td>${luckyVO.luckyId}</td>
-			<td>${luckyVO.storeId}</td>
-			<td>${luckyVO.lkStat}</td>
-			<td>${luckyVO.lkName}</td>
-			<td>${luckyVO.lkCont}</td>
-			<td>${luckyVO.lkPrc}</td> 
-			<td>${luckyVO.lkTime}</td>
+			<td>${vo.lkId}</td>
+			<td>${vo.lkName}</td>
+			<td>${vo.lkTodayId}</td>
+			<td>${vo.memId}</td>
+			<td>${vo.storeId}</td>
+			<td>${vo.lkPrc}</td> 
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="luckyId"  value="${luckyVO.luckyId}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lucky/lucky.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="luckyId"  value="${luckyVO.luckyId}">
-			     <input type="hidden" name="action" value="delete"></FORM>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/lktoday/getlktoday.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="接受" class="btn-secondary">
+			     <input type="hidden" name="lkTodayId" value="${vo.lkTodayId}">
+			     <input type="hidden" name="lkId" value="${vo.lkId}">
+			     <input type="hidden" name="memId" value="${vo.memId}">
+			     <input type="hidden" name="storeId" value="${vo.storeId}">
+			     <input type="hidden" name="lkPrc" value="${vo.lkPrc}">
+			     <input type="hidden" name="action" value="insertlkorder"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
-
 				<!-- 下面是這個版需要的js可添加各自需要的js檔-->
     <script src="../resources/js/bootstrap.min.js"></script>
     <script src="../resources/js/slick.js"></script>

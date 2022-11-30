@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.lucky.model.LuckyVO;
+import com.lkorder.model.LkOrderVO;
 
 public class LkTodayDAO implements LkTodayDAOinterface {
 	private static DataSource ds = null;
@@ -27,10 +27,41 @@ public class LkTodayDAO implements LkTodayDAOinterface {
 	}
 	
 	private static final String INSERT = "INSERT INTO LK_TODAY(MEM_ID, LK_ID, LK_QTY) VALUES (?, ?, ?)";
-	private static final String storeGET = "SELECT LK_TODAY_ID, MEM_ID, 2.LK_ID, LK_QTY, STORE_ID FROM LK_TODAY l join LUCKY s on 2.LK_ID = s.LK_ID order by LK_TODAY_ID where STORE_ID = ? and LK_TODAY_TIME = ?";
+//	private static final String storeGET = "SELECT l.LK_ID, s.LK_NAME, l.LK_TODAY_ID, l.MEM_ID, s.STORE_ID, s.LK_PRC "
+//			+ "FROM LK_TODAY l join LUCKY s on l.LK_ID = s.LK_ID "
+//			+ "where s.STORE_ID = 3 and DATE(LK_TODAY_TIME) = ? "
+//			+ "order by LK_TODAY_ID";
+	private static final String storeGET = "SELECT l.LK_ID, s.LK_NAME, l.LK_TODAY_ID, l.MEM_ID, s.STORE_ID, s.LK_PRC "
+			+ "FROM LK_TODAY l join LUCKY s on l.LK_ID = s.LK_ID "
+			+ "where s.STORE_ID = ? "
+			+ "order by LK_TODAY_ID";
+	
 	private static final String memGET = "SELECT LK_TODAY_ID, MEM_ID, LK_ID, LK_QTY FROM LK_TODAY where MEM_ID = ? and LK_TODAY_TIME = ?";
-	private static final String orderINSERT = "INSERT INTO LK_ORDER(SELECT LK_TODAY_ID, MEM_ID, 3.LK_ID, LK_PRC FROM LK_TODAY l join LUCKY s on 3.LK_ID = s.LK_ID order by LK_TODAY_ID where LK_TODAY_TIME = ?)";
 	private static final String DELETE = "DELETE FROM LK_TODAY where LK_TODAY_ID = ?";
+	private static final String orderINSERT = "INSERT INTO LK_ORDER(LK_ID, MEM_ID, LK_TODAY_ID, LK_ORD_AMT, LK_ORD_TIME_S) "
+			+ "SELECT LK_TODAY_ID, MEM_ID, l.LK_ID, LK_PRC, NOW() "
+			+ "FROM LK_TODAY l join LUCKY s on l.LK_ID = s.LK_ID "
+			+ "where LK_TODAY_TIME = ? and STORE_ID = ?"
+			+ "order by LK_TODAY_ID";
+	private static final String orderINSERT2 = "INSERT INTO LK_ORDER(LK_ID, MEM_ID, LK_TODAY_ID, LK_ORD_AMT, LK_ORD_TIME_S)"
+			+ "VALUES(?,?,?,?,?)";
+	
+	@Override
+	public void orderinsert(LkOrderVO lkOrderVO,Integer storeId) {
+		try (
+				Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(orderINSERT2)
+				) {
+			pstmt.setInt(1, lkOrderVO.getLkId());
+			pstmt.setInt(2, lkOrderVO.getMemId());
+			pstmt.setInt(3, lkOrderVO.getLkTodayId());
+			pstmt.setInt(4, lkOrderVO.getLkOrdAmt());
+			pstmt.setDate(5, lkOrderVO.getLkOrdTimeS());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void insert(LkTodayVO lkTodayVO) {
@@ -90,24 +121,24 @@ public class LkTodayDAO implements LkTodayDAOinterface {
 	}
 	
 	@Override
-	public List<LkTodayVO> findByStore(Integer storeId, Date lkTodayTime) {
+	public List<TodayLuckyVO> findByStore(Integer storeId, Date lkTodayTime) {
 		try (
 			Connection con = ds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(storeGET);
 		) {
 			pstmt.setInt(1, storeId);
-			pstmt.setDate(2, lkTodayTime);
+//			pstmt.setString(2, lkTodayTime);
 			try (ResultSet rs = pstmt.executeQuery()) {
-				List<LkTodayVO> list = new ArrayList<>();
+				List<TodayLuckyVO> list = new ArrayList<>();
 				while (rs.next()) {
-					LkTodayVO lktodayVO = new LkTodayVO();
-					lktodayVO.setLkTodayId(rs.getInt("LK_TODAY_ID"));
-					lktodayVO.setMemId(rs.getInt("MEM_ID"));
-					lktodayVO.setLuckyId(rs.getInt("LK_ID"));
-					lktodayVO.setLkTodayTime(rs.getDate("LK_TODAY_TIME"));
-					lktodayVO.setLkQty(rs.getInt("LK_QTY"));
-					lktodayVO.setStoreId(rs.getInt("STORE_ID"));
-					list.add(lktodayVO);
+					TodayLuckyVO vo = new TodayLuckyVO();
+					vo.setLkId(rs.getInt("LK_ID"));
+					vo.setLkName(rs.getString("LK_NAME"));
+					vo.setLkTodayId(rs.getInt("LK_TODAY_ID"));
+					vo.setMemId(rs.getInt("MEM_ID"));
+					vo.setStoreId(rs.getInt("STORE_ID"));
+					vo.setLkPrc(rs.getInt("LK_PRC"));
+					list.add(vo);
 				}
 				return list;
 			}
@@ -145,24 +176,11 @@ public class LkTodayDAO implements LkTodayDAOinterface {
 		return null;
 	}
 	
+
 	@Override
-	public void orderinsert(LkTodayVO lkTodayVO) {
-
-		try (
-			Connection con = ds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(orderINSERT)
-		) {
-			
-			pstmt.setInt(1, lkTodayVO.getLkTodayId());			
-			pstmt.setInt(1, lkTodayVO.getMemId());
-			pstmt.setInt(3, lkTodayVO.getLuckyId());
-			pstmt.setInt(4, lkTodayVO.getLkPrc());	
-			
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void orderinsert(LkOrderVO lkOrderVO) {
+		// TODO Auto-generated method stub
+		
 	}	
 	
 }

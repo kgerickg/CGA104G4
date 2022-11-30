@@ -64,7 +64,7 @@
 	border-radius: 5px;
 }
 
-table tr td:nth-of-type(odd) {
+.table tr td:nth-of-type(odd) {
 	display: block;
 	padding-left: 20px;
 	background: #35544E;

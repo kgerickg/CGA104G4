@@ -122,7 +122,7 @@ public class LkTodayJDBCDAO implements LkTodayDAOinterface {
 	}
 
 	@Override
-	public List<LkTodayVO> findByStore(Integer storeId, Date lkTodayTime) {
+	public List<TodayLuckyVO> findByStore(Integer storeId, Date lkTodayTime) {
 		// TODO Auto-generated method stub
 		return null;
 	}
