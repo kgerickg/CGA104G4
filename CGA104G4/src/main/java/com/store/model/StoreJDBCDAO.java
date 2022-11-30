@@ -17,7 +17,7 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 
     private static final String INSERT_SQL = "insert into STORE(STORE_ACC, STORE_PWD, ACC_STAT, STORE_NAME, STORE_TEL, STORE_CITY, STORE_DIST, STORE_ADR, STORE_PIC)values(?,?,?,?,?,?,?,?,?)";
 
-    private static final String GETSTOREID_SQL = "select STORE_ID from MEMBER";
+    private static final String GETSTOREID_SQL = "select STORE_ID from STORE";
 
     private static final String FINDBYPK_SQL = "select * from STORE where STORE_ID = ?";
 
@@ -25,7 +25,7 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 
     private static final String DELETE_SQL = "delete from STORE where STORE_ID = ?";
 
-    private static final String UPDATE_SQL = "update STORE set STORE_ACC=?,STORE_PWD=?,ACC_STAT=?,STORE_NAME=?,STORE_TEL=?,STORE_CITY=?,STORE_DIST=?,STORE_ADR=? where MEM_ID =?";
+    private static final String UPDATE_SQL = "update STORE set STORE_ACC=?,STORE_PWD=?,ACC_STAT=?,STORE_NAME=?,STORE_TEL=?,STORE_CITY=?,STORE_DIST=?,STORE_ADR=? where STORE_ID =?";
 
     @Override
     public void insert(StoreVO storeVO) {
@@ -152,7 +152,17 @@ public class StoreJDBCDAO implements StoreDAO_interface {
     }
 
     @Override
+    public List<StoreVO> findByStoreCity(String storeCity) {
+        return null;
+    }
+
+    @Override
     public List<String> getStoreName() {
+        return null;
+    }
+
+    @Override
+    public List<String> getStoreCity() {
         return null;
     }
 
@@ -184,5 +194,10 @@ public class StoreJDBCDAO implements StoreDAO_interface {
     @Override
     public void updateAccStat(StoreVO storeVO) {
 
+    }
+
+    @Override
+    public String getOneStoreNameById(Integer storeId) {
+        return null;
     }
 }

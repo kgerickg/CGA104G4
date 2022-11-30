@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>會員管理頁面</title>
+  <!-- 響應式頁面 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ↓↓↓下面是這個版需要的css可添加各自需要的css檔-->
+
+  <!-- Bootstrap Styles-->
+  <link href=../resources/back-stage/assets/css/bootstrap.css rel="stylesheet" />
+  <!-- FontAwesome Styles-->
+  <link href=../resources/back-stage/assets/css/font-awesome.css rel="stylesheet" />
+  <!-- Google Fonts-->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+  <!-- Custom Styles-->
+  <link href=../resources/back-stage/assets/css/custom-styles.css rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <!-- ↑↑↑下面是這個版需要的css可添加各自需要的css檔-->
+
+  <style>
+    div.flexdiv {
+      display: flex;
+      justify-content: space-around;
+      width: 90%;
+      margin-bottom: 2rem;
+    }
+    img.storePic{
+      width: 60px;
+      height: auto;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    th {
+      background: #42444e;
+      color: #fff;
+      text-align: center;
+    }
+    tr{
+      text-align: center;
+    }
+    tr:first-child th:first-child {
+      border-top-left-radius: 6px;
+    }
+    tr:first-child th:last-child {
+      border-top-right-radius: 6px;
+    }
+    td {
+      border-right: 1px solid #c6c9cc;
+      border-bottom: 1px solid #c6c9cc;
+    }
+    td:first-child {
+      border-left: 1px solid #c6c9cc;
+    }
+    tr:nth-child(even) td {
+      background: #eaeaed;
+    }
+    tr:last-child td:first-child {
+      border-bottom-left-radius: 6px;
+    }
+    tr:last-child td:last-child {
+      border-bottom-right-radius: 6px;
+    }
+    select:disabled{
+      color: black;
+      opacity: 1;
+    }
+    .css-button-sharp--black {
+      min-width: 40px;
+      height: 30px;
+      color: #fff;
+      padding: 5px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      outline: none;
+      border: 2px solid #212529;
+      background: #212529;
+    }
+    .css-button-sharp--black:hover {
+      background: #fff;
+      color: #212529
+    }
+    .css-button-sharp--sky {
+      min-width: 40px;
+      height: 30px;
+      color: #fff;
+      padding: 5px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      outline: none;
+      border: 2px solid #4433ff;
+      background: #4433ff;
+    }
+    .css-button-sharp--sky:hover {
+      background: #fff;
+      color: #4433ff
+    }
+    .css-button-sharp--red {
+      min-width:40px;
+      height: 30px;
+      color: #fff;
+      padding: 5px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      outline: none;
+      border: 2px solid #d90429;
+      background: #d90429;
+    }
+    .css-button-sharp--red:hover {
+      background: #fff;
+      color: #d90429
+    }
+  </style>
+</head>
+
+<body>
+<!-- 從這複製↓↓↓ -->
+
+<div id="wrapper">
+  <!-- 上方Nav ↓↓↓  -->
+  <nav class="navbar navbar-default top-navbar" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><strong>後台管理</strong></a>
+    </div>
+
+    <ul class="nav navbar-top-links navbar-right">
+      <!-- /.dropdown -->
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+          <li><a href="../back-index/storelogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
+          </li>
+          <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+          </li>
+        </ul>
+        <!-- /.dropdown-user -->
+      </li>
+      <!-- /.dropdown -->
+    </ul>
+  </nav>
+  <!-- 上方Nav ↑↑↑  -->
+  <!-- 左側Nav ↓↓↓  -->
+  <nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav" id="main-menu">
+
+        <li>
+          <a class="active-menu" href="#"><i class="fa fa-dashboard"></i> 吉食享樂</a>
+        </li>
+
+        <li>
+          <a href="#">員工帳號管理<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li>
+              <a href="#">員工帳號管理</a>
+            </li>
+            <li>
+              <a href="#">員工權限管理</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">代幣系統管理<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li>
+              <a href="#">客訴處理</a>
+            </li>
+            <li>
+              <a href="../back-promo/back-promo.html">優惠活動管理</a>
+            </li>
+            <li>
+              <a href="../back-refill/backrefill.html">會員儲值紀錄查詢</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">會員管理<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li>
+              <a href="#">合作店家資格審核</a>
+            </li>
+            <li>
+              <a href="#">合作店家帳號管理</a>
+            </li>
+            <li>
+              <a href="../back-member/membermanager.html">一般會員管理</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#"> 評論檢舉管理 </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </nav>
+  <!-- 左側Nav ↑↑↑  -->
+
+  <div id="page-wrapper">
+    <div id="wrapper-container">
+      <!-- ******內容寫在這邊 ↓↓↓****** -->
+      <div class="flexdiv">
+        <div>
+          <span style="font-size: 1.6rem;font-weight: 600;">選擇合作店家編號:</span>
+          <select style="font-size: 1.6rem" id="storeIdSelector" name="storeId"></select>
+          <button id="storeIdSelectorButton" class="css-button-sharp--black">搜索</button>
+        </div>
+        <div>
+          <span style="font-size: 1.6rem;font-weight: 600;">輸入合作店家編號:</span>
+          <input style="font-size: 1.6rem" type="text" id="selectByInputinput" name="storeId">
+          <button id="selectByInputbutton" class="css-button-sharp--black">搜索</button>
+        </div>
+        <div>
+          <button id="getAll" class="css-button-sharp--black">顯示所有合作店家</button>
+        </div>
+      </div>
+      <div id="listTable" style="margin-left: 0.5rem;margin-right: 0.5rem"></div>
+      <!-- ******內容寫在這邊 ↑↑↑****** -->
+    </div>
+  </div>
+
+</div>
+<!-- 複製到這裡↑↑↑ -->
+
+
+<script>
+
+  //儲存編號用陣列
+  let storeIdArray = [];
+
+  //頁面載入取得編號選單
+  (async function getStoreId() {
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/storeBack.do?action=getStoreId";
+    let response = await fetch(url, {method: 'get'});
+    storeIdArray = await response.json();
+    $("#storeIdSelector").empty();
+    storeIdArray.forEach(storeId => {
+      $("#storeIdSelector").append(`<option  value="${storeId}">${storeId}</option>`)
+    })
+  })();
+
+  //綁定選單店家編號查詢事件
+  $("#storeIdSelectorButton").click(selectById);
+
+  //透過選單查詢店家資料
+  async function selectById() {
+    let storeId = $("#storeIdSelector").val();
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/storeBack.do?action=selectById&storeId=" + storeId;
+    let response = await fetch(url, { method: 'get' });
+    let stores = await response.json();
+    listStore(stores);
+  }
+
+  //綁定輸入編號查詢按鈕事件
+  $("#selectByInputbutton").click(checkInputStoreNumber);
+  //確認輸入編號是否正確
+  function checkInputStoreNumber() {
+    let storeId = $("#selectByInputinput").val();
+    let evdience = false;
+    for (let i = 0; i < storeIdArray.length; i++) {
+      if (storeId == +storeIdArray[i]) {
+        evdience = true;
+        break;
+      }
+    }
+    if(!evdience){
+      alert("輸入的編號有誤");
+      return;
+    }
+
+    getStoreDataByInput(storeId);
+  };
+
+  async function getStoreDataByInput(storeId){
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/storeBack.do?action=selectById&storeId=" + storeId;
+
+    let response = await fetch(url, { method: 'get' });
+    let stores = await response.json();
+    listStore(stores);
+  }
+
+
+  //綁定顯示所有店家資料按鈕事件
+  $("#getAll").click(getAll)
+
+  //取得所有店家資料
+  async function getAll() {
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/storeBack.do?action=getAll";
+
+    let response = await fetch(url, { method: 'get' });
+    let stores = await response.json();
+    listStore(stores);
+
+
+  }
+  //動態生成表格
+  function listStore(stores) {
+    //移除原本存在的表格
+    $("#listTable").empty();
+
+    //生成表格
+    let table = document.createElement("table");
+
+    //生成表頭
+    table.innerHTML += "<thead><tr><th>編號</th><th>帳號</th>"
+            + "<th>名稱</th><th>電話</th><th>縣市</th><th>區域</th><th>路段</th>"
+            + "<th>註冊時間</th><th>照片</th><th>狀態</th><th>修改帳號狀態</th></tr></thead>";
+
+    //生成表格內容
+    let tbody = document.createElement("tbody");
+
+    //循環依人數生成表格數量
+    for (let i = 0; i < stores.length; i++) {
+      //處理註冊時間
+      let date = new Date(stores[i].storeRegTime).toLocaleDateString();
+
+      //修改狀態顯示結果不顯示數字而是文字
+
+      let tr = document.createElement("tr");
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeId}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeAcc}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeName}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeTel}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeCity ? stores[i].storeCity : ""}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeDist ? stores[i].storeDist : ""}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${stores[i].storeAdr ? stores[i].storeAdr : ""}</td>`);
+      tr.insertAdjacentHTML("beforeend", `<td>${date}</td>`);
+      if (stores[i].storePic) {
+        tr.insertAdjacentHTML("beforeend", `<td><img class="storePic" src=data:image/jpeg;base64,${stores[i].storePic}></td>`);
+      } else {
+        tr.insertAdjacentHTML("beforeend", `<td></td>`);
+      }
+
+      if(stores[i].accStat === 1){
+        tr.insertAdjacentHTML("beforeend", `<td><select disabled id="select${stores[i].storeId}"><option selected value="1">正常</option><option value="0">停權</option></select></td>`);
+      }else {
+        tr.insertAdjacentHTML("beforeend", `<td><select disabled id="select${stores[i].storeId}"><option  value="1">正常</option><option selected value="0">停權</option></select></td>`);
+      }
+      let buttonhtml = "<td><button class='css-button-sharp--black' id='accStateModify' name='aSTMbutton"+stores[i].storeId+"' value='"+stores[i].storeId+ "'>修改帳號狀態</button>" +
+              "<button class='css-button-sharp--sky' style='display: none;margin-right: 0.5rem' id='cfbutton"+stores[i].storeId+"'value='"+stores[i].storeId+ "'>確認</button>"+
+              "<button class='css-button-sharp--red' style='display: none' id='clbutton"+stores[i].storeId+"'value='"+stores[i].storeId+ "'>取消</button></td>"
+
+      tr.insertAdjacentHTML("beforeend", buttonhtml);
+
+      tbody.append(tr);
+
+    }
+    table.append(tbody);
+    table.setAttribute("class", "tableclass");
+    $("#listTable").append(table);
+
+
+    // 綁定修改帳號狀態與查詢會員儲值紀錄事件
+    addTableButtonWithFunction();
+  }
+  //綁定修改帳號狀態與查詢會員儲值紀錄事件
+  function addTableButtonWithFunction() {
+    document.querySelectorAll("#accStateModify").forEach(e => e.addEventListener('click', accStateModify));
+
+    document.querySelectorAll("button[id^='cfbutton']").forEach(e=>e.addEventListener('click',updateAccState));
+
+    document.querySelectorAll("button[id^='clbutton']").forEach(e=>e.addEventListener('click',recoverAccState));
+
+  }
+  let OriginalAccState;
+  function accStateModify(e){
+    let storeId =  e.target.value;
+    let selected = "select"+storeId;
+    let aSTMbutton = "aSTMbutton"+storeId;
+
+    OriginalAccState = $(`#${selected}`).val();
+
+    $(`#${selected}`).prop("disabled",false);
+    $(`[name=${aSTMbutton}]`).hide();
+    $("#cfbutton"+storeId).show();
+    $("#clbutton"+storeId).show();
+
+
+  }
+
+  function updateAccState(e){
+    let storeId =  e.target.value;
+    let selected = "select"+storeId;
+    let aSTMbutton = "aSTMbutton"+storeId;
+
+    $(`#${selected}`).prop("disabled",true);
+    $(`[name=${aSTMbutton}]`).show();
+    $("#cfbutton"+storeId).hide();
+    $("#clbutton"+storeId).hide();
+    let accStat = $(`#${selected}`).val();
+
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + "/store/store.do?action=updateAccStat&accStat="+accStat+"&storeId="+storeId;
+    fetch(url, { method: 'get' });
+  }
+
+  function recoverAccState(e){
+    let storeId =  e.target.value;
+    let selected = "select"+storeId;
+    let aSTMbutton = "aSTMbutton"+storeId;
+
+    $(`#${selected}`).prop("disabled",true);
+    $(`[name=${aSTMbutton}]`).show();
+    $("#cfbutton"+storeId).hide();
+    $("#clbutton"+storeId).hide();
+    $(`#${selected}`).children(`[value='${OriginalAccState}']`).prop("selected",true);
+  }
+
+
+
+
+
+</script>
+<!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
+
+<!-- jQuery Js -->
+<script src=../resources/back-stage/assets/js/jquery-1.10.2.js></script>
+<!-- Bootstrap Js -->
+<script src=../resources/back-stage/assets/js/bootstrap.min.js></script>
+<!-- 左側Nav Dropdown -->
+<script src=../resources/back-stage/assets/js/jquery.metisMenu.js></script>
+<!-- Custom Js -->
+<script src=../resources/back-stage/assets/js/custom-scripts.js></script>
+
+<!-- ↑↑↑下面是這個版需要的js可添加各自需要的js檔-->
+</body>
+</html>

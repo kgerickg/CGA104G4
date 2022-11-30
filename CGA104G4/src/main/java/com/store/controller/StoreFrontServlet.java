@@ -1,8 +1,6 @@
 package com.store.controller;
 
 
-import com.member.model.MemberService;
-import com.member.model.MemberVO;
 import com.store.model.StoreService;
 import com.store.model.StoreVO;
 import org.json.JSONArray;
@@ -42,7 +40,9 @@ public class StoreFrontServlet extends HttpServlet {
             case "updateData" -> updateData(request, response);
             case "getAll" -> getAll(request, response);
             case "selectByName" -> selectByName(request, response);
+            case "selectByCity" -> selectByCity(request, response);
             case "getStoreName" -> getStoreName(request, response);
+            case "getStoreCity" -> getStoreCity(request, response);
         }
     }
 
@@ -156,20 +156,32 @@ public class StoreFrontServlet extends HttpServlet {
         Writer out = response.getWriter();
         StoreService storeSvc = new StoreService();
         List<String> storeNameList = storeSvc.getStoreName();
-        JSONArray storeNameJosnArray = new JSONArray();
+        JSONArray storeNameJsonArray = new JSONArray();
         for (String storeName : storeNameList) {
-            storeNameJosnArray.put(storeName);
+            storeNameJsonArray.put(storeName);
         }
-        out.write(storeNameJosnArray.toString());
+        out.write(storeNameJsonArray.toString());
+
+    }
+
+    private void getStoreCity(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Writer out = response.getWriter();
+        StoreService storeSvc = new StoreService();
+        List<String> storeCityList = storeSvc.getStoreCity();
+        JSONArray storeCityJsonArray = new JSONArray();
+        for (String storeCity : storeCityList) {
+            storeCityJsonArray.put(storeCity);
+        }
+        out.write(storeCityJsonArray.toString());
 
     }
 
     private void selectByName(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String storeName = request.getParameter("storeName");
         StoreService storeService = new StoreService();
-        StoreVO storeVO = storeService.findByStoreName(storeName);
-        Writer out = response.getWriter();
+        String storeName = request.getParameter("storeName");
         JSONObject storeJSONObject = new JSONObject();
+        Writer out = response.getWriter();
+        StoreVO storeVO = storeService.findByStoreName(storeName);
         JSONArray storeJSONArray = new JSONArray();
         Base64.Encoder encoder = Base64.getEncoder();
         storeJSONObject.put("storeId", storeVO.getStoreId());
@@ -184,6 +196,30 @@ public class StoreFrontServlet extends HttpServlet {
         storeJSONArray.put(storeJSONObject);
         out.write(storeJSONArray.toString());
     }
+
+    private void selectByCity(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        StoreService storeService = new StoreService();
+        String storeCity = request.getParameter("storeCity");
+        Writer out = response.getWriter();
+        List<StoreVO> stores = storeService.findByStoreCity(storeCity);
+        JSONArray storeJSONArray = new JSONArray();
+        Base64.Encoder encoder = Base64.getEncoder();
+        for (StoreVO storeVO : stores) {
+            JSONObject storeJsonObject = new JSONObject();
+            storeJsonObject.put("storeId", storeVO.getStoreId());
+            storeJsonObject.put("storeName", storeVO.getStoreName());
+            storeJsonObject.put("storeTel", storeVO.getStoreTel());
+            storeJsonObject.put("storeCity", storeVO.getStoreCity());
+            storeJsonObject.put("storeDist", storeVO.getStoreDist());
+            storeJsonObject.put("storeAdr", storeVO.getStoreAdr());
+            if (storeVO.getStorePic() != null) {
+                storeJsonObject.put("storePic", encoder.encodeToString(storeVO.getStorePic()));
+            }
+            storeJSONArray.put(storeJsonObject);
+        }
+        out.write(storeJSONArray.toString());
+    }
+
 
     private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 

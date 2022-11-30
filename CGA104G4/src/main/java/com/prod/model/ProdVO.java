@@ -23,11 +23,10 @@ public class ProdVO {
 	private String prodCont;
 	private Integer prodPrc;
 	private Date prodTime;
+	private Integer prodStat;
 	@OneToMany
 	@JoinColumn(name="STORE_ID",referencedColumnName = "STORE_ID")
 	private StoreVO storeVO;
-
-	private Integer prodStat;
 
 	public Integer getProdId() {
 		return prodId;

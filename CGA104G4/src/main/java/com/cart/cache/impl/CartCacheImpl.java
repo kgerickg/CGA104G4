@@ -2,7 +2,6 @@ package com.cart.cache.impl;
 
 import com.cart.cache.CartCache;
 import com.cart.pojo.Cart;
-import com.cart.pojo.Item;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,12 @@ public class CartCacheImpl implements CartCache {
 
     @Override
     public Cart get(String userId) {
-
         return gson.fromJson(jedis.get(userId), Cart.class);
+
+    }
+    @Override
+    public String getCart(String userId) {
+        return jedis.get(userId);
 
     }
 
@@ -34,18 +37,18 @@ public class CartCacheImpl implements CartCache {
         jedis.del(userId);
     }
 
-    public static void main(String[] args) {
-        CartCacheImpl dao = new CartCacheImpl();
-        Cart cart = new Cart();
-        Item item = new Item();
-        item.setProdId(2);
-        item.setProdQty(9);
-        cart.getItemMap().put(item.getProdId(), item);
-        dao.put(cart);
-
-        Cart test = dao.get("1");
-        System.out.print(test);
-    }
+//    public static void main(String[] args) {
+//        CartCacheImpl dao = new CartCacheImpl();
+//        Cart cart = new Cart();
+//        Item item = new Item();
+//        item.setProdId(2);
+//        item.setProdQty(9);
+//        cart.getItemMap().put(item.getProdId(), item);
+//        dao.put(cart);
+//
+//        Cart test = dao.get("1");
+//        System.out.print(test);
+//    }
 
 
 }

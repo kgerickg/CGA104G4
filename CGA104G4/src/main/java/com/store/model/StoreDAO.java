@@ -65,10 +65,23 @@ public class StoreDAO implements StoreDAO_interface {
         StoreVO storeVO = query.uniqueResult();
         return storeVO;
     }
+    @Override
+    public List<StoreVO> findByStoreCity(String storeCity) {
+        NativeQuery<StoreVO> query = getSession().createNativeQuery("select * from Store where STORE_CITY = :storeCity", StoreVO.class);
+        query.setParameter("storeCity", storeCity);
+        List<StoreVO> stores = query.list();
+        return stores;
+    }
 
     @Override
     public List<String> getStoreName() {
         Query<String> query = getSession().createQuery("SELECT storeName FROM StoreVO", String.class);
+        List<String> list = query.list();
+        return list;
+    }
+    @Override
+    public List<String> getStoreCity() {
+        Query<String> query = getSession().createQuery("SELECT distinct storeCity FROM StoreVO", String.class);
         List<String> list = query.list();
         return list;
     }
@@ -148,8 +161,14 @@ public class StoreDAO implements StoreDAO_interface {
 
     }
 
+    @Override
+    public String getOneStoreNameById(Integer storeId) {
+        StoreVO storeVO = getSession().get(StoreVO.class, storeId);
+        return storeVO.getStoreName();
+    }
+
 
     @Override
-    public void delete(Integer memId) {
+    public void delete(Integer storeId) {
     }
 }
