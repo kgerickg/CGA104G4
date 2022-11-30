@@ -1,6 +1,6 @@
 package com.prod.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +13,7 @@ public class ProdService {
 		dao = new ProdJDBCDAO();
 	}
 
-	public ProdVO addProd(Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc,  Date prodTime, Integer prodStat) {
+	public ProdVO addProd(Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc,  Timestamp prodTime, Integer prodStat) {
 
 		ProdVO ProdVO = new ProdVO();
 
@@ -35,7 +35,7 @@ public class ProdService {
 		dao.insert(ProdVO);
 	}
 	
-	public ProdVO updateProd(Integer prodId, Integer prodTypeId, Integer storeId, String prodName, String prodCont, Integer prodPrc, Integer prodStat, Date prodTime) {
+	public ProdVO updateProd(Integer prodId, Integer prodTypeId, Integer storeId, String prodName, String prodCont, Integer prodPrc, Integer prodStat, Timestamp prodTime) {
 
 		ProdVO prodVO = new ProdVO();
 

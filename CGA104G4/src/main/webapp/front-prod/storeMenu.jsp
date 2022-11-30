@@ -2,8 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.prod.model.*"%>
 
-<jsp:useBean id="listProdTypeIds_ByStoreId_S" scope="request" type="java.util.Set<ProdVO>" />
-<jsp:useBean id="prodSvc" scope="page" class="com.prod.model.ProdService" />
+<jsp:useBean id="listProdTypeIds_ByStoreId_S" scope="request"
+	type="java.util.Set<ProdVO>" />
+<jsp:useBean id="prodSvc" scope="page"
+	class="com.prod.model.ProdService" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +18,20 @@
 <!-- GOOGLEFONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-<link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/all.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/slick-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/flaticon.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
 <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
@@ -60,8 +67,10 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${listProdTypeIds_ByStoreId_S}">
-									<li><a href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId_S" data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>							
+								<c:forEach var="prodVO" items="${listProdTypeIds_ByStoreId_S}">
+									<li><a
+										href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId_S"
+										data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -74,7 +83,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -93,7 +103,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title=""></a>${prodVO.prodName}</h3>
@@ -111,7 +122,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -130,7 +142,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -149,7 +162,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -168,7 +182,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -187,7 +202,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="../front-prod/storeProdUpdate.jsp" title="">${prodVO.prodName}</a>
@@ -206,7 +222,8 @@
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
-											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt="" class="w-100">
+											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
+												class="w-100">
 										</div>
 										<h3 class="semi-bold text-capitalize">
 											<a href="#" title="">${prodVO.prodName}</a>
@@ -272,6 +289,6 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
-
+	
 </body>
 </html>

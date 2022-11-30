@@ -1,6 +1,6 @@
 package com.prod.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -22,7 +22,7 @@ public class ProdVO {
 	private String prodName;
 	private String prodCont;
 	private Integer prodPrc;
-	private Date prodTime;
+	private Timestamp prodTime;
 	private Integer prodStat;
 	@OneToMany
 	@JoinColumn(name="STORE_ID",referencedColumnName = "STORE_ID")
@@ -68,11 +68,11 @@ public class ProdVO {
 		this.prodCont = prodCont;
 	}
 
-	public Date getProdTime() {
+	public Timestamp getProdTime() {
 		return prodTime;
 	}
 
-	public void setProdTime(Date prodTime) {
+	public void setProdTime(Timestamp prodTime) {
 		this.prodTime = prodTime;
 	}
 

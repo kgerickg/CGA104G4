@@ -2,7 +2,7 @@ package com.prod.controller;
 
 import java.io.*;
 import java.util.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -117,12 +117,12 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
-			if (prodCont == null || prodCont.trim().length() == 0) {
-				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
-			} else if (!prodCont.trim().matches(prodContReg)) {
-				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
-			}
+//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+//			if (prodCont == null || prodCont.trim().length() == 0) {
+//				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
+//			} else if (!prodCont.trim().matches(prodContReg)) {
+//				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
+//			}
 
 			Integer prodPrc = null;
 			try {
@@ -138,13 +138,14 @@ public class ProdServlet extends HttpServlet {
 				errorMsgs.put("prodStat", "商品狀態請輸入數字");
 			}
 			
-			Date prodTime = null;
+			Timestamp prodTime = null;
 			try {
-				prodTime = Date.valueOf(req.getParameter("prodTime").trim());
+				prodTime = Timestamp.valueOf(req.getParameter("prodTime").trim());
 			} catch (IllegalArgumentException e) {
-				errorMsgs.put("prodTime","請輸入日期");
+				errorMsgs.put("prodTime", "請輸入日期");
 			}
 
+			
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-prod/storeProdUpdate.jsp");
@@ -195,9 +196,9 @@ public class ProdServlet extends HttpServlet {
 				errorMsgs.put("prodPrc", "商品狀態請輸入數字");
 			}
 
-			Date prodTime = null;
+			Timestamp prodTime = null;
 			try {
-				prodTime = Date.valueOf(req.getParameter("prodTime").trim());
+				prodTime = Timestamp.valueOf(req.getParameter("prodTime").trim());
 			} catch (IllegalArgumentException e) {
 				errorMsgs.put("prodTime", "請輸入日期");
 			}
