@@ -2,7 +2,7 @@ package com.prod.controller;
 
 import java.io.*;
 import java.util.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -88,10 +88,12 @@ public class ProdServlet extends HttpServlet {
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			String param = "?prodId=" 	  + prodVO.getProdId()+
 						   "&prodTypeId=" + prodVO.getProdTypeId()+
+						   "&storeId="    + prodVO.getStoreId()+
 						   "&prodName="   + prodVO.getProdName()+
 						   "&prodCont="   + prodVO.getProdCont()+
 						   "&prodPrc=" 	  + prodVO.getProdPrc()+
-						   "&prodStat="	  + prodVO.getProdStat();
+						   "&prodStat="	  + prodVO.getProdStat()+
+						   "&prodTime="	  + prodVO.getProdTime();
 			String url = "/front-prod/storeProdUpdate.jsp"+param;
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 /front-prod/storeProdUpdate.jsp
 			successView.forward(req, res);
@@ -105,6 +107,7 @@ public class ProdServlet extends HttpServlet {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			Integer prodId = Integer.valueOf(req.getParameter("prodId").trim());
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId").trim());
+			Integer storeId = Integer.valueOf(req.getParameter("storeId").trim());
 			String prodName = req.getParameter("prodName");
 			String prodNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,100}$";
 			if (prodName == null || prodName.trim().length() == 0) {
@@ -114,12 +117,12 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
-			if (prodCont == null || prodCont.trim().length() == 0) {
-				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
-			} else if (!prodCont.trim().matches(prodContReg)) {
-				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
-			}
+//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+//			if (prodCont == null || prodCont.trim().length() == 0) {
+//				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
+//			} else if (!prodCont.trim().matches(prodContReg)) {
+//				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
+//			}
 
 			Integer prodPrc = null;
 			try {
@@ -134,7 +137,15 @@ public class ProdServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				errorMsgs.put("prodStat", "商品狀態請輸入數字");
 			}
+			
+			Timestamp prodTime = null;
+			try {
+				prodTime = Timestamp.valueOf(req.getParameter("prodTime").trim());
+			} catch (IllegalArgumentException e) {
+				errorMsgs.put("prodTime", "請輸入日期");
+			}
 
+			
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-prod/storeProdUpdate.jsp");
@@ -144,7 +155,7 @@ public class ProdServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			ProdService prodSvc = new ProdService();
-			ProdVO prodVO = prodSvc.updateProd(prodId, prodTypeId, prodName, prodCont, prodPrc, prodStat);
+			ProdVO prodVO = prodSvc.updateProd(prodId, prodTypeId, storeId, prodName, prodCont, prodPrc, prodStat, prodTime);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("prodVO", prodVO); // 資料庫update成功後,正確的的prodVO物件,存入req
@@ -185,9 +196,9 @@ public class ProdServlet extends HttpServlet {
 				errorMsgs.put("prodPrc", "商品狀態請輸入數字");
 			}
 
-			Date prodTime = null;
+			Timestamp prodTime = null;
 			try {
-				prodTime = Date.valueOf(req.getParameter("prodTime").trim());
+				prodTime = Timestamp.valueOf(req.getParameter("prodTime").trim());
 			} catch (IllegalArgumentException e) {
 				errorMsgs.put("prodTime", "請輸入日期");
 			}

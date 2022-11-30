@@ -14,7 +14,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 	private static final String GET_ALL_STMT = "select * from PROD order by PROD_ID";
 	private static final String GET_ONE_STMT = "select * from PROD where PROD_ID = ?";
 	private static final String DELETE = "delete from PROD where PROD_ID = ?";
-	private static final String UPDATE = "update PROD set PROD_TYPE_ID = ?, PROD_STAT = ?, PROD_NAME = ?, PROD_CONT = ?, PROD_PRC = ? where PROD_ID = ?";
+	private static final String UPDATE = "update PROD set STORE_ID = ?, PROD_TYPE_ID = ?, PROD_STAT = ?, PROD_NAME = ?, PROD_CONT = ?, PROD_PRC = ?, PROD_TIME = ? where PROD_ID = ?";
 	private static final String GET_ProdTypeIds_ByStoreId_STMT = "select distinct PROD_TYPE_ID from PROD where STORE_ID = ? order by PROD_TYPE_ID";
 	private static final String GET_Prods_ByProdTypeId_STMT = "select * from PROD where PROD_TYPE_ID = ? order by PROD_ID";
 	private static final String GET_Prods_ByStoreIdAndProdTypeId_STMT = "select * from PROD where STORE_ID = ? and PROD_TYPE_ID = ? order by PROD_ID";
@@ -37,7 +37,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			pstmt.setString(4, ProdVO.getProdCont());
 			pstmt.setInt(5, ProdVO.getProdPrc());
 			pstmt.setInt(6, ProdVO.getProdStat());
-			pstmt.setDate(7, ProdVO.getProdTime());
+			pstmt.setTimestamp(7, ProdVO.getProdTime());
 
 			pstmt.executeUpdate();
 
@@ -78,12 +78,14 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-			
-			pstmt.setInt(1, prodVO.getProdTypeId());
-			pstmt.setString(2, prodVO.getProdName());
-			pstmt.setString(3, prodVO.getProdCont());
-			pstmt.setInt(4, prodVO.getProdPrc());
-			pstmt.setInt(5, prodVO.getProdStat());
+			pstmt.setInt(1, prodVO.getStoreId());
+			pstmt.setInt(2, prodVO.getProdTypeId());
+			pstmt.setInt(3, prodVO.getProdStat());
+			pstmt.setString(4, prodVO.getProdName());
+			pstmt.setString(5, prodVO.getProdCont());
+			pstmt.setInt(6, prodVO.getProdPrc());
+			pstmt.setTimestamp(7, prodVO.getProdTime());
+			pstmt.setInt(8, prodVO.getProdId());
 
 			pstmt.executeUpdate();
 
@@ -182,7 +184,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 				ProdVO.setProdCont(rs.getString("PROD_CONT"));
 				ProdVO.setProdPrc(rs.getInt("PROD_PRC"));
 				ProdVO.setProdStat(rs.getInt("PROD_STAT"));
-				ProdVO.setProdTime(rs.getDate("PROD_TIME"));
+				ProdVO.setProdTime(rs.getTimestamp("PROD_TIME"));
 			}
 
 			// Handle any driver errors
@@ -244,7 +246,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 				ProdVO.setProdCont(rs.getString("PROD_CONT"));
 				ProdVO.setProdPrc(rs.getInt("PROD_PRC"));
 				ProdVO.setProdStat(rs.getInt("PROD_STAT"));
-				ProdVO.setProdTime(rs.getDate("PROD_TIME"));
+				ProdVO.setProdTime(rs.getTimestamp("PROD_TIME"));
 				list.add(ProdVO); // Store the row in the list
 			}
 
@@ -364,7 +366,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 				prodVO.setProdCont(rs.getString("PROD_CONT"));
 				prodVO.setProdPrc(rs.getInt("PROD_PRC"));
 				prodVO.setProdStat(rs.getInt("PROD_STAT"));
-				prodVO.setProdTime(rs.getDate("PROD_TIME"));
+				prodVO.setProdTime(rs.getTimestamp("PROD_TIME"));
 
 				set.add(prodVO); // Store the row in the vector
 			}
@@ -428,7 +430,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 				prodVO.setProdCont(rs.getString("PROD_CONT"));
 				prodVO.setProdPrc(rs.getInt("PROD_PRC"));
 				prodVO.setProdStat(rs.getInt("PROD_STAT"));
-				prodVO.setProdTime(rs.getDate("PROD_TIME"));
+				prodVO.setProdTime(rs.getTimestamp("PROD_TIME"));
 
 				set.add(prodVO); // Store the row in the vector
 			}
@@ -493,7 +495,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 				prodVO.setProdCont(rs.getString("PROD_CONT"));
 				prodVO.setProdPrc(rs.getInt("PROD_PRC"));
 				prodVO.setProdStat(rs.getInt("PROD_STAT"));
-				prodVO.setProdTime(rs.getDate("PROD_TIME"));
+				prodVO.setProdTime(rs.getTimestamp("PROD_TIME"));
 				list.add(prodVO); // Store the row in the List
 			}
 			// Handle any driver errors

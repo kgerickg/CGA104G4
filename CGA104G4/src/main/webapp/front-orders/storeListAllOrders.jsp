@@ -122,18 +122,37 @@
      </div>
     </div><!--profile-section end-->
    </div>             
-    <div class="col-lg-4">
-     <div class="sidebar">
-      <div class="widget widget-help">
-       <h3 class="widget-title">Need help?</h3>
-       <p>If you have more questions please let us know. We will answer as soon as possible.</p>
-       <a href="#" title="" class="btn-default height-2">Contact us <span></span></a>
-      </div><!--widget-help end-->
-     </div><!--sidebar end-->
-    </div>
+   
    </div>
   </div>
  </section>
+ <footer>
+			<div class="top-footer">
+				<div class="fixed-bg bg3"></div>
+
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-lg-3 col-md-6"></div>
+						<div class="col-lg-6 col-md-6"></div>
+						<div class="col-lg-3 col-md-6"></div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom-footer">
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-lg-6">
+							<div class="copyright">
+								<p>Copyright &copy; 2022.TibaMe All rights reserved.</p>
+							</div>
+							<!--copyright end-->
+						</div>
+						<div class="col-lg-6"></div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--footer end-->
 </div><!--wrapper end-->
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
 <script src="../resources/js/bootstrap.min.js"></script>

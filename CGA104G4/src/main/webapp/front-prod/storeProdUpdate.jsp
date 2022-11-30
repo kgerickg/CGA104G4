@@ -100,14 +100,33 @@ Integer prodId = (Integer) request.getAttribute("prodId"); //ProdServlet.java (C
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodName" value="${param.prodName}"
-												class="form-control">
+												class="form-control">${errorMsgs.prodName}
 										</div>
 										<!--form-group end-->
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodPrc" value="${param.prodPrc}"
-												class="form-control">
+												class="form-control">${errorMsgs.prodPrc}
+										</div>
+										<!--form-group end-->
+									</div>
+								</div>
+								<h4 class="text-left">&emsp;商品上架時間：
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									商家編號：</h4>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" id="f_date1" name="prodTime"
+												class="form-control">${errorMsgs.prodTime}
+										</div>
+										<!--form-group end-->
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" name="storeId" value="${param.storeId}"
+												class="form-control">${errorMsgs.storeId}
 										</div>
 										<!--form-group end-->
 									</div>
@@ -115,7 +134,7 @@ Integer prodId = (Integer) request.getAttribute("prodId"); //ProdServlet.java (C
 								<h4 class="text-left">&emsp;商品介紹：</h4>
 								<div class="col-sm-12">
 									<div class="form-group">
-										<textarea name="prodCont">${param.prodCont}</textarea>
+										<textarea name="prodCont">${param.prodCont}</textarea>${errorMsgs.prodCont}
 									</div>
 									<!--form-group end-->
 								</div>
@@ -178,5 +197,34 @@ Integer prodId = (Integer) request.getAttribute("prodId"); //ProdServlet.java (C
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
 </body>
+	<link rel="stylesheet" type="text/css"
+		href="../resources/css/jquery.datetimepicker.css" />
+	<script
+		src="../resources/js/jquery.datetimepicker.full.js"></script>
+
+	<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+
+	<script>
+		$.datetimepicker.setLocale('zh');
+		$('#f_date1').datetimepicker({
+			theme : '', //theme: 'dark',
+			timepicker : true, //timepicker:true,
+			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+			format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
+			value : new Date(), // value:   new Date(),
+		//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+		//startDate:	            '2017/07/10',  // 起始日
+		//minDate:               '-1970-01-01', // 去除今日(不含)之前
+		//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		});
+	</script>
 
 </html>
