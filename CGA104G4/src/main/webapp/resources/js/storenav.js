@@ -28,6 +28,7 @@ header.innerHTML =
                         <ul>
                             <li><a href="" >福袋變更</a></li>
                             <li><a href="${webCtx}/front-lkorder/StoreIndexLkorder.jsp" >福袋訂單管理</a></li>
+                            <li><a href="${webCtx}/front-lkcompl/StoreIndexLkCompl.jsp" >福袋客訴管理</a></li>
                         </ul>
                      </li>
                  </ul>
@@ -71,7 +72,8 @@ div.innerHTML =
         <li><a href="" >福袋商品管理+</a>
               <ul>
                    <li><a href="" >福袋變更</a></li>
-                   <li><a href="" >福袋訂單管理</a></li>
+                   <li><a href="${webCtx}/front-lkorder/StoreIndexLkorder.jsp" >福袋訂單管理</a></li>
+                   <li><a href="${webCtx}/front-lkcompl/StoreIndexLkCompl.jsp" >福袋客訴管理</a></li>
               </ul>
         </li>
         <li id="log-il-response"><a href="">登入|註冊</a>
