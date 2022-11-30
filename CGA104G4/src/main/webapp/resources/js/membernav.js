@@ -16,13 +16,9 @@ header.innerHTML =
             <nav>
                 <ul>
                     <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember" >吉食專區</a></li>
-                    <li><a href="" >最新消息</a></li>
                     <li><a href="${webCtx}/front-index/About.html" >關於我們</a></li>
-                    <li><a href="" >Q&A</a></li>
                     <li><a href="" >消費資訊+</a>
                         <ul>
-                            <li><a href="" >最愛店家</a></li>
-                            <li><a href="" >已預約福袋</a></li>
                             <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp">訂單資訊</a></li>
                             <li><a href="${webCtx}/front-lkorder/FrontIndexLkorder.jsp">福袋訂單資訊</a></li>
                             <li><a href="${webCtx}/front-lkcompl/MemberIndexLkCompl.jsp">客訴訂單資訊</a></li>
@@ -77,13 +73,9 @@ div.setAttribute("class", "responsive-mobile-menu");
 div.innerHTML =
     `<ul>
         <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember">吉食專區</a></li>
-        <li><a href="">最新消息</a></li>
         <li><a href="${webCtx}/front-index/About.html">關於我們</a></li>
-        <li><a href="">Q&A</a></li>
         <li><a href="">消費資訊+</a>
             <ul>
-                <li><a href="">最愛店家</a></li>
-                <li><a href="">已預約福袋</a></li>
                 <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp">訂單資訊</a></li>
                 <li><a href="${webCtx}/front-lkorder/FrontIndexLkorder.jsp">福袋訂單資訊查詢</a></li>
                 <li><a href="${webCtx}/front-lkcompl/MemberIndexLkCompl.jsp">客訴訂單資訊</a></li>
