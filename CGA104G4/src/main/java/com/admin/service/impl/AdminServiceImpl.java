@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
 			return admin;
 		}
 		dao.insert(admin);
-		admin.setMessage("註冊成功");
+		admin.setMessage("新增成功");
 		admin.setSuccessful(true);
 		return admin;
 	}

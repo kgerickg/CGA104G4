@@ -69,7 +69,7 @@
                             <span>or</span>
                         </div> -->
                         <div>
-                            <div class="form-group" id="emailDiv">
+                            <div class="form-group" id="accDiv">
                                 <input type="email" name="storeAcc" id="storeAcc" placeholder="帳號(信箱)*"
                                        class="form-control">
                             </div>
@@ -115,14 +115,14 @@
             p.setAttribute("id", "storeAccError")
             p.style.color = "red";
             p.textContent = "請輸入帳號";
-            $("#emaildiv").append(p);
+            $("#accDiv").append(p);
         }
         if (!password) {
             let p = document.createElement("p");
             p.setAttribute("id", "storePwdError")
             p.style.color = "red";
             p.textContent = "請輸入密碼";
-            $("#passworddiv").append(p);
+            $("#passwordDiv").append(p);
         }
         if (storeAcc && password) {
             sendData(storeAcc, password);
@@ -150,28 +150,25 @@
 
         if (!response.state) {
             if (response.storeAccError) {
-                alert(response.storeAccError);
                 let p = document.createElement("p");
                 p.setAttribute("id", "storeAccError")
                 p.style.color = "red";
                 p.textContent = response.storeAccError;
-                $("#emaildiv").append(p);
+                $("#accDiv").append(p);
             }
             if (response.storePwdError) {
-                alert(response.storePwdError);
                 let p = document.createElement("p");
                 p.setAttribute("id", "storePwdError")
                 p.style.color = "red";
                 p.textContent = response.storePwdError;
-                $("#passworddiv").append(p);
+                $("#passwordDiv").append(p);
             }
             if (response.storeError) {
-                alert(response.storeError);
                 let p = document.createElement("p");
                 p.setAttribute("id", "storeError")
                 p.style.color = "red";
                 p.textContent = response.storeError;
-                $("#emaildiv").prepend(p);
+                $("#accDiv").prepend(p);
             }
             return;
         }
