@@ -361,10 +361,9 @@
 
     function showOriginalImg() {
         let memData = JSON.parse(sessionStorage.getItem("memData"));
+        $("#personalImage").attr("src", "../resources/images/personal.jpg");
         if (memData.memPic) {
             $("#personalImage").attr("src", "data:image/png;base64," + memData.memPic);
-        } else {
-            $("#personalImage").attr("src", "../resources/images/personal.jpg");
         }
 
     }
