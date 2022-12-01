@@ -74,7 +74,6 @@ div.innerHTML =
     `<ul>
         <li><a href="${webCtx}/lucky/lucky.do?action=getAllForMember">吉食專區</a></li>
         <li><a href="${webCtx}/front-index/About.html">關於我們</a></li>
-        <li><a href="">Q&A</a></li>
         <li><a href="">消費資訊+</a>
             <ul>
                 <li><a href="${webCtx}/front-orders/memberListAllOrders.jsp">訂單資訊</a></li>
