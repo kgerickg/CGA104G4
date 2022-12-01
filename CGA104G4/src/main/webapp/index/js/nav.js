@@ -3,7 +3,7 @@
 	nav.classList.add('navbar', 'navbar-expand', 'navbar-dark', 'bg-dark');
 	nav.innerHTML = `
     <div class="container-fluid">
-		<a class="navbar-brand" href="${getContextPath()}/back-admin/index.html">會員系統</a>
+		<a class="navbar-brand" href="${getContextPath()}/back-index/index.html">會員系統</a>
 		<div class="collapse navbar-collapse" id="navbarScroll">
 			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 				<li id="register" class="nav-item">
@@ -30,7 +30,10 @@
 `;
 	const body = document.querySelector('body');
 	body.insertBefore(nav, body.firstChild);
-
+	const path = window.location.pathname;
+	const webCtx = path.substring(0, path.indexOf('/', 1));
+	const indexUrl = webCtx + "/back-admin/index.html"
+	const logoutUrl = webCtx + "/admin/logout"
 	const admName = sessionStorage.getItem('admName');
 	const register = document.querySelector('#register');
 	const edit = document.querySelector('#edit');
@@ -53,8 +56,8 @@
 
 	logout.addEventListener('click', () => {
 		sessionStorage.removeItem('admName');
-		fetch('logout');
-		location = `../back-admin/index.html`;
+		fetch(logoutUrl);
+		document.location.href = indexUrl;
 	});
 
 	function getContextPath() {

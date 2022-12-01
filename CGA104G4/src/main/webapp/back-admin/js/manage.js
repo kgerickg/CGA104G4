@@ -6,7 +6,6 @@ function onSaveClick(admId) {
     const path = window.location.pathname;
     const webCtx = path.substring(0, path.indexOf('/', 1));
     const url = webCtx + "/admin/save";
-
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
