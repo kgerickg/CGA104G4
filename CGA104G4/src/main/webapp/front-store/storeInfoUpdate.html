@@ -27,7 +27,7 @@
 
 
     <!-- 頁籤顯示的title -->
-    <title>個人資料修改</title>
+    <title>合作店家資料修改</title>
 
 
 </head>
@@ -299,7 +299,7 @@
         formData.append("action", "updateData")
 
         updateData(formData);
-        swal("資料更新","修改成功","success")
+
     })
 
     async function updateData(formData) {
@@ -317,7 +317,10 @@
             return;
         }
         await sessionStorage.removeItem("storedata");
-        window.location.reload();
+        swal("資料更新", "更新成功", "success").then(function(){
+                location.reload();
+            }
+        );
 
 
     }

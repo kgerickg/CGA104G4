@@ -148,7 +148,6 @@ async function loginCheckWithServer() {
 
 //登入改變NAV顯示結果
 function loginNavChange() {
-    console.log("hihi");
     //改變一般navbar
     document.querySelector("#logul").innerHTML = "";
     document.querySelector("#logul").innerHTML = `<li><a href="" title="" class="logout">登出</a></li>`;

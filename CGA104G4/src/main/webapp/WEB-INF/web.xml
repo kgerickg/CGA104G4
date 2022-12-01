@@ -93,6 +93,14 @@
 		<url-pattern>/prod/prod.do</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>PhotoServlet</servlet-name>
+		<servlet-class>com.photo.controller.PhotoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PhotoServlet</servlet-name>
+		<url-pattern>/photo/photo.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>NameServlet</servlet-name>
 		<servlet-class>com.message.controller.NameServlet</servlet-class>
 	</servlet>

@@ -1,7 +1,5 @@
 package com.photo.model;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
 
 public class PhotoService {
@@ -12,49 +10,39 @@ public class PhotoService {
 		dao = new PhotoJDBCDAO();
 	}
 
-	public PhotoVO addPhoto(Integer prodId, Integer photoStat) throws IOException {
+	public PhotoVO addPhoto(Integer prodId, Integer photoStat, byte[] photoPic) {
 
 		PhotoVO photoVO = new PhotoVO();
 
-		photoVO.setPhotoId(prodId);
+		photoVO.setProdId(prodId);
 		photoVO.setPhotoStat(photoStat);
-		byte[] pic = getPictureByteArray("C:/CGA104G4_Workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/CGA104G4/resources/images/PROD_ID_" + photoVO.getPhotoId() +".jpg");
-		photoVO.setPhotoPic(pic);
-	
+		photoVO.setPhotoPic(photoPic);
 		dao.insert(photoVO);
-
+		
 		return photoVO;
 	}
 
-	public static byte[] getPictureByteArray(String path) throws IOException {
-		FileInputStream fis = new FileInputStream(path);
-		byte[] buffer = new byte[fis.available()];
-		fis.read(buffer);
-		fis.close();
-		return buffer;
-	}
-
 	//預留給 Struts 2 或 Spring MVC 用
-	public void addPhoto(PhotoVO PhotoVO) throws IOException {
-		dao.insert(PhotoVO);
+	public void addPhoto(PhotoVO photoVO) {
+		dao.insert(photoVO);
 	}
 	
-	public PhotoVO updatePhoto(Integer photoId, Integer prodId, Integer photoStat) throws IOException {
+	public PhotoVO updatePhoto(Integer photoId, Integer prodId, Integer photoStat, byte[] photoPic) {
 
 		PhotoVO photoVO = new PhotoVO();
 		
-		photoVO.setPhotoId(prodId);
+		photoVO.setPhotoId(photoId);
+		photoVO.setProdId(prodId);
 		photoVO.setPhotoStat(photoStat);
-		byte[] pic = getPictureByteArray("C:/CGA104G4_Workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/CGA104G4/resources/images/PROD_ID_" + photoVO.getPhotoId() +".jpg");
-		photoVO.setPhotoPic(pic);
+		photoVO.setPhotoPic(photoPic);
 		dao.update(photoVO);
 
 		return dao.findByPrimaryKey(photoId);
 	}
 	
-	//預留給 Struts 2 用的
-	public void updatePhoto(PhotoVO PhotoVO) {
-		dao.update(PhotoVO);
+	//預留給 Struts 2 或 Spring MVC 用
+	public void updatePhoto(PhotoVO photoVO) {
+		dao.update(photoVO);
 	}
 
 	public void deletePhoto(Integer photoId) {
