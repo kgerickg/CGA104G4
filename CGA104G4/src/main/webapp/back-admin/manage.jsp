@@ -20,7 +20,10 @@
 				<th scope="col">管理員帳號</th>
 				<th scope="col">密碼</th>
 				<th scope="col">姓名</th>
-				<th scope="col">狀態</th>
+				<th scope="col">停權</th>
+				<th scope="col">會員權限</th>
+				<th scope="col">員工權限</th>
+				<th scope="col">代幣權限</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,8 +36,26 @@
 						<td id="admName${admin.admId}" contenteditable="true">${admin.admName}</td>
 						<td>
 							<select id="admAccStat${admin.admId}">
-								<option value="0" ${admin.admAccStat =='0'? 'selected' : '' }>停權</option>
-								<option value="1" ${admin.admAccStat =='1'? 'selected' : '' }>正常</option>
+								<option value="0" ${admin.admAccStat =='0'? 'selected' : '' }>停用</option>
+								<option value="1" ${admin.admAccStat =='1'? 'selected' : '' }>啟用</option>
+							</select>
+						</td>
+						<td>
+							<select id="admRoleMem${admin.admId}">
+								<option value="0" ${admin.admRoleMem =='0'? 'selected' : '' }>停用</option>
+								<option value="1" ${admin.admRoleMem =='1'? 'selected' : '' }>啟用</option>
+							</select>
+						</td>
+						<td>
+							<select id="admRoleEmp${admin.admId}">
+								<option value="0" ${admin.admRoleEmp =='0'? 'selected' : '' }>停用</option>
+								<option value="1" ${admin.admRoleEmp =='1'? 'selected' : '' }>啟用</option>
+							</select>
+						</td>
+						<td>
+							<select id="admRoleRef${admin.admId}">
+								<option value="0" ${admin.admRoleRef =='0'? 'selected' : '' }>停用</option>
+								<option value="1" ${admin.admRoleRef =='1'? 'selected' : '' }>啟用</option>
 							</select>
 						</td>
 						<td>
@@ -50,6 +71,7 @@
 		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
 		crossorigin="anonymous"></script>
 	<script src="../index/js/nav.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src=<%=request.getContextPath()%>/back-admin/js/manage.js></script>
 </body>
 </html>

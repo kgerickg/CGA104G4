@@ -1,17 +1,15 @@
 package com.admin.dao.impl;
 
-import java.util.List;
+import com.admin.dao.AdminDao;
+import com.admin.entity.Admin;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
-
-import com.admin.dao.AdminDao;
-import com.admin.entity.Admin;
+import java.util.List;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -32,13 +30,21 @@ public class AdminDaoImpl implements AdminDao {
     @Override
 
     public int update(Admin admin) {
-        System.out.println(admin.getAdmAcc());
         Admin adminorignal = session.get(Admin.class, admin.getAdmId());
 
         adminorignal.setAdmPwd(admin.getAdmPwd());
         adminorignal.setAdmName(admin.getAdmName());
         adminorignal.setAdmPic(admin.getAdmPic());
         adminorignal.setAdmAcc(admin.getAdmAcc());
+        if (admin.getAdmRoleMem() != null) {
+            adminorignal.setAdmRoleMem(admin.getAdmRoleMem());
+        }
+        if (admin.getAdmRoleEmp() != null) {
+            adminorignal.setAdmRoleEmp(admin.getAdmRoleEmp());
+        }
+        if (admin.getAdmRoleRef() != null) {
+            adminorignal.setAdmRoleRef(admin.getAdmRoleRef());
+        }
         if (admin.getAdmPic() != null) {
             adminorignal.setAdmPic(admin.getAdmPic());
         }
@@ -74,10 +80,12 @@ public class AdminDaoImpl implements AdminDao {
         return session.createQuery(criteriaQuery).uniqueResult();
     }
 
+
     @Override
     public Admin selectForLogin(String admAcc, String admPwd) {
-        final String sql = "select * from ADMIN "
-                + "where ADM_ACC = :ADM_ACC and ADM_PWD = :ADM_PWD";
+        final String sql = "select * from ADMIN left join " +
+                "ADM_FUNCTION on ADMIN.ADM_ID = ADM_FUNCTION.ADM_ID "
+                + "where ADMIN.ADM_ACC = :ADM_ACC and ADMIN.ADM_PWD = :ADM_PWD";
         return session.createNativeQuery(sql, Admin.class)
                 .setParameter("ADM_ACC", admAcc)
                 .setParameter("ADM_PWD", admPwd)

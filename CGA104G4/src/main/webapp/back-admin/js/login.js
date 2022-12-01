@@ -19,10 +19,13 @@
                 errMsg.textContent = '';
                 const {successful, message} = body;
                 if (successful) {
-                    const {admId, admName} = body;
+                    const {admId, admName, admRoleMem, admRoleEmp, admRoleRef} = body;
                     sessionStorage.setItem('admId', admId);
                     sessionStorage.setItem('admName', admName);
-                    location = '../back-admin/index.html';
+                    sessionStorage.setItem('admRoleMem', admRoleMem);
+                    sessionStorage.setItem('admRoleEmp', admRoleEmp);
+                    sessionStorage.setItem('admRoleRef', admRoleRef);
+                    location = '../back-index/index.html';
                 } else {
                     errMsg.textContent = message;
                 }

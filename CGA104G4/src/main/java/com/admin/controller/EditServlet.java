@@ -31,7 +31,6 @@ public class EditServlet extends HttpServlet {
 		final HttpSession session = request.getSession();
 		final Admin admin = ((Admin) session.getAttribute("admin"));
 		final String admAcc = admin.getAdmAcc();
-		System.out.println(admAcc);
 		Admin reqAdmin = json2Pojo(request, Admin.class);
 		reqAdmin.setAdmId(admin.getAdmId());
 		reqAdmin.setAdmAcc(admAcc);

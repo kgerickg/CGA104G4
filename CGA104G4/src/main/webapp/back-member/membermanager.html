@@ -152,9 +152,12 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="../back-index/storelogin.html"><i class="fa fa-sign-in fa-fw"></i>登入</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                    <li id="login" class="nav-item">
+                        <a id="forLogin" href="../back-admin/login.html" class="nav-link active" aria-current="page"><i
+                                class="fa fa-sign-in fa-fw"></i>登入</a>
+                    <li class="nav-item">
+                        <a href="../back-index/index.html" id="logout" class="nav-link active hide" aria-current="page"><i
+                                class="fa fa-sign-out fa-fw"></i>登出</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -175,18 +178,18 @@
                     <a href="../front-index/index.html">前台首頁<span class="fa arrow"></span></a>
 
                 </li>
-                <li>
+                <li id="emp" class="hide">
                     <a href="#">員工帳號管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="../back-admin/index.html">員工帳號管理</a>
+                            <a href="../back-admin/edit.html">員工資料更改</a>
                         </li>
-                        <li>
-                            <a href="../back-admin/index.html">員工權限管理</a>
+                        <li >
+                            <a href="../admin/manage">員工權限管理</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li id="refill" class="hide">
                     <a href="#">代幣系統管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -198,9 +201,9 @@
 
                     </ul>
                 </li>
-                <li>
+                <li id="member" class="hide">
                     <a href="#">會員管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
+                    <ul  class="nav nav-second-level ">
                         <li>
                             <a href="../back-store/storeManage.html">合作店家帳號管理</a>
                         </li>
@@ -442,7 +445,7 @@
 
 </script>
 <!-- ↓↓↓下面是這個版需要的js可添加各自需要的js檔-->
-
+<script src=../back-index/backIndex.js></script>
 <!-- jQuery Js -->
 <script src=../resources/back-stage/assets/js/jquery-1.10.2.js></script>
 <!-- Bootstrap Js -->

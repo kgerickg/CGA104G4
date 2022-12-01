@@ -7,14 +7,14 @@ import com.admin.entity.Admin;
 import core.service.CoreService;
 
 public interface AdminService extends CoreService {
-	Admin register(Admin admin);
+    Admin register(Admin admin);
 
-	Admin login(Admin admin);
+    Admin login(Admin admin);
 
-	Admin edit(Admin admin);
+    Admin edit(Admin admin);
 
-	List<Admin> findAll();
+    List<Admin> findAll();
 
-	
-	boolean save(Admin admin);
+
+    boolean save(Admin admin);
 }
