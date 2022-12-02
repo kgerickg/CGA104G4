@@ -39,15 +39,8 @@ public class CartCacheImpl implements CartCache {
 
 //    public static void main(String[] args) {
 //        CartCacheImpl dao = new CartCacheImpl();
-//        Cart cart = new Cart();
-//        Item item = new Item();
-//        item.setProdId(2);
-//        item.setProdQty(9);
-//        cart.getItemMap().put(item.getProdId(), item);
-//        dao.put(cart);
+//        dao.clear("1",3,6);
 //
-//        Cart test = dao.get("1");
-//        System.out.print(test);
 //    }
 
 

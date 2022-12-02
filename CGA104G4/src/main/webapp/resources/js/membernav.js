@@ -31,6 +31,9 @@ header.innerHTML =
                             <li><a href="${webCtx}/front-refill/refill.html">錢包專區</a></li>
                         </ul>
                     </li>
+                    <li><a href="${webCtx}/front-store/storeSearch.html">搜尋合作店家</a></li>
+                    
+                    
                 </ul>
             </nav>
             <div class="menu-btn">
@@ -88,6 +91,7 @@ div.innerHTML =
                 <li><a href="${webCtx}/front-refill/refill.html" >錢包專區</a></li>
             </ul>
         </li>
+        <li><a href="${webCtx}/front-store/storeSearch.html">搜尋合作店家</a></li>
         <li id="log-il-response"><a href="">登入|註冊</a>
             <ul>
                 <li><a href="${webCtx}/front-member/membersignup.html">會員註冊</a></li>

@@ -15,9 +15,6 @@ header.innerHTML =
             <nav>
                 <ul>
                     <li><a href="${webCtx}/front-store/storeInfoUpdate.html" >基本資料維護</a></li>
-                    <li><a href="" >我的評論</a></li>
-                    <li><a href="" >帳務管理</a></li>
-                    <li><a href="" >購買廣告</a></li>
                     <li><a href="" >一般商品管理+</a>
                         <ul>
                             <li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S" >商品管理</a></li>
@@ -61,9 +58,6 @@ div.setAttribute("class", "responsive-mobile-menu");
 div.innerHTML =
     `<ul>
         <li><a href="${webCtx}/front-store/storeInfoUpdate.html" >基本資料維護</a></li>
-        <li><a href="" >我的評論</a></li>
-        <li><a href="" >帳務管理</a></li>
-        <li><a href="" >購買廣告</a></li>
         <li><a href="" >一般商品管理+</a>
         <ul>
              <li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S" >商品管理</a></li>

@@ -15,4 +15,7 @@ public interface CartService {
 
     public void addQty(String userId, Integer storeId, Integer prodId);
 
+//    public void putInDb(String userId, Integer storeId);
+
+
 }

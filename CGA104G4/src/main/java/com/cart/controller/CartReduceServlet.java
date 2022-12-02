@@ -3,6 +3,7 @@ package com.cart.controller;
 import com.cart.pojo.Cart;
 import com.cart.pojo.Item;
 import com.cart.service.impl.CartServiceImpl;
+import com.store.model.StoreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,8 @@ public class CartReduceServlet extends HttpServlet {
         final Integer prodId = Integer.valueOf(request.getParameter("prodId"));
         String userId = String.valueOf(request.getSession().getAttribute("memId"));
         CartServiceImpl cartSvc = new CartServiceImpl();
-
+        StoreService storeService = new StoreService();
+        String storeName = storeService.findByStoreId(storeId).getStoreName();
         Cart cart = cartSvc.get(userId);
         Item item = new Item();
         HashMap<Integer, Item> itemMap;
@@ -50,6 +52,7 @@ public class CartReduceServlet extends HttpServlet {
             } else {
                 itemMap = new HashMap();
                 item.setStoreId(storeId);
+                item.setStoreName(storeName);
                 item.setProdId(prodId);
                 item.setProdQty(1);
                 itemMap.put(item.getProdId(), item);
@@ -62,6 +65,7 @@ public class CartReduceServlet extends HttpServlet {
             itemMap = new HashMap();
             cart.setUserId(userId);
             item.setStoreId(storeId);
+            item.setStoreName(storeName);
             item.setProdId(prodId);
             item.setProdQty(1);
             itemMap.put(item.getProdId(), item);

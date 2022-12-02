@@ -5,12 +5,19 @@ import com.cart.cache.impl.CartCacheImpl;
 import com.cart.pojo.Cart;
 import com.cart.pojo.Item;
 import com.cart.service.CartService;
+import com.orders.model.OrdersDAO_interface;
+import com.orders.model.OrdersJDBCDAO;
+import com.orders.model.OrdersVO;
 import com.prod.model.ProdDAO_interface;
 import com.prod.model.ProdJDBCDAO;
 import com.prod.model.ProdVO;
+import com.store.model.StoreDAO;
+import com.store.model.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -18,12 +25,46 @@ public class CartServiceImpl implements CartService {
     private final CartCache cache = new CartCacheImpl();
 
     private final ProdDAO_interface prodDao = new ProdJDBCDAO();
+    private final OrdersDAO_interface orderDao = new OrdersJDBCDAO() {
+        @Override
+        public void insert(OrdersVO ordersVO) {
+
+        }
+
+        @Override
+        public void updateOrdStat(OrdersVO OrdersVO) {
+
+        }
+
+        @Override
+        public OrdersVO findByPrimaryKey(Integer ordId) {
+            return null;
+        }
+
+        @Override
+        public List<OrdersVO> getAll() {
+            return null;
+        }
+
+        @Override
+        public Set<OrdersVO> getOrdersByMemId(Integer memId) {
+            return null;
+        }
+
+        @Override
+        public Set<OrdersVO> getOrdersByStoreId(Integer storeId) {
+            return null;
+        }
+    };
 
     @Override
     public void put(Integer storeId, Cart cart) {
         AtomicInteger storeTotalPrc = new AtomicInteger();
         cart.getStoreMap().get(storeId).forEach((prodId, item) -> {
             ProdVO product = prodDao.findByPrimaryKey(prodId);
+            StoreService storeService = new StoreService();
+            String storeName = storeService.findByStoreId(storeId).getStoreName();
+            item.setStoreName(storeName);
             item.setStoreId(storeId);
             item.setProdName(product.getProdName());
             item.setProdPrc(product.getProdPrc());
@@ -45,6 +86,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void clear(String userId) {
+
         cache.clear(userId);
     }
 
@@ -70,6 +112,13 @@ public class CartServiceImpl implements CartService {
         item.setProdQty(item.getProdQty() + 1);
         put(storeId, cart);
     }
+
+//    @Override
+//    public void putInDb(String userId,Integer storeId) {
+//        Cart cart = cache.get(userId);
+//         = cart.getStoreMap().get(storeId).get(prodId)
+//        orderDao.insert(userId,storeId,);
+//    }
 
 
 //    public static void main(String[] args) {

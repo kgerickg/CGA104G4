@@ -268,9 +268,10 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
-	<script>	
-	
+	<script>
+
 	let acart =  document.querySelectorAll(".cart");
+
 	acart.forEach(e=>{
 		e.addEventListener("click",function(e){
 
@@ -279,7 +280,6 @@
 			let webCtx = path.substring(0, path.indexOf('/', 1));
 			let url = webCtx + "/cart/add?prodId=" + prodId + "&storeId=${param.storeId}";
 			e.preventDefault();
-			alert(this.id);
 			fetch(url, {method: 'get'});
 		})
 	})

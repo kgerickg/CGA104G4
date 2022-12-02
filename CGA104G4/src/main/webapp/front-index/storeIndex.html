@@ -27,13 +27,13 @@
 
 
   <!-- 頁籤顯示的title -->
-  <title>空白模板</title>
+  <title>商店首頁</title>
 
 
 
 </head>
 
-<body>
+<body id="animation-bg">
 <script src="../resources/js/storenav.js"></script>
 <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 <!--下面可自由新增內容 -->
@@ -45,6 +45,27 @@
 
 
 <!-- 下面是這個版需要的js可添加各自需要的js檔-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+<script>
+  VANTA.BIRDS({
+    el: "#animation-bg",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 1045.00,
+    minWidth: 1045.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    backgroundColor: 0xdebb79,
+    color1: 0x503ea7,
+    colorMode: "variance",
+    birdSize: 0.60,
+    speedLimit: 3.00,
+    cohesion: 48.00,
+    quantity: 3.00
+  })
+</script>
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../resources/js/slick.js"></script>
 <script src="../resources/js/scripts.js"></script>
