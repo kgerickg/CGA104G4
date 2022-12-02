@@ -44,7 +44,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-
+<script src="https://kit.fontawesome.com/33764e6a90.js"
+	crossorigin="anonymous"></script>
 <!-- 頁籤顯示的title -->
 <title>我的訂單</title>
 
@@ -78,10 +79,10 @@
 
 										<div class="ord-head">
 											<ul>
-												<li class="date">訂單成立時間</li>
-												<li class="delivery">商店（商店編號）</li>
-												<li class="amount">訂單金額</li>
-												<li>訂單狀態</li>
+												<li class="date" style="text-align: left;">訂單成立時間</li>
+												<li class="delivery" style="width: 250px; text-align: left;">商店（商店編號）</li>
+												<li class="amount"style="text-align: left;">訂單金額</li>
+												<li class="status" style="text-align: left; width: 150px;">訂單狀態</li>
 											</ul>
 										</div>
 										<!--ord-head end-->
@@ -94,17 +95,17 @@
 
 													<div class="oct-table-head">
 														<ul>
-															<li class="date">${ordersVO.ordTime}</li>
-															<li class="delivery">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}）
+															<li class="date" style="text-align: left;">${ordersVO.ordTime}</li>
+															<li class="delivery" style="width: 250px; text-align: left;">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}）
 															</li>
-															<li class="amount">$${ordersVO.ordAmt}</li>
-															<li class="status"><c:if
+															<li class="amount" style="text-align: left;">$${ordersVO.ordAmt}</li>
+															<li class="status" style="text-align: left; width: 150px; color: #0072E3""><c:if
 																	test="${ordersVO.ordStat==0}">正在等待商家接單</c:if> <c:if
 																	test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if> <c:if
 																	test="${ordersVO.ordStat==2}">訂單已備妥，請前往領取</c:if> <c:if
 																	test="${ordersVO.ordStat==3}">訂單已完成</c:if> <c:if
-																	test="${ordersVO.ordStat==4}">訂單已取消</c:if> <c:if
-																	test="${ordersVO.ordStat==5}">客訴處理中</c:if></li>
+																	test="${ordersVO.ordStat==4}">訂單已取消</c:if>
+														
 														</ul>
 														<a
 															href="../detail/detail.do?action=listDetails_ByOrdId_B&ordId=${ordersVO.ordId}"

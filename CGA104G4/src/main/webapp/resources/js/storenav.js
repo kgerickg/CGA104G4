@@ -20,7 +20,7 @@ header.innerHTML =
                     <li><a href="" >購買廣告</a></li>
                     <li><a href="" >一般商品管理+</a>
                         <ul>
-                            <li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S" >商品變更</a></li>
+                            <li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S" >商品管理</a></li>
                             <li><a href="${webCtx}/front-orders/storeListAllOrders.jsp" >訂單管理</a></li>
                         </ul>
                     </li>
@@ -66,7 +66,7 @@ div.innerHTML =
         <li><a href="" >購買廣告</a></li>
         <li><a href="" >一般商品管理+</a>
         <ul>
-             <li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S" >商品變更</a></li>
+             <li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S" >商品管理</a></li>
              <li><a href="${webCtx}/front-orders/storeListAllOrders.jsp" >訂單管理</a></li>
         </ul>
         </li>

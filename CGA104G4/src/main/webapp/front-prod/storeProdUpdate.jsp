@@ -12,21 +12,27 @@
 <!-- GOOGLEFONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-<link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/all.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/slick-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/flaticon.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
 <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-
+<script src="https://kit.fontawesome.com/33764e6a90.js" crossorigin="anonymous"></script>
 <!-- 頁籤顯示的title -->
 <title>商品管理</title>
 </head>
@@ -152,6 +158,7 @@
 										style="display: none;"> <i class="fa fa-photo"
 										style="background-color: #66B3FF"></i> 上傳相片
 									</label>
+									
 								</h4>
 								<div class="row">
 									<div class="col-md-6">

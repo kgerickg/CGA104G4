@@ -59,6 +59,11 @@
 			<div class="container">
 				<div class="section-title text-center">
 					<h2 class="text-capitalize">${storeSvc.findByStoreId(storeId).storeName}</h2>
+					<a
+						href="../front-prod/storeNewProd.jsp?storeId=${sessionScope.storeId}"
+						class="btn-default gradient-bg half-radius height-2 update">上架新產品！
+						<span></span>
+					</a>
 				</div>
 				<!--sec-title end-->
 				<div class="popular-dishes style2 text-center">
@@ -85,8 +90,7 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
@@ -94,7 +98,7 @@
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>
@@ -106,15 +110,15 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title=""></a>${prodVO.prodName}</h3>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
+										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>
@@ -126,18 +130,12 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
-											<span></span>
-										</a>
-										<a
-											href="../front-prod/storeNewProd.jsp?storeId=${sessionScope.storeId}"
-											class="btn-default gradient-bg half-radius height-2 update">上架新產品！
 											<span></span>
 										</a>
 									</div>
@@ -151,8 +149,7 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
@@ -160,7 +157,7 @@
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>
@@ -172,8 +169,7 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
@@ -181,7 +177,7 @@
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>
@@ -193,8 +189,7 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
@@ -202,7 +197,7 @@
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>
@@ -214,8 +209,7 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="../front-prod/storeProdUpdate.jsp" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
@@ -223,7 +217,7 @@
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>
@@ -235,15 +229,14 @@
 											<img src="../ShowImageFromDB?photoId=${prodVO.prodId}" alt=""
 												class="w-100">
 										</div>
-										<h3 class="semi-bold text-capitalize">
-											<a href="#" title="">${prodVO.prodName}</a>
+										<h3 class="semi-bold text-capitalize">${prodVO.prodName}（<c:if test="${prodVO.prodStat==0}">下架不顯示</c:if><c:if test="${prodVO.prodStat==1}">販售中</c:if>）
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 										</a>
-										
+
 									</div>
 								</div>
 							</c:forEach>

@@ -27,7 +27,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-
+<script src="https://kit.fontawesome.com/33764e6a90.js" crossorigin="anonymous"></script>
 <!-- 頁籤顯示的title -->
 <title>上架新產品！</title>
 </head>
