@@ -11,6 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.photo.model.PhotoService;
 import com.photo.model.PhotoVO;
@@ -162,7 +163,8 @@ public class PhotoServlet extends HttpServlet {
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
-			Integer prodId = Integer.valueOf(req.getParameter("prodId").trim());
+			HttpSession session = req.getSession();
+			Integer prodId = (Integer) session.getAttribute("prodId");
 
 			Integer photoStat = null;
 			try {

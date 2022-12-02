@@ -50,7 +50,7 @@
 								<h3 style="color: #ffa500;">上架新產品！</h3>
 							</div>
 							<!--lg-text end-->
-							<form method="post" action="<%=request.getContextPath()%>/prod/prod.do">
+							<form method="post" action="<%=request.getContextPath()%>/prod/prod.do" enctype="multipart/form-data">
 								<h4 class="text-left">&emsp;商品最後更新時間：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									商家編號：</h4>
@@ -75,8 +75,7 @@
 									商品狀態：</h4>
 								<jsp:useBean id="prodTypeSvc" scope="page"
 									class="com.prodtype.model.ProdTypeService" />
-								<jsp:useBean id="prodSvc" scope="page"
-									class="com.prod.model.ProdService" />
+								
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -131,18 +130,8 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="hidden" name="action" value="insert"> 
-											<button type="submit" class="btn-default w-100">
-												上架新產品！ <span></span>
-											</button>
-										</div>
-									</div>
-								</div>
-							</form>
-							<form method="post"	action="<%=request.getContextPath()%>/photo/photo.do" enctype="multipart/form-data">
+								
+							
 								<jsp:useBean id="photoSvc" scope="page" class="com.photo.model.PhotoService" />
 								<h4 class="text-left">&emsp;商品相片：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									<label for="photoPic" class="btn btn-info" style="background-color: #66B3FF; border: none; color: black;">
@@ -157,7 +146,7 @@
 												<img src="../resources/images/new.jpg" width="300px">
 											</div>
 										</div>
-										<!--form-group end-->
+									
 									</div>
 
 									<div class="col-md-6">
@@ -165,15 +154,14 @@
 											<div id="blob_holder"></div>
 										</div>
 									</div>
-									<!--form-group end-->
+						
 								</div>
 								<div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="hidden" name="action" value="insert">
-											<input type="hidden" name="photoStat" value="1">
-											<button type="submit" class="btn-default w-100" id="submit">
-												更新商品相片 <span></span>
+											<input type="hidden" name="action" value="insert"> 
+											<button type="submit" class="btn-default w-100">
+												上架新產品！ <span></span>
 											</button>
 										</div>
 									</div>

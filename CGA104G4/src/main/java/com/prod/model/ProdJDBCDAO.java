@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 	private static final String GET_Prods_ByStoreIdAndProdTypeId_S_STMT = "select * from PROD where STORE_ID = ? and PROD_TYPE_ID = ? order by PROD_ID";
 
 	@Override
-	public void insert(ProdVO ProdVO) {
+	public void insert(ProdVO prodVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -39,18 +40,22 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt = con.prepareStatement(INSERT_STMT, Statement.RETURN_GENERATED_KEYS);
 
-			pstmt.setInt(1, ProdVO.getStoreId());
-			pstmt.setInt(2, ProdVO.getProdTypeId());
-			pstmt.setInt(3, ProdVO.getProdStat());
-			pstmt.setString(4, ProdVO.getProdName());
-			pstmt.setString(5, ProdVO.getProdCont());
-			pstmt.setInt(6, ProdVO.getProdPrc());
-			pstmt.setTimestamp(7, ProdVO.getProdTime());
+			pstmt.setInt(1, prodVO.getStoreId());
+			pstmt.setInt(2, prodVO.getProdTypeId());
+			pstmt.setInt(3, prodVO.getProdStat());
+			pstmt.setString(4, prodVO.getProdName());
+			pstmt.setString(5, prodVO.getProdCont());
+			pstmt.setInt(6, prodVO.getProdPrc());
+			pstmt.setTimestamp(7, prodVO.getProdTime());
 
 			pstmt.executeUpdate();
-
+			try (ResultSet rs = pstmt.getGeneratedKeys() ) {
+				if (rs.next()) {
+					prodVO.setProdId(rs.getInt(1));
+				}
+			}
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());

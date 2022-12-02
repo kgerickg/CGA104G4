@@ -5,11 +5,16 @@ import java.util.*;
 import java.sql.Timestamp;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.photo.model.PhotoVO;
 import com.prod.model.ProdService;
 import com.prod.model.ProdVO;
 
+@WebServlet("/prod/prod.do")
+@MultipartConfig
 public class ProdServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -170,8 +175,8 @@ public class ProdServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			HttpSession session = req.getSession();
-			Integer storeId = (Integer) session.getAttribute("storeId");
+			HttpSession session1 = req.getSession();
+			Integer storeId = (Integer) session1.getAttribute("storeId");
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId").trim());
 
 			String prodName = req.getParameter("prodName");
@@ -217,13 +222,42 @@ public class ProdServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
+			
+			//照片
+			InputStream in = req.getPart("photoPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
+			byte[] photoPic = null;
+			if(in.available()!=0){
+				photoPic = new byte[in.available()];
+				in.read(photoPic);
+				in.close();
+			}  else errorMsgs.put("photoPic","商品照片: 請上傳照片"); 
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-prod/storeMenu.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
+			
 
 			/*************************** 2.開始新增資料 ***************************************/
 			ProdService prodSvc = new ProdService();
-			prodSvc.addProd(prodTypeId, storeId, prodName, prodCont, prodPrc, prodTime, prodStat);
-
+			ProdVO prodVO = new ProdVO();
+			prodVO.setProdTypeId(prodTypeId);
+			prodVO.setStoreId(storeId);
+			prodVO.setProdName(prodName);
+			prodVO.setProdCont(prodCont);
+			prodVO.setProdPrc(prodPrc);
+			prodVO.setProdStat(prodStat);
+			prodVO.setProdTime(prodTime);
+			PhotoVO photoVO = new PhotoVO();
+			photoVO.setPhotoPic(photoPic);
+			prodSvc.addProd(prodVO, photoVO);
+			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-prod/storeNewProd.jsp";
+			
+			String url = "/front-prod/storeNewProd.jsp?";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交/front-prod/storeNewProd.jsp
 			successView.forward(req, res);
 		}

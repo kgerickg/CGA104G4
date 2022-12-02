@@ -5,29 +5,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.photo.model.PhotoDAO_interface;
+import com.photo.model.PhotoJDBCDAO;
+import com.photo.model.PhotoVO;
+
 public class ProdService {
 
 	private ProdDAO_interface dao;
+	private PhotoDAO_interface dao2;
 
 	public ProdService() {
 		dao = new ProdJDBCDAO();
+		dao2 = new PhotoJDBCDAO();
 	}
 
-	public ProdVO addProd(Integer storeId, Integer prodTypeId, String prodName, String prodCont, Integer prodPrc,  Timestamp prodTime, Integer prodStat) {
-
-		ProdVO ProdVO = new ProdVO();
-
-		ProdVO.setProdTypeId(prodTypeId);
-		ProdVO.setStoreId(storeId);
-		ProdVO.setProdName(prodName);
-		ProdVO.setProdCont(prodCont);
-		ProdVO.setProdPrc(prodPrc);
-		ProdVO.setProdStat(prodStat);
-		ProdVO.setProdTime(prodTime);
-
-		dao.insert(ProdVO);
-
-		return ProdVO;
+	public ProdVO addProd(ProdVO prodVO, PhotoVO photoVO) {
+		dao.insert(prodVO);
+		photoVO.setProdId(prodVO.getProdId());
+		dao2.insert(photoVO);
+		return prodVO;
 	}
 
 	//預留給 Struts 2 或 Spring MVC 用
