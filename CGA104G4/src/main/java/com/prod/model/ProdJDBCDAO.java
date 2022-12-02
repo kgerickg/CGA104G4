@@ -1,7 +1,16 @@
 package com.prod.model;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import CompositeQuery.jdbcUtil_CompositeQuery_PROD;
 
 public class ProdJDBCDAO implements ProdDAO_interface {
@@ -16,8 +25,9 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 	private static final String DELETE = "delete from PROD where PROD_ID = ?";
 	private static final String UPDATE = "update PROD set STORE_ID = ?, PROD_TYPE_ID = ?, PROD_STAT = ?, PROD_NAME = ?, PROD_CONT = ?, PROD_PRC = ?, PROD_TIME = ? where PROD_ID = ?";
 	private static final String GET_ProdTypeIds_ByStoreId_STMT = "select distinct PROD_TYPE_ID from PROD where STORE_ID = ? order by PROD_TYPE_ID";
-	private static final String GET_Prods_ByProdTypeId_STMT = "select * from PROD where PROD_TYPE_ID = ? order by PROD_ID";
-	private static final String GET_Prods_ByStoreIdAndProdTypeId_STMT = "select * from PROD where STORE_ID = ? and PROD_TYPE_ID = ? order by PROD_ID";
+	private static final String GET_Prods_ByProdTypeId_STMT = "select * from PROD where PROD_TYPE_ID = ? and PROD_STAT = ? order by PROD_ID";
+	private static final String GET_Prods_ByStoreIdAndProdTypeId_STMT = "select * from PROD where STORE_ID = ? and PROD_TYPE_ID = ? and PROD_STAT = ? order by PROD_ID";
+	private static final String GET_Prods_ByStoreIdAndProdTypeId_S_STMT = "select * from PROD where STORE_ID = ? and PROD_TYPE_ID = ? order by PROD_ID";
 
 	@Override
 	public void insert(ProdVO ProdVO) {
@@ -31,12 +41,12 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, ProdVO.getProdTypeId());
-			pstmt.setInt(2, ProdVO.getStoreId());
-			pstmt.setString(3, ProdVO.getProdName());
-			pstmt.setString(4, ProdVO.getProdCont());
-			pstmt.setInt(5, ProdVO.getProdPrc());
-			pstmt.setInt(6, ProdVO.getProdStat());
+			pstmt.setInt(1, ProdVO.getStoreId());
+			pstmt.setInt(2, ProdVO.getProdTypeId());
+			pstmt.setInt(3, ProdVO.getProdStat());
+			pstmt.setString(4, ProdVO.getProdName());
+			pstmt.setString(5, ProdVO.getProdCont());
+			pstmt.setInt(6, ProdVO.getProdPrc());
 			pstmt.setTimestamp(7, ProdVO.getProdTime());
 
 			pstmt.executeUpdate();
@@ -341,7 +351,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 	}
 
 	@Override
-	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId) {
+	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId, Integer prodStat) {
 		Set<ProdVO> set = new LinkedHashSet<ProdVO>();
 		ProdVO prodVO = null;
 
@@ -355,6 +365,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_Prods_ByProdTypeId_STMT);
 			pstmt.setInt(1, prodTypeId);
+			pstmt.setInt(2, prodStat);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -404,7 +415,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 	}
 	
 	@Override
-	public Set<ProdVO> getProdsByStoreIdAndProdTypeId(Integer storeId, Integer prodTypeId) {
+	public Set<ProdVO> getProdsByStoreIdAndProdTypeId(Integer storeId, Integer prodTypeId, Integer prodStat) {
 		Set<ProdVO> set = new LinkedHashSet<ProdVO>();
 		ProdVO prodVO = null;
 
@@ -417,6 +428,71 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_Prods_ByStoreIdAndProdTypeId_STMT);
+			pstmt.setInt(1, storeId);
+			pstmt.setInt(2, prodTypeId);
+			pstmt.setInt(3, prodStat);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				prodVO = new ProdVO();
+				prodVO.setProdId(rs.getInt("PROD_ID"));
+				prodVO.setProdTypeId(rs.getInt("PROD_TYPE_ID"));
+				prodVO.setStoreId(rs.getInt("STORE_ID"));
+				prodVO.setProdName(rs.getString("PROD_NAME"));
+				prodVO.setProdCont(rs.getString("PROD_CONT"));
+				prodVO.setProdPrc(rs.getInt("PROD_PRC"));
+				prodVO.setProdStat(rs.getInt("PROD_STAT"));
+				prodVO.setProdTime(rs.getTimestamp("PROD_TIME"));
+
+				set.add(prodVO); // Store the row in the vector
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
+	@Override
+	public Set<ProdVO> getProdsByStoreIdAndProdTypeId_S(Integer storeId, Integer prodTypeId) {
+		Set<ProdVO> set = new LinkedHashSet<ProdVO>();
+		ProdVO prodVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_Prods_ByStoreIdAndProdTypeId_S_STMT);
 			pstmt.setInt(1, storeId);
 			pstmt.setInt(2, prodTypeId);
 			rs = pstmt.executeQuery();

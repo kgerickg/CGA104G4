@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.prod.model.*"%>
 <%@ page import="com.store.model.*"%>
-<jsp:useBean id="listProdTypeIds_ByStoreId_S" scope="request"
+<jsp:useBean id="listProdTypeIds_ByStoreId" scope="request"
 	type="java.util.Set<ProdVO>" />
 <jsp:useBean id="prodSvc" scope="page"
 	class="com.prod.model.ProdService" />
@@ -20,9 +20,6 @@
 <!-- GOOGLEFONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
 <link rel="stylesheet" type="text/css"
@@ -40,10 +37,11 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-
+<script src="https://kit.fontawesome.com/33764e6a90.js"
+	crossorigin="anonymous"></script>
 
 <!-- 頁籤顯示的title -->
-<title>MENU</title>
+<title>${storeSvc.findByStoreId(storeId).storeName}</title>
 
 </head>
 
@@ -60,7 +58,7 @@
 		<section class="sec-block p-0">
 			<div class="container">
 				<div class="section-title text-center">
-						<h2 class="text-capitalize">${storeSvc.findByStoreId(storeId).storeName}</h2>
+					<h2 class="text-capitalize">${storeSvc.findByStoreId(storeId).storeName}</h2>
 				</div>
 				<!--sec-title end-->
 				<div class="popular-dishes style2 text-center">
@@ -68,9 +66,9 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO" items="${listProdTypeIds_ByStoreId_S}">
+								<c:forEach var="prodVO" items="${listProdTypeIds_ByStoreId}">
 									<li><a
-										href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId_S"
+										href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId"
 										data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li>
 								</c:forEach>
 							</ul>
@@ -80,7 +78,7 @@
 					<div class="row">
 						<div class="masonary">
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 1)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -93,14 +91,15 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 2)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 2)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -112,14 +111,15 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 3)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 3)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -132,14 +132,19 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
+											<span></span>
+										</a>
+										<a
+											href="../front-prod/storeNewProd.jsp?storeId=${sessionScope.storeId}"
+											class="btn-default gradient-bg half-radius height-2 update">上架新產品！
 											<span></span>
 										</a>
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 4)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 4)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -152,14 +157,15 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 5)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 5)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -172,14 +178,15 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 6)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 6)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -192,14 +199,15 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 7)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 7)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -212,14 +220,15 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 											<span></span>
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 8)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, 8)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -232,9 +241,9 @@
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
 											href="../prod/prod.do?action=getOne_For_Update&prodId=${prodVO.prodId}"
-											class="btn-default gradient-bg half-radius height-2 update">商品變更
-											<span></span>
+											class="btn-default gradient-bg half-radius height-2 update">商品資訊更新
 										</a>
+										
 									</div>
 								</div>
 							</c:forEach>
@@ -292,4 +301,5 @@
 	<script src="../resources/js/isotope.js"></script>
 
 </body>
+
 </html>

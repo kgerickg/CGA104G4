@@ -164,14 +164,15 @@ public class ProdServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-		if ("insert".equals(action)) { // 來自addProd.jsp的請求
+		if ("insert".equals(action)) { // 來自/front-prod/storeNewProd.jsp請求
 
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+			HttpSession session = req.getSession();
+			Integer storeId = (Integer) session.getAttribute("storeId");
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId").trim());
-			Integer storeId = Integer.valueOf(req.getParameter("storeId").trim());
 
 			String prodName = req.getParameter("prodName");
 			String prodNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,100}$";
@@ -182,18 +183,18 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
-			if (prodCont == null || prodCont.trim().length() == 0) {
-				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
-			} else if (!prodCont.trim().matches(prodContReg)) {
-				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
-			}
+//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+//			if (prodCont == null || prodCont.trim().length() == 0) {
+//				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
+//			} else if (!prodCont.trim().matches(prodContReg)) {
+//				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
+//			}
 
 			Integer prodPrc = null;
 			try {
 				prodPrc = Integer.valueOf(req.getParameter("prodPrc").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("prodPrc", "商品狀態請輸入數字");
+				errorMsgs.put("prodPrc", "商品售價請輸入數字");
 			}
 
 			Timestamp prodTime = null;
@@ -212,7 +213,7 @@ public class ProdServlet extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/prod/update_prod_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-prod/storeNewProd.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -222,8 +223,8 @@ public class ProdServlet extends HttpServlet {
 			prodSvc.addProd(prodTypeId, storeId, prodName, prodCont, prodPrc, prodTime, prodStat);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-prod/listAllProds.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllProds.jsp
+			String url = "/front-prod/storeNewProd.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交/front-prod/storeNewProd.jsp
 			successView.forward(req, res);
 		}
 
@@ -238,9 +239,12 @@ public class ProdServlet extends HttpServlet {
 			/*************************** 2.開始刪除資料 ***************************************/
 			ProdService prodSvc = new ProdService();
 			prodSvc.deleteProd(prodId);
+			HttpSession session = req.getSession();
+			Integer storeId = (Integer) session.getAttribute("storeId");
+		    session.setAttribute("storeId", storeId);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/front-prod/listAllProds.jsp";
+			String url = "/front-prod/storeMenu.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
 		}
@@ -260,7 +264,7 @@ public class ProdServlet extends HttpServlet {
 		    session.setAttribute("storeId", storeId);
 		     
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("listProdTypeIds_ByStoreId_M", set); // 資料庫取出的set物件,存入request
+			req.setAttribute("listProdTypeIds_ByStoreId", set); // 資料庫取出的set物件,存入request
 
 			String url = "/front-prod/memberMenu.jsp"; // 成功轉交 /front-prod/memberMenu.jsp
 
@@ -284,7 +288,7 @@ public class ProdServlet extends HttpServlet {
 		    session.setAttribute("storeId", storeId);
 				     
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("listProdTypeIds_ByStoreId_S", set); // 資料庫取出的set物件,存入request
+			req.setAttribute("listProdTypeIds_ByStoreId", set); // 資料庫取出的set物件,存入request
 
 			String url = "/front-prod/storeMenu.jsp"; // 成功轉交 /front-prod/storeMenu.jsp
 
@@ -300,9 +304,10 @@ public class ProdServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 ****************************************/
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId"));
+			Integer prodStat = 1;
 			/*************************** 2.開始查詢資料 ****************************************/
 			ProdService prodSvc = new ProdService();
-			Set<ProdVO> set = prodSvc.getProdsByProdTypeId(prodTypeId);
+			Set<ProdVO> set = prodSvc.getProdsByProdTypeId(prodTypeId, prodStat);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listProds_ByProdTypeId", set); // 資料庫取出的list物件,存入request
@@ -314,21 +319,22 @@ public class ProdServlet extends HttpServlet {
 		}
 
 		// 來自front-prod/memberMenu.jsp的請求
-		if ("listProds_ByStoreIdAndProdTypeId_M".equals(action)) {
+		if ("listProds_ByStoreIdAndProdTypeId".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
-			HttpSession session1 = req.getSession();
-			Integer storeId = (Integer) session1.getAttribute("storeId");
+			HttpSession session = req.getSession();
+			Integer storeId = (Integer) session.getAttribute("storeId");
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId"));
+			Integer prodStat = 1;
 			/*************************** 2.開始查詢資料 ****************************************/
 			ProdService prodSvc = new ProdService();
-			Set<ProdVO> set = prodSvc.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
+			Set<ProdVO> set = prodSvc.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId, prodStat);
 			
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-			req.setAttribute("listProds_ByStoreIdAndProdTypeId_M", set); // 資料庫取出的set物件,存入request
+			req.setAttribute("listProds_ByStoreIdAndProdTypeId", set); // 資料庫取出的set物件,存入request
 
 			String url = "/front-prod/memberMenu.jsp"; // 成功轉交 /front-prod/memberMenu.jsp
 
@@ -343,13 +349,14 @@ public class ProdServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 ****************************************/
-			HttpSession session = req.getSession();
-			Integer storeId = (Integer) session.getAttribute("storeId");
+			HttpSession session1 = req.getSession();
+			Integer storeId = (Integer) session1.getAttribute("storeId");
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId"));
+		
 			/*************************** 2.開始查詢資料 ****************************************/
 			ProdService prodSvc = new ProdService();
-			Set<ProdVO> set = prodSvc.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
-					
+			Set<ProdVO> set = prodSvc.getProdsByStoreIdAndProdTypeId_S(storeId, prodTypeId);
+				
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("listProds_ByStoreIdAndProdTypeId_S", set); // 資料庫取出的set物件,存入request
 
