@@ -72,12 +72,15 @@ public class ProdService {
 		return dao.getProdTypeIdsByStoreId(storeId);
 	}
 	
-	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId) {
-		return dao.getProdsByProdTypeId(prodTypeId);
+	public Set<ProdVO> getProdsByProdTypeId(Integer prodTypeId, Integer prodStat) {
+		return dao.getProdsByProdTypeId(prodTypeId, prodStat);
 	}
 	
-	public Set<ProdVO> getProdsByStoreIdAndProdTypeId(Integer storeId, Integer prodTypeId) {
-		return dao.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId);
+	public Set<ProdVO> getProdsByStoreIdAndProdTypeId(Integer storeId, Integer prodTypeId, Integer prodStat) {
+		return dao.getProdsByStoreIdAndProdTypeId(storeId, prodTypeId, prodStat);
+	}
+	public Set<ProdVO> getProdsByStoreIdAndProdTypeId_S(Integer storeId, Integer prodTypeId) {
+		return dao.getProdsByStoreIdAndProdTypeId_S(storeId, prodTypeId);
 	}
 	
 }

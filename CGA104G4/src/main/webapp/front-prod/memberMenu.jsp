@@ -6,7 +6,7 @@
 	class="com.prod.model.ProdService" />
 <jsp:useBean id="storeSvc" scope="page"
 	class="com.store.model.StoreService" />
-<jsp:useBean id="listProdTypeIds_ByStoreId_M" scope="request" type="java.util.Set<ProdVO>" />
+<jsp:useBean id="listProdTypeIds_ByStoreId" scope="request" type="java.util.Set<ProdVO>" />
 
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 <!-- 頁籤顯示的title -->
-<title>MENU</title>
+<title>${storeSvc.findByStoreId(storeId).storeName}</title>
 
 </head>
 
@@ -63,8 +63,8 @@
 						<div class="option-isotop">
 							<ul id="filter" class="option-set filters-nav"
 								data-option-key="filter">
-								<c:forEach var="prodVO"	items="${listProdTypeIds_ByStoreId_M}">
-									<li><a href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId_M&storeId=${param.storeId}" data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
+								<c:forEach var="prodVO"	items="${listProdTypeIds_ByStoreId}">
+									<li><a href="../prod/prod.do?action=listProds_ByStoreIdAndProdTypeId&storeId=${param.storeId}" data-option-value=".${prodVO.prodTypeId}">${prodVO.prodTypeVO.prodTypeName}</a></li> 									
 								</c:forEach>
 							</ul>
 						</div>
@@ -73,7 +73,7 @@
 					<div class="row">
 						<div class="masonary">
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 1)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 1, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 1">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -92,7 +92,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 2)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 2, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 2">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -110,7 +110,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 3)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 3, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 3">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -129,7 +129,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 4)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 4, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 4">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -148,7 +148,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 5)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 5, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 5">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -167,7 +167,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 6)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 6, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 6">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -186,7 +186,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 7)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 7, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 7">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -205,7 +205,7 @@
 								</div>
 							</c:forEach>
 							<c:forEach var="prodVO"
-								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 8)}">
+								items="${prodSvc.getProdsByStoreIdAndProdTypeId(storeId, 8, 1)}">
 								<div class="col-lg-4 col-md-4 col-sm-6 meat 8">
 									<div class="pd-item">
 										<div class="pd-thumbnail">
@@ -286,8 +286,8 @@
 	
 	</script>
 
-<%if (request.getAttribute("listProds_ByStoreIdAndProdTypeId_M")!=null){%>
-       <jsp:useBean id="listProds_ByStoreIdAndProdTypeId_M" scope="request" type="java.util.Set<ProdVO>" />
+<%if (request.getAttribute("listProds_ByStoreIdAndProdTypeId")!=null){%>
+       <jsp:useBean id="listProds_ByStoreIdAndProdTypeId" scope="request" type="java.util.Set<ProdVO>" />
 <%} %>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.prod.model.*"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@
 <!-- 請將覆蓋用的css放置此註解下方 -->
 
 <!-- 頁籤顯示的title -->
-<title>商品管理</title>
+<title>上架新產品！</title>
 </head>
 
 <body>
@@ -46,10 +47,10 @@
 					<div class="col-lg-7">
 						<div class="delitaste-form text-center">
 							<div class="lg-text">
-								<h3 style="color: #ffa500;">商品變更</h3>
+								<h3 style="color: #ffa500;">上架新產品！</h3>
 							</div>
 							<!--lg-text end-->
-							<form method="post" action="prod.do">
+							<form method="post" action="<%=request.getContextPath()%>/prod/prod.do">
 								<h4 class="text-left">&emsp;商品最後更新時間：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									商家編號：</h4>
@@ -63,7 +64,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" name="storeId" value="${param.storeId}"
+											<input type="text" name="storeId" value="${sessionScope.storeId}"
 												class="form-control" readonly="readonly">${errorMsgs.storeId}
 										</div>
 										<!--form-group end-->
@@ -79,11 +80,15 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<select name="prodTypeId" class="form-control">
-												<c:forEach var="prodTypeVO" items="${prodTypeSvc.all}">
-													<option value="${prodTypeVO.prodTypeId}"
-														${(param.prodTypeId==prodTypeVO.prodTypeId)? 'selected':''}>${prodTypeVO.prodTypeName}
-												</c:forEach>
+											<select name="prodTypeId" class="form-control">											
+												<option value="1">麵類</option>												
+												<option value="2">飯類</option>												
+												<option value="3">麵包類</option>												
+												<option value="4">小菜類</option>												
+												<option value="5">飲品</option>												
+												<option value="6">點心</option>												
+												<option value="7">湯品</option>												
+												<option value="8">其他</option>												
 											</select>
 										</div>
 										<!--form-group end-->
@@ -91,8 +96,8 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<select name="prodStat" class="form-control">
-												<option value="1" ${(param.prodStat==1)? 'selected':''}>上架販售中</option>
-												<option value="0" ${(param.prodStat==0)? 'selected':''}>下架不顯示</option>
+												<option value="1">上架販售中</option>
+												<option value="0">下架不顯示</option>
 											</select>
 										</div>
 										<!--form-group end-->
@@ -129,36 +134,27 @@
 								<div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="hidden" name="action" value="update"> <input
-												type="hidden" name="prodId" value="${param.prodId}">
+											<input type="hidden" name="action" value="insert"> 
 											<button type="submit" class="btn-default w-100">
-												更新商品資訊 <span></span>
+												上架新產品！ <span></span>
 											</button>
 										</div>
 									</div>
 								</div>
 							</form>
-							<form method="post"
-								action="<%=request.getContextPath()%>/photo/photo.do"
-								enctype="multipart/form-data">
-								<jsp:useBean id="photoSvc" scope="page"
-									class="com.photo.model.PhotoService" />
-								<h4 class="text-left">
-									&emsp;商品相片：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									<label for="photoPic" class="btn btn-info"
-										style="background-color: #66B3FF; border: none; color: black;">
-										<input id="photoPic" type="file" name="photoPic"
-										onclick="previewImage()" multiple="multiple"
-										style="display: none;"> <i class="fa fa-photo"
-										style="background-color: #66B3FF"></i> 上傳相片
+							<form method="post"	action="<%=request.getContextPath()%>/photo/photo.do" enctype="multipart/form-data">
+								<jsp:useBean id="photoSvc" scope="page" class="com.photo.model.PhotoService" />
+								<h4 class="text-left">&emsp;商品相片：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									<label for="photoPic" class="btn btn-info" style="background-color: #66B3FF; border: none; color: black;">
+										<input id="photoPic" type="file" name="photoPic" onclick="previewImage()" multiple="multiple" style="display: none;">
+											<i class="fa fa-photo" style="background-color: #66B3FF">上傳相片</i>
 									</label>
 								</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div>
-												<img src="../ShowImageFromDB?photoId=${param.prodId}"
-													width="300px">
+												<img src="../resources/images/new.jpg" width="300px">
 											</div>
 										</div>
 										<!--form-group end-->
@@ -174,9 +170,7 @@
 								<div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="hidden" name="action" value="update"> <input
-												type="hidden" name="photoId" value="${param.prodId}">
-											<input type="hidden" name="prodId" value="${param.prodId}">
+											<input type="hidden" name="action" value="insert">
 											<input type="hidden" name="photoStat" value="1">
 											<button type="submit" class="btn-default w-100" id="submit">
 												更新商品相片 <span></span>
