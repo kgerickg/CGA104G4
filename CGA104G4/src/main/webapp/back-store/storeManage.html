@@ -387,8 +387,8 @@
                 tr.insertAdjacentHTML("beforeend", `<td><select disabled id="select${stores[i].storeId}"><option  value="1">正常</option><option selected value="0">停權</option></select></td>`);
             }
             let buttonhtml = "<td><button class='css-button-sharp--black' id='accStateModify' name='aSTMbutton" + stores[i].storeId + "' value='" + stores[i].storeId + "'>修改帳號狀態</button>" +
-                "<button class='css-button-sharp--sky' style='display: none;margin-right: 0.5rem' id='cfbutton" + stores[i].storeId + "'value='" + stores[i].storeId + "'>確認</button>" +
-                "<button class='css-button-sharp--red' style='display: none' id='clbutton" + stores[i].storeId + "'value='" + stores[i].storeId + "'>取消</button></td>"
+                "<button class='css-button-sharp--sky' style='display: none;margin-right: 0.5rem' id='cfbutton" + stores[i].storeId + "' value='" + stores[i].storeId + "'>確認</button>" +
+                "<button class='css-button-sharp--red' style='display: none' id='clbutton" + stores[i].storeId + "' value='" + stores[i].storeId + "'>取消</button></td>"
 
             tr.insertAdjacentHTML("beforeend", buttonhtml);
 
@@ -400,7 +400,7 @@
         $("#listTable").append(table);
 
 
-        // 綁定修改帳號狀態與查詢會員儲值紀錄事件
+        // 綁定修改帳號狀態
         addTableButtonWithFunction();
     }
 
@@ -444,7 +444,7 @@
 
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/store/store.do?action=updateAccStat&accStat=" + accStat + "&storeId=" + storeId;
+        let url = webCtx + "/store/storeBack.do?action=updateAccStat&accStat=" + accStat + "&storeId=" + storeId;
         fetch(url, {method: 'get'});
     }
 

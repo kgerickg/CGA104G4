@@ -9,9 +9,10 @@ import org.json.JSONObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Writer;
 import java.util.Base64;
 import java.util.List;
@@ -80,17 +81,20 @@ public class StoreBackServlet extends HttpServlet {
         JSONArray storeJSONArray = new JSONArray();
         Base64.Encoder encoder = Base64.getEncoder();
         for (StoreVO storeVO : stores) {
-            JSONObject storeJsonObject = new JSONObject();
-            storeJsonObject.put("storeId", storeVO.getStoreId());
-            storeJsonObject.put("storeName", storeVO.getStoreName());
-            storeJsonObject.put("storeTel", storeVO.getStoreTel());
-            storeJsonObject.put("storeCity", storeVO.getStoreCity());
-            storeJsonObject.put("storeDist", storeVO.getStoreDist());
-            storeJsonObject.put("storeAdr", storeVO.getStoreAdr());
+            JSONObject storeJSONObject = new JSONObject();
+            storeJSONObject.put("storeId", storeVO.getStoreId());
+            storeJSONObject.put("storeAcc", storeVO.getStoreAcc());
+            storeJSONObject.put("storeName", storeVO.getStoreName());
+            storeJSONObject.put("storeTel", storeVO.getStoreTel());
+            storeJSONObject.put("storeCity", storeVO.getStoreCity());
+            storeJSONObject.put("storeDist", storeVO.getStoreDist());
+            storeJSONObject.put("storeAdr", storeVO.getStoreAdr());
+            storeJSONObject.put("accStat", storeVO.getAccStat());
+            storeJSONObject.put("storeRegTime", storeVO.getStoreRegTime());
             if (storeVO.getStorePic() != null) {
-                storeJsonObject.put("storePic", encoder.encodeToString(storeVO.getStorePic()));
+                storeJSONObject.put("storePic", encoder.encodeToString(storeVO.getStorePic()));
             }
-            storeJSONArray.put(storeJsonObject);
+            storeJSONArray.put(storeJSONObject);
         }
         out.write(storeJSONArray.toString());
     }
