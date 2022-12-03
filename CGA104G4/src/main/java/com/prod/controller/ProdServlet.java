@@ -175,8 +175,8 @@ public class ProdServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			HttpSession session1 = req.getSession();
-			Integer storeId = (Integer) session1.getAttribute("storeId");
+			HttpSession session = req.getSession();
+			Integer storeId = (Integer) session.getAttribute("storeId");
 			Integer prodTypeId = Integer.valueOf(req.getParameter("prodTypeId").trim());
 
 			String prodName = req.getParameter("prodName");

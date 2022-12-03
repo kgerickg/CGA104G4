@@ -150,7 +150,7 @@
 									</div>
 
 									<div class="col-md-6">
-										<div class="form-group">
+										<div class="form-group"><p style="color: red;">${errorMsgs.prodPic}</p>
 											<div id="blob_holder"></div>
 										</div>
 									</div>
@@ -160,7 +160,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<input type="hidden" name="action" value="insert"> 
-											<button type="submit" class="btn-default w-100">
+											<button onclick='salert()' type="submit" class="btn-default w-100">
 												上架新產品！ <span></span>
 											</button>
 										</div>
@@ -211,6 +211,8 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script src="../resources/js/sweetalert2.all.min.js"></script>
+	
 </body>
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/jquery.datetimepicker.css" />
@@ -291,5 +293,16 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
+setTimeout(
+	function salert() {
+		Swal.fire({
+					  position: 'center',
+					  icon: 'success',
+					  title: '新產品上架成功！',
+					  showConfirmButton: false,
+					  timer: 1000
+					})
+		}, 100);
+setTimeout(function(){wundow.location.reload(); }, 1000);
 </script>
 </html>

@@ -137,7 +137,7 @@
 										<div class="form-group">
 											<input type="hidden" name="action" value="update"> <input
 												type="hidden" name="prodId" value="${param.prodId}">
-											<button type="submit" id="submit" class="btn-default w-100">
+											<button onclick='salert()' type="submit" class="btn-default w-100">
 												更新商品資訊 <span></span>
 											</button>
 										</div>
@@ -184,8 +184,7 @@
 											<input type="hidden" name="action" value="update"> <input
 												type="hidden" name="photoId" value="${param.prodId}">
 											<input type="hidden" name="prodId" value="${param.prodId}">
-											<input type="hidden" name="photoStat" value="1">
-											<button type="button" class="btn-default w-100" id="submit">
+											<button onclick='salert()' type="submit" class="btn-default w-100">
 												更新商品相片 <span></span>
 											</button>
 										</div>
@@ -317,5 +316,16 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
+	setTimeout(
+			function salert() {
+				Swal.fire({
+							  position: 'center',
+							  icon: 'success',
+							  title: '更新成功！',
+							  showConfirmButton: false,
+							  timer: 1000
+							})
+				}, 100);
+		setTimeout(function(){wundow.location.reload(); }, 1000);
 </script>
 </html>
