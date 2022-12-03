@@ -24,79 +24,141 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <!-- 請將覆蓋用的css放置此註解下方 -->
     <style>
-        table {
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+        /*** Table Styles **/
+        span{
+            color: #0a0a0a;
+            text-align:center
+
+        }
+        .flexdiv{
+            display: flex;
+            flex-direction: row;
+            justify-content:space-evenly;
+        }
+        select {
+            /* Reset */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
             border: 0;
+            outline: 0;
+            font: inherit;
+            /* Personalize */
+            width: 20em;
+            height: 3em;
+            padding: 0 4em 0 1em;
+            background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center/1.4em, linear-gradient(to left, rgb(78, 80, 102) 3em, rgb(0, 0, 0) 3em);
+            color: #ffffff;
+            border-radius: 0.25em;
+            box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            /* <option> colors */
+            /* Remove focus outline */
+            /* Remove IE arrow */
+        }
+        select option {
+            color: inherit;
+            background-color: #000000;
+        }
+        select:focus {
+            outline: none;
+        }
+        select::-ms-expand {
+            display: none;
+        }
+        .table-fill {
+            background: white;
+            border-radius:3px;
             border-collapse: collapse;
-            border-radius: 8px;
+            height: 320px;
+            margin: auto;
+            padding:5px;
             width: 100%;
-            display: inline;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            animation: float 5s infinite;
         }
 
         th {
-            border: solid 1px #d08b40;
-            padding: 16px 8px;
+            color:#D5DDE5;;
+            background:#1b1e24;
+            border-bottom:4px solid #9ea7af;
+            border-right: 1px solid #343a45;
+            font-size:23px;
+            font-weight: 100;
+            padding:24px;
+            text-align:center ;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            vertical-align:middle;
+        }
+
+        th:first-child {
+            border-top-left-radius:3px;
+        }
+
+        th:last-child {
+            border-top-right-radius:3px;
+            border-right:none;
+        }
+
+        tr {
+            border-top: 1px solid #C1C3D1;
+            border-bottom-: 1px solid #C1C3D1;
+            color:#666B85;
+            font-size:16px;
+            font-weight:normal;
+            text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+            text-align:center
+        }
+
+        tr:hover td {
+            background:#4E5066;
+            color:#FFFFFF;
+            border-top: 1px solid #22262e;
+        }
+
+        tr:first-child {
+            border-top:none;
+        }
+
+        tr:last-child {
+            border-bottom:none;
+        }
+
+        tr:nth-child(odd) td {
+            background:#EBEBEB;
+        }
+
+        tr:nth-child(odd):hover td {
+            background:#4E5066;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius:3px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius:3px;
         }
 
         td {
-            border: solid 1px #ce893d;
-            text-align: center;
-            padding: 8px;
-            color: #757575;
+            background:#FFFFFF;
+            padding:20px;
+            text-align:center;
+            vertical-align:middle;
+            font-weight:300;
+            font-size:18px;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #C1C3D1;
+
         }
 
-        table td a {
-            background-color: #256cb3;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            text-decoration: none;
+        td:last-child {
+            border-right: 0px;
         }
 
-        .popular {
-            position: relative;
-        }
 
-        .no1 {
-            position: absolute;
-            top: -10px;
-            background: #bdcc28;
-            width: 60px;
-            font-size: 10px;
-            border-radius: 15px;
-            line-height: 1;
-            padding: 5px;
-        }
 
-        .basic {
-            background-color: #0ceffe;
-        }
-
-        .standard {
-            background-color: #039be5;
-            border: 1px solid #039be5;
-            color: white;
-        }
-
-        .premium {
-            border: 1px solid #2e3a4d;
-            background-color: #2e3a4d;
-            color: white;
-        }
-
-        .price {
-            font-size: 20px;
-            font-weight: 800;
-        }
-
-        .price td {
-            color: black;
-        }
-
-        .main {
-            width: 80%;
-            margin: 20px auto;
-        }
     </style>
 
     <!-- 頁籤顯示的title -->
@@ -114,18 +176,18 @@
     <div id="wrapper-container">
         <!-- ******內容寫在這邊 ↓↓↓****** -->
         <div class="flexdiv">
-            <div>
-                <span>選擇合作店家名稱:</span>
+            <div display="">
+                <span style="color: #0a0a0a" >選擇合作店家名稱:</span>
                 <select id="storeNameSelector" name="storeName"></select>
                 <button id="storeNameSelectorButton">搜索</button>
             </div>
             <div>
-                <span>選擇合作店家地區:</span>
+                <span style="color: #0a0a0a">選擇合作店家地區:</span>
                 <select id="storeCitySelector" name="storeCity"></select>
                 <button id="storeCitySelectorButton">搜索</button>
             </div>
             <div>
-                <button id="getAll">顯示所有合作店家</button>
+                <button style="margin: auto;" id="getAll">顯示所有合作店家</button>
             </div>
         </div>
         <div id="listTable" style="margin-left: 0.5rem;margin-right: 0.5rem;display: inline;"></div>
@@ -245,7 +307,7 @@
 
         }
         table.append(tbody);
-        table.setAttribute("class", "tableclass");
+        table.setAttribute("class", "table-fill");
         $("#listTable").append(table);
     }
 
