@@ -279,7 +279,7 @@
 			let webCtx = path.substring(0, path.indexOf('/', 1));
 			let url = webCtx + "/cart/add?prodId=" + prodId + "&storeId=${param.storeId}";
 			e.preventDefault();
-			alert(this.id);
+// 			alert(this.id);
 			fetch(url, {method: 'get'});
 		})
 	})

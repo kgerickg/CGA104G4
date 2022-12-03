@@ -36,7 +36,7 @@ public class ProdServlet extends HttpServlet {
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("prodId");
 			if (str == null || (str.trim()).length() == 0) {
-				errorMsgs.put("prodId", "請輸入商品編號");
+				errorMsgs.put("prodId", "請輸入商品編號！");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -49,7 +49,7 @@ public class ProdServlet extends HttpServlet {
 			try {
 				prodId = Integer.valueOf(str);
 			} catch (Exception e) {
-				errorMsgs.put("prodId", "商品編號格式不正確");
+				errorMsgs.put("prodId", "商品編號格式不正確！");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -62,7 +62,7 @@ public class ProdServlet extends HttpServlet {
 			ProdService prodSvc = new ProdService();
 			ProdVO prodVO = prodSvc.getOneProd(prodId);
 			if (prodVO == null) {
-				errorMsgs.put("prodId", "查無資料");
+				errorMsgs.put("prodId", "查無資料！");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -116,24 +116,24 @@ public class ProdServlet extends HttpServlet {
 			String prodName = req.getParameter("prodName");
 			String prodNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,100}$";
 			if (prodName == null || prodName.trim().length() == 0) {
-				errorMsgs.put("prodName", "商品名稱: 請勿空白");
+				errorMsgs.put("prodName", "商品名稱請勿空白！");
 			} else if (!prodName.trim().matches(prodNameReg)) {
-				errorMsgs.put("prodName", "商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在1到100之間");
+				errorMsgs.put("prodName", "商品名稱只能是中文字、英文字母、數字和＿，且長度必需在1到100之間！");
 			}
 
 			String prodCont = req.getParameter("prodCont");
 //			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
 //			if (prodCont == null || prodCont.trim().length() == 0) {
-//				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
+//				errorMsgs.put("prodCont", "商品介紹請勿空白");
 //			} else if (!prodCont.trim().matches(prodContReg)) {
-//				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
+//				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
 //			}
 
 			Integer prodPrc = null;
 			try {
 				prodPrc = Integer.valueOf(req.getParameter("prodPrc").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("prodPrc", "商品價格請輸入數字");
+				errorMsgs.put("prodPrc", "商品價格請輸入數字！");
 			}
 
 			Integer prodStat = null;
@@ -182,24 +182,24 @@ public class ProdServlet extends HttpServlet {
 			String prodName = req.getParameter("prodName");
 			String prodNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,100}$";
 			if (prodName == null || prodName.trim().length() == 0) {
-				errorMsgs.put("prodName", "商品名稱: 請勿空白");
+				errorMsgs.put("prodName", "商品名稱請勿空白！");
 			} else if (!prodName.trim().matches(prodNameReg)) {
-				errorMsgs.put("prodName", "商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在1到100之間");
+				errorMsgs.put("prodName", "商品名稱只能是中文字、英文字母、數字和＿，且長度必需在1到100之間！");
 			}
 
 			String prodCont = req.getParameter("prodCont");
 //			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
 //			if (prodCont == null || prodCont.trim().length() == 0) {
-//				errorMsgs.put("prodCont", "商品介紹: 請勿空白");
+//				errorMsgs.put("prodCont", "商品介紹請勿空白！");
 //			} else if (!prodCont.trim().matches(prodContReg)) {
-//				errorMsgs.put("prodCont", "商品介紹: 只能是中、英文字母、數字和_ , 且長度必需在1到500之間");
+//				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
 //			}
 
 			Integer prodPrc = null;
 			try {
 				prodPrc = Integer.valueOf(req.getParameter("prodPrc").trim());
 			} catch (NumberFormatException e) {
-				errorMsgs.put("prodPrc", "商品售價請輸入數字");
+				errorMsgs.put("prodPrc", "商品售價請輸入數字！");
 			}
 
 			Timestamp prodTime = null;
@@ -230,12 +230,12 @@ public class ProdServlet extends HttpServlet {
 				photoPic = new byte[in.available()];
 				in.read(photoPic);
 				in.close();
-			}  else errorMsgs.put("photoPic","商品照片: 請上傳照片"); 
+			}  else errorMsgs.put("photoPic","請上傳商品照片！"); 
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-prod/storeMenu.jsp");
+						.getRequestDispatcher("/front-prod/storeNewProd.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -257,7 +257,7 @@ public class ProdServlet extends HttpServlet {
 			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			
-			String url = "/front-prod/storeNewProd.jsp?";
+			String url = "/front-prod/storeNewProd.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交/front-prod/storeNewProd.jsp
 			successView.forward(req, res);
 		}

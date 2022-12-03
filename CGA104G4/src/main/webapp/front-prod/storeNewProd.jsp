@@ -58,14 +58,14 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="datetime" id="f_date1" name="prodTime"
-												class="form-control" readonly="readonly">${errorMsgs.prodTime}
+												class="form-control" readonly="readonly">
 										</div>
 										<!--form-group end-->
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="storeId" value="${sessionScope.storeId}"
-												class="form-control" readonly="readonly">${errorMsgs.storeId}
+												class="form-control" readonly="readonly">
 										</div>
 										<!--form-group end-->
 									</div>
@@ -102,21 +102,21 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品名稱：
+								<h4 class="text-left">&emsp;商品名稱<strong><font color="#FF0000">*</font></strong>：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									商品售價：</h4>
+									商品售價<strong><font color="#FF0000">*</font></strong>：</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodName" value="${param.prodName}"
-												class="form-control">${errorMsgs.prodName}
+												class="form-control"><p style="color: red;">${errorMsgs.prodName}</p>
 										</div>
 										<!--form-group end-->
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodPrc" value="${param.prodPrc}"
-												class="form-control">${errorMsgs.prodPrc}
+												class="form-control"><p style="color: red;">${errorMsgs.prodPrc}</p>
 										</div>
 										<!--form-group end-->
 									</div>
@@ -125,7 +125,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea name="prodCont" style="height: 170px;">${param.prodCont}</textarea>${errorMsgs.prodCont}
+											<textarea name="prodCont" style="height: 170px;">${param.prodCont}</textarea><p style="color: red;">${errorMsgs.prodCont}</p>
 										</div>
 										<!--form-group end-->
 									</div>
