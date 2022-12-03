@@ -122,12 +122,12 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
-//			if (prodCont == null || prodCont.trim().length() == 0) {
-//				errorMsgs.put("prodCont", "商品介紹請勿空白");
-//			} else if (!prodCont.trim().matches(prodContReg)) {
-//				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
-//			}
+			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+			if (prodCont == null || prodCont.trim().length() == 0) {
+				errorMsgs.put("prodCont", "商品介紹請勿空白！");
+			} else if (!prodCont.trim().matches(prodContReg)) {
+				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
+			}
 
 			Integer prodPrc = null;
 			try {
@@ -188,12 +188,12 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
-//			if (prodCont == null || prodCont.trim().length() == 0) {
-//				errorMsgs.put("prodCont", "商品介紹請勿空白！");
-//			} else if (!prodCont.trim().matches(prodContReg)) {
-//				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
-//			}
+			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+			if (prodCont == null || prodCont.trim().length() == 0) {
+				errorMsgs.put("prodCont", "商品介紹請勿空白！");
+			} else if (!prodCont.trim().matches(prodContReg)) {
+				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
+			}
 
 			Integer prodPrc = null;
 			try {

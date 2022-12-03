@@ -74,7 +74,7 @@
 										<div class="ord-head">
 											<ul>
 												<li class="date" style="text-align: left; width: 140px;">訂單成立時間</li>
-												<li class="delivery" style="width: 190px; text-align: left;">客戶（會員編號）</li>
+												<li class="delivery" style="text-align: left;width: 190px;">客戶（會員編號）</li>
 												<li class="amount" style="text-align: left; width: 120px;">訂單金額</li>
 												<li class="status" style="text-align: left; width: 200px;">訂單狀態</li>
 											</ul>

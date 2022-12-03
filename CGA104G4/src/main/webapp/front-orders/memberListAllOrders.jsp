@@ -79,10 +79,10 @@
 
 										<div class="ord-head">
 											<ul>
-												<li class="date" style="text-align: left;">訂單成立時間</li>
-												<li class="delivery" style="width: 250px; text-align: left;">商店（商店編號）</li>
-												<li class="amount"style="text-align: left;">訂單金額</li>
-												<li class="status" style="text-align: left; width: 150px;">訂單狀態</li>
+												<li class="date" style="text-align: left; width: 140px;">訂單成立時間</li>
+												<li class="delivery" style="text-align: left; width: 190px;">商店（商店編號）</li>
+												<li class="amount"style="text-align: left; width: 120px;">訂單金額</li>
+												<li class="status" style="text-align: left; width: 200px;">訂單狀態</li>
 											</ul>
 										</div>
 										<!--ord-head end-->
@@ -95,11 +95,10 @@
 
 													<div class="oct-table-head">
 														<ul>
-															<li class="date" style="text-align: left;">${ordersVO.ordTime}</li>
-															<li class="delivery" style="width: 250px; text-align: left;">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}）
-															</li>
-															<li class="amount" style="text-align: left;">$${ordersVO.ordAmt}</li>
-															<li class="status" style="text-align: left; width: 150px; color: #0072E3""><c:if
+															<li class="date" style="text-align: left; width: 140px;">${ordersVO.ordTime}</li>
+															<li class="delivery" style="text-align: left; width: 190px;">${ordersVO.storeVO.storeName}（商店編號：${ordersVO.storeVO.storeId}）</li>
+															<li class="amount" style="text-align: left; width: 120px;">$${ordersVO.ordAmt}</li>
+															<li class="status" style="text-align: left; width: 200px; color: #0072E3""><c:if
 																	test="${ordersVO.ordStat==0}">正在等待商家接單</c:if> <c:if
 																	test="${ordersVO.ordStat==1}">商家已接單，訂單準備中</c:if> <c:if
 																	test="${ordersVO.ordStat==2}">訂單已備妥，請前往領取</c:if> <c:if

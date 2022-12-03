@@ -123,7 +123,7 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品介紹：</h4>
+								<h4 class="text-left">&emsp;商品介紹<strong><font color="#FF0000">*</font></strong>：</h4>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">

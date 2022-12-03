@@ -35,8 +35,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-
-
+<script src="https://kit.fontawesome.com/33764e6a90.js" crossorigin="anonymous"></script>
 <!-- 頁籤顯示的title -->
 <title>${storeSvc.findByStoreId(storeId).storeName}</title>
 
@@ -84,6 +83,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -102,6 +102,7 @@
 											<a href="#" title=""></a>${prodVO.prodName}</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -121,6 +122,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -140,6 +142,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -159,6 +162,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -178,6 +182,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -197,6 +202,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -216,6 +222,7 @@
 										</h3>
 										<p>${prodVO.prodCont}</p>
 										<strong class="semi-bold">$${prodVO.prodPrc}</strong> <a
+											onclick='salert()'
 											href="#" id="${prodVO.prodId}"
 											class="btn-default gradient-bg half-radius height-2 cart">加入購物車
 											<span></span>
@@ -268,6 +275,7 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script src="../resources/js/sweetalert2.all.min.js"></script>
 	<script>
 
 	let acart =  document.querySelectorAll(".cart");
@@ -283,7 +291,15 @@
 			fetch(url, {method: 'get'});
 		})
 	})
-	
+	function salert() {
+	Swal.fire({
+				  position: 'center',
+				  icon: 'success',
+				  title: '商品已加入購物車！',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
+	}
 	</script>
 
 <%if (request.getAttribute("listProds_ByStoreIdAndProdTypeId")!=null){%>
