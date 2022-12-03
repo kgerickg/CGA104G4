@@ -10,7 +10,7 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 	String passwd = "password";
 
 	private static final String INSERT_STMT = 
-		"insert into DETAIL (PROD_QTY, ORD_ID) values (?, ?)";
+		"insert into DETAIL (PROD_QTY, PROD_ID,ORD_ID) values (?, ?, ?)";
 	private static final String GET_ALL_STMT = 
 		"select PROD_ID, PROD_QTY, ORD_ID from DETAIL order by PROD_ID";
 	private static final String GET_ONE_STMT = 
@@ -35,7 +35,8 @@ public class DetailJDBCDAO implements DetailDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setInt(1, detailVO.getProdQty());
-			pstmt.setInt(2, detailVO.getOrdId());
+			pstmt.setInt(2, detailVO.getProdId());
+			pstmt.setInt(3, detailVO.getOrdId());
 
 			pstmt.executeUpdate();
 

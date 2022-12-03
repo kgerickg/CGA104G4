@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
     <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
+    <script src="../resources/js/cart.js"></script>
     <!-- 請將覆蓋用的css放置此註解下方 -->
     <style>
         h1 {
@@ -58,7 +58,7 @@
 
 <body>
 <script src="../resources/js/membernav.js"></script>
-<script src="../resources/js/cart.js"></script>
+
 <!-- 上面是NAV載入 請一定要放在BODY開始的位置 -->
 <!--下面可自由新增內容 -->
 <div style="height: 90px"></div>
@@ -82,7 +82,7 @@
     <tr>
         <td colspan="4" align="right">總計</td>
         <td id="total"></td>
-        <td><a id="checkout" href="../cart/clear">結帳</a></td>
+        <td><button id="checkout">結帳</button></td>
     </tr>
     </tfoot>
 

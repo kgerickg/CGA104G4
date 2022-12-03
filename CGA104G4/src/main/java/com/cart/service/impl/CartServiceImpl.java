@@ -25,37 +25,6 @@ public class CartServiceImpl implements CartService {
     private final CartCache cache = new CartCacheImpl();
 
     private final ProdDAO_interface prodDao = new ProdJDBCDAO();
-    private final OrdersDAO_interface orderDao = new OrdersJDBCDAO() {
-        @Override
-        public void insert(OrdersVO ordersVO) {
-
-        }
-
-        @Override
-        public void updateOrdStat(OrdersVO OrdersVO) {
-
-        }
-
-        @Override
-        public OrdersVO findByPrimaryKey(Integer ordId) {
-            return null;
-        }
-
-        @Override
-        public List<OrdersVO> getAll() {
-            return null;
-        }
-
-        @Override
-        public Set<OrdersVO> getOrdersByMemId(Integer memId) {
-            return null;
-        }
-
-        @Override
-        public Set<OrdersVO> getOrdersByStoreId(Integer storeId) {
-            return null;
-        }
-    };
 
     @Override
     public void put(Integer storeId, Cart cart) {
@@ -70,6 +39,8 @@ public class CartServiceImpl implements CartService {
             item.setProdPrc(product.getProdPrc());
             item.setProdTotalPrc(product.getProdPrc() * item.getProdQty());
         });
+        cart.getStoreMap().forEach((k,v)->v.forEach((k1,v2)->storeTotalPrc.getAndAdd(v2.getProdTotalPrc())));
+        cart.setTotalPrc(storeTotalPrc.get());
         cache.put(cart);
     }
 

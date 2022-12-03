@@ -271,10 +271,11 @@
 	<script>
 
 	let acart =  document.querySelectorAll(".cart");
-
 	acart.forEach(e=>{
 		e.addEventListener("click",function(e){
-
+			let value=parseInt(document.getElementById("cartIcon").innerText)+1;
+			document.getElementById("cartIcon").innerText=value;
+			sessionStorage.setItem('cartIcon', value.toString());
 			prodId = this.id;
 			let path = window.location.pathname;
 			let webCtx = path.substring(0, path.indexOf('/', 1));

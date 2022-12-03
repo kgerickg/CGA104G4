@@ -29,7 +29,8 @@ function listCarts(carts) {
         for (let prodId in carts.storeMap[storeId]) {
             console.log(carts.storeMap[storeId][prodId]);
             let tr = document.createElement("tr");
-            tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].storeName}</td>`);
+            console.log()
+            tr.insertAdjacentHTML("beforeend", `<td storeId=${storeId} prodId=${prodId}>${carts.storeMap[storeId][prodId].storeName}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodName}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodPrc}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td><input type="button" value="加入結帳清單" onclick="addCheckList(this);"/></td>`);
@@ -50,6 +51,8 @@ function addCheckList(btn) {			//增加到結帳清單
     let tr = btn.parentNode.parentNode;
     let info = tr.children;
     let item = document.createElement("tr");
+    let storeId = info[0].getAttribute("storeId");
+    let prodId = info[0].getAttribute("prodId");
     let storeName = info[0].innerHTML;
     let prodName = info[1].innerHTML;
     let price = parseInt(info[2].innerHTML);
@@ -58,12 +61,12 @@ function addCheckList(btn) {			//增加到結帳清單
         '<td>' + prodName + '</td>' +
         '<td>' + price + '</td>' +
         '<td align="center">' +
-        '<input type="button" value="-" onclick="reduce(this);"/> ' +
+        `<input type="button" value="-" storeId=${storeId} prodId=${prodId} onclick="reduce(this);"/> ` +
         '<input type="text" size="3" readonly value="1"/>' +
-        '<input type="button" value="+" onclick="increase(this);"/> ' +	//函數要傳入this，方便操作。
+        `<input type="button" value="+" storeId=${storeId} prodId=${prodId} onclick="increase(this);"/> ` +	//函數要傳入this，方便操作。
         '</td>' +
         '<td>' + price + '</td>' +
-        '<td align="center"><input type="button" value="x" onclick="removeCheckList(this)"/></td>';
+        `<td align="center"><input type="button" value="x" storeId=${storeId} prodId=${prodId} onclick="removeCheckList(this)"/></td>`;
     let cart = document.getElementById("goods");
     cart.appendChild(item);
     tr.remove();
@@ -72,7 +75,7 @@ function addCheckList(btn) {			//增加到結帳清單
     changeTotal();				//刷新總價格
 }
 
-function removeCheckList(btn) {
+async function removeCheckList(btn) {
     let tr = btn.parentNode.parentNode;
     let children = tr.children;
     let price = parseInt(children[4].innerHTML);
@@ -80,9 +83,16 @@ function removeCheckList(btn) {
     changeTotal();					//改變合計金額
 
     tr.innerHTML = "";
+
+    let storeId = btn.getAttribute("storeId");
+    let prodId = btn.getAttribute("prodId");
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + `/cart/delete?storeId=${storeId}&prodId=${prodId}`;
+    let response = await fetch(url, {method: 'get'});
 }
 
-function reduce(btn) {			//減少商品數量
+async function reduce(btn) {			//減少商品數量
     let amount = btn.nextElementSibling.value;
     if (amount == 0) {
         return;				//若商品等於0則退出
@@ -95,9 +105,16 @@ function reduce(btn) {			//減少商品數量
     all -= value;		//更新總價。
     changeTotal();		//刷新總價
 
+    let storeId = btn.getAttribute("storeId");
+    let prodId = btn.getAttribute("prodId");
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + `/cart/reduce?storeId=${storeId}&prodId=${prodId}`;
+    let response = await fetch(url, {method: 'get'});
+
 }
 
-function increase(btn) {		//增加商品數量
+async function increase(btn) {		//增加商品數量
     let amount = btn.previousElementSibling.value;
     amount++;
     btn.previousElementSibling.value = amount;		//更新商品數量
@@ -107,6 +124,13 @@ function increase(btn) {		//增加商品數量
 
     all += value;		//更新總價
     changeTotal();		//刷新總價
+
+    let storeId = btn.getAttribute("storeId");
+    let prodId = btn.getAttribute("prodId");
+    let path = window.location.pathname;
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + `/cart/add?storeId=${storeId}&prodId=${prodId}`;
+    let response = await fetch(url, {method: 'get'});
 }
 
 function changeTotal() {		//更新total函數，在每次改變結帳清單時使用。
@@ -114,15 +138,15 @@ function changeTotal() {		//更新total函數，在每次改變結帳清單時�
     total.innerHTML = all;
 }
 
-let checkout = document.getElementById("checkout");
-checkout.addEventListener("click", cleanRedis)
+window.onload = function () {
+    let checkout = document.getElementById("checkout");
+    checkout.addEventListener("click", cleanRedis)
 
-async function cleanRedis() {
-    let path = window.location.pathname;
-    let webCtx = path.substring(0, path.indexOf('/', 1));
-    let url = webCtx + "/cart/add?price=" + all
-
-    fetch(url, {method: 'get'})
-        .then(location.href = "/front-orders/memberListAllOrders.jsp") ;
-
+    function cleanRedis() {
+        sessionStorage.setItem("cartIcon", "0")
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/cart/clear"
+        window.location.href = url
+    }
 }
