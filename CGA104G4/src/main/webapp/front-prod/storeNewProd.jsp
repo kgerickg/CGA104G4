@@ -58,14 +58,14 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="datetime" id="f_date1" name="prodTime"
-												class="form-control" readonly="readonly">${errorMsgs.prodTime}
+												class="form-control" readonly="readonly">
 										</div>
 										<!--form-group end-->
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="storeId" value="${sessionScope.storeId}"
-												class="form-control" readonly="readonly">${errorMsgs.storeId}
+												class="form-control" readonly="readonly">
 										</div>
 										<!--form-group end-->
 									</div>
@@ -102,30 +102,30 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品名稱：
+								<h4 class="text-left">&emsp;商品名稱<strong><font color="#FF0000">*</font></strong>：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									商品售價：</h4>
+									商品售價<strong><font color="#FF0000">*</font></strong>：</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodName" value="${param.prodName}"
-												class="form-control">${errorMsgs.prodName}
+												class="form-control"><p style="color: red;">${errorMsgs.prodName}</p>
 										</div>
 										<!--form-group end-->
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodPrc" value="${param.prodPrc}"
-												class="form-control">${errorMsgs.prodPrc}
+												class="form-control"><p style="color: red;">${errorMsgs.prodPrc}</p>
 										</div>
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品介紹：</h4>
+								<h4 class="text-left">&emsp;商品介紹<strong><font color="#FF0000">*</font></strong>：</h4>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea name="prodCont" style="height: 170px;">${param.prodCont}</textarea>${errorMsgs.prodCont}
+											<textarea name="prodCont" style="height: 170px;">${param.prodCont}</textarea><p style="color: red;">${errorMsgs.prodCont}</p>
 										</div>
 										<!--form-group end-->
 									</div>
@@ -150,7 +150,7 @@
 									</div>
 
 									<div class="col-md-6">
-										<div class="form-group">
+										<div class="form-group"><p style="color: red;">${errorMsgs.prodPic}</p>
 											<div id="blob_holder"></div>
 										</div>
 									</div>
@@ -160,7 +160,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<input type="hidden" name="action" value="insert"> 
-											<button type="submit" class="btn-default w-100">
+											<button onclick='salert()' type="submit" class="btn-default w-100">
 												上架新產品！ <span></span>
 											</button>
 										</div>
@@ -211,6 +211,8 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script src="../resources/js/sweetalert2.all.min.js"></script>
+	
 </body>
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/jquery.datetimepicker.css" />
@@ -291,5 +293,16 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
+setTimeout(
+	function salert() {
+		Swal.fire({
+					  position: 'center',
+					  icon: 'success',
+					  title: '新產品上架成功！',
+					  showConfirmButton: false,
+					  timer: 1000
+					})
+		}, 100);
+setTimeout(function(){wundow.location.reload(); }, 1000);
 </script>
 </html>

@@ -52,11 +52,11 @@
 					<div class="col-lg-7">
 						<div class="delitaste-form text-center">
 							<div class="lg-text">
-								<h3 style="color: #ffa500;">商品變更</h3>
+								<h3 style="color: #ffa500;">商品資訊更新</h3>
 							</div>
 							<!--lg-text end-->
 							<form method="post" action="prod.do">
-								<h4 class="text-left">&emsp;商品最後更新時間：
+								<h4 class="text-left">&emsp;商品資訊最後更新時間：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									商家編號：</h4>
 								<div class="row">
@@ -104,9 +104,9 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品名稱：
+								<h4 class="text-left">&emsp;商品名稱<font color="#FF0000">*</font>：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									商品售價：</h4>
+									商品售價<font color="#FF0000">*</font>：</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -123,7 +123,7 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品介紹：</h4>
+								<h4 class="text-left">&emsp;商品介紹<strong><font color="#FF0000">*</font></strong>：</h4>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
@@ -137,7 +137,7 @@
 										<div class="form-group">
 											<input type="hidden" name="action" value="update"> <input
 												type="hidden" name="prodId" value="${param.prodId}">
-											<button type="submit" class="btn-default w-100">
+											<button onclick='salert()' type="submit" class="btn-default w-100">
 												更新商品資訊 <span></span>
 											</button>
 										</div>
@@ -184,8 +184,7 @@
 											<input type="hidden" name="action" value="update"> <input
 												type="hidden" name="photoId" value="${param.prodId}">
 											<input type="hidden" name="prodId" value="${param.prodId}">
-											<input type="hidden" name="photoStat" value="1">
-											<button type="submit" class="btn-default w-100" id="submit">
+											<button onclick='salert()' type="submit" class="btn-default w-100">
 												更新商品相片 <span></span>
 											</button>
 										</div>
@@ -236,6 +235,7 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script src="../resources/js/sweetalert2.all.min.js"></script>
 </body>
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/jquery.datetimepicker.css" />
@@ -316,5 +316,16 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
+	setTimeout(
+			function salert() {
+				Swal.fire({
+							  position: 'center',
+							  icon: 'success',
+							  title: '更新成功！',
+							  showConfirmButton: false,
+							  timer: 1000
+							})
+				}, 100);
+		setTimeout(function(){wundow.location.reload(); }, 1000);
 </script>
 </html>
