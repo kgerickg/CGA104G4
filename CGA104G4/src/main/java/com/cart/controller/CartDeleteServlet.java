@@ -1,6 +1,7 @@
 package com.cart.controller;
 
 import com.cart.pojo.Cart;
+import com.cart.pojo.Item;
 import com.cart.service.impl.CartServiceImpl;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class CartDeleteServlet extends HttpServlet {
         String userId = String.valueOf(request.getSession().getAttribute("memId"));
         CartServiceImpl cartSvc = new CartServiceImpl();
         Cart cart = cartSvc.get(userId);
-        cart.getStoreMap().get(storeId).get(prodId).setProdQty(0);
+        cart.getStoreMap().get(storeId).remove(prodId);
         cartSvc.put(storeId, cart);
     }
 }

@@ -18,7 +18,7 @@ function listCarts(carts) {
 
     //生成表頭
     table.innerHTML += "<thead><tr><th>商店名稱</th><th>商品名稱</th>"
-        + "<th>商品價格</th><th>加入結帳清單</th>"
+        + "<th>商品價格</th><th>加入結帳清單</th><th>刪除</th>"
         + "</tr></thead>";
 
     //生成表格內容
@@ -34,6 +34,7 @@ function listCarts(carts) {
             tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodName}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${carts.storeMap[storeId][prodId].prodPrc}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td><input type="button" value="加入結帳清單" onclick="addCheckList(this);"/></td>`);
+            tr.insertAdjacentHTML("beforeend", `<td><input type="button" value="x" storeId=${storeId} prodId=${prodId} onclick="removeCartList(this)"/></td>`);
             tbody.append(tr);
         }
         table.append(tbody);
@@ -42,12 +43,22 @@ function listCarts(carts) {
         $("#listTable").append(table);
     }
 
+}
 
+async function removeCartList(btn) {
+    let tr = btn.parentNode.parentNode;
+    let storeId = btn.getAttribute("storeId");
+    let prodId = btn.getAttribute("prodId");
+    let webCtx = path.substring(0, path.indexOf('/', 1));
+    let url = webCtx + `/cart/delete?storeId=${storeId}&prodId=${prodId}`;
+    let response = await fetch(url, {method: 'get'});
+    tr.remove();
 }
 
 let all = 0;			//用全局變數記錄總合計價格。
 
-function addCheckList(btn) {			//增加到結帳清單
+async function addCheckList(btn) {			//增加到結帳清單
+
     let tr = btn.parentNode.parentNode;
     let info = tr.children;
     let item = document.createElement("tr");
@@ -56,6 +67,8 @@ function addCheckList(btn) {			//增加到結帳清單
     let storeName = info[0].innerHTML;
     let prodName = info[1].innerHTML;
     let price = parseInt(info[2].innerHTML);
+
+
     item.innerHTML = 				//創建結帳清單
         '<td>' + storeName + '</td>' +
         '<td>' + prodName + '</td>' +
@@ -77,19 +90,19 @@ function addCheckList(btn) {			//增加到結帳清單
 
 async function removeCheckList(btn) {
     let tr = btn.parentNode.parentNode;
+    let info = tr.children;
     let children = tr.children;
     let price = parseInt(children[4].innerHTML);
     all -= price;
     changeTotal();					//改變合計金額
-
-    tr.innerHTML = "";
-
     let storeId = btn.getAttribute("storeId");
     let prodId = btn.getAttribute("prodId");
     let path = window.location.pathname;
     let webCtx = path.substring(0, path.indexOf('/', 1));
     let url = webCtx + `/cart/delete?storeId=${storeId}&prodId=${prodId}`;
     let response = await fetch(url, {method: 'get'});
+    tr.remove();
+
 }
 
 async function reduce(btn) {			//減少商品數量
@@ -140,7 +153,36 @@ function changeTotal() {		//更新total函數，在每次改變結帳清單時�
 
 window.onload = function () {
     let checkout = document.getElementById("checkout");
-    checkout.addEventListener("click", cleanRedis)
+    checkout.addEventListener("click", swalCheck)
+
+  function swalCheck(){
+        // swal({
+        //     title: "即將進行扣款",
+        //     text:`即將扣款${all}點數`,
+        //     icon: "warning",
+        // })
+      swal({
+          title: "請確認",
+          text: `即將扣款${all}點數`,
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+      })
+          .then((willDelete) => {
+              if (willDelete) {
+                  swal("您已成功扣款", {
+                      icon: "success",
+                      buttons: false,
+                  });
+                  setTimeout(() => {
+                      cleanRedis();
+                  }, 1000)
+
+              } else {
+                  swal("您已取消扣款");
+              }
+          });
+    }
 
     function cleanRedis() {
         sessionStorage.setItem("cartIcon", "0")

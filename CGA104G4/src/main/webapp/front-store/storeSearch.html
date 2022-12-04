@@ -26,16 +26,32 @@
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
         /*** Table Styles **/
-        span{
+        span {
             color: #0a0a0a;
-            text-align:center
+            text-align: center
 
         }
-        .flexdiv{
+
+        .flexdiv {
             display: flex;
             flex-direction: row;
-            justify-content:space-evenly;
+            justify-content: space-evenly;
         }
+
+        button {
+            border: 0;
+            background-color: #4E5066FF;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: #000000FF;
+            background-color: #4E5066FF;
+            border: 2px #003C9D solid;
+        }
+
         select {
             /* Reset */
             -webkit-appearance: none;
@@ -57,97 +73,101 @@
             /* Remove focus outline */
             /* Remove IE arrow */
         }
+
         select option {
             color: inherit;
             background-color: #000000;
         }
+
         select:focus {
             outline: none;
         }
+
         select::-ms-expand {
             display: none;
         }
+
         .table-fill {
             background: white;
-            border-radius:3px;
+            border-radius: 3px;
             border-collapse: collapse;
             height: 320px;
             margin: auto;
-            padding:5px;
+            padding: 5px;
             width: 100%;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             animation: float 5s infinite;
         }
 
         th {
-            color:#D5DDE5;;
-            background:#1b1e24;
-            border-bottom:4px solid #9ea7af;
+            color: #D5DDE5;;
+            background: #1b1e24;
+            border-bottom: 4px solid #9ea7af;
             border-right: 1px solid #343a45;
-            font-size:23px;
+            font-size: 23px;
             font-weight: 100;
-            padding:24px;
-            text-align:center ;
+            padding: 24px;
+            text-align: center;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            vertical-align:middle;
+            vertical-align: middle;
         }
 
         th:first-child {
-            border-top-left-radius:3px;
+            border-top-left-radius: 3px;
         }
 
         th:last-child {
-            border-top-right-radius:3px;
-            border-right:none;
+            border-top-right-radius: 3px;
+            border-right: none;
         }
 
         tr {
             border-top: 1px solid #C1C3D1;
             border-bottom-: 1px solid #C1C3D1;
-            color:#666B85;
-            font-size:16px;
-            font-weight:normal;
+            color: #666B85;
+            font-size: 16px;
+            font-weight: normal;
             text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-            text-align:center
+            text-align: center
         }
 
         tr:hover td {
-            background:#4E5066;
-            color:#FFFFFF;
+            background: #4E5066;
+            color: #FFFFFF;
             border-top: 1px solid #22262e;
         }
 
         tr:first-child {
-            border-top:none;
+            border-top: none;
         }
 
         tr:last-child {
-            border-bottom:none;
+            border-bottom: none;
         }
 
         tr:nth-child(odd) td {
-            background:#EBEBEB;
+            background: #EBEBEB;
         }
 
         tr:nth-child(odd):hover td {
-            background:#4E5066;
+            background: #4E5066;
         }
 
         tr:last-child td:first-child {
-            border-bottom-left-radius:3px;
+            border-bottom-left-radius: 3px;
         }
 
         tr:last-child td:last-child {
-            border-bottom-right-radius:3px;
+            border-bottom-right-radius: 3px;
         }
 
         td {
-            background:#FFFFFF;
-            padding:20px;
-            text-align:center;
-            vertical-align:middle;
-            font-weight:300;
-            font-size:18px;
+            background: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 18px;
             text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
             border-right: 1px solid #C1C3D1;
 
@@ -156,7 +176,6 @@
         td:last-child {
             border-right: 0px;
         }
-
 
 
     </style>
@@ -177,14 +196,12 @@
         <!-- ******內容寫在這邊 ↓↓↓****** -->
         <div class="flexdiv">
             <div display="">
-                <span style="color: #0a0a0a" >選擇合作店家名稱:</span>
+                <span style="color: #0a0a0a">選擇合作店家名稱:</span>
                 <select id="storeNameSelector" name="storeName"></select>
-                <button id="storeNameSelectorButton">搜索</button>
             </div>
             <div>
                 <span style="color: #0a0a0a">選擇合作店家地區:</span>
                 <select id="storeCitySelector" name="storeCity"></select>
-                <button id="storeCitySelectorButton">搜索</button>
             </div>
             <div>
                 <button style="margin: auto;" id="getAll">顯示所有合作店家</button>
@@ -208,7 +225,7 @@
         let url = webCtx + "/store/storeFront.do?action=getStoreName";
         let response = await fetch(url, {method: 'get'});
         storeNameArray = await response.json();
-        $("#storeNameSelector").empty();
+        $("#storeNameSelector").empty().append(`<option value="none" selected disabled hidden>請選擇店家</option>`);
         storeNameArray.forEach(storeName => {
             $("#storeNameSelector").append(`<option  value="${storeName}">${storeName}</option>`)
         })
@@ -222,14 +239,14 @@
         let url = webCtx + "/store/storeFront.do?action=getStoreCity";
         let response = await fetch(url, {method: 'get'});
         storeCityArray = await response.json();
-        $("#storeCitySelector").empty();
+        $("#storeCitySelector").empty().append(`<option value="none" selected disabled hidden>請選擇地區</option>`);
         storeCityArray.forEach(storeCity => {
             $("#storeCitySelector").append(`<option  value="${storeCity}">${storeCity}</option>`)
         })
     })();
 
     //綁定合作店家名稱選單查詢按鈕點擊事件
-    $("#storeNameSelectorButton").click(selectByName);
+    $("#storeNameSelector").change(selectByName);
 
     //透過選單查詢合作店家資料
     async function selectByName() {
@@ -243,7 +260,7 @@
     }
 
     //綁定合作店家名稱選單查詢按鈕點擊事件
-    $("#storeCitySelectorButton").click(selectByCity);
+    $("#storeCitySelector").change(selectByCity);
 
     async function selectByCity() {
         let storeCity = $("#storeCitySelector").val();
@@ -258,8 +275,6 @@
     // 綁定顯示所有合作店家資料按鈕事件
 
     $("#getAll").click(getAll)
-
-    //取得所有會員資料
     async function getAll() {
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
@@ -269,7 +284,19 @@
         let stores = await response.json();
         listStore(stores);
 
-    }
+    };
+
+    //取得所有會員資料
+        window.onload = async function getAllOnload() {
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let url = webCtx + "/store/storeFront.do?action=getAll";
+
+        let response = await fetch(url, {method: 'get'});
+        let stores = await response.json();
+        listStore(stores);
+
+    };
 
     //動態生成表格
     function listStore(stores) {

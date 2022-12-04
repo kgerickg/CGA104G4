@@ -44,7 +44,7 @@ header.innerHTML =
             </div>
             <ul class="oth-lnks ml-auto">
                 <li>
-                    <a href="#" title="" class="">
+                    <a href="${webCtx}/front-member/memberinfoupdate.html" title="" class="">
                         <img alt="" src="" id="personImage" style="width:2.5rem;border-radius: 100%;margin-right: 0px;
                          display:none">
                     </a>
@@ -187,6 +187,7 @@ async function logout() {
         .then(response => {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
+                sessionStorage.removeItem("cartIcon");
                 window.location.reload();
                 window.location.href = webCtx + "/front-index/index.html";
             }
