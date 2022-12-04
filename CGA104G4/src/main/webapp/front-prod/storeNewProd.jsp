@@ -87,7 +87,7 @@
 												<option value="5">飲品</option>												
 												<option value="6">點心</option>												
 												<option value="7">湯品</option>												
-												<option value="8">其他</option>												
+												<option value="8">烤肉</option>												
 											</select>
 										</div>
 										<!--form-group end-->
