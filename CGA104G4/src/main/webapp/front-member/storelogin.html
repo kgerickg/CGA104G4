@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn-default w-100" style="outline: none;"
                                         id="submitButton">
-                                    合作店家登入
+                                    登入
                                 </button>
                             </div>
                         </div>
@@ -113,14 +113,14 @@
         if (!storeAcc) {
             let p = document.createElement("p");
             p.setAttribute("id", "storeAccError")
-            p.style.color = "red";
+            p.style.color = "#e38e23";
             p.textContent = "請輸入帳號";
             $("#accDiv").append(p);
         }
         if (!password) {
             let p = document.createElement("p");
             p.setAttribute("id", "storePwdError")
-            p.style.color = "red";
+            p.style.color = "#e38e23";
             p.textContent = "請輸入密碼";
             $("#passwordDiv").append(p);
         }
@@ -152,21 +152,21 @@
             if (response.storeAccError) {
                 let p = document.createElement("p");
                 p.setAttribute("id", "storeAccError")
-                p.style.color = "red";
+                p.style.color = "#e38e23";
                 p.textContent = response.storeAccError;
                 $("#accDiv").append(p);
             }
             if (response.storePwdError) {
                 let p = document.createElement("p");
                 p.setAttribute("id", "storePwdError")
-                p.style.color = "red";
+                p.style.color = "#e38e23";
                 p.textContent = response.storePwdError;
                 $("#passwordDiv").append(p);
             }
             if (response.storeError) {
                 let p = document.createElement("p");
                 p.setAttribute("id", "storeError")
-                p.style.color = "red";
+                p.style.color = "#e38e23";
                 p.textContent = response.storeError;
                 $("#accDiv").prepend(p);
             }

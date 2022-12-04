@@ -80,9 +80,9 @@ public class StoreFrontServlet extends HttpServlet {
         String storeNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,10}$";
 
         if (storeName == null || storeName.trim().length() == 0) {
-            MsgsJson.put("storeNameError", "姓名請勿空白");
+            MsgsJson.put("storeNameError", "姓名不能為空白，請重新輸入");
         } else if (!storeName.trim().matches(storeNameReg)) {
-            MsgsJson.put("storeNameError", "姓名格式異常");
+            MsgsJson.put("storeNameError", "姓名格式異常，請重新輸入");
         }
 
         // 電話驗證
@@ -90,9 +90,9 @@ public class StoreFrontServlet extends HttpServlet {
         String storeTelReg = "^0[1-9]{1}[0-9]{8}$";
 
         if (storeTel == null || storeTel.trim().length() == 0) {
-            MsgsJson.put("storeTelError", "電話號碼請勿空白");
+            MsgsJson.put("storeTelError", "電話號碼不能為空白，請重新輸入");
         } else if (!storeTel.trim().matches(storeTelReg)) {
-            MsgsJson.put("storeTelError", "電話號碼格式異常");
+            MsgsJson.put("storeTelError", "電話號碼格式異常，請重新輸入");
         }
 
         // 地址驗證
@@ -232,22 +232,22 @@ public class StoreFrontServlet extends HttpServlet {
         String storePwdReg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
 
         if (oStorePwd == null || oStorePwd.trim().length() == 0) {
-            MsgsJson.put("oStorePwdError", "舊密碼請勿空白");
+            MsgsJson.put("oStorePwdError", "舊密碼為空白，請重新輸入");
         } else if (!oStorePwd.trim().matches(storePwdReg)) {
-            MsgsJson.put("oStorePwdError", "舊密碼格式異常");
+            MsgsJson.put("oStorePwdError", "舊密碼格式異常，請重新輸入");
         }
 
         if (nStorePwd == null || nStorePwd.trim().length() == 0) {
-            MsgsJson.put("nStorePwdError", "新密碼請勿空白");
+            MsgsJson.put("nStorePwdError", "新密碼不能為空白，請重新輸入");
         } else if (!nStorePwd.trim().matches(storePwdReg)) {
-            MsgsJson.put("nStorePwdError", "新密碼格式異常");
+            MsgsJson.put("nStorePwdError", "新密碼格式異常，請重新輸入");
         } else if (nStorePwd.equals(oStorePwd)) {
-            MsgsJson.put("nStorePwdError", "新密碼請勿與舊密碼相同");
+            MsgsJson.put("nStorePwdError", "新密碼請勿與舊密碼相同，請重新輸入");
         }
 
         if (nStorePwd != null) {
             if (!nStorePwd.equals(confirmPwd)) {
-                MsgsJson.put("confirmPwdError", "新密碼與確認密碼不相符");
+                MsgsJson.put("confirmPwdError", "新密碼與確認密碼不相符，請重新輸入");
             }
         }
 
@@ -263,7 +263,7 @@ public class StoreFrontServlet extends HttpServlet {
 
         if (!StorePwd.equals(oStorePwd)) {
             MsgsJson.put("state", false);
-            MsgsJson.put("oStorePwdError", "舊密碼錯誤請重新確認");
+            MsgsJson.put("oStorePwdError", "舊密碼錯誤，請重新輸入");
             out.write(MsgsJson.toString());
             return;
         }
@@ -284,9 +284,9 @@ public class StoreFrontServlet extends HttpServlet {
         String emailReg = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 
         if (storeAcc == null || storeAcc.trim().length() == 0) {
-            MsgsJson.put("storeAccError", "帳號請勿空白");
+            MsgsJson.put("storeAccError", "帳號不能為空白，請重新輸入");
         } else if (!storeAcc.trim().matches(emailReg)) {
-            MsgsJson.put("storeAccError", "帳號格式異常");
+            MsgsJson.put("storeAccError", "帳號格式異常，請重新輸入");
         }
 
         if (!MsgsJson.isEmpty()) {
@@ -302,7 +302,7 @@ public class StoreFrontServlet extends HttpServlet {
             out.write(MsgsJson.toString());
         } else {
             MsgsJson.put("state", state);
-            MsgsJson.put("storeAccError", "查無此帳號請重新確認或進行註冊");
+            MsgsJson.put("storeAccError", "查無此帳號，請重新輸入或進行註冊");
             out.write(MsgsJson.toString());
         }
 
@@ -318,17 +318,17 @@ public class StoreFrontServlet extends HttpServlet {
         String emailReg = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 
         if (storeAcc == null || storeAcc.trim().length() == 0) {
-            MsgsJson.put("storeAccError", "帳號請勿空白");
+            MsgsJson.put("storeAccError", "帳號不能為空白，請重新輸入");
         } else if (!storeAcc.trim().matches(emailReg)) {
-            MsgsJson.put("storeAccError", "帳號格式異常");
+            MsgsJson.put("storeAccError", "帳號格式異常，請重新輸入");
         } else if (storeService.selectByStoreAcc(storeAcc) != null) {
-            MsgsJson.put("storeAccError", "帳號已存在請確認或使用忘記密碼");
+            MsgsJson.put("storeAccError", "帳號已存在請使用忘記密碼");
         }
 
         //名稱驗證
         String storeName = request.getParameter("storeName");
         if (storeName == null || storeName.trim().length() == 0) {
-            MsgsJson.put("storeNameError", "名稱請勿空白");
+            MsgsJson.put("storeNameError", "店家名稱不能為空白，請重新輸入");
         }
 
         // 密碼驗證
@@ -337,7 +337,7 @@ public class StoreFrontServlet extends HttpServlet {
         String storePwdReg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
 
         if (storePwd == null || storePwd.trim().length() == 0) {
-            MsgsJson.put("storePwdError", "密碼請勿空白");
+            MsgsJson.put("storePwdError", "密碼不能為空白，請重新輸入");
         } else if (!storePwd.trim().matches(storePwdReg)) {
             MsgsJson.put("storePwdError", "密碼格式異常");
         } else if (!storePwd.equals(confirmPwd)) {
@@ -426,9 +426,9 @@ public class StoreFrontServlet extends HttpServlet {
         String emailReg = "^\\w{1,63}@[a-zA-Z0-9]{2,63}\\.[a-zA-Z]{2,63}(\\.[a-zA-Z]{2,63})?$";
 
         if (storeAcc == null || storeAcc.trim().length() == 0) {
-            msgsJson.put("storeAccError", "帳號請勿空白");
+            msgsJson.put("storeAccError", "帳號不能為空白，請重新輸入");
         } else if (!storeAcc.trim().matches(emailReg)) {
-            msgsJson.put("storeAccError", "帳號格式異常");
+            msgsJson.put("storeAccError", "帳號格式異常，請重新輸入");
         }
 
         // 密碼驗證
@@ -437,9 +437,9 @@ public class StoreFrontServlet extends HttpServlet {
         String storePwdReg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$";
 
         if (storePwd == null || storePwd.trim().length() == 0) {
-            msgsJson.put("storePwdError", "密碼請勿空白");
+            msgsJson.put("storePwdError", "密碼不能為空白，請重新輸入");
         } else if (!storePwd.trim().matches(storePwdReg)) {
-            msgsJson.put("storePwdError", "密碼格式異常");
+            msgsJson.put("storePwdError", "密碼格式異常，請重新輸入");
         }
 
 
@@ -454,14 +454,14 @@ public class StoreFrontServlet extends HttpServlet {
 
 
         if (storeVO == null) {
-            msgsJson.put("storeError", "帳號或密碼錯誤請重新輸入");
+            msgsJson.put("storeError", "帳號或密碼錯誤，請重新輸入");
             msgsJson.put("state", false);
             out.write(msgsJson.toString());
             return;
         }
 
         if (storeVO.getAccStat() == 0) {
-            msgsJson.put("storeError", "帳號已被停權，若有疑慮請聯絡客服人員");
+            msgsJson.put("storeError", "您的帳號已被停權，請聯絡客服人員");
             msgsJson.put("state", false);
             out.write(msgsJson.toString());
             return;

@@ -28,7 +28,7 @@ function onSaveClick(admId) {
         .then(body => {
             const {successful, message} = body;
             if (successful) {
-                swal("個人資料修改", "修改成功!", "success").then(() => {
+                swal("資料修改", "修改成功!", "success").then(() => {
                     location.reload();
                 })
 
