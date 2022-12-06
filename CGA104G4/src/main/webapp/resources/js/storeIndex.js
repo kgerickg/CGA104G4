@@ -145,13 +145,13 @@ function loginNavChange() {
     let storeUserName = sessionStorage.getItem("storeName");
     document.querySelector("#logul").innerHTML = "";
     document.querySelector("#logul").innerHTML = `<li><a href="${webCtx}/prod/prod.do?action=listProdTypeIds_ByStoreId_S">${storeUserName}</a></li><li><a href="" title="" class="logout">登出</a></li>`;
-    // let storedata = JSON.parse(sessionStorage.getItem("storedata"));
-    // if(storedata.storePic){
-    //     document.querySelector("#storeImage").setAttribute("src","data:image/png;base64,"+storedata.storePic);
-    // }else {
-    //     document.querySelector("#storeImage").setAttribute("src","../resources/images/default.png");
-    // }
-    // 改變response-navbar
+    let storedata = JSON.parse(sessionStorage.getItem("storedata"));
+    if(storedata.storePic){
+        document.querySelector("#storeImage").setAttribute("src","data:image/png;base64,"+storedata.storePic);
+    }else {
+        document.querySelector("#storeImage").setAttribute("src","../resources/images/default.png");
+    }
+    //改變response-navbar
 
     document.querySelector("#log-il-response").innerHTML = "";
     document.querySelector("#log-il-response").innerHTML = `<a href="" class="logout">登出</a>`;

@@ -18,7 +18,7 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 	private static final String GET_ALL_STMT = "select PHOTO_ID, PROD_ID, PHOTO_STAT from PHOTO order by PHOTO_ID";
 	private static final String GET_ONE_STMT = "select PHOTO_ID, PROD_ID, PHOTO_STAT, PHOTO_PIC from PHOTO where PHOTO_ID = ?";
 	private static final String DELETE = "delete from PHOTO where PHOTO_ID = ?";
-	private static final String UPDATE = "update PHOTO set PROD_ID = ?, PHOTO_STAT = ?, PHOTO_PIC = ? where PHOTO_ID = ?";
+	private static final String UPDATE = "update PHOTO set PROD_ID = ?, PHOTO_PIC = ? where PHOTO_ID = ?";
 
 	@Override
 	public void insert(PhotoVO photoVO) {
@@ -77,9 +77,8 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setInt(1, photoVO.getProdId());
-			pstmt.setInt(2, photoVO.getPhotoStat());
-			pstmt.setBytes(3, photoVO.getPhotoPic());
-			pstmt.setInt(4, photoVO.getPhotoId());
+			pstmt.setBytes(2, photoVO.getPhotoPic());
+			pstmt.setInt(3, photoVO.getPhotoId());
 			
 			pstmt.executeUpdate();
 

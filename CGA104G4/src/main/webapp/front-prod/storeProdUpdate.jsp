@@ -32,7 +32,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-<script src="https://kit.fontawesome.com/33764e6a90.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/33764e6a90.js"
+	crossorigin="anonymous"></script>
 <!-- 頁籤顯示的title -->
 <title>商品管理</title>
 </head>
@@ -52,11 +53,13 @@
 					<div class="col-lg-7">
 						<div class="delitaste-form text-center">
 							<div class="lg-text">
-								<h3 style="color: #ffa500;">商品變更</h3>
+								<h3 style="color: #ffa500;">商品資訊更新</h3>
 							</div>
 							<!--lg-text end-->
-							<form method="post" action="prod.do">
-								<h4 class="text-left">&emsp;商品最後更新時間：
+							<form method="post"
+								action="<%=request.getContextPath()%>/prod/prod.do"
+								enctype="multipart/form-data">
+								<h4 class="text-left">&emsp;商品資訊最後更新時間：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									商家編號：</h4>
 								<div class="row">
@@ -104,9 +107,11 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品名稱：
+								<h4 class="text-left">
+									&emsp;商品名稱<font color="#FF0000">*</font>：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									商品售價：</h4>
+									商品售價<font color="#FF0000">*</font>：
+								</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -123,7 +128,9 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品介紹：</h4>
+								<h4 class="text-left">
+									&emsp;商品介紹<strong><font color="#FF0000">*</font></strong>：
+								</h4>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
@@ -132,21 +139,6 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="hidden" name="action" value="update"> <input
-												type="hidden" name="prodId" value="${param.prodId}">
-											<button type="submit" class="btn-default w-100">
-												更新商品資訊 <span></span>
-											</button>
-										</div>
-									</div>
-								</div>
-							</form>
-							<form method="post"
-								action="<%=request.getContextPath()%>/photo/photo.do"
-								enctype="multipart/form-data">
 								<jsp:useBean id="photoSvc" scope="page"
 									class="com.photo.model.PhotoService" />
 								<h4 class="text-left">
@@ -158,7 +150,6 @@
 										style="display: none;"> <i class="fa fa-photo"
 										style="background-color: #66B3FF"></i> 上傳相片
 									</label>
-									
 								</h4>
 								<div class="row">
 									<div class="col-md-6">
@@ -181,12 +172,11 @@
 								<div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="hidden" name="action" value="update"> <input
-												type="hidden" name="photoId" value="${param.prodId}">
+											<input type="hidden" name="action" value="update">
 											<input type="hidden" name="prodId" value="${param.prodId}">
-											<input type="hidden" name="photoStat" value="1">
-											<button type="submit" class="btn-default w-100" id="submit">
-												更新商品相片 <span></span>
+											<input type="hidden" name="photoId" value="${param.prodId}">
+											<button onclick="salert()"type="submit" class="btn-default w-100">
+												更新商品資訊 <span></span>
 											</button>
 										</div>
 									</div>
@@ -236,6 +226,7 @@
 	<script src="../resources/js/slick.js"></script>
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
+	<script src="../resources/js/sweetalert2.all.min.js"></script>
 </body>
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/jquery.datetimepicker.css" />
@@ -316,5 +307,16 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
+		setTimeout(
+				function salert() {
+					Swal.fire({
+								  position: 'center',
+								  icon: 'success',
+								  title: '更新成功！',
+								  showConfirmButton: false,
+								  timer: 1000
+								})
+					}, 100);
+			setTimeout(function(){wundow.location.reload(); }, 1000);
 </script>
 </html>

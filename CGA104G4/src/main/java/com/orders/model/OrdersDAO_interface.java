@@ -11,4 +11,5 @@ public interface OrdersDAO_interface {
           public List<OrdersVO> getAll();
           public Set<OrdersVO> getOrdersByMemId(Integer memId);
           public Set<OrdersVO> getOrdersByStoreId(Integer storeId);
+          public Integer genOrderId();
 }

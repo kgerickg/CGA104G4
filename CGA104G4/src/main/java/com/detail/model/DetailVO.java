@@ -3,7 +3,11 @@ import com.orders.model.OrdersService;
 import com.orders.model.OrdersVO;
 import com.prod.model.ProdService;
 import com.prod.model.ProdVO;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor(staticName = "of")
 public class DetailVO {
 	
 	private static final long serialVersionUID = 1L;

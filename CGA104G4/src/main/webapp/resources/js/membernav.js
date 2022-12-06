@@ -5,6 +5,7 @@ divwrapper.setAttribute("class", "wrapper");
 let header = document.createElement("header");
 let path = window.location.pathname;
 let webCtx = path.substring(0, path.indexOf('/', 1));
+let value = sessionStorage.getItem('cartIcon') ? sessionStorage.getItem('cartIcon') : "0";
 header.innerHTML =
     `<div class="container-fluid">
         <div class="header-content d-flex flex-wrap align-items-center" style="z-index=1001;">
@@ -43,7 +44,7 @@ header.innerHTML =
             </div>
             <ul class="oth-lnks ml-auto">
                 <li>
-                    <a href="#" title="" class="">
+                    <a href="${webCtx}/front-member/memberinfoupdate.html" title="" class="">
                         <img alt="" src="" id="personImage" style="width:2.5rem;border-radius: 100%;margin-right: 0px;
                          display:none">
                     </a>
@@ -52,7 +53,7 @@ header.innerHTML =
                     <a href="${webCtx}/front-cart/cart.html" title="" class="">
                         <img alt="" src="${webCtx}/resources/images/shopping-cart.svg" style="width:2rem">
                     </a>
-                     <span class="cart-item-num">0</span>
+                     <span class="cart-item-num" id="cartIcon">${value}</span>
                 </li>
             </ul>
             <nav class="padding-remove">
@@ -186,6 +187,7 @@ async function logout() {
         .then(response => {
             if (response.ok) {
                 sessionStorage.removeItem("memData");
+                sessionStorage.removeItem("cartIcon");
                 window.location.reload();
                 window.location.href = webCtx + "/front-index/index.html";
             }

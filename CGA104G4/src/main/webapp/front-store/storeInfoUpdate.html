@@ -309,10 +309,10 @@
         let response = await fetch(url, {method: 'post', body: formData}).then(e => e.json());
         if (!response.state) {
             if (response.storeNameError) {
-                $("#storeNameError").html(response.storeNameError);
+                $("#storeNameError").html(`<p style='color:#e38e23;'>${response.storeNameError}</p>`);
             }
             if (response.storeTelError) {
-                $("#storeTelError").html(response.storeTelError);
+                $("#storeTelError").html(`<p style='color:#e38e23;'>${response.storeTelError}</p>`);
             }
             return;
         }
