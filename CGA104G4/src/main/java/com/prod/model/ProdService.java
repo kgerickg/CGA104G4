@@ -1,6 +1,5 @@
 package com.prod.model;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,21 +30,11 @@ public class ProdService {
 		dao.insert(ProdVO);
 	}
 	
-	public ProdVO updateProd(Integer prodId, Integer prodTypeId, Integer storeId, String prodName, String prodCont, Integer prodPrc, Integer prodStat, Timestamp prodTime) {
-
-		ProdVO prodVO = new ProdVO();
-
-		prodVO.setProdId(prodId);
-		prodVO.setProdTypeId(prodTypeId);
-		prodVO.setStoreId(storeId);
-		prodVO.setProdName(prodName);
-		prodVO.setProdCont(prodCont);
-		prodVO.setProdPrc(prodPrc);
-		prodVO.setProdStat(prodStat);
-		prodVO.setProdTime(prodTime);
+	public ProdVO updateProd(ProdVO prodVO, PhotoVO photoVO) {
 		dao.update(prodVO);
-		
-		return dao.findByPrimaryKey(prodId);
+		photoVO.setProdId(prodVO.getProdId());
+		dao2.update(photoVO);
+		return prodVO;
 	}
 
 	public void deleteProd(Integer prodId) {
