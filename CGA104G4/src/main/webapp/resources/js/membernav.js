@@ -7,7 +7,7 @@ let path = window.location.pathname;
 let webCtx = path.substring(0, path.indexOf('/', 1));
 header.innerHTML =
     `<div class="container-fluid">
-        <div class="header-content d-flex flex-wrap align-items-center">
+        <div class="header-content d-flex flex-wrap align-items-center" style="z-index=1001;">
             <div class="logo">
                 <a href="${webCtx}/front-index/index.html" title="">
                     <img class="logoimg" src="${webCtx}/resources/images/1.png" alt="">
@@ -107,7 +107,7 @@ divwrapper.append(div);
 body.insertAdjacentElement("afterbegin", divwrapper);
 
 divwrapper.insertAdjacentHTML("afterend",
-    "<div style='position: absolute;top: 12%;z-index: 1000;color: green;font-size: 1.5rem; width: 100%;height: 2rem;overflow: hidden'>" +
+    "<div style='position: absolute;top: 12%;color: green;font-size: 1.5rem; width: 100%;height: 2rem;overflow: hidden'>" +
     "<div style='position: relative;' >" +
     "<div id='promoDiv' style='position: absolute;right: 0%;'>" +
     "</div></div></div>");
