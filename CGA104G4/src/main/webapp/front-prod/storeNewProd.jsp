@@ -315,17 +315,15 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
-	setTimeout(function salert() {
-		Swal.fire({
-			position : 'center',
-			icon : 'success',
-			title : '新產品上架成功！',
-			showConfirmButton : false,
-			timer : 1000
-		})
-	}, 100);
-	setTimeout(function() {
-		wundow.location.reload();
-	}, 1000);
+// 	function salert() {
+// 		Swal.fire({
+// 			position : 'center',
+// 			icon : 'success',
+// 			title : '新產品上架成功！',
+// 			showConfirmButton : false,
+// 			timer : 1000
+// 		})
+// 	}
+
 </script>
 </html>
