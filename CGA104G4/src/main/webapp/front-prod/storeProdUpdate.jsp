@@ -307,16 +307,15 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
-		setTimeout(
-				function salert() {
-					Swal.fire({
-								  position: 'center',
-								  icon: 'success',
-								  title: '更新成功！',
-								  showConfirmButton: false,
-								  timer: 1000
-								})
-					}, 100);
-			setTimeout(function(){wundow.location.reload(); }, 1000);
+
+// 				function salert() {
+// 					Swal.fire({
+// 								  position: 'center',
+// 								  icon: 'success',
+// 								  title: '商品資訊更新成功！',
+// 								  showConfirmButton: false,
+// 								  timer: 1000
+// 								})
+// 					} 
 </script>
 </html>
