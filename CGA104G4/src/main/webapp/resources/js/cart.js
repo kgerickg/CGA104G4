@@ -184,11 +184,11 @@ window.onload = function () {
           });
     }
 
-    function cleanRedis() {
+    async function cleanRedis() {
         sessionStorage.setItem("cartIcon", "0")
         let path = window.location.pathname;
         let webCtx = path.substring(0, path.indexOf('/', 1));
-        let url = webCtx + "/cart/clear"
+        let url = webCtx + "/cart/clear?value=1"
         window.location.href = url
     }
 }

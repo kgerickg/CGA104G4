@@ -53,6 +53,9 @@ public class RefillServlet extends HttpServlet {
             case "selectByMemEmail":
                 selectByMemEmail(request, response);
                 break;
+            case "setToken":
+                setToken(request, response);
+                break;
         }
 
     }
@@ -310,5 +313,12 @@ public class RefillServlet extends HttpServlet {
         reFillJson.put("memToken", memToken);
         Writer out = response.getWriter();
         out.write(reFillJson.toString());
+    }
+    private void setToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        RefillService refillService = SpringUtil.getBean(getServletContext(), RefillService.class);
+        Integer memId = (Integer) session.getAttribute("memId");
+        Integer chargeToken = (Integer) session.getAttribute("value");
+        refillService.setToken(memId,chargeToken);
     }
 }

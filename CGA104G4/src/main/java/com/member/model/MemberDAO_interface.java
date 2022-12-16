@@ -22,6 +22,7 @@ public interface MemberDAO_interface extends BasicDAO_interface<MemberVO> {
     public MemberVO findByMemId(Integer memId);
 
     public void updateToKen(Integer memId, Integer refillToken);
+    public void updateToKenBuy(Integer memId, Integer chargeToken);
 
     public List<MemberVO> selectMemEmail(String memEmail);
 }

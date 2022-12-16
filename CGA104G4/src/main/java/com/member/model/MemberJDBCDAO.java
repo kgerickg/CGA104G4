@@ -177,6 +177,11 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	@Override
+	public void updateToKenBuy(Integer memId, Integer chargeToken) {
+
+	}
+
+	@Override
 	public List<MemberVO> selectMemEmail(String memEmail) {
 		return null;
 	}

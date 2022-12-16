@@ -1,11 +1,13 @@
 package com.refill.model;
 
 
+import com.member.model.MemberDAO;
 import com.member.model.MemberDAO_interface;
 import com.member.model.MemberVO;
 import com.promo.model.PromoDAO;
 import com.promo.model.PromoDAO_interface;
 import com.promo.model.PromoVO;
+import com.utils.ApplicationContextProvider;
 import com.utils.RandomPassword;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
@@ -34,6 +36,9 @@ public class RefillService {
         MemberVO memberVO = memDao.findByPrimaryKey(memId);
         Integer memToken = memberVO.getMemToken();
         return memToken;
+    }
+    public void setToken(Integer memId, Integer chargeToken) {
+        memDao.updateToKenBuy(memId,chargeToken);
     }
 
     public List<RefillVO> getRefillRecord(Integer memId) {

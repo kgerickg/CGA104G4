@@ -68,6 +68,15 @@ public class MemberDAO implements MemberDAO_interface {
         memberVOorignal.setMemToken(NewToken);
         session.merge(memberVOorignal);
     }
+    @Override
+    public void updateToKenBuy(Integer memId, Integer chargeToken) {
+        MemberVO memberVO = new MemberVO();
+        memberVO.setMemId(memId);
+        MemberVO memberVOorignal = session.get(MemberVO.class, memberVO.getMemId());
+        Integer NewToken = memberVOorignal.getMemToken()-chargeToken;
+        memberVOorignal.setMemToken(NewToken);
+        session.update(memberVOorignal);
+    }
 
     @Override
     public List<MemberVO> selectMemEmail(String memEmail) {
