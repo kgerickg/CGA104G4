@@ -103,7 +103,7 @@ public class ProdJDBCDAO implements ProdDAO_interface {
 			pstmt.setInt(8, prodVO.getProdId());
 
 			pstmt.executeUpdate();
-
+		
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());

@@ -9,6 +9,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.photo.model.PhotoService;
 import com.photo.model.PhotoVO;
 import com.prod.model.ProdService;
 import com.prod.model.ProdVO;
@@ -122,12 +123,13 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
 			if (prodCont == null || prodCont.trim().length() == 0) {
 				errorMsgs.put("prodCont", "商品介紹請勿空白！");
-			} else if (!prodCont.trim().matches(prodContReg)) {
-				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
 			}
+//			} else if (!prodCont.trim().matches(prodContReg)) {
+//				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
+//			}
 
 			Integer prodPrc = null;
 			try {
@@ -157,13 +159,46 @@ public class ProdServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
+			
+			Integer photoId = Integer.valueOf(req.getParameter("photoId").trim());
+			
+			//照片
+			InputStream in = req.getPart("photoPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
+			byte[] photoPic = null;
+			if(in.available()!=0){
+				photoPic = new byte[in.available()];
+				in.read(photoPic);
+				in.close();
+			}  else {
+				PhotoService photoSvc = new PhotoService();
+				photoPic = photoSvc.getOnePhoto(photoId).getPhotoPic();
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-prod/storeNewProd.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
 
 			/*************************** 2.開始修改資料 *****************************************/
 			ProdService prodSvc = new ProdService();
-			ProdVO prodVO = prodSvc.updateProd(prodId, prodTypeId, storeId, prodName, prodCont, prodPrc, prodStat, prodTime);
+			ProdVO prodVO = new ProdVO();
+			prodVO.setProdId(prodId);
+			prodVO.setProdTypeId(prodTypeId);
+			prodVO.setStoreId(storeId);
+			prodVO.setProdName(prodName);
+			prodVO.setProdCont(prodCont);
+			prodVO.setProdPrc(prodPrc);
+			prodVO.setProdStat(prodStat);
+			prodVO.setProdTime(prodTime);
+			PhotoVO photoVO = new PhotoVO();
+			photoVO.setPhotoId(photoId);
+			photoVO.setPhotoPic(photoPic);
+			prodSvc.updateProd(prodVO, photoVO);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("prodVO", prodVO); // 資料庫update成功後,正確的的prodVO物件,存入req
+			
 			String url = "/front-prod/storeProdUpdate.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交storeProdUpdate.jsp
 			successView.forward(req, res);
@@ -188,12 +223,13 @@ public class ProdServlet extends HttpServlet {
 			}
 
 			String prodCont = req.getParameter("prodCont");
-			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
+//			String prodContReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,500}$";
 			if (prodCont == null || prodCont.trim().length() == 0) {
 				errorMsgs.put("prodCont", "商品介紹請勿空白！");
-			} else if (!prodCont.trim().matches(prodContReg)) {
-				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
 			}
+//			} else if (!prodCont.trim().matches(prodContReg)) {
+//				errorMsgs.put("prodCont", "商品介紹只能是中文字、英文字母、數字和＿，且長度必需在1到500之間！");
+//			}
 
 			Integer prodPrc = null;
 			try {

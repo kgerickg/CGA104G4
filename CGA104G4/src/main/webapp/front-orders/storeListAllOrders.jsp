@@ -152,21 +152,21 @@
 				</div>
 			</div>
 		</section>
-		<footer>
-			<div class="bottom-footer">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-6">
-							<div class="copyright">
-								<p>Copyright &copy; 2022.TibaMe All rights reserved.</p>
-							</div>
-							<!--copyright end-->
-						</div>
-						<div class="col-lg-6"></div>
-					</div>
-				</div>
-			</div>
-		</footer>
+<!-- 		<footer> -->
+<!-- 			<div class="bottom-footer"> -->
+<!-- 				<div class="container"> -->
+<!-- 					<div class="row align-items-center"> -->
+<!-- 						<div class="col-lg-6"> -->
+<!-- 							<div class="copyright"> -->
+<!-- 								<p>Copyright &copy; 2022.TibaMe All rights reserved.</p> -->
+<!-- 							</div> -->
+<!-- 							copyright end -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-6"></div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</footer> -->
 		<!--footer end-->
 	</div>
 	<!--wrapper end-->

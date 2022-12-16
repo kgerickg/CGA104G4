@@ -13,21 +13,28 @@
 <!-- GOOGLEFONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
 
 <!-- 下面是這個模板需要的css請勿改動 若有排版需要請直接寫新的css蓋過去就可以了 -->
-<link rel="stylesheet" type="text/css" href="../resources/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/animate.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/all.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/flaticon.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/slick-theme.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/flaticon.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/nav.css">
 <!-- 已經預載入jquery了有需要jquery可以直接使用 -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 <!-- 請將覆蓋用的css放置此註解下方 -->
-<script src="https://kit.fontawesome.com/33764e6a90.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/33764e6a90.js"
+	crossorigin="anonymous"></script>
 <!-- 頁籤顯示的title -->
 <title>上架新產品！</title>
 </head>
@@ -50,7 +57,9 @@
 								<h3 style="color: #ffa500;">上架新產品！</h3>
 							</div>
 							<!--lg-text end-->
-							<form method="post" action="<%=request.getContextPath()%>/prod/prod.do" enctype="multipart/form-data">
+							<form method="post"
+								action="<%=request.getContextPath()%>/prod/prod.do"
+								enctype="multipart/form-data">
 								<h4 class="text-left">&emsp;商品最後更新時間：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									商家編號：</h4>
@@ -64,8 +73,9 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" name="storeId" value="${sessionScope.storeId}"
-												class="form-control" readonly="readonly">
+											<input type="text" name="storeId"
+												value="${sessionScope.storeId}" class="form-control"
+												readonly="readonly">
 										</div>
 										<!--form-group end-->
 									</div>
@@ -75,19 +85,19 @@
 									商品狀態：</h4>
 								<jsp:useBean id="prodTypeSvc" scope="page"
 									class="com.prodtype.model.ProdTypeService" />
-								
+
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<select name="prodTypeId" class="form-control">											
-												<option value="1">麵類</option>												
-												<option value="2">飯類</option>												
-												<option value="3">麵包類</option>												
-												<option value="4">小菜類</option>												
-												<option value="5">飲品</option>												
-												<option value="6">點心</option>												
-												<option value="7">湯品</option>												
-												<option value="8">烤肉</option>												
+											<select name="prodTypeId" class="form-control">
+												<option value="1">麵類</option>
+												<option value="2">飯類</option>
+												<option value="3">麵包類</option>
+												<option value="4">小菜類</option>
+												<option value="5">飲品</option>
+												<option value="6">點心</option>
+												<option value="7">湯品</option>
+												<option value="8">烤肉</option>
 											</select>
 										</div>
 										<!--form-group end-->
@@ -102,41 +112,51 @@
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品名稱<strong><font color="#FF0000">*</font></strong>：
+								<h4 class="text-left">
+									&emsp;商品名稱<strong><font color="#FF0000">*</font></strong>：
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									商品售價<strong><font color="#FF0000">*</font></strong>：</h4>
+									商品售價<strong><font color="#FF0000">*</font></strong>：
+								</h4>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodName" value="${param.prodName}"
-												class="form-control"><p style="color: red;">${errorMsgs.prodName}</p>
+												class="form-control">
+											<p style="color: red;">${errorMsgs.prodName}</p>
 										</div>
 										<!--form-group end-->
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<input type="text" name="prodPrc" value="${param.prodPrc}"
-												class="form-control"><p style="color: red;">${errorMsgs.prodPrc}</p>
+												class="form-control">
+											<p style="color: red;">${errorMsgs.prodPrc}</p>
 										</div>
 										<!--form-group end-->
 									</div>
 								</div>
-								<h4 class="text-left">&emsp;商品介紹<strong><font color="#FF0000">*</font></strong>：</h4>
+								<h4 class="text-left">
+									&emsp;商品介紹<strong><font color="#FF0000">*</font></strong>：
+								</h4>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea name="prodCont" style="height: 170px;">${param.prodCont}</textarea><p style="color: red;">${errorMsgs.prodCont}</p>
+											<textarea name="prodCont" style="height: 170px;">${param.prodCont}</textarea>
+											<p style="color: red;">${errorMsgs.prodCont}</p>
 										</div>
 										<!--form-group end-->
 									</div>
 								</div>
-								
-							
-								<jsp:useBean id="photoSvc" scope="page" class="com.photo.model.PhotoService" />
-								<h4 class="text-left">&emsp;商品相片：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									<label for="photoPic" class="btn btn-info" style="background-color: #66B3FF; border: none; color: black;">
-										<input id="photoPic" type="file" name="photoPic" onclick="previewImage()" multiple="multiple" style="display: none;">
-											<i class="fa fa-photo" style="background-color: #66B3FF">上傳相片</i>
+								<jsp:useBean id="photoSvc" scope="page"
+									class="com.photo.model.PhotoService" />
+								<h4 class="text-left">
+									&emsp;商品相片：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+									<label for="photoPic" class="btn btn-info"
+										style="background-color: #66B3FF; border: none; color: black;">
+										<input id="photoPic" type="file" name="photoPic"
+										onclick="previewImage()" multiple="multiple"
+										style="display: none;"> <i class="fa fa-photo"
+										style="background-color: #66B3FF">上傳相片</i>
 									</label>
 								</h4>
 								<div class="row">
@@ -146,21 +166,23 @@
 												<img src="../resources/images/new.jpg" width="300px">
 											</div>
 										</div>
-									
+
 									</div>
 
 									<div class="col-md-6">
-										<div class="form-group"><p style="color: red;">${errorMsgs.prodPic}</p>
+										<div class="form-group">
+											<p style="color: red;">${errorMsgs.prodPic}</p>
 											<div id="blob_holder"></div>
 										</div>
 									</div>
-						
+
 								</div>
 								<div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="hidden" name="action" value="insert"> 
-											<button onclick='salert()' type="submit" class="btn-default w-100">
+											<input type="hidden" name="action" value="insert">
+											<button onclick="salert()" type="submit"
+												class="btn-default w-100">
 												上架新產品！ <span></span>
 											</button>
 										</div>
@@ -212,7 +234,7 @@
 	<script src="../resources/js/scripts.js"></script>
 	<script src="../resources/js/isotope.js"></script>
 	<script src="../resources/js/sweetalert2.all.min.js"></script>
-	
+
 </body>
 <link rel="stylesheet" type="text/css"
 	href="../resources/css/jquery.datetimepicker.css" />
@@ -293,16 +315,15 @@
 			document.getElementById('submit').disabled = true;
 		}
 	}
-setTimeout(
-	function salert() {
-		Swal.fire({
-					  position: 'center',
-					  icon: 'success',
-					  title: '新產品上架成功！',
-					  showConfirmButton: false,
-					  timer: 1000
-					})
-		}, 100);
-setTimeout(function(){wundow.location.reload(); }, 1000);
+// 	function salert() {
+// 		Swal.fire({
+// 			position : 'center',
+// 			icon : 'success',
+// 			title : '新產品上架成功！',
+// 			showConfirmButton : false,
+// 			timer : 1000
+// 		})
+// 	}
+
 </script>
 </html>
